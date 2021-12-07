@@ -75,7 +75,5 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
-    <Build Include="Procedures\Product_ProductTag_SelectByProductId.sql" />
-    <Build Include="Procedures\Product_ProductTag_SelectByProductTagId.sql" />
   </ItemGroup>
 </Project>

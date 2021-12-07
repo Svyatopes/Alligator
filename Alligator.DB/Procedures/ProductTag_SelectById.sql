@@ -1,5 +1,5 @@
 ﻿CREATE proc dbo.ProductTag_SelectById
-			@Id integer
+			@Id int
 AS
 BEGIN
 	SELECT
