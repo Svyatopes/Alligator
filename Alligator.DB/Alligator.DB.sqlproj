@@ -59,4 +59,16 @@
     <Folder Include="Tables" />
     <Folder Include="Procedures" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Client.sql" />
+    <Build Include="Tables\Comment.sql" />
+    <Build Include="Procedures\ClientSelectById.sql" />
+    <Build Include="Procedures\CommentSelectByClientId.sql" />
+    <Build Include="Procedures\InsertClient.sql" />
+    <Build Include="Procedures\InsertComment.sql" />
+    <Build Include="Procedures\ClientUpdate.sql" />
+    <Build Include="Procedures\CommentUpdate.sql" />
+    <Build Include="Procedures\ClientDelete.sql" />
+    <Build Include="Procedures\DeleteComment.sql" />
+  </ItemGroup>
 </Project>
