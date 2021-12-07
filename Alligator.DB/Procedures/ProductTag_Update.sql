@@ -1,6 +1,6 @@
 ﻿CREATE proc dbo.ProductTag_Update
 			@Id int,
-			@Name varchar
+			@Name varchar(50)
 AS
 BEGIN
 	UPDATE dbo.ProductTag Set Name = @Name
