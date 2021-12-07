@@ -60,7 +60,6 @@
     <Folder Include="Procedures" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\Comment.sql" />
     <Build Include="Procedures\ClientSelectById.sql" />
@@ -71,7 +70,6 @@
     <Build Include="Procedures\CommentUpdate.sql" />
     <Build Include="Procedures\ClientDelete.sql" />
     <Build Include="Procedures\DeleteComment.sql" />
-=======
     <Build Include="Tables\Product.sql" />
     <Build Include="Procedures\Product_Delete.sql" />
     <Build Include="Procedures\Product_Insert.sql" />
@@ -87,6 +85,6 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
->>>>>>> master
+
   </ItemGroup>
 </Project>
