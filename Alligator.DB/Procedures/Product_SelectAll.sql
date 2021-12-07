@@ -1,4 +1,4 @@
-﻿CREATE proc [dbo].[Product_SelectAll]
+﻿CREATE proc dbo.Product_SelectAll
 AS
 BEGIN
 	SELECT

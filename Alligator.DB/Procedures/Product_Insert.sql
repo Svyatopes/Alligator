@@ -1,4 +1,4 @@
-﻿CREATE proc [dbo].[Product_Insert]
+﻿CREATE proc dbo.Product_Insert
 			@Name varchar
 AS
 BEGIN

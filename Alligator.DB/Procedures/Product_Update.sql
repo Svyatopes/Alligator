@@ -1,4 +1,4 @@
-﻿CREATE proc [dbo].[Product_Update]
+﻿CREATE proc dbo.Product_Update
 			@Id int,
 			@Name varchar
 AS
