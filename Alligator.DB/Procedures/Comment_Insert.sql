@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.InsertComment
+﻿CREATE PROCEDURE dbo.Comment_insert
 	@Text varchar(300),
 	@ClientId int
 AS

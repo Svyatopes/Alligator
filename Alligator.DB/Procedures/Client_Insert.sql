@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.InsertClient
+﻿CREATE PROCEDURE dbo.Insert_Client
 	@FirstName varchar(50),
     @LastName varchar(50),
     @Patronymic varchar(50),

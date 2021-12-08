@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.DeleteComment
+﻿CREATE PROCEDURE dbo.Comment_Delete
 	@Id int
 AS
 DELETE FROM dbo.Comment

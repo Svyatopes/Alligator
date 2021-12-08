@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.ClientDelete
+﻿CREATE PROCEDURE dbo.Client_Delete
     @Id int
 AS
 DELETE FROM dbo.Client

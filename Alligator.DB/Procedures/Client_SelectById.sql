@@ -1,4 +1,4 @@
-﻿CREATE PROC dbo.ClientSelectById
+﻿CREATE PROC dbo.Client_SelectById
 	@Id int
 AS
 BEGIN 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.CommentUpdate
+﻿CREATE PROCEDURE dbo.Comment_Update
     @Id int,
 	@Text varchar(300)
 
