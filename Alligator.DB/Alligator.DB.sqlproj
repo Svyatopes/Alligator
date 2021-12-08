@@ -75,5 +75,17 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
+    <Build Include="Tables\Supply.sql" />
+    <Build Include="Tables\SupplyDetail.sql" />
+    <Build Include="Procedures\Supply_SelectById.sql" />
+    <Build Include="Procedures\Supply_SelectAll.sql" />
+    <Build Include="Procedures\Supply_Delete.sql" />
+    <Build Include="Procedures\Supply_Update.sql" />
+    <Build Include="Procedures\Supply_Insert.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectAll.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectById.sql" />
+    <Build Include="Procedures\SupplyDetail_Delete.sql" />
+    <Build Include="Procedures\SupplyDetail_Insert.sql" />
+    <Build Include="Procedures\SupplyDetail_Update.sql" />
   </ItemGroup>
 </Project>
