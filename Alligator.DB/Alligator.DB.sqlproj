@@ -85,6 +85,7 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
-
+    <Build Include="Procedures\ClientSelectAll.sql" />
+    <Build Include="Procedures\CommentSelectAll.sql" />
   </ItemGroup>
 </Project>

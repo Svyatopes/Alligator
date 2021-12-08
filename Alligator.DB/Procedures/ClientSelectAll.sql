@@ -1,8 +1,7 @@
-﻿CREATE PROC [dbo].[ClientSelectById]
-	@Id int
+﻿CREATE PROCEDURE [dbo].[ClientSelectAll]
 AS
-BEGIN 
-	SELECT 
+BEGIN
+	SELECT
 		Id
 		FirstName,
 		LastName,
@@ -10,5 +9,7 @@ BEGIN
 		PhoneNumber,
 		Email
 	from dbo.Client
-	where Id = @Id;
 end
+
+
+

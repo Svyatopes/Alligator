@@ -12,9 +12,10 @@
 	),
 	UNIQUE NONCLUSTERED
 	(
-	[PhoneNumber] ASC,
-	[Email] ASC
+		[PhoneNumber] ASC,
+		[Email] ASC
 	)
+
 	
 )
 GO

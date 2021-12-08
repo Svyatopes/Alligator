@@ -3,7 +3,9 @@
 AS
 BEGIN
 	SELECT 
-	[Text]
+	[Id],
+	[Text],
+	[ClientId]
 	from dbo.Comment
 	where ClientId = @ClientId;
 	end
