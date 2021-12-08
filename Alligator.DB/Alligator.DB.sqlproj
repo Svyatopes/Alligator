@@ -82,4 +82,7 @@
     <Build Include="Procedures\Category_SelectById.sql" />
     <Build Include="Procedures\Category_Insert.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Alligator.DB.refactorlog" />
+  </ItemGroup>
 </Project>
