@@ -8,5 +8,5 @@ BEGIN
 	clientId,
 	Address
 	from dbo.[Order]
-	where id=@ClientId
+	where ClientId=@ClientId
 END

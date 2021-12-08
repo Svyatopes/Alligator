@@ -1,7 +1,8 @@
 ﻿create proc dbo.OrderDetail_UpdateAmount
-@OrderId int, @Amount int
+@Id int,
+@Amount int
 AS
 BEGIN
 	update dbo.[OrderDetail] set Amount=@Amount	 
-	where OrderId=@OrderId
+	where Id=@Id
 END
