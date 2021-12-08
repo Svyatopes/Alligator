@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[ClientSelectAll]
+﻿CREATE PROCEDURE dbo.ClientSelectAll
 AS
 BEGIN
 	SELECT

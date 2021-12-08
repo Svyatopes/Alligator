@@ -62,14 +62,14 @@
   <ItemGroup>
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\Comment.sql" />
-    <Build Include="Procedures\ClientSelectById.sql" />
-    <Build Include="Procedures\CommentSelectByClientId.sql" />
-    <Build Include="Procedures\InsertClient.sql" />
-    <Build Include="Procedures\InsertComment.sql" />
-    <Build Include="Procedures\ClientUpdate.sql" />
-    <Build Include="Procedures\CommentUpdate.sql" />
-    <Build Include="Procedures\ClientDelete.sql" />
-    <Build Include="Procedures\DeleteComment.sql" />
+    <Build Include="Procedures\Client_SelectById.sql" />
+    <Build Include="Procedures\Comment_SelectByClientId.sql" />
+    <Build Include="Procedures\Client_Insert.sql" />
+    <Build Include="Procedures\Comment_Insert.sql" />
+    <Build Include="Procedures\Client_Update.sql" />
+    <Build Include="Procedures\Comment_Update.sql" />
+    <Build Include="Procedures\Client_Delete.sql" />
+    <Build Include="Procedures\Comment.Delete.sql" />
     <Build Include="Tables\Product.sql" />
     <Build Include="Procedures\Product_Delete.sql" />
     <Build Include="Procedures\Product_Insert.sql" />
@@ -85,7 +85,7 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
-    <Build Include="Procedures\ClientSelectAll.sql" />
-    <Build Include="Procedures\CommentSelectAll.sql" />
+    <Build Include="Procedures\Client_SelectAll.sql" />
+    <Build Include="Procedures\Comment_SelectAll.sql" />
   </ItemGroup>
 </Project>
