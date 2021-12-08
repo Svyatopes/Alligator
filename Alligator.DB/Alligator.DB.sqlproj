@@ -82,5 +82,20 @@
     <Build Include="Procedures\OrderDetail_Delete.sql" />
     <Build Include="Procedures\OrderDetail_SelectById.sql" />
     <Build Include="Procedures\OrderReview_Delete.sql" />
+    <Build Include="Procedures\Product_Delete.sql" />
+    <Build Include="Procedures\Product_Insert.sql" />
+    <Build Include="Procedures\Product_ProductTag_Delete.sql" />
+    <Build Include="Procedures\Product_ProductTag_Insert.sql" />
+    <Build Include="Procedures\Product_SelectAll.sql" />
+    <Build Include="Procedures\Product_SelectById.sql" />
+    <Build Include="Procedures\Product_Update.sql" />
+    <Build Include="Procedures\ProductTag_Delete.sql" />
+    <Build Include="Procedures\ProductTag_Insert.sql" />
+    <Build Include="Procedures\ProductTag_SelectAll.sql" />
+    <Build Include="Procedures\ProductTag_SelectById.sql" />
+    <Build Include="Procedures\ProductTag_Update.sql" />
+    <Build Include="Tables\Product.sql" />
+    <Build Include="Tables\Product_ProductTag.sql" />
+    <Build Include="Tables\ProductTag.sql" />
   </ItemGroup>
 </Project>
