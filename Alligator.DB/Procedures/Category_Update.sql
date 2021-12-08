@@ -3,6 +3,7 @@
 	@Category varchar(50)
 AS
 BEGIN
-	UPDATE dbo.Category Set Category = @Category
+	UPDATE dbo.Category 
+	Set Category = @Category
 	where Id = @id
 END

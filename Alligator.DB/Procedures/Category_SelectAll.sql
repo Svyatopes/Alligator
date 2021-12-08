@@ -3,6 +3,6 @@ AS
 BEGIN
 	SELECT 
 	Id,
-	Category
+	Name
 	from dbo.Category
 END

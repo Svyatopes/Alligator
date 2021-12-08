@@ -2,6 +2,6 @@
 	@category varchar(50)
 AS
 BEGIN
-	INSERT INTO dbo.Category (category)
- VALUES (category)
+	INSERT INTO dbo.Category (Name)
+ VALUES (Name)
 END

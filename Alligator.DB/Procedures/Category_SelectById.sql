@@ -4,7 +4,7 @@ AS
 BEGIN
 	SELECT 
 	Id,
-	Category
+	Name
 	from dbo.Category
 	where Id = @Id
 END
