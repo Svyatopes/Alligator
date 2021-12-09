@@ -4,5 +4,6 @@
 			@ProductId int
 AS
 BEGIN
-	INSERT INTO dbo.SupplyDetail (Amount, SupplyId, ProductId) VALUES (@Amount, @SupplyId, @ProductId)
+	INSERT INTO dbo.SupplyDetail (Amount, SupplyId, ProductId) 
+	VALUES (@Amount, @SupplyId, @ProductId)
 END
