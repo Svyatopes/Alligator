@@ -2,10 +2,11 @@
 	@Text varchar(300),
 	@ClientId int
 AS
+BEGIN
 INSERT INTO dbo.Comment
            (Text,
            ClientId)
      VALUES
            (@Text
            ,@ClientId)
-           GO
+END

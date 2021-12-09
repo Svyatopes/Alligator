@@ -5,6 +5,7 @@
     @PhoneNumber varchar(50),
     @Email varchar(50)
 AS
+BEGIN
 INSERT INTO dbo.Client
            (FirstName,
             LastName,
@@ -12,9 +13,9 @@ INSERT INTO dbo.Client
             PhoneNumber,
             Email)
      VALUES
-           (@FirstName
-           ,@LastName
-           ,@Patronymic
-           ,@PhoneNumber
-           ,@Email)
-           GO
+           (@FirstName,
+            @LastName,
+           @Patronymic,
+           @PhoneNumber,
+           @Email)
+END

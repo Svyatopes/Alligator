@@ -12,7 +12,6 @@
 	),
 	UNIQUE NONCLUSTERED
 	(
-		[PhoneNumber] ASC,
 		[Email] ASC
 	)
 

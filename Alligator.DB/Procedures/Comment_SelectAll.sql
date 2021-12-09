@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].Comment_SelectAll
+﻿CREATE PROCEDURE dbo.Comment_SelectAll
 AS
 BEGIN
 	SELECT

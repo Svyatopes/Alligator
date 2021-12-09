@@ -3,7 +3,8 @@
 	@Text varchar(300)
 
 AS
+BEGIN
 	UPDATE dbo.Comment
    SET Text = @Text
  WHERE Id = @Id;
-go
+END
