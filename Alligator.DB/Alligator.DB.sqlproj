@@ -60,6 +60,16 @@
     <Folder Include="Procedures" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="Tables\Client.sql" />
+    <Build Include="Tables\Comment.sql" />
+    <Build Include="Procedures\Client_SelectById.sql" />
+    <Build Include="Procedures\Comment_SelectByClientId.sql" />
+    <Build Include="Procedures\Client_Insert.sql" />
+    <Build Include="Procedures\Comment_Insert.sql" />
+    <Build Include="Procedures\Client_Update.sql" />
+    <Build Include="Procedures\Comment_Update.sql" />
+    <Build Include="Procedures\Client_Delete.sql" />
+    <Build Include="Procedures\Comment.Delete.sql" />
     <Build Include="Tables\Product.sql" />
     <Build Include="Procedures\Product_Delete.sql" />
     <Build Include="Procedures\Product_Insert.sql" />
@@ -75,5 +85,28 @@
     <Build Include="Tables\Product_ProductTag.sql" />
     <Build Include="Procedures\Product_ProductTag_Insert.sql" />
     <Build Include="Procedures\Product_ProductTag_Delete.sql" />
+    <Build Include="Tables\Supply.sql" />
+    <Build Include="Tables\SupplyDetail.sql" />
+    <Build Include="Procedures\Supply_SelectById.sql" />
+    <Build Include="Procedures\Supply_SelectAll.sql" />
+    <Build Include="Procedures\Supply_Delete.sql" />
+    <Build Include="Procedures\Supply_Update.sql" />
+    <Build Include="Procedures\Supply_Insert.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectAll.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectById.sql" />
+    <Build Include="Procedures\SupplyDetail_Delete.sql" />
+    <Build Include="Procedures\SupplyDetail_Insert.sql" />
+    <Build Include="Procedures\SupplyDetail_Update.sql" />
+    <Build Include="Tables\Category.sql" />
+    <Build Include="Procedures\Category_Delete.sql" />
+    <Build Include="Procedures\Category_Update.sql" />
+    <Build Include="Procedures\Category_SelectAll.sql" />
+    <Build Include="Procedures\Category_SelectById.sql" />
+    <Build Include="Procedures\Category_Insert.sql" />
+    <Build Include="Procedures\Client_SelectAll.sql" />
+    <Build Include="Procedures\Comment_SelectAll.sql" /> 
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Alligator.DB.refactorlog" />
   </ItemGroup>
 </Project>
