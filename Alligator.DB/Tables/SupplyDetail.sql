@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[SupplyDetail](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[SupplyId] [int] NOT NULL,
 	[ProductId] [int] NOT NULL,
 	[Amount] [int] NOT NULL,

@@ -1,4 +1,4 @@
-﻿CREATE proc dbo.Supply
+﻿CREATE proc dbo.Supply_Insert
 			@Date date
 AS
 BEGIN
