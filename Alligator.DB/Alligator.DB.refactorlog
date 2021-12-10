@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="1a4e23b4-89d6-4b6f-a1b4-9e0607ce07ac" ChangeDateTime="12/08/2021 21:54:08">
+    <Property Name="ElementName" Value="[dbo].[PK_Category]" />
+    <Property Name="ElementType" Value="SqlPrimaryKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Category]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[PK_Product_Category]" />
+  </Operation>
+</Operations>
