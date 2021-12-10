@@ -1,4 +1,4 @@
-﻿create proc dbo.OrderDetail_UpdateAmount
+﻿create proc dbo.OrderDetail_Update
 @Id int,
 @Amount int
 AS

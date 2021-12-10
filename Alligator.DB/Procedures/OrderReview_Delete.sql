@@ -1,4 +1,4 @@
-﻿create proc dbo.OrderReview_DeleteById
+﻿create proc dbo.OrderReview_Delete
 @Id int
 AS
 BEGIN
