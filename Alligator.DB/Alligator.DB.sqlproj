@@ -128,7 +128,8 @@
     <Build Include="Procedures\Category_SelectById.sql" />
     <Build Include="Procedures\Category_Insert.sql" />
     <Build Include="Procedures\Client_SelectAll.sql" />
-    <Build Include="Procedures\Comment_SelectAll.sql" /> 
+    <Build Include="Procedures\Comment_SelectAll.sql" />
+    <Build Include="Tables\ProductTag.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />
