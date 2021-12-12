@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator", "Alligator\Alligator.csproj", "{A8A60628-F8CF-4EFE-BB50-C718C6A34C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.UI", "Alligator\Alligator.UI.csproj", "{A8A60628-F8CF-4EFE-BB50-C718C6A34C50}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Alligator.DB", "Alligator.DB\Alligator.DB.sqlproj", "{E0FBB3D6-C3A7-40BD-9999-7BABA9597709}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.DataLayer", "Alligator.DataLayer\Alligator.DataLayer.csproj", "{81787F65-1BC9-42B2-A18F-DC2284C2558C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{E0FBB3D6-C3A7-40BD-9999-7BABA9597709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0FBB3D6-C3A7-40BD-9999-7BABA9597709}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E0FBB3D6-C3A7-40BD-9999-7BABA9597709}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
