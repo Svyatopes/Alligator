@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE dbo.Comment_insert
 	@Text varchar(300),
-	@ClientId int
+	@Id int
 AS
 BEGIN
 INSERT INTO dbo.Comment
@@ -8,5 +8,5 @@ INSERT INTO dbo.Comment
            ClientId)
      VALUES
            (@Text
-           ,@ClientId)
+           ,@Id)
 END

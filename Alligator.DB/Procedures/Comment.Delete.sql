@@ -3,5 +3,5 @@
 AS
 BEGIN
 DELETE FROM dbo.Comment
-      WHERE Id  = @Id;
+      WHERE @Id  = Id;
 END
