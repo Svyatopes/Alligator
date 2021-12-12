@@ -13,22 +13,21 @@ namespace Alligator.DataLayer.Repositories
     public class CommentDBConnect
     {
         string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
-        public List<Comment> GetCommentsByClientId(Client client)
+        public List<Comment> GetCommentsByClientId(int id)
         {
-            string proc = "dbo.Client_SelectClientByCommentId";
+            string proc = "dbo.Comment_SelectByClientId";
             using SqlConnection conn = new SqlConnection(_connection);
             conn.Open();
-            List<Comment> comment = (List<Comment>)conn.Query<Comment>(proc, new { client.Id },
+            List<Comment> comment = (List<Comment>)conn.Query<Comment>(proc, new { ClientId = id },
             commandType: CommandType.StoredProcedure);
             return comment;
         }
-        public void InsertCommentByClientId(Client client, string text)
+        public void InsertCommentByClientId(int id, string text)
         {
             string proc = "dbo.Comment_Insert";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            int Id = client.Id;
-            connection.Execute(proc, new { text, Id },
+            connection.Execute(proc, new { text, id },
             commandType: CommandType.StoredProcedure
                );
 
@@ -42,12 +41,12 @@ namespace Alligator.DataLayer.Repositories
                  commandType: CommandType.StoredProcedure
                 );
         }
-        public void UpdateComment(Comment comment)
+        public void UpdateCommentById(int id, string text)
         {
             string proc = "dbo.Comment_Update";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc, new { comment.Id, comment.Text },
+            connection.Execute(proc, new { Id=id,Text=text },
                 commandType: CommandType.StoredProcedure
                 );
         }

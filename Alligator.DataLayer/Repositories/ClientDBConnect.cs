@@ -21,8 +21,18 @@ namespace Alligator.DataLayer.Repositories
             Client client = conn.QueryFirstOrDefault<Client>(proc, new { Id = id },
             commandType: CommandType.StoredProcedure);
             return client;
-
         }
+
+        public Client GetClientByCommentId(int id)
+        {
+            string proc = "dbo.Client_SelectByCommentId";
+            using SqlConnection conn = new SqlConnection(_connection);
+            conn.Open();
+            Client client = conn.QueryFirstOrDefault<Client>(proc, new { commentId = id },
+            commandType: CommandType.StoredProcedure);
+            return client;
+        }
+        // VOZMOZHNO ZAEBIS
         public List<Client> GetAllClients()
         {
             string proc = "dbo.Client_SelectAll";
@@ -31,23 +41,8 @@ namespace Alligator.DataLayer.Repositories
             var clients = conn.Query<Client>(proc).ToList();
             return clients;
         }
-        public List<Client> GetAllClients1()
-        {
-            using var connection = new SqlConnection(_connection);
-            string proc = "dbo.Client_SelectAll";
-            connection.Open();
-            var clientDictionary = new Dictionary<int, Client>();
-            return connection.Query<Client, Comment, Client>(proc, (client, comment) =>
-            {
-                client.Comment=comment;
 
-                return client;
-            }, commandType: CommandType.StoredProcedure,
-              splitOn: "Id")
-                .Distinct()
-                .ToList();
-        }
-
+        /// ЗАЕБИСЬ
         public void InsertClient(string fName, string sName, string tName, string phoneNumber, string email)
         {
             string proc = "dbo.Insert_Client";
@@ -57,6 +52,7 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure
                 );
         }
+        /// ZAEBIS V ROT EBIS
         public void UpdateClient(Client client)
         {
             string proc = "dbo.Client_Update";
@@ -67,11 +63,9 @@ namespace Alligator.DataLayer.Repositories
                 );
 
         }
+        /// TIPA ZAEBIS
         public void DeleteClient(int id)
         {
-            //1 - удаление из таблицы коментов по clientId = Id
-            // delete from table where clientId = Id
-            //2 - удаление клиента
             string proc = "dbo.Client_Delete";
             string proc1 = "dbo.Comment_DeleteByClientId";
             using var connection = new SqlConnection(_connection);
@@ -82,7 +76,25 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure
                 );
         }
-       //still in process
+
+        public List<Client> GetAllClientsWithComments()
+        {
+            using var connection = new SqlConnection(_connection);
+            string proc = "dbo.Client_SelectAll";
+            connection.Open();
+            var clientDictionary = new Dictionary<int, Client>();
+            return connection.Query<Client, Comment, Client>(proc, (client, comment) =>
+            {
+                client.Comment = comment;
+
+                return client;
+            }, commandType: CommandType.StoredProcedure,
+              splitOn: "Id")
+                .Distinct()
+                .ToList();
+        }
+
+        //still in process
         //public List<Client> GetAllClientsWithComments()
         //{
         //    string proc = "dbo.Comment_SelectAllWithClients";
