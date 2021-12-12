@@ -130,6 +130,9 @@
     <Build Include="Procedures\Client_SelectAll.sql" />
     <Build Include="Procedures\Comment_SelectAll.sql" />
     <Build Include="Tables\ProductTag.sql" />
+    <Build Include="Procedures\OrderReview_SelectAll.sql" />
+    <Build Include="Procedures\OrderReview_SelectByOrderId.sql" />
+    <Build Include="Procedures\OrderReview_SelectById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />
