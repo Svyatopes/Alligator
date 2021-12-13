@@ -28,7 +28,7 @@ namespace Alligator.DataLayer.Repositories
                 .FirstOrDefault();
         }
 
-        public List<Product> GetAllProduct()
+        public List<Product> GetAllProducts()
         {
             string procString = "dbo.Product_SelectAll";
             using var connection = new SqlConnection(_connectionString);
