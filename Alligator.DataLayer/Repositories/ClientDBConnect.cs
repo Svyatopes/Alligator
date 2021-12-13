@@ -12,7 +12,7 @@ namespace Alligator.DataLayer.Repositories
 {
     public class ClientDBConnect
     {
-        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         public Client GetClientById(int id)
         {
             string proc = "dbo.Client_SelectById";
@@ -106,7 +106,6 @@ namespace Alligator.DataLayer.Repositories
                 .Distinct()
                 .ToList();
         }
-
     }
 }
 

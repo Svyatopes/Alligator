@@ -12,7 +12,7 @@ namespace Alligator.DataLayer.Repositories
 {
     public class CommentDBConnect
     {
-        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         public List<Comment> GetCommentsByClientId(int id)
         {
             string proc = "dbo.Comment_SelectByClientId";
@@ -21,6 +21,14 @@ namespace Alligator.DataLayer.Repositories
             List<Comment> comment = (List<Comment>)conn.Query<Comment>(proc, new { ClientId = id },
             commandType: CommandType.StoredProcedure);
             return comment;
+        }
+        public List<Comment> GetAllComments()
+        {
+            string proc = "dbo.Comment_SelectAll";
+            using SqlConnection conn = new SqlConnection(_connection);
+            conn.Open();
+            var comments = conn.Query<Comment>(proc).ToList();
+            return comments;
         }
         public void InsertCommentByClientId(int id, string text)
         {
@@ -50,13 +58,6 @@ namespace Alligator.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure
                 );
         }
-        public List<Comment> GetAllComments()
-        {
-            string proc = "dbo.Comment_SelectAll";
-            using SqlConnection conn = new SqlConnection(_connection);
-            conn.Open();
-            var comments = conn.Query<Comment>(proc).ToList();
-            return comments;
-        }
+        
     }
 }

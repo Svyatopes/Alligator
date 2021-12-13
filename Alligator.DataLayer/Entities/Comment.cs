@@ -10,6 +10,6 @@ namespace Alligator.DataLayer.Entities
     {
          public int Id { get; set; }
          public Client Client { get; set; }
-        public string Text { get; set; }
+         public string Text { get; set; }
     }
 }
