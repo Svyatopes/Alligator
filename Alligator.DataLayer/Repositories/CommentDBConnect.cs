@@ -50,19 +50,13 @@ namespace Alligator.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure
                 );
         }
-        //public List<Comment> GetAllComments()
-        //{
-        //    string proc = "dbo.Comment_SelectAll";
-        //    using SqlConnection conn = new SqlConnection(_connection);
-        //    conn.Open();
-        //    var result = SqlConnection.Query
-        //    List<Comment> comments = conn.Query<Comment>(proc).ToList();
-        //    return comments;
-        //}
+        public List<Comment> GetAllComments()
+        {
+            string proc = "dbo.Comment_SelectAll";
+            using SqlConnection conn = new SqlConnection(_connection);
+            conn.Open();
+            var comments = conn.Query<Comment>(proc).ToList();
+            return comments;
+        }
     }
 }
-//getCommentsByClientId
-//TODO:getAllComments
-//InsertCommentByClientId
-//TODO:DeleteCommentByClientId
-//TODO:UpdateCommentByClientId

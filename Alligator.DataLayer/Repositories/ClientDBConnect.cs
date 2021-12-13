@@ -22,7 +22,52 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
             return client;
         }
+        public Client GetClientById1(int id)
+        {
+            using var conn = new SqlConnection(_connection);
+            string proc = "dbo.Test_SelectClientById";
+            conn.Open();
+            Client result = default;
+            conn.Query<Client, Comment, Client>(proc,
+                (client, comment) =>
+                {
+                    if (result == default)
+                    {
 
+                        client.Comment = comment;
+                        return client;
+                    }
+                    if (comment != null)
+
+                        result.Comments.Add(comment);
+                    return result;
+                },
+                new { Id = id },
+                commandType: CommandType.StoredProcedure,
+                splitOn: "id"
+                );
+            return result;
+        }
+        public List<Client> GetAllClients1()
+        {
+            using var conn = new SqlConnection(_connection);
+            conn.Open();
+            var result = conn.Query<Client, Comment, Client>
+                ("dbo.Client_SelectAll",(client, comment) =>
+                {
+                    client.Comment=comment;
+                    if(client.Comments==null)
+                    {
+                        client.Comments = new List<Comment>();
+                    }
+                    client.Comments.Add(comment);
+                    return client;
+                },
+                commandType: CommandType.StoredProcedure,
+                splitOn: "Id"
+                ).ToList();
+            return result;
+        }
         public Client GetClientByCommentId(int id)
         {
             string proc = "dbo.Client_SelectByCommentId";
@@ -32,7 +77,6 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
             return client;
         }
-        // VOZMOZHNO ZAEBIS
         public List<Client> GetAllClients()
         {
             string proc = "dbo.Client_SelectAll";
@@ -41,8 +85,6 @@ namespace Alligator.DataLayer.Repositories
             var clients = conn.Query<Client>(proc).ToList();
             return clients;
         }
-
-        /// ЗАЕБИСЬ
         public void InsertClient(string fName, string sName, string tName, string phoneNumber, string email)
         {
             string proc = "dbo.Insert_Client";
@@ -52,7 +94,6 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure
                 );
         }
-        /// ZAEBIS V ROT EBIS
         public void UpdateClient(Client client)
         {
             string proc = "dbo.Client_Update";
@@ -63,7 +104,6 @@ namespace Alligator.DataLayer.Repositories
                 );
 
         }
-        /// TIPA ZAEBIS
         public void DeleteClient(int id)
         {
             string proc = "dbo.Client_Delete";
@@ -76,7 +116,6 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure
                 );
         }
-
         public List<Client> GetAllClientsWithComments()
         {
             using var connection = new SqlConnection(_connection);
@@ -94,35 +133,6 @@ namespace Alligator.DataLayer.Repositories
                 .ToList();
         }
 
-        //still in process
-        //public List<Client> GetAllClientsWithComments()
-        //{
-        //    string proc = "dbo.Comment_SelectAllWithClients";
-        //    using var connection = new SqlConnection(_connection);
-        //    connection.Open();
-        //    var clientsDictionary = new Dictionary<int, Client>();
-        //    return connection
-        //        .Query<Client, Comment, Client>(
-        //        proc,
-        //        (client, comment) =>
-        //        {
-        //            Client clientEntry;
-        //            if (!clientsDictionary.TryGetValue(client.Id, out clientEntry))
-        //            {
-        //                clientEntry = client;
-        //                clientEntry.Comments = new List<Comment>();
-        //                clientsDictionary.Add(clientEntry.Id, clientEntry);
-        //            }
-        //            if (comment != null)
-        //                clientEntry.Comments.Add(comment);
-        //            return clientEntry;
-        //        },
-        //        commandType: CommandType.StoredProcedure,
-        //        splitOn: "Id"
-        //        )
-        //        .Distinct()
-        //        .ToList();
-        //}
     }
 }
 

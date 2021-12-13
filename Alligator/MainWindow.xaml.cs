@@ -31,7 +31,7 @@ namespace Alligator
         {
             InitializeComponent();
             CommentDBConnect repo = new CommentDBConnect();
-            repo.InsertCommentByClientId(8, "dolboeb");
+            repo.GetAllComments();
 
 
         }

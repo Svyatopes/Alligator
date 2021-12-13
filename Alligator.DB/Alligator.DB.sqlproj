@@ -131,6 +131,7 @@
     <Build Include="Procedures\Comment_SelectAll.sql" />
     <Build Include="Tables\ProductTag.sql" />
     <Build Include="Procedures\Client_SelectByCommentId.sql" />
+    <Build Include="Procedures\Test_SelectClientById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />
