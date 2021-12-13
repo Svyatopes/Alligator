@@ -3,5 +3,5 @@
 AS
 BEGIN
 	INSERT INTO dbo.Category (Name)
- VALUES (Name)
+ VALUES (@Name)
 END
