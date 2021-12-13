@@ -30,9 +30,6 @@ namespace Alligator
         public MainWindow()
         {
             InitializeComponent();
-            CommentDBConnect repo = new CommentDBConnect();
-            repo.GetAllComments();
-
 
         }
 

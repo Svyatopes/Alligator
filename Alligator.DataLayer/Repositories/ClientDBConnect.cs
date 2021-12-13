@@ -22,32 +22,6 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
             return client;
         }
-        public Client GetClientById1(int id)
-        {
-            using var conn = new SqlConnection(_connection);
-            string proc = "dbo.Test_SelectClientById";
-            conn.Open();
-            Client result = default;
-            conn.Query<Client, Comment, Client>(proc,
-                (client, comment) =>
-                {
-                    if (result == default)
-                    {
-
-                        client.Comment = comment;
-                        return client;
-                    }
-                    if (comment != null)
-
-                        result.Comments.Add(comment);
-                    return result;
-                },
-                new { Id = id },
-                commandType: CommandType.StoredProcedure,
-                splitOn: "id"
-                );
-            return result;
-        }
         public List<Client> GetAllClients1()
         {
             using var conn = new SqlConnection(_connection);
