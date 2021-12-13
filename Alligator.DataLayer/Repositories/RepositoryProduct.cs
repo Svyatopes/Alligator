@@ -49,7 +49,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query(procString, new { Name = name, CategoryId = category.Id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { Name = name, CategoryId = category.Id }, commandType: CommandType.StoredProcedure);
         }
 
         public void EditProduct(int id, string name, Category category)
@@ -59,7 +59,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query<Product>(procString, new { Id = id, Name = name, CategoryId = category.Id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { Id = id, Name = name, CategoryId = category.Id }, commandType: CommandType.StoredProcedure);
         }
 
         public void DeleteCategory(int id)
@@ -69,7 +69,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query<Product>(procString, new { Id = id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { Id = id }, commandType: CommandType.StoredProcedure);
         }
     }
 }

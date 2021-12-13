@@ -46,7 +46,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query<Category>(procString, new { Name = name }, commandType: CommandType.StoredProcedure);            
+            connection.Execute(procString, new { Name = name }, commandType: CommandType.StoredProcedure);            
         }
 
         public void UpdateCategory(Category category)
@@ -56,7 +56,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query<Category>(procString, new { category.Id, category.Name }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { category.Id, category.Name }, commandType: CommandType.StoredProcedure);
         }
 
         public void DeleteCategory(Category category)
@@ -66,7 +66,7 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Query<Category>(procString, new { category.Id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure);
         }
 
     }
