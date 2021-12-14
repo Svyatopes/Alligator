@@ -3,8 +3,9 @@
 AS
 BEGIN
 	SELECT
-		Id,
-		Name
-	from dbo.Product
-	where Id = @Id
+		p.Id,
+		p.Name,
+		c.Name
+	from dbo.Product p inner join dbo.Category c on p.CategoryId = c.Id
+	where p.Id = @Id
 END

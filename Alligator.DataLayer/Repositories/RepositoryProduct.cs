@@ -20,7 +20,14 @@ namespace Alligator.DataLayer.Repositories
 
             return connection
                 .Query<Product, Category, Product>(procString, (product, category) => 
-                { product.Category = category; return product; }, new { Id = id }, 
+                { 
+                    product.Category = category; 
+                    return product; 
+                }, 
+                new 
+                { 
+                    Id = id 
+                }, 
                 commandType: CommandType.StoredProcedure, splitOn: "Id")
                 .FirstOrDefault();
         }
@@ -34,7 +41,10 @@ namespace Alligator.DataLayer.Repositories
             
             return connection
                 .Query<Product, Category, Product>(procString, (product, category) => 
-                {product.Category = category; return product; }, 
+                {
+                    product.Category = category; 
+                    return product; 
+                }, 
                 commandType: CommandType.StoredProcedure,splitOn: "Id")
                 .Distinct()
                 .ToList();            
@@ -47,7 +57,11 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { Name = product.Name, CategoryId = product.Category.Id }, 
+            connection.Execute(procString, new 
+                { 
+                    Name = product.Name, 
+                    CategoryId = product.Category.Id 
+                }, 
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -58,7 +72,12 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { Id = product.Id, Name = product.Name, CategoryId = product.Category.Id }, 
+            connection.Execute(procString, new 
+                { 
+                    Id = product.Id, 
+                    Name = product.Name, 
+                    CategoryId = product.Category.Id 
+                }, 
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -69,7 +88,11 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { Id = id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new 
+                { 
+                    Id = id 
+                }, 
+                commandType: CommandType.StoredProcedure);
         }
     }
 }

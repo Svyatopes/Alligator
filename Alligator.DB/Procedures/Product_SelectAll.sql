@@ -2,7 +2,8 @@
 AS
 BEGIN
 	SELECT
-		Id,
-		Name
-	from dbo.Product
+		p.Id,
+		p.Name,
+		c.Name
+	from dbo.Product p inner join dbo.Category c on p.CategoryId = c.Id
 END

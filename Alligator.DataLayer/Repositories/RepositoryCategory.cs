@@ -10,16 +10,19 @@ namespace Alligator.DataLayer.Repositories
     public class RepositoryCategory
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        
+
         public Category GetCategoryById(int id)
         {
             string procString = "dbo.Category_SelectById";
-            using var connection = new SqlConnection(_connectionString);           
+            using var connection = new SqlConnection(_connectionString);
 
-            connection.Open();           
+            connection.Open();
 
             var category = connection.QueryFirstOrDefault<Category>
-                (procString, new { Id = id }, 
+                (procString, new 
+                { 
+                    Id = id 
+                },
                 commandType: CommandType.StoredProcedure);
 
             return category;
@@ -44,8 +47,11 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { Name = name }, 
-                commandType: CommandType.StoredProcedure);            
+            connection.Execute(procString, new
+                {
+                    Name = name
+                },
+                commandType: CommandType.StoredProcedure);
         }
 
         public void UpdateCategory(Category category)
@@ -55,7 +61,11 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { category.Id, category.Name }, 
+            connection.Execute(procString, new 
+                { 
+                    category.Id, 
+                    category.Name 
+                },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -66,7 +76,10 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { category.Id }, 
+            connection.Execute(procString, new
+                {
+                    category.Id
+                },
                 commandType: CommandType.StoredProcedure);
         }
     }
