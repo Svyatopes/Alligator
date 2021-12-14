@@ -12,31 +12,13 @@ namespace Alligator.DataLayer.Repositories
 {
     public class RepositoryOrder
     {
-        //private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        private const string _connectionString = "Data Source=Local;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
-
-        public List<Order> GetAllOrder()
-        {
-            using var connection = new SqlConnection(_connectionString);
-            connection.Open();
-
-            var orderDictionary = new Dictionary<int, Order>();
-            return connection.Query<Order, Client, Order>("dbo.Order_SelectAll", (order, client) =>
-             {
-                 order.Client = client;
-
-                 return order;
-             }, commandType: CommandType.StoredProcedure,
-              splitOn: "Id")
-                .Distinct()
-                .ToList();
-        }
+        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        //private const string _connectionString = "Data Source=Local;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
 
         public Order GetOrderById(int id)
         {
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
-            Order result = default;
             return connection.Query<Order, Client, Order>("dbo.Order_SelectById", (order, client) =>
             {
                 order.Client = client;
@@ -45,22 +27,25 @@ namespace Alligator.DataLayer.Repositories
             }, 
             new {Id=id},
             commandType: CommandType.StoredProcedure,
-             splitOn: "Id").FirstOrDefault();
+            splitOn: "Id").
+            FirstOrDefault();
         }
 
-        public Order GetOrderByClientId(int id)
+        public List<Order> GetOrdersByClientId(int id)
         {
             using var connection = new SqlConnection(_connectionString);
-            connection.Open();            
-            return connection.Query<Order, Client, Order>("dbo.Order_SelectByClientId", (order, client) =>
+            connection.Open();
+            var orderDictionary = new Dictionary<int, Order>();
+            return connection.Query<Order, Client, Order>
+            ("dbo.Order_SelectByClientId", (order, client) =>
             {
                 order.Client = client;
-
                 return order;
             },
             new { ClientId = id },
             commandType: CommandType.StoredProcedure,
-             splitOn: "Id").FirstOrDefault();
+            splitOn: "Id").
+            Distinct().ToList();
         }
 
         public void AddOrder(DateTime date, int clientId, string address)
@@ -68,8 +53,9 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
             string procString = "dbo.Order_Insert";
-             connection.Execute(procString, new { Date = date, ClientId=clientId, Address=address }, 
-                 commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, 
+            new { Date = date, ClientId=clientId, Address=address }, 
+            commandType: CommandType.StoredProcedure);
         }
 
         public void DeleteOrder(int id)
@@ -77,8 +63,9 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
             string procString = "dbo.Order_Delete";
-            connection.Execute(procString, new { Id=id },
-                commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, 
+            new { Id=id },
+            commandType: CommandType.StoredProcedure);
         }
 
         public void EditOrder(DateTime date, int id, string address)
@@ -86,8 +73,9 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
             string procString = "dbo.Order_Update";
-            connection.Execute(procString, new { Date = date, Id = id, Address = address },
-                commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, 
+            new { Date = date, Id = id, Address = address },
+            commandType: CommandType.StoredProcedure);
         }
    
     }

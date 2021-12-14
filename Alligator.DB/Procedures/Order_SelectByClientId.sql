@@ -5,7 +5,6 @@ BEGIN
 	select
 	o.id,
 	o.date,
-	o.clientId,
 	o.Address,
 	c.Id,
 	c.FirstName,
