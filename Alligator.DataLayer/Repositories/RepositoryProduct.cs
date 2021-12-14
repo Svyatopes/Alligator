@@ -10,6 +10,7 @@ namespace Alligator.DataLayer.Repositories
     public class RepositoryProduct
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        //private const string _connectionString = "Data Source=(local);Database=AggregatorAlligator;Integrated Security=true";
 
         public Product GetProductById(int id)
         {
@@ -19,16 +20,16 @@ namespace Alligator.DataLayer.Repositories
             connection.Open();
 
             return connection
-                .Query<Product, Category, Product>(procString, (product, category) => 
-                { 
+                .Query<Product, Category, Product>(procString, (product, category) =>
+                {
                     product.Category = category; 
-                    return product; 
-                }, 
-                new 
-                { 
-                    Id = id 
-                }, 
-                commandType: CommandType.StoredProcedure, splitOn: "Id")
+                    return product;
+                },
+                new
+                {
+                    Id = id
+                },
+                commandType: CommandType.StoredProcedure, splitOn: "Name")
                 .FirstOrDefault();
         }
 
@@ -40,14 +41,14 @@ namespace Alligator.DataLayer.Repositories
             connection.Open();
             
             return connection
-                .Query<Product, Category, Product>(procString, (product, category) => 
+                .Query<Product, Category, Product>(procString, (product, category) =>
                 {
-                    product.Category = category; 
-                    return product; 
-                }, 
-                commandType: CommandType.StoredProcedure,splitOn: "Id")
+                    product.Category = category;
+                    return product;
+                },
+                commandType: CommandType.StoredProcedure,splitOn: "Name")
                 .Distinct()
-                .ToList();            
+                .ToList();
         }
 
         public void AddProduct(Product product)
