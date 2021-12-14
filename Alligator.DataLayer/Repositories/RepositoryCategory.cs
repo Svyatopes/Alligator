@@ -1,17 +1,13 @@
 ﻿using Alligator.DataLayer.Entities;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    class RepositoryCategory
+    public class RepositoryCategory
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         
@@ -22,7 +18,9 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();           
 
-            var category = connection.QueryFirstOrDefault<Category>(procString, new { Id = id }, commandType: CommandType.StoredProcedure);
+            var category = connection.QueryFirstOrDefault<Category>
+                (procString, new { Id = id }, 
+                commandType: CommandType.StoredProcedure);
 
             return category;
         }
@@ -46,7 +44,8 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { Name = name }, commandType: CommandType.StoredProcedure);            
+            connection.Execute(procString, new { Name = name }, 
+                commandType: CommandType.StoredProcedure);            
         }
 
         public void UpdateCategory(Category category)
@@ -56,7 +55,8 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { category.Id, category.Name }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { category.Id, category.Name }, 
+                commandType: CommandType.StoredProcedure);
         }
 
         public void DeleteCategory(Category category)
@@ -66,8 +66,8 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure);
+            connection.Execute(procString, new { category.Id }, 
+                commandType: CommandType.StoredProcedure);
         }
-
     }
 }
