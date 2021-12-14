@@ -10,52 +10,66 @@ namespace Alligator.DataLayer.Repositories
 {
     public class SupplyRepository
     {
-        private const string _connString = "Server=(local);Database=AggregatorAlligator;Integrated Security=true;";
-        Supply supply1 = new Supply();
+        private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        //string _connString = "Server=(local);Database=AggregatorAlligator;Integrated Security=true";
+        
         public List<Supply> GetSupplies()
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
-            var result = sqlConnection.Query<Supply>(
-                "dbo.Supply_SelectAll").ToList();
-            return result;
+
+            return sqlConnection
+                .Query<Supply>("dbo.Supply_SelectAll"
+                ).ToList();            
         }
-        public Supply GetSupplyById(int id)
+        public List<Supply> GetSupplyById(int id)
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
-            var result = sqlConnection.Query<Supply>("dbo.Supply_SelectById",
+
+            return sqlConnection
+                .Query<Supply>(
+                "dbo.Supply_SelectById",
                 new { Id = id },
-                commandType: CommandType.StoredProcedure)
-                .FirstOrDefault();
-            return result;
+                commandType: CommandType.StoredProcedure
+                ).ToList();            
         }
 
         public void AddSupply(DateTime date)
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
-            sqlConnection.Execute("dbo.Supply_Insert", new { Date = date },
-                 commandType: CommandType.StoredProcedure);
+
+            sqlConnection
+                .Query<Supply>(
+                "dbo.Supply_Insert",
+                new { Date = date },
+                commandType: CommandType.StoredProcedure
+                );
         }
         public void DeleteSupply(int id)
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
-            string procString = "dbo.Supply_Delete";
-            sqlConnection.Execute(procString, new { Id = id },
-                commandType: CommandType.StoredProcedure);
+
+            sqlConnection
+                .Query<Supply>(
+                "dbo.Supply_Delete",
+                new { Id = id },
+                commandType: CommandType.StoredProcedure
+                );
         }
         public void EditSupply(int id, DateTime date)
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
-            string procString = "dbo.Supply_Update";
-            sqlConnection.Execute(procString, new { Id = id, Date = date },
-                commandType: CommandType.StoredProcedure);
-        }
+
+            sqlConnection
+                .Query<Supply>(
+                "dbo.Supply_Update",
+                new { Id = id, Date = date },
+                commandType: CommandType.StoredProcedure
+                );
+        }        
     }
 }
-       
-
-        
