@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class RepositoryComment
+    public class CommentRepository
     {
 
-        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
 
         public Comment GetCommentById(int id)
         {
@@ -28,7 +28,7 @@ namespace Alligator.DataLayer.Repositories
                 },
              new { Id = id }, 
              commandType: CommandType.StoredProcedure,
-             splitOn: "ClientId")
+             splitOn: "Id")
                .FirstOrDefault();
         }
 
@@ -43,7 +43,7 @@ namespace Alligator.DataLayer.Repositories
                 return comment;
             },
             commandType: CommandType.StoredProcedure,
-            splitOn: "ClientId")
+            splitOn: "Id")
              .Distinct()
              .ToList();
         }

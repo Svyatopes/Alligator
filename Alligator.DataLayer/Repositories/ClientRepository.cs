@@ -10,7 +10,7 @@ using Alligator.DataLayer.Repositories;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class RepositoryClient
+    public class ClientRepository
     {
 
         string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";

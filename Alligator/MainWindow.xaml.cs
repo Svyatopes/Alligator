@@ -30,7 +30,6 @@ namespace Alligator
         public MainWindow()
         {
              InitializeComponent();
-
         }
 
     }
