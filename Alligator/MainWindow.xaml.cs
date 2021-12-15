@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
+using Alligator.DataLayer.Repositories;
+using Alligator.DataLayer.Entities;
+using Alligator.DataLayer;
+using System.Diagnostics;
 
 
 namespace Alligator
@@ -25,8 +29,7 @@ namespace Alligator
     {
         public MainWindow()
         {
-            InitializeComponent();
-          
+             InitializeComponent();
         }
 
     }

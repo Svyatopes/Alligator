@@ -63,7 +63,7 @@
     <Build Include="Tables\Client.sql" />
     <Build Include="Tables\Comment.sql" />
     <Build Include="Procedures\Client_SelectById.sql" />
-    <Build Include="Procedures\Comment_SelectByClientId.sql" />
+    <Build Include="Procedures\Comment_SelectById.sql" />
     <Build Include="Procedures\Client_Insert.sql" />
     <Build Include="Procedures\Comment_Insert.sql" />
     <Build Include="Procedures\Client_Update.sql" />
@@ -127,6 +127,7 @@
     <Build Include="Procedures\Client_SelectAll.sql" />
     <Build Include="Procedures\Comment_SelectAll.sql" />
     <Build Include="Tables\ProductTag.sql" />
+    <Build Include="Procedures\Client_SelectByCommentId.sql" />
     <Build Include="Procedures\OrderReview_SelectByOrderId.sql" />
     <Build Include="Procedures\OrderReview_SelectById.sql" />
     <Build Include="Procedures\Order_SelectAll.sql" />

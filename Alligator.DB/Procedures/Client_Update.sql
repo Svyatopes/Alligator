@@ -4,6 +4,7 @@
     @LastName varchar(50),
     @Patronymic varchar(50),
     @PhoneNumber varchar(50)
+    
 AS
 BEGIN
 	UPDATE dbo.Client
