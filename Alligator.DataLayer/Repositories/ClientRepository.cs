@@ -20,7 +20,8 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Client_SelectAll";
             using var conn = new SqlConnection(_connection);
             conn.Open();
-            var clients = conn.Query<Client>(proc).ToList();
+            var clients = conn.Query<Client>(proc)
+            .ToList();
             return clients;
         }
 
@@ -29,7 +30,11 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Client_SelectById";
             using SqlConnection conn = new SqlConnection(_connection);
             conn.Open();
-            Client client = conn.QueryFirstOrDefault<Client>(proc, new { Id = id },
+            Client client = conn.QueryFirstOrDefault<Client>
+            (proc, new
+            { 
+                Id = id 
+            },
             commandType: CommandType.StoredProcedure);
             return client;
 
@@ -40,7 +45,12 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Client_SelectByCommentId";
             using SqlConnection conn = new SqlConnection(_connection);
             conn.Open();
-            Client client = conn.QueryFirstOrDefault<Client>(proc, new { commentId = id },
+            Client client = conn.QueryFirstOrDefault<Client>
+            (proc,
+            new
+            {
+                commentId = id 
+            },
             commandType: CommandType.StoredProcedure);
             return client;
         }
@@ -50,8 +60,14 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Insert_Client";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc,
-            new { FirstName = client.FirstName, LastName = client.LastName, Patronymic = client.Patronymic, PhoneNumber = client.PhoneNumber, Email = client.Email },
+            connection.Execute(proc,new
+            { 
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                Patronymic = client.Patronymic,
+                PhoneNumber = client.PhoneNumber, 
+                Email = client.Email 
+            },
             commandType: CommandType.StoredProcedure
                 );
         }
@@ -61,8 +77,14 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Client_Update";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc,
-            new {client.Id, client.FirstName, client.LastName, client.Patronymic, client.PhoneNumber },
+            connection.Execute(proc, new 
+            {
+                client.Id,
+                client.FirstName,
+                client.LastName,
+                client.Patronymic,
+                client.PhoneNumber 
+            },
             commandType: CommandType.StoredProcedure
                 );
         }
@@ -72,7 +94,10 @@ namespace Alligator.DataLayer.Repositories
             string proc1 = "dbo.Comment_DeleteByClientId";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc1, new { Id =id },
+            connection.Execute(proc1, new
+            {
+                Id =id
+            },
             commandType: CommandType.StoredProcedure
                 );
         }

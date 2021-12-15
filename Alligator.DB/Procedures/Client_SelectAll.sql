@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE dbo.Client_SelectAll
 AS
-begin 
+BEGIN
 	SELECT 
 	Id,
 	FirstName,
@@ -8,5 +8,5 @@ begin
 	Patronymic,
 	PhoneNumber,
 	Email
-from dbo.Client
-end
+FROM dbo.Client
+END

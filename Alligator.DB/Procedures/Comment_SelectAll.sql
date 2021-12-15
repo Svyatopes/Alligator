@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE dbo.Comment_SelectAll
 AS
-begin 
+BEGIN 
 	SELECT 
 	Comment.Id,
 	Comment.Text,
@@ -11,7 +11,7 @@ begin
 	Client.Patronymic,
 	Client.PhoneNumber,
 	Client.Email
-from Comment
+FROM Comment
 left join Client
 on dbo.[Comment].[ClientId] = dbo.[Client].[Id]
-end
+END

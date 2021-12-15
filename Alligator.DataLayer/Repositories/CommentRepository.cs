@@ -13,7 +13,7 @@ namespace Alligator.DataLayer.Repositories
     public class CommentRepository
     {
 
-        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+        string _connection = "Data Source = 80.78.240.16; Database=AggregatorAlligator;User Id = student; Password=qwe!23;";
 
         public Comment GetCommentById(int id)
         {
@@ -53,9 +53,9 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Comment_Insert";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc, new { text, id },
-            commandType: CommandType.StoredProcedure
-               );
+            connection.Execute(proc, new
+            { text, id },
+            commandType: CommandType.StoredProcedure);
 
         }
 
@@ -64,9 +64,9 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Comment_Delete";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc, new { Id = commentId },
-                 commandType: CommandType.StoredProcedure
-                );
+            connection.Execute(proc, new
+            { Id = commentId },
+            commandType: CommandType.StoredProcedure);
         }
 
         public void UpdateCommentById(int id, string text)
@@ -74,8 +74,12 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Comment_Update";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc, new { Id=id,Text=text },
-                commandType: CommandType.StoredProcedure
+            connection.Execute(proc, new
+            {
+             Id=id,
+             Text=text
+            },
+            commandType: CommandType.StoredProcedure
                 );
         }
 

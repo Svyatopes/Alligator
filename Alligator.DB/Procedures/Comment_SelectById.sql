@@ -1,5 +1,4 @@
-﻿
-create proc dbo.Comment_SelectById
+﻿CREATE PROC dbo.Comment_SelectById
 @Id int
 AS
 BEGIN
@@ -12,5 +11,5 @@ BEGIN
 	c.LastName,
 	c.Email,
 	c.PhoneNumber
-	from dbo.[Comment] co inner join dbo.[Client] c on co.ClientId=c.Id
+	FROM dbo.[Comment] co inner join dbo.[Client] c on co.[ClientId]=c.Id
 END
