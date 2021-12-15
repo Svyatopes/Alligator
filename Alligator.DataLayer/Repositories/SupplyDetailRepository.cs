@@ -18,10 +18,10 @@ namespace Alligator.DataLayer.Repositories
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
 
-            var supplyDetailDictionary = new Dictionary<int, SupplyDetail>();
+            string dbo = "dbo.SupplyDetail_SelectAll";
             return sqlConnection
                 .Query<SupplyDetail, Supply, Product, Category, SupplyDetail>(
-                    "dbo.SupplyDetail_SelectAll",
+                    dbo,
                     (supplyDetail, supply, product, category) =>
                     {
                         supplyDetail.Supply = supply;
@@ -42,10 +42,10 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            var supplyDetailDictionary = new Dictionary<int, SupplyDetail>();
+            string dbo = "dbo.SupplyDetail_SelectById";
             return connection
                 .Query<SupplyDetail, Supply, Product, Category, SupplyDetail>(
-                    "dbo.SupplyDetail_SelectById",
+                    dbo,
                     (supplyDetail, supply, product, category) =>
                     {
                         supplyDetail.Supply = supply;
@@ -60,17 +60,18 @@ namespace Alligator.DataLayer.Repositories
                  )
                 .ToList();
         }
-                
+
         public void AddSupplyDetail(int amount, int supplyId, int productId)
         {
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
+            string dbo = "dbo.SupplyDetail_Insert";
             connection
-                .Query<SupplyDetail>(
-                "dbo.SupplyDetail_Insert",
-                new { Amount = amount, SupplyId = supplyId, ProductId = productId },
-                commandType: CommandType.StoredProcedure
+                .Execute(
+                    dbo,
+                    new { Amount = amount, SupplyId = supplyId, ProductId = productId },
+                    commandType: CommandType.StoredProcedure
                 );
         }
 
@@ -79,11 +80,12 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
+            string dbo = "dbo.SupplyDetail_Update";
             connection
-                .Query<SupplyDetail>(
-                "dbo.SupplyDetail_Update",
-                new { Id = id, Amount = amount },
-                commandType: CommandType.StoredProcedure
+                .Execute(
+                    dbo,
+                    new { Id = id, Amount = amount },
+                    commandType: CommandType.StoredProcedure
                 );
         }
 
@@ -92,11 +94,12 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
+            string dbo = "dbo.SupplyDetail_Delete";
             connection
-                .Query<SupplyDetail>(
-                "dbo.SupplyDetail_Delete",
-                new { Id = id },
-                commandType: CommandType.StoredProcedure
+                .Execute(
+                    dbo,
+                    new { Id = id },
+                    commandType: CommandType.StoredProcedure
                 );
         }
     }

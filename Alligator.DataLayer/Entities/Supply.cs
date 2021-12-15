@@ -10,6 +10,6 @@ namespace Alligator.DataLayer.Entities
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-
+        public List<SupplyDetail> SupplyDetails { get; set; }
     }
 }

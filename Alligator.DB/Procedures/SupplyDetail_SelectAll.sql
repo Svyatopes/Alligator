@@ -12,5 +12,5 @@ BEGIN
 		c.Name		
 	from dbo.[SupplyDetail] sd inner join dbo.[Supply] s on sd.SupplyId = s.Id 
 			inner join dbo.[Product] p on sd.ProductId = p.Id 
-			inner join dbo.[Category] c on p.CategoryId = c.Id			
+			inner join dbo.[Category] c on p.CategoryId = c.Id				
 END
