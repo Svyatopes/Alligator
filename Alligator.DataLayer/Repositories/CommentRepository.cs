@@ -29,7 +29,7 @@ namespace Alligator.DataLayer.Repositories
              new { Id = id }, 
              commandType: CommandType.StoredProcedure,
              splitOn: "Id")
-               .FirstOrDefault();
+             .FirstOrDefault();
         }
 
         public List<Comment> GetAllComments()
@@ -48,13 +48,13 @@ namespace Alligator.DataLayer.Repositories
              .ToList();
         }
 
-        public void InsertCommentByClientId(int id, string text)
+        public void InsertCommentById(int clientId, string text)
         {
             string proc = "dbo.Comment_Insert";
             using var connection = new SqlConnection(_connection);
             connection.Open();
             connection.Execute(proc, new
-            { text, id },
+            { text, clientId },
             commandType: CommandType.StoredProcedure);
 
         }
@@ -80,7 +80,7 @@ namespace Alligator.DataLayer.Repositories
              Text=text
             },
             commandType: CommandType.StoredProcedure
-                );
+            );
         }
 
 

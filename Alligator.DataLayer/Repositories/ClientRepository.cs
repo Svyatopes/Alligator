@@ -30,11 +30,12 @@ namespace Alligator.DataLayer.Repositories
             string proc = "dbo.Client_SelectById";
             using SqlConnection conn = new SqlConnection(_connection);
             conn.Open();
-            Client client = conn.QueryFirstOrDefault<Client>
-            (proc, new
-            { 
-                Id = id 
-            },
+            Client client = conn.Query<Client, Comment, Client>
+            (proc,(client, comment)=>
+            {
+                client.Comments= (List<Comment>)comment
+            }
+            new {  Id = id },
             commandType: CommandType.StoredProcedure);
             return client;
 
@@ -91,7 +92,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteClient(int id)
         {
-            string proc1 = "dbo.Comment_DeleteByClientId";
+            string proc1 = "dbo.Comment_Delete";
             using var connection = new SqlConnection(_connection);
             connection.Open();
             connection.Execute(proc1, new

@@ -9,6 +9,6 @@ BEGIN
 	cl.Patronymic,
 	cl.PhoneNumber,
 	cl.Email
-	FROM dbo.[Client] cl inner join dbo.[Comment] co on cl.Id=co.ClientId
-	WHERE co.Id=@commentId
+	FROM dbo.[Client] cl 
+	WHERE Id=@commentId
 END
