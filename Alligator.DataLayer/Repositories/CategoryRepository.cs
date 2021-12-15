@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class RepositoryCategory
+    public class CategoryRepository
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class RepositoryProduct
+    public class ProductRepository
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         //private const string _connectionString = "Data Source=(local);Database=AggregatorAlligator;Integrated Security=true";
@@ -29,7 +29,7 @@ namespace Alligator.DataLayer.Repositories
                 {
                     Id = id
                 },
-                commandType: CommandType.StoredProcedure, splitOn: "Name")
+                commandType: CommandType.StoredProcedure, splitOn: "Id")
                 .FirstOrDefault();
         }
 
@@ -46,7 +46,7 @@ namespace Alligator.DataLayer.Repositories
                     product.Category = category;
                     return product;
                 },
-                commandType: CommandType.StoredProcedure,splitOn: "Name")
+                commandType: CommandType.StoredProcedure,splitOn: "Id")
                 .Distinct()
                 .ToList();
         }
