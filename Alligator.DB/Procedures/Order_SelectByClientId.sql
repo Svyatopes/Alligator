@@ -3,10 +3,14 @@
 AS
 BEGIN
 	select
-	id,
-	date,
-	clientId,
-	Address
-	from dbo.[Order]
-	where ClientId=@ClientId
+	o.id,
+	o.date,
+	o.Address,
+	c.Id,
+	c.FirstName,
+	c.LastName,
+	c.Email,
+	c.PhoneNumber
+	from dbo.[Order] o inner join dbo.[Client] c on o.ClientId=c.Id
+	where o.ClientId=@ClientId
 END
