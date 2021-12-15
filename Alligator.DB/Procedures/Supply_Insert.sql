@@ -1,5 +1,5 @@
 ﻿CREATE proc dbo.Supply_Insert
-			@Date date
+			@Date datetime
 AS
 BEGIN
 	INSERT INTO dbo.Supply (Date) VALUES (@Date)
