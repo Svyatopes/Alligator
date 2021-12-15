@@ -1,11 +1,9 @@
 ﻿using Alligator.DataLayer.Entities;
-using System;
+using Dapper;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
@@ -18,31 +16,10 @@ namespace Alligator.DataLayer.Repositories
         {
             string procString = "dbo.ProductTag_SelectById";
 
-
             using var connection = new SqlConnection(_connectionString);
+            connection.Open();
 
-            var command = new SqlCommand(procString, connection);
-            command.Parameters.AddWithValue("@Id", id);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-
-            var productTag = new ProductTag();
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    
-                   productTag.Id = reader.GetInt32(reader.GetOrdinal(nameof(ProductTag.Id)));
-                   productTag.Name = reader.GetString(reader.GetOrdinal(nameof(ProductTag.Name)));
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            var productTag = connection.QueryFirstOrDefault<ProductTag>(procString, new { Id = id }, commandType: CommandType.StoredProcedure);
 
             return productTag;
 
@@ -52,33 +29,10 @@ namespace Alligator.DataLayer.Repositories
         {
             string procString = "dbo.ProductTag_SelectAll";
 
-
             using var connection = new SqlConnection(_connectionString);
+            connection.Open();
 
-            var command = new SqlCommand(procString, connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-
-            var productTags = new List<ProductTag>();
-
-            try
-            {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    productTags.Add(new ProductTag()
-                    {
-
-                        Id = reader.GetInt32(reader.GetOrdinal(nameof(ProductTag.Id))),
-                        Name = reader.GetString(reader.GetOrdinal(nameof(ProductTag.Name)))
-                    });
-                }
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            var productTags = connection.Query<ProductTag>(procString).ToList();
 
             return productTags;
 
@@ -89,21 +43,9 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.ProductTag_Insert";
 
             using var connection = new SqlConnection(_connectionString);
+            connection.Open();
 
-            var command = new SqlCommand(procString, connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Name", name);
-
-            try
-            {
-                connection.Open();
-                var number = command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
+            connection.Execute(procString, new { Name = name }, commandType: CommandType.StoredProcedure);
         }
 
         public void EditProductTag(ProductTag productTag)
@@ -112,21 +54,9 @@ namespace Alligator.DataLayer.Repositories
 
 
             using var connection = new SqlConnection(_connectionString);
+            connection.Open();
 
-            var command = new SqlCommand(procString, connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Id", productTag.Id);
-            command.Parameters.AddWithValue("@Name", productTag.Name);
-
-            try
-            {
-                connection.Open();
-                var number = command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            connection.Execute(procString, new { productTag.Id, productTag.Name }, commandType: CommandType.StoredProcedure);
 
         }
 
@@ -135,22 +65,10 @@ namespace Alligator.DataLayer.Repositories
         {
             string procString = "dbo.ProductTag_Delete";
 
-
             using var connection = new SqlConnection(_connectionString);
+            connection.Open();
 
-            var command = new SqlCommand(procString, connection);
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Id", productTag.Id);
-
-            try
-            {
-                connection.Open();
-                var number = command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            connection.Execute(procString, new { productTag.Id }, commandType: CommandType.StoredProcedure);
 
         }
 

@@ -12,7 +12,6 @@ Go
 
 ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Client] FOREIGN KEY([ClientId])
 REFERENCES [dbo].[Client] ([Id])
-GO
-
+go
 ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Client]
 Go
