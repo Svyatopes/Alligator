@@ -12,24 +12,42 @@ namespace Alligator.DataLayer.Repositories
 {
     public class CommentDBConnect
     {
+
         string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        public List<Comment> GetCommentsByClientId(int id)
+
+        public Comment GetCommentById(int id)
         {
-            string proc = "dbo.Comment_SelectByClientId";
+            string proc = "dbo.Comment_SelectById";
             using SqlConnection conn = new SqlConnection(_connection);
             conn.Open();
-            List<Comment> comment = (List<Comment>)conn.Query<Comment>(proc, new { ClientId = id },
-            commandType: CommandType.StoredProcedure);
-            return comment;
+            return conn.Query<Comment, Client, Comment>(proc,
+                (comment, client) =>
+                {   
+                comment.Client = client;
+                return comment;
+                },
+             new { Id = id }, 
+             commandType: CommandType.StoredProcedure,
+             splitOn: "ClientId")
+               .FirstOrDefault();
         }
+
         public List<Comment> GetAllComments()
         {
+            using var connection = new SqlConnection(_connection);
             string proc = "dbo.Comment_SelectAll";
-            using SqlConnection conn = new SqlConnection(_connection);
-            conn.Open();
-            var comments = conn.Query<Comment>(proc).ToList();
-            return comments;
+            return connection.Query<Comment, Client, Comment>(proc, (comment, client) =>
+            {
+                
+                comment.Client = client;
+                return comment;
+            },
+            commandType: CommandType.StoredProcedure,
+            splitOn: "ClientId")
+             .Distinct()
+             .ToList();
         }
+
         public void InsertCommentByClientId(int id, string text)
         {
             string proc = "dbo.Comment_Insert";
@@ -40,15 +58,17 @@ namespace Alligator.DataLayer.Repositories
                );
 
         }
-        public void DeleteCommentById(int id)
+
+        public void DeleteCommentById(int commentId)
         {
             string proc = "dbo.Comment_Delete";
             using var connection = new SqlConnection(_connection);
             connection.Open();
-            connection.Execute(proc, new { Id = id },
+            connection.Execute(proc, new { Id = commentId },
                  commandType: CommandType.StoredProcedure
                 );
         }
+
         public void UpdateCommentById(int id, string text)
         {
             string proc = "dbo.Comment_Update";
@@ -58,6 +78,7 @@ namespace Alligator.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure
                 );
         }
-        
+
+
     }
 }

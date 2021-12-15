@@ -1,13 +1,13 @@
-﻿CREATE PROC dbo.Client_SelectById
+﻿CREATE PROCEDURE dbo.Client_SelectById
 	@Id int
-AS
-BEGIN 
-	SELECT 
-		FirstName,
-		LastName,
-		Patronymic,
-		PhoneNumber,
-		Email
-	from dbo.Client
-	where Id = @Id;
-end
+as
+begin 
+ select 
+ cl.Id,
+ cl.FirstName,
+ cl.LastName,
+ cl.PhoneNumber,
+ cl.Email,
+ co.Text
+ from dbo.[Client] cl inner join dbo.[Comment] co on cl.Id=co.ClientId
+ end
