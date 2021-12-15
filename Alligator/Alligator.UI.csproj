@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,6 +7,11 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="VIewModels\EntitiesViewModels\" />
+    <Folder Include="VIewModels\TabItemsViewModels\" />
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
   </ItemGroup>
