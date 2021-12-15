@@ -1,0 +1,8 @@
+﻿<TabItem x:Class="Alligator.UI.TabItems.TabItemProducts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              Header="Товары/услуги">
+    <Grid>
+        <TextBlock>Товары/услуги</TextBlock>
+    </Grid>
+</TabItem>

@@ -4,9 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alligator"
+        xmlns:tabItems="clr-namespace:Alligator.UI.TabItems"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="АЛЛИГАТОР ЙОУ" Height="450" Width="800">
     <Grid>
-
+        <TabControl TabStripPlacement="Left">
+            <tabItems:TabItemMain />
+            <tabItems:TabItemClients />
+            <tabItems:TabItemOrders />
+            <tabItems:TabItemProducts />
+            <tabItems:TabItemCategories />
+            <tabItems:TabItemSupplies />
+        </TabControl>
     </Grid>
 </Window>

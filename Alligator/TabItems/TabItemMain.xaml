@@ -1,0 +1,8 @@
+﻿<TabItem x:Class="Alligator.UI.TabItems.TabItemMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              Header="Главная страница">
+    <Grid>
+        <TextBlock>Главная страница</TextBlock>
+    </Grid>
+</TabItem>
