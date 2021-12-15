@@ -15,6 +15,17 @@ namespace Alligator.DataLayer.Repositories
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         //private const string _connectionString = "Data Source=Local;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
 
+        public List<Order> GetAllOrders()
+        {
+            using var connection = new SqlConnection(_connectionString);
+            connection.Open();
+
+            var orderDictionary = new Dictionary<int, Order>();
+            return connection.Query<Order>("dbo.Order_SelectAll",
+            commandType: CommandType.StoredProcedure)
+            .ToList();
+        }
+
         public Order GetOrderById(int id)
         {
             using var connection = new SqlConnection(_connectionString);
