@@ -1,4 +1,4 @@
-﻿using Alligator.DataLayer.Entities;
+using Alligator.DataLayer.Entities;
 using System.Collections.Generic;
 
 namespace Alligator.DataLayer
@@ -12,7 +12,5 @@ namespace Alligator.DataLayer
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<Comment> Comments { get; set; }
-
-
     }
 }

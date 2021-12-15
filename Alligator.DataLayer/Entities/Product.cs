@@ -1,5 +1,3 @@
-﻿
-
 namespace Alligator.DataLayer.Entities
 {
     public class Product

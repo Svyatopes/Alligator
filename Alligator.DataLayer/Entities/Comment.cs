@@ -1,4 +1,5 @@
-﻿namespace Alligator.DataLayer.Entities
+
+namespace Alligator.DataLayer.Entities
 {
     public class Comment
     {
