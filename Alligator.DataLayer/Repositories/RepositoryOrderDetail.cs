@@ -29,8 +29,8 @@ namespace Alligator.DataLayer.Repositories
             }, 
             new { Id = id },
             commandType: CommandType.StoredProcedure,
-            splitOn: "Id").
-            FirstOrDefault();
+            splitOn: "Id")
+            .FirstOrDefault();
         }
 
         public List<OrderDetail> GetOrderDetailsByOrderId(int id)
@@ -47,8 +47,8 @@ namespace Alligator.DataLayer.Repositories
             }, 
             new { OrderId = id },
             commandType: CommandType.StoredProcedure,
-            splitOn: "Id").
-            Distinct().ToList();
+            splitOn: "Id")
+            .Distinct().ToList();
         }
 
         public List<OrderDetail> GetOrderDetailsByProductId(int id)
@@ -65,8 +65,8 @@ namespace Alligator.DataLayer.Repositories
             }, 
             new { ProductId = id },
             commandType: CommandType.StoredProcedure,
-            splitOn: "Id").
-            FindAll().Distinct().ToList();
+            splitOn: "Id")
+            .Distinct().ToList();
         }
 
         public void AddOrderDetail(int amount,int orderId, int productId)

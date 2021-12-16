@@ -6,14 +6,14 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="VIewModels\EntitiesViewModels\" />
-    <Folder Include="VIewModels\TabItemsViewModels\" />
-  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\Alligator.BusinessLayer\Alligator.BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>
