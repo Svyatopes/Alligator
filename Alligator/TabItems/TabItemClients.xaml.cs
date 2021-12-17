@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Alligator.UI.VIewModels.TabItemsViewModels;
+using System.Windows.Controls;
 
 namespace Alligator.UI.TabItems
 {
@@ -7,9 +8,11 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemClients : TabItem
     {
+        TabItemClientsViewModel clientsViewModel = new TabItemClientsViewModel();
         public TabItemClients()
         {
             InitializeComponent();
+            DataContext = clientsViewModel;
         }
     }
 }

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="АЛЛИГАТОР ЙОУ" Height="450" Width="800">
     <Grid>
-        <TabControl TabStripPlacement="Left">
+        <TabControl TabStripPlacement="Left" SelectionChanged="TabControl_SelectionChanged">
             <tabItems:TabItemMain />
             <tabItems:TabItemClients />
             <tabItems:TabItemOrders />
