@@ -66,7 +66,7 @@ namespace Alligator.DataLayer.Repositories
             new { ProductId = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
-            FindAll().Distinct().ToList();
+            Distinct().ToList();
         }
 
         public void AddOrderDetail(int amount,int orderId, int productId)
