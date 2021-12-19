@@ -30,7 +30,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 id = value;
-                OnPropertyChanged("Id");
+                OnPropertyChanged(nameof(Id));
             }
         }
 
@@ -42,7 +42,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 date = value;
-                OnPropertyChanged("Date");
+                OnPropertyChanged(nameof(Date));
             }
         }
 
@@ -54,7 +54,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 clientModel = value;
-                OnPropertyChanged("Client");
+                OnPropertyChanged(nameof(Client));
             }
         }
 
@@ -66,7 +66,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 address = value;
-                OnPropertyChanged("Address");
+                OnPropertyChanged(nameof(Address));
             }
         }
 
@@ -78,7 +78,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 orderDetails = value;
-                OnPropertyChanged("OrderDetails");
+                OnPropertyChanged(nameof(OrderDetails));
             }
         }
 
@@ -89,7 +89,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 orderReviews = value;
-                OnPropertyChanged("OrderReviews");
+                OnPropertyChanged(nameof(OrderReviews));
             } 
         }
 
