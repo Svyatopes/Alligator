@@ -13,6 +13,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
     class TabItemClientsViewModel   : BaseViewModel
     {
         private ObservableCollection<ClientViewModel> clients;
+        private ClientViewModel selected;
+        public TabItemClientsViewModel()
+        {
+            Clients = new ObservableCollection<ClientViewModel>();
+        }
         public ObservableCollection<ClientViewModel> Clients
         {
             get { return clients; }
@@ -22,9 +27,14 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("Clients");
             }
         }
-        public TabItemClientsViewModel()
+        public ClientViewModel Selected
         {
-            Clients = new ObservableCollection<ClientViewModel>();
+            get { return selected; }
+            set
+            {
+                selected = value;
+                OnPropertyChanged("Selected");
+            }
         }
     }
 }

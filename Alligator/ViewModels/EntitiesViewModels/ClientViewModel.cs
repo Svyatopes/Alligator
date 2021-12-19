@@ -12,15 +12,15 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
-        public ClientViewModel(ClientModel clientModel)
-        {
+        //public ClientViewModel(ClientModel clientModel)
+        //{
                 
-            FirstName = clientModel.FirstName;
-            LastName = clientModel.LastName;
-            Patronymic = clientModel.Patronymic;
-            PhoneNumber = clientModel.PhoneNumber;
-            Email = clientModel.Email;
-        }
+        //    FirstName = clientModel.FirstName;
+        //    LastName = clientModel.LastName;
+        //    Patronymic = clientModel.Patronymic;
+        //    PhoneNumber = clientModel.PhoneNumber;
+        //    Email = clientModel.Email;
+        //}
         
         private string firstName { get; set; }
         private string lastName { get; set; }
@@ -37,6 +37,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged("FirstName");
             }
         }
+
         public string LastName
         {
             get { return lastName; }
