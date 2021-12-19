@@ -35,5 +35,25 @@ namespace Alligator.BusinessLayer
             var orderDetails = _repositoryOrderdetail.GetOrderDetailsByProductId(id);
             return CustomMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
         }
+
+        public void AddOrderDetailModel(int amount, int orderId, int productId)
+        {
+            _repositoryOrderdetail.AddOrderDetail(amount, orderId, productId);
+        }
+
+        public void EditOrderDetailModel(int id, int amount)
+        {
+            _repositoryOrderdetail.EditOrderDetail(id, amount);
+        }
+        
+        public void DeleteOrderDetailModel(int id)
+        {
+            _repositoryOrderdetail.DeleteOrderDetail(id);
+        }
+
+        public void DeleteOrderDetailByProductId(int id)
+        {
+            _repositoryOrderdetail.DeleteOrderDetailByProductId(id);
+        }
     }
 }

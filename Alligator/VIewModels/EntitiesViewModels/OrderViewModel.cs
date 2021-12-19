@@ -14,15 +14,84 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
         public OrderViewModel(OrderModel orderModel)
         {
             Id = orderModel.Id;
+            Date = orderModel.Date;
+            Client = orderModel.Client;
+            Address = orderModel.Address;
+            OrderDetails = orderModel.OrderDetails;
+            OrderReviews = orderModel.OrderReviews;
 
         }
+
+
+        private int id;
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        private DateTime date;
         
-        public int Id { get; set; }
-        public DateTime Date { get; set; }
-        public ClientModel Client { get; set; }
-        public string Address { get; set; }
-        public List<OrderDetailModel> OrderDetails { get; set; }
-        public List<OrderReviewModel> OrderReviews { get; set; }
+        public DateTime Date
+        {
+            get { return date; }
+            set
+            {
+                date = value;
+                OnPropertyChanged("Date");
+            }
+        }
+
+        private ClientModel clientModel;
+        
+        public ClientModel Client
+        {
+            get { return clientModel; }
+            set
+            {
+                clientModel = value;
+                OnPropertyChanged("Client");
+            }
+        }
+
+        private string address;
+
+        public string Address 
+        {
+            get { return address; }
+            set
+            {
+                address = value;
+                OnPropertyChanged("Address");
+            }
+        }
+
+        private List<OrderDetailModel> orderDetails;
+        
+        public List<OrderDetailModel> OrderDetails 
+        {
+            get { return orderDetails; }
+            set
+            {
+                orderDetails = value;
+                OnPropertyChanged("OrderDetails");
+            }
+        }
+
+        private List<OrderReviewModel> orderReviews;
+        public List<OrderReviewModel> OrderReviews 
+        { 
+            get { return orderReviews; }
+            set
+            {
+                orderReviews = value;
+                OnPropertyChanged("OrderReviews");
+            } 
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

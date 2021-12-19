@@ -35,7 +35,17 @@ namespace Alligator.BusinessLayer
 
         public void AddOrderModel(DateTime date, int clientId, string address)
         {
+             _repositoryOrder.AddOrder(date, clientId, address);            
+        }
 
+        public void DeleteOrderModel(int id)
+        {
+            _repositoryOrder.DeleteOrder(id);
+        }
+
+        public void EditOrderModel(DateTime date, int id, string address)
+        {
+            _repositoryOrder.EditOrder(date, id, address);
         }
     }
 }
