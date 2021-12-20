@@ -4,10 +4,10 @@
               Header="Клиенты">
     <Grid Background="#C4C4C4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="AllClientsWindow" Width="0" />
-            <ColumnDefinition x:Name="ClientCardWindow" Width="1*" />
-            <ColumnDefinition x:Name="AddClientWindow" Width="0" />
             
+            <ColumnDefinition x:Name="AllClientsWindow" Width="1*" />
+            <ColumnDefinition x:Name="ClientCardWindow" Width="0" />
+            <ColumnDefinition x:Name="AddClientWindow" Width="0" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
@@ -25,14 +25,10 @@
                 <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding PhoneNumber}"/>
                 <DataGridTextColumn Header="Почта" Width="*" Binding="{Binding Email}"/>
             </DataGrid.Columns>
-
         </DataGrid >
-
-
         <Grid  Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -42,105 +38,91 @@
                 <RowDefinition Height="13*" />
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
-
             <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Имя</TextBlock>
             <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Фамилия</TextBlock>
             <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Отчество</TextBlock>
             <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="0">Телефон</TextBlock>
             <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="1">Почта</TextBlock>
             <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="2">Количество заказов</TextBlock>
-            <DataGrid Background="#5F5656" Grid.Row="3" Grid.Column="0" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" ItemsSource="{Binding Comments}">
+            <Grid Grid.Column="0" Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <DataGrid Background="#5F5656" Grid.Row="0" Grid.Column="0" Margin="5,15,5,5" ItemsSource="{Binding Selected.Comments}" AutoGenerateColumns="False" CanUserAddRows="True" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn  Header="Комментарии" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
                 </DataGrid.Columns>
-
             </DataGrid >
-            <DataGrid  Background="#5F5656" Grid.Row="3" Grid.Column="1" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" ItemsSource="{Binding Comment}">
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"   Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddComment_ClientCard_Click">Добавить кomment</Button>
+                <TextBox Grid.Column="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
+                </Grid>
+            </Grid>
+            <DataGrid  Background="#5F5656" Grid.Row="3" Grid.Column="1" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Заказы" Width="*" />
                 </DataGrid.Columns>
-
             </DataGrid >
             <StackPanel Grid.Column="0"  >
                 <Grid  Grid.Column="0" Grid.Row="1">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox  Text="{Binding Path=Select}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></TextBox>
-
-
+                    <TextBox  Text="{Binding Path=Selected.FirstName}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></TextBox>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="1">
                 <Grid Grid.Column="0" Grid.Row="0">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
-
-
+                    <TextBox Grid.Column="1" Grid.Row="1"  Text="{Binding Path=Selected.LastName}" Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="0">
                 <Grid Grid.Column="0" Grid.Row="2">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1" Width="220"   Background="White" Margin="15,0,5,5" ></TextBox>
-
-
+                    <TextBox Text="{Binding Path= Selected.Patronymic}" Grid.Column="1" Grid.Row="1" Width="220"   Background="White" Margin="15,0,5,5" ></TextBox>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="0">
-            <Grid Grid.Column="1" Grid.Row="1">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220" HorizontalAlignment="Right"  Background="White" ></TextBox>
-
-
-            </Grid>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1" Text="{Binding Path=Selected.PhoneNumber}" Grid.Row="1" Margin="15,0,5,5"  Width="220" HorizontalAlignment="Right"  Background="White" ></TextBox>
+                </Grid>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1">
-            <Grid Grid.Column="1" Grid.Row="0">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBox Grid.Column="1" Grid.Row="1"  Background="White" Width="220" HorizontalAlignment="Right"  Margin="15,0,5,5" ></TextBox>
-
-
-            </Grid>
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=Selected.Email}" Background="White" Width="220" HorizontalAlignment="Right"  Margin="15,0,5,5" ></TextBox>
+                </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2">
-            <Grid Grid.Column="1" Grid.Row="2">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="1" Grid.Row="1"  Background="White" Width="200" HorizontalAlignment="Right" Margin="15,0,5,5"></TextBlock>
-
-            </Grid>
+                <Grid Grid.Column="1" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Grid.Row="1"  Background="White" Width="200" HorizontalAlignment="Right" Margin="15,0,5,5"></TextBlock>
+                </Grid>
             </StackPanel>
-
         </Grid>
-        
         <Grid  Grid.Row="2"  Grid.Column="1" VerticalAlignment="Stretch" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
@@ -161,14 +143,10 @@
             <Button  Grid.Column="2" Background="#DACDCD" Height="20" Width="140" Click="ButtonDeleteClient_AllClients_Click">Удалить клиента</Button>
             <Button  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" Click="ButtonOpenClientCard_AllClients_Click">Открыть карту клиента</Button>
         </Grid>
-
         <Grid Grid.Column="2" Grid.Row="1">
-            
             <Grid  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -178,63 +156,49 @@
                     <RowDefinition Height="13*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <DataGrid Background="#5F5656" Grid.Row="3"  Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" ItemsSource="{Binding Comments}">
+                <Grid Grid.Column="0" Grid.Row="3">
+                    <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid  Background="#5F5656" Grid.Row="0"  Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True"  ItemsSource="{Binding Selected.Comments}" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn  Header="Комментарии" Width="*" />
+                        <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
                     </DataGrid.Columns>
-
                 </DataGrid >
-                <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Имя</TextBlock>
-                <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Фамилия</TextBlock>
+                </Grid>
+                <TextBlock  Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Имя</TextBlock>
+                <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Фамилия</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Отчество</TextBlock>
-                <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="0">Телефон</TextBlock>
-                <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="1">Почта</TextBlock>
-
-               
-
+                <TextBlock   Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="0">Телефон</TextBlock>
+                <TextBlock  Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="1">Почта</TextBlock>
                 <Grid Grid.Column="0" Grid.Row="1">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></TextBox>
-
-
+                    <TextBox x:Name="firstName" Text="{Binding Path=Selected.FirstName}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></TextBox>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="0">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
-
-
+                    <TextBox x:Name="lName" Text="{Binding Path=Selected.LastName}" Grid.Column="1" Grid.Row="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
                 </Grid>
                 <Grid Grid.Column="0" Grid.Row="2">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1" Width="220"   Background="White" Margin="15,0,5,5" ></TextBox>
-
-
+                    <TextBox x:Name="tName" Text="{Binding Path= Selected.Patronymic}" Grid.Column="1" Grid.Row="1" Width="220"   Background="White" Margin="15,0,5,5" ></TextBox>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220" HorizontalAlignment="Right"  Background="White" ></TextBox>
-
-
+                    <TextBox x:Name="phoneNumber" Text="{Binding Selected.PhoneNumber}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220" HorizontalAlignment="Right"  Background="White" ></TextBox>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="0">
 
@@ -242,25 +206,15 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBox Grid.Column="1" Grid.Row="1"  Background="White" Width="220" HorizontalAlignment="Right"  Margin="15,0,5,5" ></TextBox>
-
-
+                    <TextBox x:Name="email" Grid.Column="1" Grid.Row="1" Text="{Binding Selected.Email}" Background="White" Width="220" HorizontalAlignment="Right"  Margin="15,0,5,5" ></TextBox>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="2">
-
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="5*"/>
                     </Grid.ColumnDefinitions>
-
-                    
-
                 </Grid>
-
             </Grid>
-          
-
         </Grid>
         <Grid  Grid.Row="2"  Grid.Column="3" VerticalAlignment="Stretch" Height="Auto">
             <Grid.ColumnDefinitions>
@@ -270,7 +224,6 @@
             </Grid.ColumnDefinitions>
             <Button Background="#DACDCD"  Grid.Row="2" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonComeBack_AddingClient_Click">Вернуться назад</Button>
             <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonSaveChanges_AddingClient_Click">Сохранить изменения</Button> 
-            
         </Grid>
     </Grid>
 </TabItem>

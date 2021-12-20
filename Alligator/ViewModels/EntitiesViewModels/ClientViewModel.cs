@@ -1,7 +1,9 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
+using Alligator.UI.ViewModels.EntitiesViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,22 +14,12 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
-        //public ClientViewModel(ClientModel clientModel)
-        //{
-                
-        //    FirstName = clientModel.FirstName;
-        //    LastName = clientModel.LastName;
-        //    Patronymic = clientModel.Patronymic;
-        //    PhoneNumber = clientModel.PhoneNumber;
-        //    Email = clientModel.Email;
-        //}
-        
         private string firstName { get; set; }
         private string lastName { get; set; }
         private string patronymic { get; set; }
         private string phoneNumber { get; set; }
         private string email { get; set; }
-        private List<CommentModel> Comments { get; set; }
+        private ObservableCollection<CommentViewModel> comments {get;set;}
         public string FirstName
         {
             get { return firstName; }
@@ -37,7 +29,15 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged("FirstName");
             }
         }
-
+        public ObservableCollection<CommentViewModel> Comments
+        {
+            get { return comments; }
+            set
+            {
+                comments = value;
+                OnPropertyChanged("Comments");
+            }
+        }
         public string LastName
         {
             get { return lastName; }

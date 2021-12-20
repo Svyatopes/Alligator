@@ -1,4 +1,5 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
+﻿using Alligator.UI.ViewModels.EntitiesViewModels;
+using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,16 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
-    class TabItemClientsViewModel   : BaseViewModel
+   public  class TabItemClientsViewModel   : BaseViewModel
     {
         private ObservableCollection<ClientViewModel> clients;
+        private ObservableCollection<CommentViewModel> comments;
         private ClientViewModel selected;
+        
         public TabItemClientsViewModel()
         {
             Clients = new ObservableCollection<ClientViewModel>();
+            Comments = new ObservableCollection<CommentViewModel>();
         }
         public ObservableCollection<ClientViewModel> Clients
         {
@@ -25,6 +29,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 clients = value;
                 OnPropertyChanged("Clients");
+            }
+        }
+
+        public ObservableCollection<CommentViewModel> Comments
+        {
+            get { return comments; }
+            set
+            {
+                comments = value;
+                OnPropertyChanged("Comments");
             }
         }
         public ClientViewModel Selected
@@ -36,5 +50,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("Selected");
             }
         }
+
     }
 }
