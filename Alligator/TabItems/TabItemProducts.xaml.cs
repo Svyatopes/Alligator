@@ -16,8 +16,7 @@ namespace Alligator.UI.TabItems
             InitializeComponent();
             viewModel = new ProductsTabItemViewModel();
             DataContext = viewModel;
-            dg_Products.ItemsSource = viewModel.Products;
-
+            
             ObservableCollection<ProductViewModel> productsList = new ObservableCollection<ProductViewModel>();
             productsList.Add(new ProductViewModel()
             {
@@ -25,32 +24,49 @@ namespace Alligator.UI.TabItems
                 Category = "cat1"
             }
             );
-
+            dg_Products.ItemsSource = productsList;
+            viewModel.Selected = null;
         }
 
         
         ProductsTabItemViewModel viewModel = new ProductsTabItemViewModel();
 
         private void Button_AddProduct_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (viewModel.Selected == null)
-            {
-                AllProductsGrid.Width = new GridLength(0, GridUnitType.Star);
-                AddProductGrid.Width = new GridLength(1, GridUnitType.Star);
-            }
-            else
-            {
-                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            viewModel.Selected = null;
+        {           
+           
+            AllProductsGrid.Width = new GridLength(0, GridUnitType.Star);
+            AddProductGrid.Width = new GridLength(1, GridUnitType.Star);
+            SeeProductGrid.Width = new GridLength(0, GridUnitType.Star);
         }
 
         private void Button_SeeProduct_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (viewModel.Selected != null)
+            {
+                AllProductsGrid.Width = new GridLength(0, GridUnitType.Star);
+                AddProductGrid.Width = new GridLength(0, GridUnitType.Star);
+                SeeProductGrid.Width = new GridLength(1, GridUnitType.Star);
+            }
+            else
+            {
+                MessageBox.Show("Выберите товар", " ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         private void Button_DeleteProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Comeback_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            AllProductsGrid.Width = new GridLength(1, GridUnitType.Star);
+            AddProductGrid.Width = new GridLength(0, GridUnitType.Star);
+            SeeProductGrid.Width = new GridLength(0, GridUnitType.Star);
+        }
+
+        private void Button_SaveProduct_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
