@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.UI", "Alligator\A
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Alligator.DB", "Alligator.DB\Alligator.DB.sqlproj", "{E0FBB3D6-C3A7-40BD-9999-7BABA9597709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.DataLayer", "Alligator.DataLayer\Alligator.DataLayer.csproj", "{81787F65-1BC9-42B2-A18F-DC2284C2558C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.DataLayer", "Alligator.DataLayer\Alligator.DataLayer.csproj", "{81787F65-1BC9-42B2-A18F-DC2284C2558C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.BusinessLayer", "Alligator.BusinessLayer\Alligator.BusinessLayer.csproj", "{BE31D2BB-AB7D-4DAE-857A-A56FFADE913D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE31D2BB-AB7D-4DAE-857A-A56FFADE913D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE31D2BB-AB7D-4DAE-857A-A56FFADE913D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE31D2BB-AB7D-4DAE-857A-A56FFADE913D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE31D2BB-AB7D-4DAE-857A-A56FFADE913D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

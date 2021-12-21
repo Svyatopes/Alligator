@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Alligator.UI.ViewModels.EntitiesViewModels
+﻿namespace Alligator.UI.ViewModels.EntitiesViewModels
 {
-    public class CategoryViewModel : INotifyPropertyChanged
+    public class CategoryViewModel : BaseViewModel
     {
+
+        
         private int _id;
         public int Id
         {
@@ -16,8 +15,8 @@ namespace Alligator.UI.ViewModels.EntitiesViewModels
             }
         }
 
-        private string? _name;
-        public string? Name
+        private string _name;
+        public string Name
         {
             get { return _name; }
             set
@@ -26,13 +25,6 @@ namespace Alligator.UI.ViewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+                
     }
 }

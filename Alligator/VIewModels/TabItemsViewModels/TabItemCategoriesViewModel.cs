@@ -1,46 +1,37 @@
-﻿using MvvmHelpers;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Alligator.UI.Commands.TabItemCategories;
 using Alligator.UI.ViewModels.EntitiesViewModels;
 
 namespace Alligator.UI.ViewModels.TabItemsViewModels
 {
     public class TabItemCategoriesViewModel : BaseViewModel
     {
+        private string? _textBoxNewCategoryText;
+        private string? _textBoxNewProductTagText;
+        private CategoryViewModel _selectedCategory;
+        private ProductTagViewModel _selectedProductTag;
+        
+        public ICommand AddCategory { get; set; }
+        public ICommand DeleteCategory { get; set; }
+        public ICommand AddProductTag { get; set; }
+        public ICommand DeleteProductTag { get; set; }
+
         public TabItemCategoriesViewModel()
         {
             Categories = new ObservableCollection<CategoryViewModel>();
             ProductTags = new ObservableCollection<ProductTagViewModel>();
+
+            AddCategory = new ButtonCategoryAdd(this);
+            DeleteCategory = new ButtonCategoryDelete(this);
+            AddProductTag = new ButtonProductTagAdd(this);
+            DeleteProductTag = new ButtonProductTagDelete(this);
         }
 
+        public ObservableCollection<CategoryViewModel> Categories { get; set; }
 
-        private ObservableCollection<CategoryViewModel> _categories;
-        public ObservableCollection<CategoryViewModel> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                _categories = value;
-                OnPropertyChanged(nameof(Categories));
-            }
-        }
+        public ObservableCollection<ProductTagViewModel> ProductTags { get; set; }
 
-        private ObservableCollection<ProductTagViewModel> _productTags;
-        public ObservableCollection<ProductTagViewModel> ProductTags
-        {
-            get { return _productTags; }
-            set
-            {
-                _productTags = value;
-                OnPropertyChanged(nameof(ProductTags));
-            }
-        }
-
-        private string? _textBoxNewCategoryText;
         public string? TextBoxNewCategoryText
         {
             get { return _textBoxNewCategoryText; }
@@ -51,7 +42,6 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             }
         }
 
-        private string? _textBoxNewProductTagText;
         public string? TextBoxNewProductTagText
         {
             get { return _textBoxNewProductTagText; }
@@ -63,5 +53,24 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
         }
 
 
+        public CategoryViewModel SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
+
+        public ProductTagViewModel SelectedProductTag
+        {
+            get { return _selectedProductTag; }
+            set
+            {
+                _selectedProductTag = value;
+                OnPropertyChanged(nameof(SelectedProductTag));
+            }
+        }
     }
 }
