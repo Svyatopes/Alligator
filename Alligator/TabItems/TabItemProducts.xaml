@@ -2,7 +2,75 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
               Header="Товары/услуги">
-    <Grid>
-        <TextBlock>Товары/услуги</TextBlock>
+    <Grid>   
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="AllProductsGrid" Width="*" />
+            <ColumnDefinition x:Name="AddProductGrid" Width="0" />
+            <ColumnDefinition x:Name="SeeProductGrid" Width="0" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Просмотр товара</Label>
+        <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Товары и услуги</Label>
+        <Label  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить товар</Label>
+
+        <DataGrid x:Name="dg_Products" SelectedItem="{Binding Selected}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Products}">
+            <DataGrid.Columns>                
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Path = Name}" Width="*" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Path = Category}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="2" VerticalAlignment="Stretch" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Click="Button_AddProduct_Click">Добавить товар</Button>
+            <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" Click="Button_SeeProduct_Click">Просмотреть товар</Button>
+            <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Click="Button_DeleteProduct_Click">Удалить товар</Button>
+        </Grid>
+
+        
+        <Grid  Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Товар</TextBlock>
+            <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Категория</TextBlock>
+            <DataGrid  Background="#5F5656" Grid.Column="1" Margin="10,0,0,-250"  AutoGenerateColumns="False" CanUserAddRows="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Теги" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid >
+            
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2" VerticalAlignment="Stretch" Height="Auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Click="Button_Comeback_Click">Вернуться назад</Button>
+            <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" Click="Button_DeleteProduct_Click">Удалить товар</Button>
+            <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Click="Button_SaveProduct_Click">Сохранить изменения</Button>
+        </Grid>
+
     </Grid>
+    
+        
 </TabItem>

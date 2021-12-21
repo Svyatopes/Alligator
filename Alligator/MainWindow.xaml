@@ -14,7 +14,7 @@
             <tabItems:TabItemOrders />
             <tabItems:TabItemProducts />
             <tabItems:TabItemCategories />
-            <tabItems:TabItemSupplies />
+            <tabItems:TabItemSupplies />            
         </TabControl>
     </Grid>
 </Window>
