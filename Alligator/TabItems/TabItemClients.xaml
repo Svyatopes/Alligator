@@ -49,9 +49,9 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <DataGrid Background="#5F5656" Grid.Row="0" Grid.Column="0" Margin="5,15,5,5" ItemsSource="{Binding Selected.Comments}" AutoGenerateColumns="False" CanUserAddRows="True" >
+                <DataGrid Background="#5F5656" SelectedItem="{Binding SelectedCom}" Grid.Row="0" x:Name="comm" Grid.Column="0" Margin="5,15,5,5"   IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Selected.Comments}" AutoGenerateColumns="False"  >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
+                        <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
                 </DataGrid.Columns>
             </DataGrid >
                 <Grid Grid.Row="3">
@@ -60,7 +60,7 @@
                     <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"   Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddComment_ClientCard_Click">Добавить кomment</Button>
-                <TextBox Grid.Column="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
+                <TextBox Grid.Column="1" x:Name="commentOfCurrentClient" Text="{Binding SelectedCom.Text}"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
                 </Grid>
             </Grid>
             <DataGrid  Background="#5F5656" Grid.Row="3" Grid.Column="1" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" >
@@ -158,14 +158,22 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Column="0" Grid.Row="3">
                     <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <DataGrid  Background="#5F5656" Grid.Row="0"  Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True"  ItemsSource="{Binding Selected.Comments}" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid >
+
+                </Grid>
+                <Grid Margin="10,0,0,0" Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Button  Grid.Column="0" Grid.Row="0" Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddComment_AddingClient_Click">Добавить комментарии</Button>
+                   
                 </Grid>
                 <TextBlock  Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Имя</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Фамилия</TextBlock>

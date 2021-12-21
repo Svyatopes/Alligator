@@ -14,13 +14,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
    public  class TabItemClientsViewModel   : BaseViewModel
     {
         private ObservableCollection<ClientViewModel> clients;
-        private ObservableCollection<CommentViewModel> comments;
+        //private ObservableCollection<CommentViewModel> comments;
         private ClientViewModel selected;
-        
+        private CommentViewModel selectedCom;
+       
+
         public TabItemClientsViewModel()
         {
             Clients = new ObservableCollection<ClientViewModel>();
-            Comments = new ObservableCollection<CommentViewModel>();
+           
         }
         public ObservableCollection<ClientViewModel> Clients
         {
@@ -32,15 +34,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public ObservableCollection<CommentViewModel> Comments
-        {
-            get { return comments; }
-            set
-            {
-                comments = value;
-                OnPropertyChanged("Comments");
-            }
-        }
         public ClientViewModel Selected
         {
             get { return selected; }
@@ -48,6 +41,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 selected = value;
                 OnPropertyChanged("Selected");
+            }
+        }
+        public CommentViewModel SelectedCom
+        {
+            get { return selectedCom; }
+            set
+            {
+                selectedCom = value;
+                OnPropertyChanged("SelectedCom");
             }
         }
 

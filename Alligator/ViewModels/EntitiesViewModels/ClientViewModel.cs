@@ -14,12 +14,12 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ClientViewModel : INotifyPropertyChanged
     {
-        private string firstName { get; set; }
-        private string lastName { get; set; }
-        private string patronymic { get; set; }
-        private string phoneNumber { get; set; }
-        private string email { get; set; }
-        private ObservableCollection<CommentViewModel> comments {get;set;}
+        private string firstName;
+        private string lastName;
+        private string patronymic;
+        private string phoneNumber;
+        private string email;
+        private ObservableCollection<CommentViewModel> comments;
         public string FirstName
         {
             get { return firstName; }

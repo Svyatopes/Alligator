@@ -13,6 +13,8 @@ namespace Alligator.UI.ViewModels.EntitiesViewModels
     public class CommentViewModel
     {
         private string text;
+        
+
         public string Text
         {
             get { return text; }

@@ -62,11 +62,11 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Order = order;
                 orderdetail.Product = product;
                 return orderdetail;
-            }, 
+            },
             new { ProductId = id },
             commandType: CommandType.StoredProcedure,
-            splitOn: "Id").
-            FindAll().Distinct().ToList();
+            splitOn: "Id")
+           .Distinct().ToList();
         }
 
         public void AddOrderDetail(int amount,int orderId, int productId)

@@ -21,7 +21,6 @@ namespace Alligator.UI.TabItems
             InitializeComponent();
             viewModel = new TabItemClientsViewModel();
             DataContext = viewModel;
-            dg.ItemsSource = viewModel.Clients;
             CreateClients();
         }
 
@@ -31,13 +30,16 @@ namespace Alligator.UI.TabItems
             comments.Add(new CommentViewModel() { Text = "не звонить" });
 
             viewModel.Clients.Add(new ClientViewModel() { Comments = comments, FirstName = "Ваня", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
-            viewModel.Clients.Add(new ClientViewModel() { FirstName = "Ваня", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
+            viewModel.Clients.Add(new ClientViewModel() { FirstName = "Дима", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
         }
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        private void ButtonAddComment_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
 
+        }
         private void ButtonComeBack_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
@@ -76,14 +78,15 @@ namespace Alligator.UI.TabItems
             }
             else
             {
-                 MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             viewModel.Selected = null; 
 
         }
         private void ButtonSaveChanges_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            viewModel.Clients.Add(new ClientViewModel() { FirstName = firstName.Text, LastName =lName.Text, Patronymic = tName.Text, PhoneNumber = phoneNumber.Text, Email = email.Text });
+            
+            viewModel.Clients.Add(new ClientViewModel() { FirstName = firstName.Text, LastName =lName.Text, Patronymic = tName.Text, PhoneNumber = phoneNumber.Text, Email = email.Text  });
             AddClientWindow.Width = new GridLength(0, GridUnitType.Star);
             AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
         }
@@ -92,6 +95,7 @@ namespace Alligator.UI.TabItems
             AddClientWindow.Width = new GridLength(0, GridUnitType.Star);
             AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
             viewModel.Selected = null;
+
         }
         
         private void ButtonOpenClientCard_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -104,11 +108,28 @@ namespace Alligator.UI.TabItems
             }
             else
             {
-                 MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+               
             }
         }
         private void ButtonAddComment_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if(viewModel.Selected.Comments is null)
+            {
+                ObservableCollection<CommentViewModel> comments = new ObservableCollection<CommentViewModel>();
+                viewModel.Selected.Comments = comments;
+            }
+            if(viewModel.SelectedCom == null)
+            {
+                if (commentOfCurrentClient.Text != "")
+                {
+                    CommentViewModel com = new CommentViewModel() { Text = commentOfCurrentClient.Text };
+                    viewModel.Selected.Comments.Add(com);
+                }
+            }
+            commentOfCurrentClient.Text = null;
+            viewModel.SelectedCom = null;
+
+
 
         }
     }
