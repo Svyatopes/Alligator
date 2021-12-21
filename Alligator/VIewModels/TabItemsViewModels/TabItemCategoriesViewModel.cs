@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.Commands.TabItemCategories;
-using Alligator.UI.ViewModels.EntitiesViewModels;
 
 namespace Alligator.UI.ViewModels.TabItemsViewModels
 {
@@ -9,9 +10,12 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
     {
         private string? _textBoxNewCategoryText;
         private string? _textBoxNewProductTagText;
-        private CategoryViewModel _selectedCategory;
-        private ProductTagViewModel _selectedProductTag;
-        
+        private CategoryModel _selectedCategory;
+        private ProductTagModel _selectedProductTag;
+
+        private readonly CategoryService _categoryService;
+        private readonly ProductTagService _productTagService;
+
         public ICommand AddCategory { get; set; }
         public ICommand DeleteCategory { get; set; }
         public ICommand AddProductTag { get; set; }
@@ -19,18 +23,21 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
 
         public TabItemCategoriesViewModel()
         {
-            Categories = new ObservableCollection<CategoryViewModel>();
-            ProductTags = new ObservableCollection<ProductTagViewModel>();
+            _productTagService = new ProductTagService();
+            _categoryService = new CategoryService();
 
-            AddCategory = new ButtonCategoryAdd(this);
-            DeleteCategory = new ButtonCategoryDelete(this);
-            AddProductTag = new ButtonProductTagAdd(this);
-            DeleteProductTag = new ButtonProductTagDelete(this);
+            Categories = new ObservableCollection<CategoryModel>(_categoryService.GetAllCategories());
+            ProductTags = new ObservableCollection<ProductTagModel>(_productTagService.GetAllProductTags());
+
+            AddCategory = new ButtonCategoryAdd(this, _categoryService);
+            DeleteCategory = new ButtonCategoryDelete(this, _categoryService);
+            AddProductTag = new ButtonProductTagAdd(this, _productTagService);
+            DeleteProductTag = new ButtonProductTagDelete(this, _productTagService);
         }
 
-        public ObservableCollection<CategoryViewModel> Categories { get; set; }
+        public ObservableCollection<CategoryModel> Categories { get; set; }
 
-        public ObservableCollection<ProductTagViewModel> ProductTags { get; set; }
+        public ObservableCollection<ProductTagModel> ProductTags { get; set; }
 
         public string? TextBoxNewCategoryText
         {
@@ -53,7 +60,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
         }
 
 
-        public CategoryViewModel SelectedCategory
+        public CategoryModel SelectedCategory
         {
             get { return _selectedCategory; }
             set
@@ -63,7 +70,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             }
         }
 
-        public ProductTagViewModel SelectedProductTag
+        public ProductTagModel SelectedProductTag
         {
             get { return _selectedProductTag; }
             set
@@ -72,5 +79,6 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SelectedProductTag));
             }
         }
+    
     }
 }

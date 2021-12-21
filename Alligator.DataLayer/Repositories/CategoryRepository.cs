@@ -19,9 +19,9 @@ namespace Alligator.DataLayer.Repositories
             connection.Open();
 
             var category = connection.QueryFirstOrDefault<Category>
-                (procString, new 
-                { 
-                    Id = id 
+                (procString, new
+                {
+                    Id = id
                 },
                 commandType: CommandType.StoredProcedure);
 
@@ -40,17 +40,17 @@ namespace Alligator.DataLayer.Repositories
             return categories;
         }
 
-        public void InsertCategory(string name)
+        public int InsertCategory(string name)
         {
             string procString = "dbo.Category_Insert";
             using var connection = new SqlConnection(_connectionString);
 
             connection.Open();
 
-            connection.Execute(procString, new
-                {
-                    Name = name
-                },
+            return connection.QuerySingle<int>(procString, new
+            {
+                Name = name
+            },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -61,26 +61,22 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new 
-                { 
-                    category.Id, 
-                    category.Name 
-                },
+            connection.Execute(procString, new
+            {
+                category.Id,
+                category.Name
+            },
                 commandType: CommandType.StoredProcedure);
         }
 
-        public void DeleteCategory(Category category)
+        public bool DeleteCategory(Category category)
         {
             string procString = "dbo.Category_Delete";
             using var connection = new SqlConnection(_connectionString);
 
             connection.Open();
 
-            connection.Execute(procString, new
-                {
-                    category.Id
-                },
-                commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure) == 1;
         }
     }
 }

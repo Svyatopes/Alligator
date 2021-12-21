@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Alligator.UI.ViewModels.EntitiesViewModels
+namespace Alligator.UI.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {

@@ -1,6 +1,7 @@
 ﻿<TabItem x:Class="Alligator.UI.TabItems.TabItemCategories"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              Header="Категории и теги">
 
     <Grid>
@@ -15,7 +16,12 @@
         </Grid.RowDefinitions>
         <Label HorizontalAlignment="Center" VerticalAlignment="Center">Категории</Label>
         <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Теги</Label>
-        <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding Categories}">
+        <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding SelectedCategory}"  ItemsSource="{Binding Categories}">
+         <!--   <i:Interaction.Triggers>
+                <i:EventTrigger EventName="CellEditEnding">
+                    <i:InvokeCommandAction Command="{Binding SomeCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers> -->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Наименование" Width="200" Binding="{Binding Name}"/>
                 <DataGridTemplateColumn>

@@ -1,9 +1,5 @@
-﻿using Alligator.UI.ViewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alligator.BusinessLayer;
+using Alligator.UI.ViewModels.TabItemsViewModels;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
@@ -11,17 +7,25 @@ namespace Alligator.UI.Commands.TabItemCategories
     public class ButtonProductTagDelete : CommandBase
     {
         private TabItemCategoriesViewModel viewModel;
+        private ProductTagService _productTagService;
 
-        public ButtonProductTagDelete(TabItemCategoriesViewModel viewModel)
+
+        public ButtonProductTagDelete(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
         {
             this.viewModel = viewModel;
+            _productTagService = productTagService;
         }
 
         public override void Execute(object parameter)
         {
             var userAnswer = MessageBox.Show("Вы правда хотите удалить этот тэг?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
-                viewModel.ProductTags.Remove(viewModel.SelectedProductTag);
+            {
+                if (_productTagService.DeleteProductTag(viewModel.SelectedProductTag))
+                    viewModel.ProductTags.Remove(viewModel.SelectedProductTag);
+                else
+                    MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

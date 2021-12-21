@@ -1,4 +1,5 @@
-﻿using Alligator.UI.ViewModels.EntitiesViewModels;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.TabItemsViewModels;
 using System.Linq;
 using System.Windows;
@@ -7,16 +8,18 @@ namespace Alligator.UI.Commands.TabItemCategories
 {
     public class ButtonProductTagAdd : CommandBase
     {
-        private TabItemCategoriesViewModel viewModel;
+        private TabItemCategoriesViewModel _viewModel;
+        private ProductTagService _productTagService;
 
-        public ButtonProductTagAdd(TabItemCategoriesViewModel viewModel)
+        public ButtonProductTagAdd(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
+            _productTagService = productTagService;
         }
 
         public override void Execute(object parameter)
         {
-            var productTagNameToAdd = viewModel.TextBoxNewProductTagText.Trim();
+            var productTagNameToAdd = _viewModel.TextBoxNewProductTagText.Trim();
 
             if (string.IsNullOrEmpty(productTagNameToAdd))
             {
@@ -24,15 +27,21 @@ namespace Alligator.UI.Commands.TabItemCategories
                 return;
             }
 
-            if (viewModel.ProductTags.Any(pt => pt.Name == productTagNameToAdd))
+            if (_viewModel.ProductTags.Any(pt => pt.Name == productTagNameToAdd))
             {
                 MessageBox.Show("Такой тэг уже существует");
                 return;
             }
 
-            //TODO: use business logic with adding
-            viewModel.ProductTags.Add(new ProductTagViewModel() { Name = productTagNameToAdd });
-            viewModel.TextBoxNewProductTagText = string.Empty;
+            var productTag = _productTagService.AddProductTag(productTagNameToAdd);
+            if (productTag == null)
+            {
+                MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            _viewModel.ProductTags.Add(productTag);
+            _viewModel.TextBoxNewProductTagText = string.Empty;
         }
     }
 }

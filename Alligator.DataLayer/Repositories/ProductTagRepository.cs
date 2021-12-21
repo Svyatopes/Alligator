@@ -38,14 +38,14 @@ namespace Alligator.DataLayer.Repositories
 
         }
 
-        public void AddProductTag(string name)
+        public int AddProductTag(string name)
         {
             string procString = "dbo.ProductTag_Insert";
 
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            connection.Execute(procString, new { Name = name }, commandType: CommandType.StoredProcedure);
+            return connection.QuerySingle<int>(procString, new { Name = name }, commandType: CommandType.StoredProcedure);
         }
 
         public void EditProductTag(ProductTag productTag)
@@ -61,14 +61,14 @@ namespace Alligator.DataLayer.Repositories
         }
 
 
-        public void DeleteProductTag(ProductTag productTag)
+        public bool DeleteProductTag(ProductTag productTag)
         {
             string procString = "dbo.ProductTag_Delete";
 
             using var connection = new SqlConnection(_connectionString);
             connection.Open();
 
-            connection.Execute(procString, new { productTag.Id }, commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString, new { productTag.Id }, commandType: CommandType.StoredProcedure) == 1;
 
         }
 
