@@ -9,7 +9,7 @@ using Alligator.DataLayer.Entities;
 
 namespace Alligator.BusinessLayer.Configuration
 {
-    public static class CustomMapper
+    public static class OrderMapper
     {
         private static Mapper _instance;
 

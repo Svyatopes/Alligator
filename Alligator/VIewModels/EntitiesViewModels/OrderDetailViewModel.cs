@@ -15,7 +15,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
         {
             Id = OrderDetailModel.Id;
             Order = OrderDetailModel.Order;
-            Product = OrderDetailModel.Product;
+            //Product = OrderDetailModel.Product;
             Amount = OrderDetailModel.Amount;
         }
 
@@ -27,7 +27,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 id = value;
-                OnPropertyChanged("Id");
+                OnPropertyChanged(nameof(Id));
             } 
         }
 
@@ -39,21 +39,21 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 order = value;
-                OnPropertyChanged("Order");
+                OnPropertyChanged(nameof(Order));
             }
         }
 
-        private ProductModel product;
+        //private ProductModel product;
         
-        public ProductModel Product 
-        { 
-            get { return product; }
-            set
-            {
-                product = value;
-                OnPropertyChanged("Product");
-            } 
-        }
+        //public ProductModel Product 
+        //{ 
+        //    get { return product; }
+        //    set
+        //    {
+        //        product = value;
+        //        OnPropertyChanged(nameof(Product));
+        //    } 
+        //}
 
         private int amount;
 
@@ -63,7 +63,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 amount = value;
-                OnPropertyChanged("Amount");
+                OnPropertyChanged(nameof(Amount));
             }
         }
 

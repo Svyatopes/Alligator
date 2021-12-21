@@ -21,19 +21,19 @@ namespace Alligator.BusinessLayer
         public OrderDetailModel GetOrderDetailById(int id)
         {
             var orderDetail = _repositoryOrderdetail.GetOrderDetailById(id);
-            return CustomMapper.GetInstance().Map<OrderDetailModel>(orderDetail);
+            return OrderMapper.GetInstance().Map<OrderDetailModel>(orderDetail);
         }
 
         public List<OrderDetailModel> GetOrderDetailsByOrderId(int id)
         {
             var orderDetails = _repositoryOrderdetail.GetOrderDetailsByOrderId(id);
-            return CustomMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
+            return OrderMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
         }
 
         public List<OrderDetailModel> GetOrderDetailsByProductId(int id)
         {
             var orderDetails = _repositoryOrderdetail.GetOrderDetailsByProductId(id);
-            return CustomMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
+            return OrderMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
         }
 
         public void AddOrderDetailModel(int amount, int orderId, int productId)

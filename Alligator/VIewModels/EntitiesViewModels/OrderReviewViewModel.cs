@@ -15,7 +15,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
         {
             Id = OrderReviewModel.Id;
             Order = OrderReviewModel.Order;
-            Client = OrderReviewModel.Client;
+            //Client = OrderReviewModel.Client;
             Text = OrderReviewModel.Text;
         }
 
@@ -27,7 +27,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 id = value;
-                OnPropertyChanged("Id");
+                OnPropertyChanged(nameof(Id));
             }
         }
 
@@ -39,20 +39,20 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 order = value;
-                OnPropertyChanged("Order");
+                OnPropertyChanged(nameof(Order));
             }
         }
-        private ClientModel clientModel;
+        //private ClientModel clientModel;
 
-        public ClientModel Client
-        {
-            get { return clientModel; }
-            set
-            {
-                clientModel = value;
-                OnPropertyChanged("Client");
-            }
-        }
+        //public ClientModel Client
+        //{
+        //    get { return clientModel; }
+        //    set
+        //    {
+        //        clientModel = value;
+        //        OnPropertyChanged(nameof(Client));
+        //    }
+        //}
 
         private string text;
         public string Text
@@ -61,7 +61,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             set
             {
                 text = value;
-                OnPropertyChanged("Text");
+                OnPropertyChanged(nameof(Text));
             }
         }
        

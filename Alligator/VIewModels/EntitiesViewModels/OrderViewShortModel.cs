@@ -9,17 +9,14 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class OrderViewModel: INotifyPropertyChanged
+    public class OrderViewShortModel : INotifyPropertyChanged
     {
-        public OrderViewModel(OrderModel orderModel)
+        public OrderViewShortModel(OrderShortModel orderShortModel)
         {
-            Id = orderModel.Id;
-            Date = orderModel.Date;
-            //Client = orderModel.Client;
-            Address = orderModel.Address;
-            OrderDetails = orderModel.OrderDetails;
-            OrderReviews = orderModel.OrderReviews;
-
+            Id = orderShortModel.Id;
+            Date = orderShortModel.Date;          
+            Address = orderShortModel.Address;
+            ClientId = orderShortModel.ClientId;
         }
 
 
@@ -35,7 +32,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
         }
 
         private DateTime date;
-        
+
         public DateTime Date
         {
             get { return date; }
@@ -46,21 +43,10 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        //private ClientModel clientModel;
-        
-        //public ClientModel Client
-        //{
-        //    get { return clientModel; }
-        //    set
-        //    {
-        //        clientModel = value;
-        //        OnPropertyChanged(nameof(Client));
-        //    }
-        //}
-
+      
         private string address;
 
-        public string Address 
+        public string Address
         {
             get { return address; }
             set
@@ -70,27 +56,15 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        private List<OrderDetailModel> orderDetails;
-        
-        public List<OrderDetailModel> OrderDetails 
+        private int clientId;
+        public int ClientId
         {
-            get { return orderDetails; }
+            get { return ClientId; }
             set
             {
-                orderDetails = value;
-                OnPropertyChanged(nameof(OrderDetails));
+                ClientId = value;
+                OnPropertyChanged(nameof(ClientId));
             }
-        }
-
-        private List<OrderReviewModel> orderReviews;
-        public List<OrderReviewModel> OrderReviews 
-        { 
-            get { return orderReviews; }
-            set
-            {
-                orderReviews = value;
-                OnPropertyChanged(nameof(OrderReviews));
-            } 
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -100,4 +74,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
+    
+    
 }

@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
-    public class TabItemOrdersViewModel: BaseViewModel
+    public class TabItemOrdersShortViewModel : BaseViewModel
     {
-        private ObservableCollection<OrderViewModel> orders;
-        public ObservableCollection<OrderViewModel> Orders
+
+        private ObservableCollection<OrderViewShortModel> orders;
+        public ObservableCollection<OrderViewShortModel> Orders
         {
             get { return orders; }
             set
@@ -22,9 +23,10 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public TabItemOrdersViewModel()
+        public TabItemOrdersShortViewModel()
         {
-            Orders = new ObservableCollection<OrderViewModel>();
+            Orders = new ObservableCollection<OrderViewShortModel>();
         }
     }
 }
+

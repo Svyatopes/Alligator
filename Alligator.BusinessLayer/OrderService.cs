@@ -18,19 +18,19 @@ namespace Alligator.BusinessLayer
         public List<OrderShortModel> GetOrderssWithoutSensitiveData()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);
+            return OrderMapper.GetInstance().Map<List<OrderShortModel>>(orders);
         }
 
         public List<OrderModel> GetOrders()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
+            return OrderMapper.GetInstance().Map<List<OrderModel>>(orders);
         }
 
         public List<OrderModel> GetOrdersByClientId(int id)
         {
             var orders = _repositoryOrder.GetOrdersByClientId(id);
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
+            return OrderMapper.GetInstance().Map<List<OrderModel>>(orders);
         }
 
         public void AddOrderModel(DateTime date, int clientId, string address)

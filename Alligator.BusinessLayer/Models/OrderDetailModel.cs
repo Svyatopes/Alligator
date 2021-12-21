@@ -10,7 +10,7 @@ namespace Alligator.BusinessLayer.Models
     {
         public int Id { get; set; }
         public OrderModel Order { get; set; }
-        public ProductModel Product { get; set; }
+       // public ProductModel Product { get; set; }
         public int Amount { get; set; }
     }
 }
