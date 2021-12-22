@@ -9,7 +9,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
     {
         private int _id;
         private DateTime _date;
-        private ObservableCollection<SupplyViewModel> _details;
+        private ObservableCollection<SupplyDelailsViewModel> _details;
 
 
         public int Id
@@ -20,7 +20,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 _id = value;
                 OnPropertyChanged(nameof(Id));
             }
-        }        
+        }
 
         public DateTime Date
         {
@@ -32,7 +32,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        public ObservableCollection<SupplyViewModel> Details
+        public ObservableCollection<SupplyDelailsViewModel> Details
         {
             get { return _details; }
             set
@@ -41,8 +41,8 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Details));
             }
         }
-        
-        
+
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

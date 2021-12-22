@@ -8,7 +8,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
     {
         private int _id;
         private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
-        private ObservableCollection<SuppliesViewModel> _supplies;
+        private SupplyViewModel _supply;
         
         public int Id
         {
@@ -29,13 +29,13 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(SupplyDetails));
             }
         }
-        public ObservableCollection<SuppliesViewModel> Supplies
+        public SupplyViewModel Supply
         {
-            get { return _supplies; }
+            get { return _supply; }
             set
             {
-                _supplies = value;
-                OnPropertyChanged(nameof(Supplies));
+                _supply = value;
+                OnPropertyChanged(nameof(Supply));
             }
         }
 

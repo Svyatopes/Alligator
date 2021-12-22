@@ -1,6 +1,7 @@
 ﻿using Alligator.UI.VIewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,26 +26,12 @@ namespace Alligator.UI.TabItems
 
         private void InitialFillViewModel()
         {
-            ViewModel.Supplies.Add(new SuppliesViewModel() { Id = 125, Date = new DateTime(2021, 05, 08) });
+            ViewModel.Supplies.Add(new SuppliesViewModel() { Id = 125, Date = new DateTime(2021, 05, 08), Details = ViewModel.SupplyDetails });
             ViewModel.Product.Add(new ProductViewModel() { Name = "Роза" });
-            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() 
-            { 
-                Product = ViewModel.Product.Last(), 
-                Amount = 15 
-            });
-
+            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() { Product = ViewModel.Product.Last(), Amount = 15 });
             ViewModel.Product.Add(new ProductViewModel() { Name = "Ромашка" });
 
-            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() 
-            { 
-                Product = ViewModel.Product.Last(), 
-                Amount = 10 
-            });
-            ViewModel.Supply = new SupplyViewModel() 
-            { 
-                Supplies = ViewModel.Supplies, 
-                SupplyDetails = ViewModel.SupplyDetails 
-            };
+            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() { Product = ViewModel.Product.Last(), Amount = 10 });
 
         }
 
@@ -57,11 +44,16 @@ namespace Alligator.UI.TabItems
 
         private void ButtonAddNewSupply_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.TextBoxNewIdText = 0;
+            ViewModel.TextBoxNewProductText = "";
+            ViewModel.TextBoxNewAmountText = 0;
+
+            ViewModel.Supply = new SuppliesViewModel();
+            ViewModel.SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
+            ViewModel.Product = new ObservableCollection<ProductViewModel>();
             SupplyWindow.Width = new GridLength(1, GridUnitType.Star);
             AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
             ViewModel.StateMainDataGrid = false;
-            //ViewModel.NewProduct.Clear();
-            //ViewModel.NewSupply.Clear();
 
         }
 
@@ -71,19 +63,9 @@ namespace Alligator.UI.TabItems
             AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
             AddSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
             ViewModel.StateMainDataGrid = false;
-            ViewModel.NewSupply = new SupplyViewModel();
-            ViewModel.NewSupply.Supplies = new System.Collections.ObjectModel.ObservableCollection<SuppliesViewModel>();
-            for (int i = 0; i < ViewModel.Supplies.Count; i++)
-            {
-                if (ViewModel.Supplies[i].Id == ViewModel.Selected.Id)
-                {
-                    ViewModel.NewSupply.SupplyDetails = ViewModel.SupplyDetails;
-                }
-            }
-            ViewModel.NewSupply.Supplies.Add( ViewModel.Selected); 
-            
-
-
+            ViewModel.Supply = ViewModel.Selected;
+            ViewModel.SupplyDetails = ViewModel.Supply.Details;
+        
         }
 
         private void ButtonReturnBack_Click(object sender, RoutedEventArgs e)
@@ -95,39 +77,32 @@ namespace Alligator.UI.TabItems
 
         private void ButtonSavedAll_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Supplies.Add(ViewModel.NewSupply.Supplies[0]);
+            ViewModel.Supply = new SuppliesViewModel()
+            {
+                Id = ViewModel.TextBoxNewIdText,
+                Date = DatePickerBooox.SelectedDate.Value,
+                Details = ViewModel.SupplyDetails
+            };
+
+            ViewModel.Supplies.Add(ViewModel.Supply);
+
         }
 
         private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.NewProduct.Add(new ProductViewModel() 
-            { 
-                Id = ViewModel.TextBoxNewIdText, 
-                Name = ViewModel.TextBoxNewProductText 
-            });
-
-            ViewModel.NewSupplyDetails.Add(new SupplyDelailsViewModel() 
-            { 
-                Product = ViewModel.NewProduct.Last(), 
-                Amount = ViewModel.TextBoxNewAmountText 
-            });
-
-        }
-
-        private void ButtonAddSSupply_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.NewSupplies.Add(new SuppliesViewModel()
+            ViewModel.Product.Add(new ProductViewModel()
             {
                 Id = ViewModel.TextBoxNewIdText,
-                Date = DatePickerBooox.SelectedDate.Value
-            }
-            ); 
+                Name = ViewModel.TextBoxNewProductText
 
-            ViewModel.NewSupply = new SupplyViewModel()
+            });
+
+            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel()
             {
-                Supplies = ViewModel.NewSupplies,
-                SupplyDetails = ViewModel.NewSupplyDetails
-            };
+                Product = ViewModel.Product[0],
+                Amount = ViewModel.TextBoxNewAmountText
+            });
+            ViewModel.Product = new ObservableCollection<ProductViewModel>();
 
         }
 

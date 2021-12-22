@@ -67,7 +67,7 @@
                 <TextBox x:Name="Number" Text="{Binding TextBoxNewIdText}" Grid.Column="1" Margin="0,0,0,5"  Grid.Row="0" Width="150"   Background="White" ></TextBox>
                 <ComboBox x:Name="Product" Text="{Binding TextBoxNewProductText}" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="0" Width="150"   Background="White" >
                     <ComboBoxItem Content="Candy"/>
-                    <ComboBoxItem Content="Frout"/>
+                    <ComboBoxItem Content="Fruit"/>
                     <ComboBoxItem Content="Tomato"/>
                 </ComboBox>
                 <TextBox x:Name="Amount" Text="{Binding TextBoxNewAmountText}" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="1" Width="150"   Background="White" ></TextBox>
@@ -75,16 +75,8 @@
                 <Button  Grid.Column="0" Grid.Row="7" Height="20" Width="180" Click="ButtonReturnBack_Click" Content="Вернуться назад"/>
                 <Button  Grid.Column="2" Grid.Row="7" Height="20" Width="180" Click="ButtonSavedAll_Click" Content="Сохранить поставку"/>
                 <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddProduct_Click" Content="Добавить продукт в таблицу"/>
-                <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddSSupply_Click" Content="Добавить поставку дату поставки в таб"/>
-
-                <DataGrid ItemsSource="{Binding NewSupplies}" Grid.ColumnSpan="2"   Grid.Column="0" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Date supply" Width="1*" Binding="{Binding Date, StringFormat=d}" />
-                        <DataGridTextColumn Header="Number supply" Width="1*" Binding="{Binding Id}" />
-                        
-                    </DataGrid.Columns>
-                </DataGrid>
-                <DataGrid ItemsSource="{Binding NewSupplyDetails}" Grid.ColumnSpan="2"   Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
+                                
+                <DataGrid ItemsSource="{Binding SupplyDetails}" Grid.ColumnSpan="2"   Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Path = Product.Name}" />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" />
@@ -119,45 +111,24 @@
 
 
                 <TextBlock  Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0" Width="140" >Номер поставки</TextBlock>
-                <TextBox x:Name="tName" Text="{Binding Path= NewSupplies.Name}" Grid.Column="1" Grid.Row="0" Width="140"   Background="White" Margin="15,0,5,5" ></TextBox>
+                <TextBox x:Name="tName" Text="{Binding Supply.Id}" Grid.Column="1" Grid.Row="0" Width="140"   Background="White" Margin="15,0,5,5" ></TextBox>
+                <TextBox x:Name="tDate" Text="{Binding Supply.Date, StringFormat=d}" Grid.Column="3" Grid.Row="0" Width="140"   Background="White" Margin="15,0,5,5" ></TextBox>
 
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="0" Width="140" >Дата поставки</TextBlock>
-                <ComboBox x:Name="tProduct" Text="{Binding Path= Selected.Product.Name}" Grid.Column="0" Grid.Row="3" Width="140"   Background="White" Margin="15,0,5,5" ></ComboBox>
-                
-                <DataGrid Grid.Column="0" Grid.ColumnSpan="2"   Grid.Row="4" Grid.RowSpan ="4"  Margin="10" 
-                          AutoGenerateColumns="False" CanUserAddRows="False" 
-                          ItemsSource="{Binding NewSupply.Supplies}" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Номер поставки" Width="1*" Binding="{Binding Id}" />
-                        <DataGridTextColumn Header="Дата поставки" Width="1*" Binding="{Binding Date, StringFormat=d}" />
-                        
-                    </DataGrid.Columns>
-                </DataGrid>
 
-                <DataGrid  ItemsSource="{Binding Path = NewSupply.SupplyDetails}" Grid.Column="2" Grid.ColumnSpan="2"   Grid.Row="4" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
+
+                <DataGrid  ItemsSource="{Binding SupplyDetails}" Grid.Column="1" Grid.ColumnSpan="2"   Grid.Row="2" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Path = Product.Name}" />
+                        <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Product.Name}" />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" />
                         
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button  Grid.Column="0" Grid.Row="7" Height="20" Width="180" Click="ButtonReturnBackk_Click" Content="Вернуться назад"/>
+                <Button  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Height="20" Width="180" Click="ButtonReturnBackk_Click" Content="Вернуться назад"/>
 
             </Grid>
         </Grid>
-        <!--
-        <Grid Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto">
-            <TextBox  Grid.Column="0" Margin="-10,0,0,0" MinWidth="70" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewProductText}" />
-            <TextBlock  Grid.Column="0" Margin="-150,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Продукт" />
-            <TextBox  Grid.Column="1" Margin="-130,0,0,0" MinWidth="70" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewAmountText}" />
-            <TextBlock  Grid.Column="0" Margin="150,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Количество" />
-            <DatePicker Name="DatePickerBooox" Grid.Column="1" Margin="100,0,0,0" MinWidth="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            
-            <TextBox Grid.Column="0" Grid.Row="0" Margin="0,0,0,0" MinWidth="70" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewProductText}" />
-            <TextBlock  Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Продукт" />
-            <TextBox Grid.Column="2" Grid.Row="2" Margin="0,0,0,0" MinWidth="70" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewAmountText}" />
-             
-        </Grid> -->
+        
         
 
     </Grid>

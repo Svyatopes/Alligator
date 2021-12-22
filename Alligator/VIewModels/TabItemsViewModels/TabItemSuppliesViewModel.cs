@@ -1,19 +1,7 @@
-﻿
+﻿using Alligator.UI.VIewModels.EntitiesViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-
-using Alligator.UI.VIewModels.EntitiesViewModels;
-using System.Windows.Controls.Primitives;
-using Alligator.UI.TabItems;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
@@ -22,32 +10,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public TabItemSuppliesViewModel()
         {
             Supplies = new ObservableCollection<SuppliesViewModel>();
-            Supply = new SupplyViewModel();
+            Supply = new SuppliesViewModel();
             SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
             Product = new ObservableCollection<ProductViewModel>();
-
-            NewSupplies = new ObservableCollection<SuppliesViewModel>();
-            NewSupply = new SupplyViewModel();
-            NewSupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
-            NewProduct = new ObservableCollection<ProductViewModel>();
-            
-            //NewSupplies.RemoveAll();
-            //WidthGridAddPlayer = new GridLength(0, GridUnitType.Star);
-            //WidthGridPlayerInfo = new GridLength(0, GridUnitType.Star);
             StateMainDataGrid = true;
         }
 
-        private ObservableCollection<SupplyViewModel> _details;
+        private ObservableCollection<SuppliesViewModel> _details;
         private ObservableCollection<SuppliesViewModel> _supplies;
-        private SupplyViewModel _supply;
+        private SuppliesViewModel _supply;
         private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
         private ObservableCollection<ProductViewModel> _product;
-
-
-        private ObservableCollection<SuppliesViewModel> _newSupplies;
-        private SupplyViewModel _newSupply;
-        private ObservableCollection<SupplyDelailsViewModel> _newSupplyDetails;       
-        private ObservableCollection<ProductViewModel> _newProduct;
 
         private DateTime _textBoxNewDateText;
         private int _textBoxNewAmountText;
@@ -55,7 +28,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private string _textBoxNewProductText;
 
 
-        public ObservableCollection<SupplyViewModel> Details
+        public ObservableCollection<SuppliesViewModel> Details
         {
             get { return _details; }
             set
@@ -75,7 +48,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public SupplyViewModel Supply
+        public SuppliesViewModel Supply
         {
             get { return _supply; }
             set
@@ -105,43 +78,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public ObservableCollection<SuppliesViewModel> NewSupplies
-        {
-            get { return _newSupplies; }
-            set
-            {
-                _newSupplies = value;
-                OnPropertyChanged(nameof(NewSupplies));
-            }
-        }
-
-        public SupplyViewModel NewSupply
-        {
-            get { return _newSupply; }
-            set
-            {
-                _newSupply = value;
-                OnPropertyChanged(nameof(NewSupply));
-            }
-        }
-        public ObservableCollection<SupplyDelailsViewModel> NewSupplyDetails
-        {
-            get { return _newSupplyDetails; }
-            set
-            {
-                _newSupplyDetails = value;
-                OnPropertyChanged(nameof(NewSupplyDetails));
-            }
-        }
-        public ObservableCollection<ProductViewModel> NewProduct
-        {
-            get { return _newProduct; }
-            set
-            {
-                _newProduct = value;
-                OnPropertyChanged(nameof(NewProduct));
-            }
-        }
         private SuppliesViewModel _selected;
         public SuppliesViewModel Selected
         {
@@ -152,7 +88,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(Selected));
             }
         }
-        
+
         private ProductViewModel _pselected;
         public ProductViewModel PSelected
         {
@@ -165,9 +101,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
         public DateTime TextBoxNewDateText
         {
-            get 
+            get
             {
-                return _textBoxNewDateText; 
+                return _textBoxNewDateText;
             }
             set
             {
@@ -177,9 +113,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
         public int TextBoxNewIdText
         {
-            get 
+            get
             {
-                return _textBoxNewIdText; 
+                return _textBoxNewIdText;
             }
             set
             {
@@ -187,7 +123,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(TextBoxNewIdText));
             }
         }
-                
+
         public int TextBoxNewAmountText
         {
             get { return _textBoxNewAmountText; }
@@ -239,5 +175,5 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(TextBoxNewProductText));
             }
         }
-    }    
+    }
 }
