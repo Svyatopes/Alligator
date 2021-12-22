@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class SuppliesViewModel : INotifyPropertyChanged
+    public class SupplyViewModel : INotifyPropertyChanged
     {
         private int _id;
-        private DateTime _date;
-        private ObservableCollection<SupplyViewModel> _details;
-
-
+        private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
+        private ObservableCollection<SuppliesViewModel> _supplies;
+        
         public int Id
         {
             get { return _id; }
@@ -20,29 +18,27 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 _id = value;
                 OnPropertyChanged(nameof(Id));
             }
-        }        
+        }
 
-        public DateTime Date
+        public ObservableCollection<SupplyDelailsViewModel> SupplyDetails
         {
-            get { return _date; }
+            get { return _supplyDetails; }
             set
             {
-                _date = value;
-                OnPropertyChanged(nameof(Date));
+                _supplyDetails = value;
+                OnPropertyChanged(nameof(SupplyDetails));
+            }
+        }
+        public ObservableCollection<SuppliesViewModel> Supplies
+        {
+            get { return _supplies; }
+            set
+            {
+                _supplies = value;
+                OnPropertyChanged(nameof(Supplies));
             }
         }
 
-        public ObservableCollection<SupplyViewModel> Details
-        {
-            get { return _details; }
-            set
-            {
-                _details = value;
-                OnPropertyChanged(nameof(Details));
-            }
-        }
-        
-        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

@@ -21,7 +21,7 @@
         <Label  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Посмотреть поставку</Label>
 
         <!-- Первое окошко всех заказов, Grid.Column="0" -->
-        <DataGrid Grid.Column="0" SelectedItem="{Binding Selected}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Supplies}" >
+        <DataGrid Grid.Column="0" ItemsSource="{Binding Supplies}" SelectedItem="{Binding Selected}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
              <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер заказа" Width="1*" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Дата" Width="1*" Binding="{Binding Date}"/>
@@ -39,7 +39,7 @@
 
         </Grid>
         
-        <!-- Второе  окошко всех заказов, Grid.Column="1" -->
+        <!-- Второе  окошко ДОБАВИТЬ ЗАКАЗ, Grid.Column="1" -->
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -74,21 +74,20 @@
                 <DatePicker Name="DatePickerBooox" Grid.Column="1" Grid.Row="1" Margin="0,0,0,5" Width="150" Background="White" />
                 <Button  Grid.Column="0" Grid.Row="7" Height="20" Width="180" Click="ButtonReturnBack_Click" Content="Вернуться назад"/>
                 <Button  Grid.Column="2" Grid.Row="7" Height="20" Width="180" Click="ButtonSavedAll_Click" Content="Сохранить поставку"/>
-                <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddProduct_Click" Content="Добавить еще один продукт"/>
-                <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddSSupply_Click" Content="Добавить поставку"/>
+                <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddProduct_Click" Content="Добавить продукт в таблицу"/>
+                <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Height="20" Width="180" Click="ButtonAddSSupply_Click" Content="Добавить поставку дату поставки в таб"/>
+
                 <DataGrid ItemsSource="{Binding NewSupplies}" Grid.ColumnSpan="2"   Grid.Column="0" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Номер заказа" Width="1*" Binding="{Binding Id}" />
-                        <DataGridTextColumn Header="Дата" Width="1*" Binding="{Binding Date}"/>
-                        <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}"/>
-
-
+                        <DataGridTextColumn Header="Date supply" Width="1*" Binding="{Binding Date, StringFormat=d}" />
+                        <DataGridTextColumn Header="Number supply" Width="1*" Binding="{Binding Id}" />
+                        
                     </DataGrid.Columns>
                 </DataGrid>
-                <DataGrid ItemsSource="{Binding NewProducts}" Grid.ColumnSpan="2"   Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
+                <DataGrid ItemsSource="{Binding NewSupplyDetails}" Grid.ColumnSpan="2"   Grid.Column="2" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Продукты" Width="1*" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Path = Product.Name}" />
+                        <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" />
                         
                     </DataGrid.Columns>
                 </DataGrid>
@@ -97,7 +96,7 @@
         </Grid>
 
 
-        <!-- Третье  окошко всех заказов, Grid.Column="2" -->
+        <!-- Третье  окошко ПОДРОБНОСТИ ЗАКАЗА, Grid.Column="2" -->
         <Grid Grid.Column="2" Grid.Row="1">
             <Grid  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -120,22 +119,24 @@
 
 
                 <TextBlock  Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0" Width="140" >Номер поставки</TextBlock>
-                <TextBox x:Name="tName" Text="{Binding Path= Selected.Id}" Grid.Column="1" Grid.Row="0" Width="140"   Background="White" Margin="15,0,5,5" ></TextBox>
+                <TextBox x:Name="tName" Text="{Binding Path= NewSupplies.Name}" Grid.Column="1" Grid.Row="0" Width="140"   Background="White" Margin="15,0,5,5" ></TextBox>
 
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="0" Width="140" >Дата поставки</TextBlock>
                 <ComboBox x:Name="tProduct" Text="{Binding Path= Selected.Product.Name}" Grid.Column="0" Grid.Row="3" Width="140"   Background="White" Margin="15,0,5,5" ></ComboBox>
+                
                 <DataGrid Grid.Column="0" Grid.ColumnSpan="2"   Grid.Row="4" Grid.RowSpan ="4"  Margin="10" 
                           AutoGenerateColumns="False" CanUserAddRows="False" 
-                          ItemsSource="{Binding NewProducts}" >
+                          ItemsSource="{Binding NewSupply.Supplies}" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="id" Width="1*" Binding="{Binding Id}" />
-                        <DataGridTextColumn Header="Продукты" Width="1*" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Номер поставки" Width="1*" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Дата поставки" Width="1*" Binding="{Binding Date, StringFormat=d}" />
                         
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <DataGrid  ItemsSource="{Binding Path = NewProducts}" Grid.Column="2" Grid.ColumnSpan="2"   Grid.Row="4" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
+                <DataGrid  ItemsSource="{Binding Path = NewSupply.SupplyDetails}" Grid.Column="2" Grid.ColumnSpan="2"   Grid.Row="4" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
                     <DataGrid.Columns>
+                        <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Path = Product.Name}" />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" />
                         
                     </DataGrid.Columns>

@@ -1,12 +1,9 @@
 ﻿using Alligator.UI.VIewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 
 namespace Alligator.UI.TabItems
 {
@@ -17,11 +14,9 @@ namespace Alligator.UI.TabItems
     {
         public TabItemSuppliesViewModel ViewModel;
 
-
         public TabItemSupplies()
         {
             InitializeComponent();
-            var product = new ProductViewModel();
             ViewModel = new TabItemSuppliesViewModel();
             DataContext = ViewModel;
 
@@ -30,13 +25,27 @@ namespace Alligator.UI.TabItems
 
         private void InitialFillViewModel()
         {
-            List<ProductViewModel> item = new List<ProductViewModel>(); 
-            item.Add (new ProductViewModel() { Id = 21, Name = "рюкзак" });
-            ViewModel.Products.Add(item.Last());
-            item.Add (new ProductViewModel() { Id = 23, Name = "ручка" });
-            ViewModel.Products.Add(item.Last());
-            ViewModel.Supplies.Add(new SuppliesViewModel() { Id = 231, Date = new DateTime(2021, 05, 08), Amount = 23, Product = ViewModel.Products });
-           
+            ViewModel.Supplies.Add(new SuppliesViewModel() { Id = 125, Date = new DateTime(2021, 05, 08) });
+            ViewModel.Product.Add(new ProductViewModel() { Name = "Роза" });
+            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() 
+            { 
+                Product = ViewModel.Product.Last(), 
+                Amount = 15 
+            });
+
+            ViewModel.Product.Add(new ProductViewModel() { Name = "Ромашка" });
+
+            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel() 
+            { 
+                Product = ViewModel.Product.Last(), 
+                Amount = 10 
+            });
+            ViewModel.Supply = new SupplyViewModel() 
+            { 
+                Supplies = ViewModel.Supplies, 
+                SupplyDetails = ViewModel.SupplyDetails 
+            };
+
         }
 
         private void ButtonDeleteClient_AllClients_Click(object sender, RoutedEventArgs e)
@@ -51,22 +60,29 @@ namespace Alligator.UI.TabItems
             SupplyWindow.Width = new GridLength(1, GridUnitType.Star);
             AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
             ViewModel.StateMainDataGrid = false;
-            ViewModel.NewProducts.Clear();
-            ViewModel.NewSupplies.Clear();
-
-
+            //ViewModel.NewProduct.Clear();
+            //ViewModel.NewSupply.Clear();
 
         }
-
 
         private void ButtonOpenClientCard_AllClients_Click(object sender, RoutedEventArgs e)
         {
             SupplyWindow.Width = new GridLength(0, GridUnitType.Star);
             AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
             AddSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            
             ViewModel.StateMainDataGrid = false;
-            ViewModel.NewProducts=ViewModel.Selected.Product;
+            ViewModel.NewSupply = new SupplyViewModel();
+            ViewModel.NewSupply.Supplies = new System.Collections.ObjectModel.ObservableCollection<SuppliesViewModel>();
+            for (int i = 0; i < ViewModel.Supplies.Count; i++)
+            {
+                if (ViewModel.Supplies[i].Id == ViewModel.Selected.Id)
+                {
+                    ViewModel.NewSupply.SupplyDetails = ViewModel.SupplyDetails;
+                }
+            }
+            ViewModel.NewSupply.Supplies.Add( ViewModel.Selected); 
+            
+
 
         }
 
@@ -79,34 +95,39 @@ namespace Alligator.UI.TabItems
 
         private void ButtonSavedAll_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Supplies.Add(ViewModel.NewSupplies.Last());
+            ViewModel.Supplies.Add(ViewModel.NewSupply.Supplies[0]);
         }
 
         private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.NewProducts.Add(new ProductViewModel() { Id = ViewModel.TextBoxNewAmountText, Name = ViewModel.TextBoxNewProductText });
+            ViewModel.NewProduct.Add(new ProductViewModel() 
+            { 
+                Id = ViewModel.TextBoxNewIdText, 
+                Name = ViewModel.TextBoxNewProductText 
+            });
+
+            ViewModel.NewSupplyDetails.Add(new SupplyDelailsViewModel() 
+            { 
+                Product = ViewModel.NewProduct.Last(), 
+                Amount = ViewModel.TextBoxNewAmountText 
+            });
+
         }
 
         private void ButtonAddSSupply_Click(object sender, RoutedEventArgs e)
         {
-            var IdToAdd = ViewModel.TextBoxNewIdText;
-            var DateToAdd = DatePickerBooox.SelectedDate.Value;
-            var AmountToAdd = ViewModel.TextBoxNewAmountText;
-            var ProductToAdd = ViewModel.TextBoxNewProductText;
-            List<ProductViewModel> item = new List<ProductViewModel>();
-            item.Add(new ProductViewModel() { Id = IdToAdd, Name = ProductToAdd });
-            ViewModel.NewProducts.Add(new ProductViewModel() { Id = IdToAdd, Name = ProductToAdd });
-            ViewModel.NewSupplies.Add(new SuppliesViewModel() { Id = IdToAdd, Amount = AmountToAdd, Date = DateToAdd, Product = ViewModel.NewProducts });
-            
+            ViewModel.NewSupplies.Add(new SuppliesViewModel()
+            {
+                Id = ViewModel.TextBoxNewIdText,
+                Date = DatePickerBooox.SelectedDate.Value
+            }
+            ); 
 
-        }
-
-        private void ButtonBack_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void ButtonAddNewClient_AllClients_Click(object sender, RoutedEventArgs e)
-        {
+            ViewModel.NewSupply = new SupplyViewModel()
+            {
+                Supplies = ViewModel.NewSupplies,
+                SupplyDetails = ViewModel.NewSupplyDetails
+            };
 
         }
 
@@ -116,5 +137,5 @@ namespace Alligator.UI.TabItems
             AllSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
             ViewModel.StateMainDataGrid = false;
         }
-    }     
+    }
 }
