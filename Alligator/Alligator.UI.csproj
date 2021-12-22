@@ -14,5 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Alligator.BusinessLayer\Alligator.BusinessLayer.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="TabItems\NewFolder\" />
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -7,6 +9,10 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
     public class SuppliesViewModel : INotifyPropertyChanged
     {
         private int _id;
+        private DateTime _date;
+        private int _amount;
+        private ObservableCollection<ProductViewModel> _product;
+
         public int Id
         {
             get { return _id; }
@@ -15,10 +21,9 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 _id = value;
                 OnPropertyChanged(nameof(Id));
             }
-        }
+        }        
 
-        private DateTime? _date;
-        public DateTime? Date
+        public DateTime Date
         {
             get { return _date; }
             set
@@ -27,8 +32,8 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Date));
             }
         }
-        private int? _amount;
-        public int? Amount
+        
+        public int Amount
         {
             get { return _amount; }
             set
@@ -37,8 +42,8 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Amount));
             }
         }
-        private string? _product;
-        public string? Product
+        
+        public ObservableCollection<ProductViewModel> Product
         {
             get { return _product; }
             set
@@ -47,8 +52,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Product));
             }
         }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
