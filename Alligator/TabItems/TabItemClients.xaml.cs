@@ -22,7 +22,7 @@ namespace Alligator.UI.TabItems
             viewModel = new TabItemClientsViewModel();
             DataContext = viewModel;
             CreateClients();
-            viewModel.AllClients = Visibility.Visible;
+           
             viewModel.ClientCard = Visibility.Collapsed;
             viewModel.AddClient = Visibility.Collapsed;
             

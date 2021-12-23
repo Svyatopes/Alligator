@@ -27,16 +27,29 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private Visibility _allClients;
         private Visibility _clientCard;
         private Visibility _addClient;
+        private Visibility _buttonOpenCard;
         public ICommand DeleteClient { get; set; }
         public ICommand AddingClient { get; set; }
        public ICommand OpenClientCard { get; set; }
+        public ICommand ComeBack { get; set; }
+        public ICommand SaveChanges { get; set; }
 
         public TabItemClientsViewModel()
         {
             Clients = new ObservableCollection<ClientViewModel>();
             DeleteClient = new ButtonDeleteClient_AllClients(this);
-            AddingClient = new ButtonAddClient(this);
+            ComeBack = new ButtonComeBack(this);
             OpenClientCard = new ButtonOpenClientCard(this);
+            SaveChanges = new ButtonSaveChanges(this);
+        }
+        public Visibility ButtonOpenCard
+        {
+            get { return _buttonOpenCard; }
+            set
+            {
+                _buttonOpenCard = value;
+                OnPropertyChanged("ButtonOpenCard");
+            }
         }
         public Visibility AllClients
         {

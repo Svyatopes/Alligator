@@ -17,7 +17,12 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            viewModel.AllClients = Visibility.Collapsed;
+            if (viewModel.Selected != null)
+            {
+                viewModel.ButtonOpenCard = Visibility.Collapsed;
+            }
+           
+           viewModel.AllClients = Visibility.Collapsed;
             viewModel.ClientCard = Visibility.Visible;
         }
     }
