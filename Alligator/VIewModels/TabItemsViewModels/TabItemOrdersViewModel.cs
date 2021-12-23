@@ -13,50 +13,55 @@ using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
-    public class TabItemOrdersViewModel: BaseViewModel
+    public class TabItemOrdersViewModel : BaseViewModel
     {
         private OrderShortModel _selectedOrder;
-       
         private OrderDetailModel _selectedOrderDetailModel;
         private OrderReviewModel _selectedOrderReviewModel;
+
+        //private ProductModel _selectedProduct;
+        // private ClientModel _selectedClient;
         private readonly OrderService _orderService;
         private readonly OrderReviewService _orderReviewService;
         private readonly OrderDetailService _orderDetailService;
+       // private readonly ClientService _clientService;
         private string _newReviewText;
+        private string _newAdressText;
+        private DateTime _newDate;
 
-       public ICommand AddReview { get; set; }
+        public ICommand AddReview { get; set; }
         public ICommand GetOrders { get; set; }
-
         public ICommand GetOrderInfo { get; set; }
+        public ICommand DeleteOrder { get; set; }
+        public ICommand AddOrder { get; set; }
         public TabItemOrdersViewModel()
         {
-            //AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
-            //OrderDetail = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId());
-            //OrderReview = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId());
-            //Order = new ObservableCollection<OrderModel>(_orderService.GetOrders());
-           
+
             _orderService = new OrderService();
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
+            //_clientService = new ClientService();
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
+            DeleteOrder = new DeleteOrderCommand(this, _orderService);
+            AddOrder = new AddOrderCommand(this, _orderService);
 
+            AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
+            //выпадает ошибка: null
+            //OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
+            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));
+            //Order = new ObservableCollection<OrderModel>(_orderService.GetOrders());
+            //Clients=new ObservableCollection<ClientModel> (__clientService.GetClients());
+            //Products=new ObservableCollection<ProductModel>(_productService.GetProducts());
         }
 
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
         public ObservableCollection<OrderDetailModel> OrderDetails { get; set; }
         public ObservableCollection<OrderReviewModel> OrderReviews { get; set; }
-        public ObservableCollection<OrderModel> Order { get; set; }
 
-        //public ObservableCollection<OrderViewModel> Orders
-        //{
-        //    get { return orders; }
-        //    set
-        //    {
-        //        orders = value;
-        //        OnPropertyChanged(nameof(Orders));
-        //    }
-        //}
+       // public ObservableCollection<ClientModel> Clients {get;set;}
+       // public ObservableCollection<ProductModel> Products {get;set;}
+        
         public OrderShortModel SelectedOrder
         {
             get { return _selectedOrder; }
@@ -84,6 +89,27 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SelectedOrderReview));
             }
         }
+
+        //public ClientModel SelectedClient
+        //{
+        //    get { return _selectedClientModel; }
+        //    set
+        //    {
+        //        _selectedClientModel = value;
+        //        OnPropertyChanged(nameof(SelectedClient));
+        //    }
+        //}
+
+        //public ProductModel SelectedProduct
+        //{
+        //    get { return _selectedProduct; }
+        //    set
+        //    {
+        //        _selectedProduct = value;
+        //        OnPropertyChanged(nameof(SelectedProduct));
+        //    }
+        //}
+
        
         public string NewReviewText
         {
@@ -92,6 +118,26 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _newReviewText = value;
                 OnPropertyChanged(nameof(NewReviewText));
+            }
+        }
+
+        public string NewAdressText
+        {
+            get { return _newAdressText; }
+            set
+            {
+                _newAdressText = value;
+                OnPropertyChanged(nameof(NewAdressText));
+            }
+        }
+
+        public DateTime NewDate
+        {
+            get { return _newDate; }
+            set
+            {
+                _newDate = value;
+                OnPropertyChanged(nameof(NewDate));
             }
         }
 

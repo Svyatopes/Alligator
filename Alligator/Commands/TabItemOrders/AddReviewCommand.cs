@@ -30,8 +30,8 @@ namespace Alligator.UI.Commands.TabItemOrders
                 return;
             }
            _orderReviewService.AddOrderReviewModel(ReviewToAdd, _viewModel.SelectedOrderReview.Id);
-
-            //_viewModel.OrderReview.Add(ReviewToAdd);
+            var NewReviewModel = _orderReviewService.GetOrderReviewModelById(_viewModel.SelectedOrderReview.Id);
+            _viewModel.OrderReviews.Add(NewReviewModel);
             _viewModel.NewReviewText = string.Empty;
         }
     }
