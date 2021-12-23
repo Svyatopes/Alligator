@@ -21,7 +21,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             viewModel.TextBoxNewIdText = 0;
             viewModel.TextBoxNewProductText = "";
             viewModel.TextBoxNewAmountText = 0;
-
+            viewModel.TextBoxNewDateText = System.DateTime.Now;
             viewModel.Supply = new SuppliesViewModel();
             viewModel.SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
             viewModel.Product = new ObservableCollection<ProductViewModel>();

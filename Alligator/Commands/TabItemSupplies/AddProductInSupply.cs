@@ -17,6 +17,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override void Execute(object parameter)
         {
+            viewModel.Product = new ObservableCollection<ProductViewModel>();
             viewModel.Product.Add(new ProductViewModel()
             {
                 Id = viewModel.TextBoxNewIdText,

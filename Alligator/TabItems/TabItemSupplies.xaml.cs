@@ -37,26 +37,6 @@ namespace Alligator.UI.TabItems
 
         }
 
-        private void ButtonSavedAll_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Supply = new SuppliesViewModel()
-            {
-                Id = ViewModel.TextBoxNewIdText,
-                Date = DatePickerBooox.SelectedDate.Value,
-                Details = ViewModel.SupplyDetails
-            };
-
-            ViewModel.Supplies.Add(ViewModel.Supply);
-
-        }
-
         
-
-        private void ButtonReturnBackk_Click(object sender, RoutedEventArgs e)
-        {
-            //AddSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            //AllSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            //ViewModel.StateMainDataGrid = false;
-        }
     }
 }

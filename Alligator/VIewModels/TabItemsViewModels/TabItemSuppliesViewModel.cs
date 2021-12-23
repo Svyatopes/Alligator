@@ -25,7 +25,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddNewSupply = new AddNewSupply_AllSupplies(this);
             OpenCardSupply = new OpenSupplyCard_AllSupplies(this);
             ReturnBackNewSupply = new ReturnBack_NewSupply(this);
+            ReturnBackCardSupply = new ReturnBack_CardSupply(this);
             AddProductInSupply = new AddProductInSupply(this);
+            SaveNewSupply = new SaveNewSupply(this);
+            ChangeCardSupply = new ChangeCardSupply(this);
+            DeleteProductInSupply = new DeleteProductInSupply(this);
         }
 
         private ObservableCollection<SuppliesViewModel> _details;
@@ -38,7 +42,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand DeleteSupply { get; set; }
         public ICommand AddNewSupply { get; set; }
         public ICommand ReturnBackNewSupply { get; set; }
+        public ICommand ReturnBackCardSupply { get; set; }
         public ICommand AddProductInSupply { get; set; }
+        public ICommand SaveNewSupply { get; set; }
+        public ICommand ChangeCardSupply { get; set; }
+        public ICommand DeleteProductInSupply { get; set; }
 
 
         private DateTime _textBoxNewDateText;
@@ -47,15 +55,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private string _textBoxNewProductText;
 
 
-        public ObservableCollection<SuppliesViewModel> Details
-        {
-            get { return _details; }
-            set
-            {
-                _details = value;
-                OnPropertyChanged(nameof(Details));
-            }
-        }
+        //public ObservableCollection<SuppliesViewModel> Details
+        //{
+        //    get { return _details; }
+        //    set
+        //    {
+        //        _details = value;
+        //        OnPropertyChanged(nameof(Details));
+        //    }
+        //}
 
         public ObservableCollection<SuppliesViewModel> Supplies
         {
@@ -108,8 +116,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        private ProductViewModel _pselected;
-        public ProductViewModel PSelected
+        private SupplyDelailsViewModel _pselected;
+        public SupplyDelailsViewModel PSelected
         {
             get { return _pselected; }
             set
@@ -154,15 +162,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
         private GridLength _supplyWindow;
 
-        public GridLength SupplyWindow
-        {
-            get { return _supplyWindow; }
-            set
-            {
-                _supplyWindow = value;
-                OnPropertyChanged(nameof(SupplyWindow));
-            }
-        }
+        //public GridLength SupplyWindow
+        //{
+        //    get { return _supplyWindow; }
+        //    set
+        //    {
+        //        _supplyWindow = value;
+        //        OnPropertyChanged(nameof(SupplyWindow));
+        //    }
+        //}
 
         private Visibility _visibilityFirst;
         public Visibility VisibilityFirst
@@ -209,17 +217,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
 
 
-        private GridLength _allSupplyWindow;
+        //private GridLength _allSupplyWindow;
 
-        public GridLength AllSupplyWindow
-        {
-            get { return _allSupplyWindow; }
-            set
-            {
-                _allSupplyWindow = value;
-                OnPropertyChanged(nameof(AllSupplyWindow));
-            }
-        }
+        //public GridLength AllSupplyWindow
+        //{
+        //    get { return _allSupplyWindow; }
+        //    set
+        //    {
+        //        _allSupplyWindow = value;
+        //        OnPropertyChanged(nameof(AllSupplyWindow));
+        //    }
+        //}
         private bool _stateMainDataGrid;
         public bool StateMainDataGrid
         {
