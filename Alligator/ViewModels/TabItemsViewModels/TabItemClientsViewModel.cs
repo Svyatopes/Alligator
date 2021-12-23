@@ -26,15 +26,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private bool selectedTabClients;
         private Visibility _allClients;
         private Visibility _clientCard;
+        private Visibility _addClient;
         public ICommand DeleteClient { get; set; }
-        public ICommand AddClient { get; set; }
+        public ICommand AddingClient { get; set; }
        public ICommand OpenClientCard { get; set; }
 
         public TabItemClientsViewModel()
         {
             Clients = new ObservableCollection<ClientViewModel>();
             DeleteClient = new ButtonDeleteClient_AllClients(this);
-            AddClient = new ButtonAddClient(this);
+            AddingClient = new ButtonAddClient(this);
             OpenClientCard = new ButtonOpenClientCard(this);
         }
         public Visibility AllClients
@@ -44,6 +45,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _allClients = value;
                 OnPropertyChanged("AllClients");
+            }
+        }
+        public Visibility AddClient
+        {
+            get { return _addClient; }
+            set
+            {
+                _addClient = value;
+                OnPropertyChanged("AddingClient");
             }
         }
         public Visibility ClientCard

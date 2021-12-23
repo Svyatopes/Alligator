@@ -19,8 +19,7 @@ namespace Alligator.UI.Commands.TabItemClients
         {
             if (viewModel.Selected == null)
             {
-                //viewModel.AllClientsColumnWidth = 0.0;
-                //viewModel.ClientCardColumnWidth = 1.0;
+                
                 
             }
             else

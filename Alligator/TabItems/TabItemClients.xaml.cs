@@ -22,6 +22,10 @@ namespace Alligator.UI.TabItems
             viewModel = new TabItemClientsViewModel();
             DataContext = viewModel;
             CreateClients();
+            viewModel.AllClients = Visibility.Visible;
+            viewModel.ClientCard = Visibility.Collapsed;
+            viewModel.AddClient = Visibility.Collapsed;
+            
         }
 
         public void CreateClients()
@@ -89,7 +93,7 @@ namespace Alligator.UI.TabItems
         private void ButtonSaveChanges_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             
-            viewModel.Clients.Add(new ClientViewModel() { FirstName = firstName.Text, LastName =lName.Text, Patronymic = tName.Text, PhoneNumber = phoneNumber.Text, Email = email.Text  });
+           // viewModel.Clients.Add(new ClientViewModel() { FirstName = firstName.Text, LastName =lName.Text, Patronymic = tName.Text, PhoneNumber = phoneNumber.Text, Email = email.Text  });
             //viewModel.ClientCardColumnWidth = 1;
             //viewModel.AllClientsColumnWidth = 0;
         }
