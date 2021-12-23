@@ -1,6 +1,7 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.EntitiesViewModels;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class ClientViewModel : INotifyPropertyChanged
+    public class ClientViewModel : BaseViewModel
     {
         private string firstName;
         private string lastName;
@@ -79,12 +80,12 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //public void OnPropertyChanged([CallerMemberName] string prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
     }
 
 }

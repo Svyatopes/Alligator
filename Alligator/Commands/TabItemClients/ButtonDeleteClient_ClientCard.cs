@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    class ButtonDeleteClient_ClientCard
+    public class ButtonDeleteClient_ClientCard
     {
     }
 }

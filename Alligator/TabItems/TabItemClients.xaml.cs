@@ -30,7 +30,7 @@ namespace Alligator.UI.TabItems
             comments.Add(new CommentViewModel() { Text = "не звонить" });
 
             viewModel.Clients.Add(new ClientViewModel() { Comments = comments, FirstName = "Ваня", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
-            viewModel.Clients.Add(new ClientViewModel() { FirstName = "Дима", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
+            viewModel.Clients.Add(new ClientViewModel() { FirstName = "Дима", LastName = "ывапро", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
         }
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -42,22 +42,25 @@ namespace Alligator.UI.TabItems
         }
         private void ButtonComeBack_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            
+            //viewModel.ClientCardColumnWidth = 0;
+            //viewModel.AllClientsColumnWidth = 1;
             viewModel.Selected = null;
         }
 
         private void ButtonDeleteClient_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            //viewModel.ClientCardColumnWidth = 0;
+            //viewModel.AllClientsColumnWidth = 1;
             viewModel.Clients.Remove(viewModel.Selected);
 
         }
         private void ButtonSaveChanges_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
-            ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
+            //AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            //ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
+            //viewModel.AllClientsColumnWidth = 1;
+            //viewModel.ClientCardColumnWidth = 0;
         }
         private void ButtonDeleteClient_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -71,44 +74,48 @@ namespace Alligator.UI.TabItems
 
         private void ButtonAddNewClient_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (viewModel.Selected == null)
-            {
-                AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
-                AddClientWindow.Width = new GridLength(1, GridUnitType.Star);
-            }
-            else
-            {
-                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            viewModel.Selected = null; 
+            //if (viewModel.Selected == null)
+            //{
+            //    AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
+            //    AddClientWindow.Width = new GridLength(1, GridUnitType.Star);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //viewModel.Selected = null; 
 
         }
         private void ButtonSaveChanges_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             
             viewModel.Clients.Add(new ClientViewModel() { FirstName = firstName.Text, LastName =lName.Text, Patronymic = tName.Text, PhoneNumber = phoneNumber.Text, Email = email.Text  });
-            AddClientWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            //viewModel.ClientCardColumnWidth = 1;
+            //viewModel.AllClientsColumnWidth = 0;
         }
         private void ButtonComeBack_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            AddClientWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            //viewModel.ClientColumnWidth = 0;
+            //viewModel.AllClientsColumnWidth = 1;
             viewModel.Selected = null;
+            //AddClientWindow.Width = new GridLength(0, GridUnitType.Star);
+            //AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
+            //viewModel.Selected = null;
 
         }
         
         private void ButtonOpenClientCard_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (viewModel.Selected!=null)
+            if (viewModel.Selected != null)
             {
-
-                ClientCardWindow.Width = new GridLength(1, GridUnitType.Star);
-                AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
+                //viewModel.ClientCardColumnWidth = 1;
+                //viewModel.AllClientsColumnWidth = 1;
+                //ClientCardWindow.Width = new GridLength(1, GridUnitType.Star);
+                //AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
             }
             else
             {
-               
+
             }
         }
         private void ButtonAddComment_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
