@@ -2,11 +2,16 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Input;
+
+using Alligator.UI.Commands.TabItemSupplies;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
     public class TabItemSuppliesViewModel : BaseViewModel
     {
+        public TabItemSuppliesViewModel viewModel;
+
         public TabItemSuppliesViewModel()
         {
             Supplies = new ObservableCollection<SuppliesViewModel>();
@@ -14,6 +19,13 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
             Product = new ObservableCollection<ProductViewModel>();
             StateMainDataGrid = true;
+            
+
+            DeleteSupply = new DeleteSupply_AllSupplies(this);
+            AddNewSupply = new AddNewSupply_AllSupplies(this);
+            OpenCardSupply = new OpenSupplyCard_AllSupplies(this);
+            ReturnBackNewSupply = new ReturnBack_NewSupply(this);
+            AddProductInSupply = new AddProductInSupply(this);
         }
 
         private ObservableCollection<SuppliesViewModel> _details;
@@ -21,6 +33,13 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private SuppliesViewModel _supply;
         private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
         private ObservableCollection<ProductViewModel> _product;
+
+        public ICommand OpenCardSupply { get; set; }
+        public ICommand DeleteSupply { get; set; }
+        public ICommand AddNewSupply { get; set; }
+        public ICommand ReturnBackNewSupply { get; set; }
+        public ICommand AddProductInSupply { get; set; }
+
 
         private DateTime _textBoxNewDateText;
         private int _textBoxNewAmountText;
@@ -144,6 +163,52 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SupplyWindow));
             }
         }
+
+        private Visibility _visibilityFirst;
+        public Visibility VisibilityFirst
+        {
+            get
+            {
+                return _visibilityFirst;
+            }
+            set
+            {
+                _visibilityFirst = value;
+
+                OnPropertyChanged(nameof(VisibilityFirst));
+            }
+        }
+        private Visibility _visibilitySecond;
+        public Visibility VisibilitySecond
+        {
+            get
+            {
+                return _visibilitySecond;
+            }
+            set
+            {
+                _visibilitySecond = value;
+
+                OnPropertyChanged(nameof(VisibilitySecond));
+            }
+        }
+        private Visibility _visibilityThird;
+        public Visibility VisibilityThird
+        {
+            get
+            {
+                return _visibilityThird;
+            }
+            set
+            {
+                _visibilityThird = value;
+
+                OnPropertyChanged(nameof(VisibilityThird));
+            }
+        }
+
+
+
         private GridLength _allSupplyWindow;
 
         public GridLength AllSupplyWindow

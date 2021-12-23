@@ -9,33 +9,16 @@ namespace Alligator.BusinessLayer
         private readonly SupplyDetailRepository _supplyDetailRepository;
         public SupplyDetailService()
         {
-            _supplyDetailRepository = new SupplyDetailRepository();            
+            _supplyDetailRepository = new SupplyDetailRepository();
 
         }
-        public List<SupplyDetailModels> GetAllSupplyDetails() 
+        public List<SupplyDetailModel> GetAllSupplyDetails()
         {
-            var entities =  _supplyDetailRepository.GetAllSupplyDetails(); //позвали репозиторий.
-                                                                           //Вернули данные как в табличке
+            var entities = _supplyDetailRepository.GetAllSupplyDetails();
 
-            return SupplyMapper.GetInstance().Map<List<SupplyDetailModels>>(entities);
-
-            //var result = new List<SupplyDetailModels>();  ///перегоняем данные из одного списка в другой
-            //foreach (var entity in entities)
-            //{
-            //    result.Add(new SupplyDetailModels
-            //    {
-            //        Id = entity.Id,
-            //        Amount = entity.Amount,
-            //        Supply = entity.Supply,
-            //        Product = entity.Product
+            return SupplyMapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
 
 
-            //    });
-               
-                
-                
-            //}
-            //return result;
         }
     }
 }

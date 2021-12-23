@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class ProductViewModel : INotifyPropertyChanged
+    public class ProductViewModel : BaseViewModel
     {
         private int _id;
         public int Id

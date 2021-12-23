@@ -11,9 +11,8 @@ namespace Alligator.DataLayer.Repositories
     {
 
         private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //string _connString = "Server=(local);Database=AggregatorAlligator;Integrated Security=true";
-
-        public List<SupplyDetail> GetAllSupplyDetails() //сходили в бд
+        
+        public List<SupplyDetail> GetAllSupplyDetails() 
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();

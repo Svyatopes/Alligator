@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer.Models
 {
-    public class SupplyDetailModels
+    public class SupplyDetailModel
     {
         public int Id { get; set; }
         public Supply Supply { get; set; }

@@ -20,6 +20,8 @@ namespace Alligator.UI.TabItems
             InitializeComponent();
             ViewModel = new TabItemSuppliesViewModel();
             DataContext = ViewModel;
+            ViewModel.VisibilitySecond = Visibility.Collapsed;
+            ViewModel.VisibilityThird = Visibility.Collapsed;
 
             InitialFillViewModel();
         }
@@ -35,46 +37,6 @@ namespace Alligator.UI.TabItems
 
         }
 
-        private void ButtonDeleteClient_AllClients_Click(object sender, RoutedEventArgs e)
-        {
-            var userAnswer = MessageBox.Show("Вы правда хотите удалить поставку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (userAnswer == MessageBoxResult.Yes)
-                ViewModel.Supplies.Remove(ViewModel.Selected);
-        }
-
-        private void ButtonAddNewSupply_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.TextBoxNewIdText = 0;
-            ViewModel.TextBoxNewProductText = "";
-            ViewModel.TextBoxNewAmountText = 0;
-
-            ViewModel.Supply = new SuppliesViewModel();
-            ViewModel.SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
-            ViewModel.Product = new ObservableCollection<ProductViewModel>();
-            SupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            ViewModel.StateMainDataGrid = false;
-
-        }
-
-        private void ButtonOpenClientCard_AllClients_Click(object sender, RoutedEventArgs e)
-        {
-            SupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            AddSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            ViewModel.StateMainDataGrid = false;
-            ViewModel.Supply = ViewModel.Selected;
-            ViewModel.SupplyDetails = ViewModel.Supply.Details;
-        
-        }
-
-        private void ButtonReturnBack_Click(object sender, RoutedEventArgs e)
-        {
-            SupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            ViewModel.StateMainDataGrid = false;
-        }
-
         private void ButtonSavedAll_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Supply = new SuppliesViewModel()
@@ -88,29 +50,13 @@ namespace Alligator.UI.TabItems
 
         }
 
-        private void ButtonAddProduct_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Product.Add(new ProductViewModel()
-            {
-                Id = ViewModel.TextBoxNewIdText,
-                Name = ViewModel.TextBoxNewProductText
-
-            });
-
-            ViewModel.SupplyDetails.Add(new SupplyDelailsViewModel()
-            {
-                Product = ViewModel.Product[0],
-                Amount = ViewModel.TextBoxNewAmountText
-            });
-            ViewModel.Product = new ObservableCollection<ProductViewModel>();
-
-        }
+        
 
         private void ButtonReturnBackk_Click(object sender, RoutedEventArgs e)
         {
-            AddSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
-            ViewModel.StateMainDataGrid = false;
+            //AddSupplyWindow.Width = new GridLength(0, GridUnitType.Star);
+            //AllSupplyWindow.Width = new GridLength(1, GridUnitType.Star);
+            //ViewModel.StateMainDataGrid = false;
         }
     }
 }

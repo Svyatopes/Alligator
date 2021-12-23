@@ -11,5 +11,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+       
     }
 }

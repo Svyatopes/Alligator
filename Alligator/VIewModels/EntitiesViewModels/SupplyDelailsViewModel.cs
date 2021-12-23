@@ -1,10 +1,9 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class SupplyDelailsViewModel : INotifyPropertyChanged
+    public class SupplyDelailsViewModel : BaseViewModel
     {
 
         private int _id;

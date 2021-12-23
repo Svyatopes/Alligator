@@ -19,7 +19,7 @@ namespace Alligator.BusinessLayer.Configuration
         {
             _instance = new Mapper(new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<SupplyDetail, SupplyDetailModels>();
+                cfg.CreateMap<SupplyDetail, SupplyDetailModel>();
                 
             }));
         }

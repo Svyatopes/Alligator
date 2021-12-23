@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class SupplyViewModel : INotifyPropertyChanged
+    public class SupplyViewModel : BaseViewModel
     {
         private int _id;
         private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
@@ -38,12 +36,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Supply));
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+        
     }
 }

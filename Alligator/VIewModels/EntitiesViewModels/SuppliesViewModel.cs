@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class SuppliesViewModel : INotifyPropertyChanged
+    public class SuppliesViewModel : BaseViewModel
     {
         private int _id;
         private DateTime _date;

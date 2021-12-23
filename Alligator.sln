@@ -9,7 +9,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Alligator.DB", "Alligator.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.DataLayer", "Alligator.DataLayer\Alligator.DataLayer.csproj", "{81787F65-1BC9-42B2-A18F-DC2284C2558C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.BusinessLayer", "Alligator.BusinessLayer\Alligator.BusinessLayer.csproj", "{4CA51772-E591-4338-9ECC-BC174384CF46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.BusinessLayer", "Alligator.BusinessLayer\Alligator.BusinessLayer.csproj", "{4CA51772-E591-4338-9ECC-BC174384CF46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
