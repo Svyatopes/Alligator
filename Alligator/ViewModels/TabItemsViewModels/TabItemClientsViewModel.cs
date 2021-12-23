@@ -20,6 +20,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         
         private ClientViewModel selected;
         private CommentViewModel selectedCom;
+        private CommentViewModel comment;
         private double allClientsColumnWidth=1;
         private double clientColumnWidth;
         private double clientCardColumnWidth;
@@ -33,6 +34,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
        public ICommand OpenClientCard { get; set; }
         public ICommand ComeBack { get; set; }
         public ICommand SaveChanges { get; set; }
+        public ICommand DeleteClientInClientCard { get; set; }
+        public ICommand AddComment { get; set; }
 
         public TabItemClientsViewModel()
         {
@@ -41,6 +44,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             ComeBack = new ButtonComeBack(this);
             OpenClientCard = new ButtonOpenClientCard(this);
             SaveChanges = new ButtonSaveChanges(this);
+            AddingClient = new ButtonAddClient(this);
+            DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this);
+            AddComment = new ButtonAddComment(this);
         }
         public Visibility ButtonOpenCard
         {
@@ -109,13 +115,13 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("Selected");
             }
         }
-        public CommentViewModel SelectedCom
+        public CommentViewModel Comment
         {
-            get { return selectedCom; }
+            get { return comment; }
             set
             {
                 selectedCom = value;
-                OnPropertyChanged("SelectedCom");
+                OnPropertyChanged("Comment");
             }
         }
 

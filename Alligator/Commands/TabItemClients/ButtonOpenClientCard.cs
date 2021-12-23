@@ -17,13 +17,15 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            if (viewModel.Selected != null)
+            if (viewModel.Selected is null)
             {
-                viewModel.ButtonOpenCard = Visibility.Collapsed;
+                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           
-           viewModel.AllClients = Visibility.Collapsed;
-            viewModel.ClientCard = Visibility.Visible;
+            else
+            {
+                viewModel.AllClients = Visibility.Collapsed;
+                viewModel.ClientCard = Visibility.Visible;
+            }
         }
     }
 }

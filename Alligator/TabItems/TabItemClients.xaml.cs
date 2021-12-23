@@ -22,9 +22,9 @@ namespace Alligator.UI.TabItems
             viewModel = new TabItemClientsViewModel();
             DataContext = viewModel;
             CreateClients();
-           
-            viewModel.ClientCard = Visibility.Collapsed;
             viewModel.AddClient = Visibility.Collapsed;
+            viewModel.ClientCard = Visibility.Collapsed;
+            
             
         }
 
@@ -59,37 +59,28 @@ namespace Alligator.UI.TabItems
             viewModel.Clients.Remove(viewModel.Selected);
 
         }
-        private void ButtonSaveChanges_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //AllClientsWindow.Width = new GridLength(1, GridUnitType.Star);
-            //ClientCardWindow.Width = new GridLength(0, GridUnitType.Star);
-            //viewModel.AllClientsColumnWidth = 1;
-            //viewModel.ClientCardColumnWidth = 0;
-        }
-        private void ButtonDeleteClient_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            viewModel.Clients.Remove(viewModel.Selected);
-        }
+
+
         private void ButtonCheckClientCard_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             ClientViewModel client = viewModel.Selected;
             
         }
 
-        private void ButtonAddNewClient_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            //if (viewModel.Selected == null)
-            //{
-            //    AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
-            //    AddClientWindow.Width = new GridLength(1, GridUnitType.Star);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
-            //}
-            //viewModel.Selected = null; 
+        //private void ButtonAddNewClient_AllClients_Click(object sender, System.Windows.RoutedEventArgs e)
+        //{
+        //    //if (viewModel.Selected == null)
+        //    //{
+        //    //    AllClientsWindow.Width = new GridLength(0, GridUnitType.Star);
+        //    //    AddClientWindow.Width = new GridLength(1, GridUnitType.Star);
+        //    //}
+        //    //else
+        //    //{
+        //    //    MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    //}
+        //    //viewModel.Selected = null; 
 
-        }
+        //}
         private void ButtonSaveChanges_AddingClient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             
@@ -122,26 +113,6 @@ namespace Alligator.UI.TabItems
 
             }
         }
-        private void ButtonAddComment_ClientCard_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if(viewModel.Selected.Comments is null)
-            {
-                ObservableCollection<CommentViewModel> comments = new ObservableCollection<CommentViewModel>();
-                viewModel.Selected.Comments = comments;
-            }
-            if(viewModel.SelectedCom == null)
-            {
-                if (commentOfCurrentClient.Text != "")
-                {
-                    CommentViewModel com = new CommentViewModel() { Text = commentOfCurrentClient.Text };
-                    viewModel.Selected.Comments.Add(com);
-                }
-            }
-            commentOfCurrentClient.Text = null;
-            viewModel.SelectedCom = null;
 
-
-
-        }
     }
 }

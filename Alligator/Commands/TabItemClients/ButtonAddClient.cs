@@ -20,13 +20,15 @@ namespace Alligator.UI.Commands.TabItemClients
             if (viewModel.Selected == null)
             {
                 
-                
+                viewModel.AllClients = Visibility.Collapsed;
+                viewModel.AddClient = Visibility.Visible;
             }
             else
             {
                 MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             viewModel.Selected = null;
+            
         }
     }
 }
