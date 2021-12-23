@@ -12,11 +12,11 @@ namespace Alligator.BusinessLayer
 {
     public class OrderReviewService
     {
-        private readonly RepositoryOrderReview _repositoryOrderReview;
+        private readonly OrderReviewRepository _repositoryOrderReview;
 
         public OrderReviewService()
         {
-            _repositoryOrderReview = new RepositoryOrderReview();
+            _repositoryOrderReview = new OrderReviewRepository();
         }
 
         public OrderReviewModel GetOrderReviewModelById(int id)

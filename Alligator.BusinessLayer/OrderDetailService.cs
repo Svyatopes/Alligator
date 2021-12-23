@@ -11,11 +11,11 @@ namespace Alligator.BusinessLayer
 {
     public class OrderDetailService
     {
-        private readonly RepositoryOrderDetail _repositoryOrderdetail;
+        private readonly OrderDetailRepository _repositoryOrderdetail;
 
         public OrderDetailService()
         {
-            _repositoryOrderdetail = new RepositoryOrderDetail();
+            _repositoryOrderdetail = new OrderDetailRepository();
         }
 
         public OrderDetailModel GetOrderDetailById(int id)

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-   public  class RepositoryOrderReview
+   public  class OrderReviewRepository
     {
 
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";

@@ -11,10 +11,12 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemOrders : TabItem
     {
+        private TabItemOrdersViewModel _viewModel;
         public TabItemOrders()
         {
             InitializeComponent();
-            DataContext = new TabItemOrdersViewModel();                      
+            _viewModel = new TabItemOrdersViewModel();
+            DataContext = _viewModel;
         }
 
         private void ButtonNewOrder_Click(object sender, System.Windows.RoutedEventArgs e)

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    class OrderReviewViewModel : INotifyPropertyChanged
+    class OrderReviewViewModel : BaseViewModel
     {
         public OrderReviewViewModel(OrderReviewViewModel OrderReviewModel)
         {
@@ -64,13 +64,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Text));
             }
         }
-       
-        public event PropertyChangedEventHandler PropertyChanged;
-       
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+              
     }
 }

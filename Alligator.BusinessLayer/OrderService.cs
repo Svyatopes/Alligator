@@ -8,11 +8,15 @@ namespace Alligator.BusinessLayer
 {
     public class OrderService
     {
-        private readonly RepositoryOrder _repositoryOrder;
+        private readonly OrderRepository _repositoryOrder;
+        private readonly OrderDetailRepository _repositoryOrderDetail;
+        private readonly OrderReviewRepository _repositoryOrderReview;
 
         public OrderService()
         {
-            _repositoryOrder = new RepositoryOrder();
+            _repositoryOrder = new OrderRepository();
+            _repositoryOrderDetail = new OrderDetailRepository();
+            _repositoryOrderReview = new OrderReviewRepository();
         }
 
         public List<OrderShortModel> GetOrderssWithoutSensitiveData()
@@ -31,6 +35,14 @@ namespace Alligator.BusinessLayer
         {
             var orders = _repositoryOrder.GetOrdersByClientId(id);
             return OrderMapper.GetInstance().Map<List<OrderModel>>(orders);
+        }
+
+        public OrderModel GetOrderByIdWithDetailsAndReviews(int id)
+        {
+            var order = _repositoryOrder.GetOrderById(id);
+            order.OrderDetails = _repositoryOrderDetail.GetOrderDetailsByOrderId(id);
+            order.OrderReviews = _repositoryOrderReview.GetOrderReviewsByOrderId(id);
+            return OrderMapper.GetInstance().Map<OrderModel>(order);
         }
 
         public void AddOrderModel(DateTime date, int clientId, string address)

@@ -1,7 +1,14 @@
 ﻿<TabItem x:Class="Alligator.UI.TabItems.TabItemOrders"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
               Header="Заказы">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding GetOrders}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Background="#C4C4C4">
         <Grid.ColumnDefinitions>
 
@@ -17,7 +24,7 @@
         <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Детали заказа</Label>
         <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Заказы</Label>
         <Label  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить заказ</Label>
-        <DataGrid x:Name="dg" SelectedItem="{Binding Selected}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Orders}">
+        <DataGrid x:Name="dg" SelectedItem="{Binding SelectedOrder}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding AllOrders}">
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Id" Width="*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Date}"/>
@@ -45,7 +52,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <DataGrid Background="#5F5656" Grid.Row="0" Grid.Column="0" Margin="5,15,5,5" ItemsSource="{Binding Selected.Review}" AutoGenerateColumns="False" CanUserAddRows="True" >
+                <DataGrid Background="#5F5656" Grid.Row="0" Grid.Column="0" Margin="5,15,5,5" SelectedItem="{Binding SelectedOrderReview}" ItemsSource="{Binding OrderReviews }" AutoGenerateColumns="False" CanUserAddRows="True" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Text}"  Header="Отзывы" Width="*" />
                     </DataGrid.Columns>
@@ -55,8 +62,8 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0"   Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddReview_OrderWindow_Click">Добавить отзыв</Button>
-                    <TextBox Grid.Column="1"  Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
+                    <Button Grid.Column="0"   Background="#DACDCD"  Height="20" Width="140" Command="{Binding AddReview}">Добавить отзыв</Button>
+                    <TextBox Grid.Column="1"  Background="White" Width="220"  Margin="15,0,5,5" Text="{Binding TextBoxNewReview}"></TextBox>
                 </Grid>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="2">
@@ -110,7 +117,7 @@
             </Grid.ColumnDefinitions>
             <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddNewOrder_AllOrders_Click">Добавить заказ</Button>
             <Button  Grid.Column="2" Background="#DACDCD" Height="20" Width="140" Click="ButtonDeleteOrder_AllOrders_Click">Удалить заказ</Button>
-            <Button  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" Click="ButtonOpenOrderWindow_AllOrders_Click">Просмотреть заказ</Button>
+            <Button  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" Command="{Binding GetOrderInfo}">Просмотреть заказ</Button>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="1">
             <Grid >

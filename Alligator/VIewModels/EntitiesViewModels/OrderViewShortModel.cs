@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
-    public class OrderViewShortModel : INotifyPropertyChanged
+    public class OrderViewShortModel : BaseViewModel
     {
         public OrderViewShortModel(OrderShortModel orderShortModel)
         {
@@ -67,12 +67,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+      
     }
     
     
