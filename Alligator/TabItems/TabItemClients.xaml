@@ -7,7 +7,6 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-
         </Grid.ColumnDefinitions>
 
         <Grid Visibility="{Binding AllClients}" >
@@ -38,7 +37,6 @@
                 <Button Grid.Column="2" Background="#DACDCD" Visibility="{Binding ButtonOpenCard}" Height="20" Width="140" Command="{Binding Path=OpenClientCard}" >Открыть карту клиента</Button>
             </Grid>
         </Grid>
-
         <Grid  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5" Visibility="{Binding ClientCard}">
             <Grid   VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
                 <Grid.ColumnDefinitions>
@@ -53,7 +51,7 @@
                     <RowDefinition Height="13*" />
                     <RowDefinition Height="2*" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0"   Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">Карта клиента</Label>
+                <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">Карта клиента</Label>
                 <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Имя</TextBlock>
                 <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Фамилия</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="3">Отчество</TextBlock>
@@ -93,7 +91,7 @@
                         <RowDefinition Height="5*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                <DataGrid   Background="#5F5656" SelectedItem="{Binding SelectedCom}"  x:Name="comm" Grid.Column="0" Margin="5,15,5,5"   IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Selected.Comments}" AutoGenerateColumns="False"  >
+                    <DataGrid   Background="#5F5656" SelectedItem="{Binding SelectedComment}"  x:Name="comm" Grid.Column="0" Margin="5,15,5,5"   IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Selected.Comments}" AutoGenerateColumns="False"  >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Text}"  Header="Комментарии" Width="*" />
                         </DataGrid.Columns>
@@ -108,7 +106,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Button Grid.Column="1" Grid.Row="0"  Background="#DACDCD" Command="{Binding AddComment}"  Height="20" Width="140" >Добавить кomment</Button>
-                        <Button Grid.ColumnSpan="2" Grid.Row="1"  Background="#DACDCD"  Height="20" Width="140" >Удалить комментарий</Button>
+                        <Button Grid.ColumnSpan="2" Grid.Row="1"  Background="#DACDCD" Command="{Binding DeleteComment}" Height="20" Width="140" >Удалить комментарий</Button>
                         <TextBox Grid.Column="0" Grid.Row="0"  Text="{Binding Comment}"  Background="White"   Margin="15,0,5,5" ></TextBox>
                     </Grid>
                     
@@ -167,11 +165,11 @@
                             <RowDefinition Height="*"/>
 
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="firstName" Text="{Binding Path=Selected.FirstName}" Grid.Column="1" Grid.Row="0"  Margin="15,0,5,5"  Background="White" ></TextBox>
-                        <TextBox x:Name="lName" Text="{Binding Path=Selected.LastName}" Grid.Column="1" Grid.Row="1" Background="White"  Margin="15,0,5,5" ></TextBox>
-                        <TextBox x:Name="tName" Text="{Binding Path= Selected.Patronymic}" Grid.Column="1" Grid.Row="2"  Background="White" Margin="15,0,5,5" ></TextBox>
-                        <TextBox x:Name="phoneNumber" Text="{Binding Selected.PhoneNumber}" Grid.Column="3" Grid.Row="0" Margin="15,0,5,5"   Background="White" ></TextBox>
-                        <TextBox x:Name="email" Grid.Column="3" Grid.Row="1" Text="{Binding Selected.Email}" Background="White"   Margin="15,0,5,5" ></TextBox>
+                        <TextBox x:Name="firstName" Text="{Binding FirstNameTextNewFirstName}" Grid.Column="1" Grid.Row="0"  Margin="15,0,5,5"  Background="White" ></TextBox>
+                        <TextBox x:Name="lName" Text="{Binding LastNameTextNewFirstName}" Grid.Column="1" Grid.Row="1" Background="White"  Margin="15,0,5,5" ></TextBox>
+                        <TextBox x:Name="tName" Text="{Binding  PatronymicTextNewPatronymic}" Grid.Column="1" Grid.Row="2"  Background="White" Margin="15,0,5,5" ></TextBox>
+                        <TextBox x:Name="phoneNumber" Text="{Binding PhoneNumberTextNewPhoneNumber}" Grid.Column="3" Grid.Row="0" Margin="15,0,5,5"   Background="White" ></TextBox>
+                        <TextBox x:Name="email" Grid.Column="3" Grid.Row="1" Text="{Binding EmailTextNewEmail}" Background="White"   Margin="15,0,5,5" ></TextBox>
                     </Grid>
                 </Grid>
 
@@ -188,8 +186,8 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-            <Button Background="#DACDCD" Grid.Row="2"  Grid.Column="0" Margin="0,0,0,10"  Click="ButtonComeBack_AddingClient_Click">Вернуться назад</Button>
-            <Button Background="#DACDCD" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"  Click="ButtonSaveChanges_AddingClient_Click">Сохранить изменения</Button>
+            <Button Background="#DACDCD" Grid.Row="2"  Grid.Column="0" Margin="0,0,0,10"  Command="{Binding ComeBack}">Вернуться назад</Button>
+            <Button Background="#DACDCD" Grid.Column="1" Grid.Row="2" Margin="0,0,0,10"  Command="{Binding AddNewClient }">Сохранить изменения</Button>
             </Grid>
 
         </Grid>

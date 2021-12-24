@@ -27,16 +27,12 @@ namespace Alligator.UI.Commands.TabItemClients
                 ObservableCollection<CommentViewModel> comments = new ObservableCollection<CommentViewModel>();
                 viewModel.Selected.Comments = comments;
             }
-
-            //viewModel.Comment = new CommentViewModel();
-            var comment = viewModel.Comment;
-            if (comment.Text != "")
+            viewModel.Selected.Comments.Add(new CommentViewModel()
             {
-                CommentViewModel com = new CommentViewModel() { Text = viewModel.Comment.Text };
-                viewModel.Selected.Comments.Add(com);
-            }
-            viewModel.Comment.Text = null;
+                Text = viewModel.Comment
+            });
             viewModel.Comment = null;
+           
 
         }
     }

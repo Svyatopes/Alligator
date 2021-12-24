@@ -25,6 +25,7 @@ namespace Alligator.UI.Commands.TabItemClients
             {
                 viewModel.AllClients = Visibility.Collapsed;
                 viewModel.ClientCard = Visibility.Visible;
+                viewModel.Comments = viewModel.Selected.Comments;
             }
         }
     }

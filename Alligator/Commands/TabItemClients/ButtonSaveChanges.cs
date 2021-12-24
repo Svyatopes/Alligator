@@ -10,7 +10,7 @@ namespace Alligator.UI.Commands.TabItemClients
 {
     public class ButtonSaveChanges : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
+        private readonly TabItemClientsViewModel viewModel;
         public ButtonSaveChanges(TabItemClientsViewModel viewModel)
         {
             this.viewModel = viewModel;

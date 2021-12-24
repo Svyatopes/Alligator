@@ -19,9 +19,8 @@ namespace Alligator.UI.Commands.TabItemClients
         {
             if (viewModel.Selected == null)
             {
-                
-                viewModel.AllClients = Visibility.Collapsed;
                 viewModel.AddClient = Visibility.Visible;
+               viewModel.AllClients = Visibility.Collapsed;  
             }
             else
             {

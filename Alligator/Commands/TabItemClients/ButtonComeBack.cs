@@ -19,6 +19,7 @@ namespace Alligator.UI.Commands.TabItemClients
         {
             viewModel.AllClients = Visibility.Visible;
             viewModel.ClientCard = Visibility.Collapsed;
+            viewModel.AddClient = Visibility.Collapsed;
         }
     }
 }
