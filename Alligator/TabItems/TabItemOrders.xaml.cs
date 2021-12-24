@@ -17,6 +17,8 @@ namespace Alligator.UI.TabItems
             InitializeComponent();
             _viewModel = new TabItemOrdersViewModel();
             DataContext = _viewModel;
+            _viewModel.VisibilityThird = Visibility.Collapsed;
+            _viewModel.VisibilitySecond = Visibility.Collapsed;
         }
 
         private void ButtonNewOrder_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -33,8 +35,8 @@ namespace Alligator.UI.TabItems
 
         private void ButtonComeBack_OrderWindow_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            OrderWindow.Width = new GridLength(0, GridUnitType.Star);
-            AllOrdersWindow.Width = new GridLength(1, GridUnitType.Star);
+            //OrderWindow.Width = new GridLength(0, GridUnitType.Star);
+            //AllOrdersWindow.Width = new GridLength(1, GridUnitType.Star);
         }
 
         private void ButtonDeleteOrder_OrderWindow_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -49,8 +51,8 @@ namespace Alligator.UI.TabItems
 
         private void ButtonAddNewOrder_AllOrders_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            AllOrdersWindow.Width = new GridLength(0, GridUnitType.Star);
-            AddOrderWindow.Width = new GridLength(1, GridUnitType.Star);
+            //AllOrdersWindow.Width = new GridLength(0, GridUnitType.Star);
+            //AddOrderWindow.Width = new GridLength(1, GridUnitType.Star);
         }
 
         private void ButtonDeleteOrder_AllOrders_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -60,8 +62,8 @@ namespace Alligator.UI.TabItems
 
         private void ButtonComeBack_AddingOrder_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            AllOrdersWindow.Width = new GridLength(1, GridUnitType.Star);
-            AddOrderWindow.Width = new GridLength(0, GridUnitType.Star);
+        //    AllOrdersWindow.Width = new GridLength(1, GridUnitType.Star);
+        //    AddOrderWindow.Width = new GridLength(0, GridUnitType.Star);
         }
 
         private void ButtonSaveChanges_AddingOrder_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -71,8 +73,8 @@ namespace Alligator.UI.TabItems
 
         private void ButtonOpenOrderWindow_AllOrders_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            OrderWindow.Width = new GridLength(1, GridUnitType.Star);
-            AllOrdersWindow.Width = new GridLength(0, GridUnitType.Star);
+            //OrderWindow.Width = new GridLength(1, GridUnitType.Star);
+            //AllOrdersWindow.Width = new GridLength(0, GridUnitType.Star);
         }
 
       

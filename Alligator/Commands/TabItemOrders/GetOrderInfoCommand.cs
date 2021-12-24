@@ -23,7 +23,11 @@ namespace Alligator.UI.Commands.TabItemOrders
         }
 
         public override void Execute(object parameter)
-        {            
+        {
+            _viewModel.VisibilityFirst = Visibility.Collapsed;
+            _viewModel.VisibilityThird = Visibility.Collapsed;
+            _viewModel.VisibilitySecond = Visibility.Visible;
+            _viewModel.StateMainDataGrid = false;
             var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id);
             _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel> (order.OrderReviews);
             _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);

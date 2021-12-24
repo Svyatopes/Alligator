@@ -9,20 +9,20 @@
             <i:InvokeCommandAction Command="{Binding GetOrders}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Background="#C4C4C4">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="AllOrdersWindow" Width="1*" />
-            <ColumnDefinition x:Name="OrderWindow" Width="0" />
-            <ColumnDefinition x:Name="AddOrderWindow" Width="0" />
-        </Grid.ColumnDefinitions>
+
+    <Grid>
+        <!--Первое окно Все заказы-->
+        <Grid Visibility="{Binding VisibilityFirst}" Background="#C4C4C4">
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="9*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Детали заказа</Label>
+        
         <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Заказы</Label>
-        <Label  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить заказ</Label>
+        
         <DataGrid x:Name="dg" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Id" Width="*" Binding="{Binding Id}"/>
@@ -31,195 +31,214 @@
                 <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Address}"/>
             </DataGrid.Columns>
         </DataGrid >
-        
-        
-        <Grid  Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="13*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-            <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Дата</TextBlock>
-            <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Клиент</TextBlock>
-            <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Адрес</TextBlock>
-            <Grid Grid.Column="0" Grid.Row="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <DataGrid SelectedItem="{Binding SelectedOrderReview}" ItemsSource="{Binding OrderReviews }" Background="#5F5656" Grid.Row="0" Grid.Column="0" Margin="5,15,5,5"  AutoGenerateColumns="False" CanUserAddRows="True" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Text}"  Header="Отзывы" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid >
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0"   Background="#DACDCD"  Height="20" Width="140" Command="{Binding AddReview}">Добавить отзыв</Button>
-                    <TextBox Grid.Column="1"  Background="White" Width="220"  Margin="15,0,5,5" Text="{Binding NewReviewText}"></TextBox>
-                </Grid>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-            <TextBlock Background="#DACDCD"  Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1">Состав заказа</TextBlock>
-            </Grid>
-            <DataGrid  SelectedItem="{Binding SelectedOrderDetail}" ItemsSource="{Binding OrderDetails }" Background="#5F5656" Grid.Row="3" Grid.Column="1" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True" >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Продукт" Width="*" Binding="{Binding Product}"/>
-                    <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Amount}"/>
-                </DataGrid.Columns>
-            </DataGrid >
-           
-            <StackPanel Grid.Column="0"  >
-                <Grid  Grid.Column="0" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox  Text="{Binding Address}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></TextBox>
-                </Grid>
-            </StackPanel>
-            <StackPanel Grid.Column="0" Grid.Row="1">
-                <Grid Grid.Column="0" Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="1" Grid.Row="1"  Text="{Binding Date}" Background="White" Width="220"  Margin="15,0,5,5" ></TextBox>
-                </Grid>
-            </StackPanel>
-        </Grid>
-        <Grid  Grid.Row="2"  Grid.Column="1" VerticalAlignment="Stretch" Height="Auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonComeBack_OrderWindow_Click">Вернуться назад</Button>
-                <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonDeleteOrder_OrderWindow_Click">Удалить заказ</Button>
-                <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonSaveChanges_OrderWindow_Click">Сохранить изменения</Button>
-            </Grid>
         <Grid Grid.Row="2" VerticalAlignment="Stretch" Height="Auto">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="140" Click="ButtonAddNewOrder_AllOrders_Click">Добавить заказ</Button>
+                <Button Command="{Binding OpenAddOrderWindow}" Grid.Column="0" Background="#DACDCD"  Height="20" Width="140">Добавить заказ</Button>
             <Button  Command="{Binding DeleteOrder}" Grid.Column="2" Background="#DACDCD" Height="20" Width="140" >Удалить заказ</Button>
-            <Button  Command="{Binding GetOrderInfo}" Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" >Просмотреть заказ</Button>
-        </Grid>
-        <Grid Grid.Column="2" Grid.Row="1">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="0*" />
-                    <RowDefinition Height="13*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <DataGrid  ItemsSource="{Binding Products}" Background="#5F5656" Grid.Column="1"  Grid.Row="3" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True"   >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Product}"  Header="Продукт" Width="*" />
-                        <DataGridTextColumn Binding="{Binding Amount}"  Header="Количество" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid >
-                <TextBlock Grid.Column="1" Grid.Row="2"  Background="#DACDCD">Количество</TextBlock>
-                <TextBox Grid.Column="2" Grid.Row="2" Background="White" Text="{Binding NewAmount}"></TextBox>
+            <Button  Command="{Binding OpenOrderInfoWindow}"  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" >Просмотреть заказ</Button>
+            <!--<Button  Command="{Binding GetOrderInfo}" Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" >Просмотреть заказ</Button>-->
             </Grid>
-            <Grid  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="13*" />
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                
-                
-                
-                <Grid Grid.Column="0" Grid.Row="3">
+        </Grid>
+
+<!--Второе окно Детали заказа-->        
+            <Grid VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5" Visibility="{Binding VisibilitySecond}">
+                <Grid VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="13*" />
+                        <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
-                    <DataGrid  ItemsSource="{Binding OrderReviews}" SelectedItem="{Binding SelectedOrderReview}" Background="#5F5656" Grid.Row="0"  Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True"  >
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Text}"  Header="Отзывы" Width="*" />
-                        </DataGrid.Columns>
-                    </DataGrid >
-                    <Grid Grid.Row="1" >
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">Детали заказа</Label>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Дата</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Клиент</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="3">Адрес</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,10" Grid.Row="3">Состав заказа</TextBlock>
+                    <Grid Grid.Row="1" Grid.RowSpan="3" >
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Text="{Binding SelectedOrder.Date}" Grid.Column="1" Grid.Row="0" Margin="15,0,5,5" Width="220" Background="White" ></TextBox>
+                        <TextBox Text="{Binding SelectedOrder.ClientId}" Grid.Column="1" Grid.Row="1"  Background="White" Width="220" Margin="15,0,5,5" ></TextBox>
+                        <TextBox Text="{Binding SelectedOrder.Address}" Grid.Column="1" Grid.Row="2" Width="220" Background="White" Margin="15,0,5,5" ></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                    <DataGrid ItemsSource="{Binding OrderReviews}" SelectedItem="{Binding SelectedOrderReview}" Background="#5F5656"  x:Name="comm" Grid.Column="0" Margin="5,15,5,5" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" >
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Text}" Header="Отзывы" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid >
+                        <Grid Grid.Row="5" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                        <Button Command="{Binding AddReview}" Grid.Column="0" Grid.Row="1"  Background="#DACDCD"  Height="20" Margin="5,0,0,0" >Добавить отзыв</Button>
-                        <TextBox Text="{Binding NewReviewText}" Grid.Column="1" Grid.Row="1" Background="White" Height="20" Margin="10,0,0,0"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Column="1" Grid.Row="0" Background="#DACDCD" Command="{Binding AddReview}" Height="20" Width="140" >Добавить отзыв</Button>
+                            <Button Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReview}" Height="20" Width="140" >Удалить отзыв</Button>
+                            <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewReviewText}" Background="White" Margin="15,0,5,5" ></TextBox>
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="1">
+                        <DataGrid ItemsSource="{Binding OrderDetails}" SelectedItem="{Binding SelectedOrderDetail}" Background="#5F5656" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Product}"  Header="Продукты" Width="*" />
+                                <DataGridTextColumn Binding="{Binding Amount}" Header="Количество" Width="*" />
+                        </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Height="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                    <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Command="{Binding ComeBackFirstWindow}" >Вернуться назад</Button>
+                        <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding Path = DeleteClientInClientCard}">Удалить клиента</Button>
+                        <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding Path=SaveChanges}" >Сохранить изменения</Button>
+
                     </Grid>
                 </Grid>
-                <TextBlock  Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Дата</TextBlock>
-                <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Клиент</TextBlock>
-                <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Адрес</TextBlock>
-                <Grid Grid.Column="0" Grid.Row="0">
+            </Grid>
+
+            <!--третье окно Добавить заказ-->
+        <Grid Visibility="{Binding VisibilityThird}">
+            <Grid VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
+                <Grid VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <DatePicker x:Name="Date" Text="{Binding NewDate}" Grid.Column="1" Grid.Row="1" Margin="15,0,5,5"  Width="220"   Background="White" ></DatePicker>
-                </Grid>
-                <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">Выбрать продукт</TextBlock>
-                <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" x:Name="Product" Grid.Column="1" Grid.Row="1" Margin="10,0,0,10"/>
-                <Grid Grid.Column="0" Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="Client" ItemsSource="{Binding Client.Id}" SelectedItem="{Binding SelectedClient.Id}"  Grid.Column="1" Grid.Row="1"  Background="White" Width="220"  Margin="15,0,5,5" ></ComboBox>
-                </Grid>
-                <Grid Grid.Column="0" Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox x:Name="Adress" Text="{Binding NewAdressText}" Grid.Column="1" Grid.Row="2" Width="220"   Background="White" Margin="15,0,5,5" ></TextBox>
-                </Grid>
-                
-                
-                <Grid Grid.Column="1" Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="5*"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="13*" />
+                        <RowDefinition Height="2*" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить заказ</Label>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Дата</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2">Клиент</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="3">Адрес</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="1">Продукты</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="2">Количество</TextBlock>
+                    <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="3">Список продуктов</TextBlock>
+                    <Grid Grid.Row="1" Grid.RowSpan="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <DatePicker x:Name="Date" Text="{Binding NewDate}" Grid.Column="1" Grid.Row="0" Margin="15,0,5,5" Width="220" Background="White" ></DatePicker>
+                        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Client.Id}" SelectedItem="{Binding SelectedClient.Id}" Background="White" Width="220" Margin="15,0,5,5" ></ComboBox>
+                        <TextBox Text="{Binding NewAdressText}" Grid.Column="1" Grid.Row="2" Width="220" Background="White" Margin="15,0,5,5" ></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Grid.Column="1"  Grid.Row="1" Margin="15,0,5,5" Width="220" HorizontalAlignment="Right" Background="White" ></ComboBox>
+                        <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding NewAmount}" Background="White" Width="220" HorizontalAlignment="Right" Margin="15,0,5,5" ></TextBox>
+
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid  ItemsSource="{Binding OrderReviews}" SelectedItem="{Binding SelectedOrderReview}" Background="#5F5656" Grid.Column="0" Margin="5,15,5,5" IsReadOnly="True" CanUserAddRows="False" AutoGenerateColumns="False" >
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Text}" Header="Отзывы" Width="*" />
+                            </DataGrid.Columns>
+                        </DataGrid >
+                        <Grid Grid.Row="5" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Button Grid.Column="1" Grid.Row="0" Background="#DACDCD" Command="{Binding AddReview}" Height="20" Width="140" >Добавить отзыв</Button>
+                            <Button Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReview}" Height="20" Width="140" >Удалить отзыв</Button>
+                            <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewReviewText}" Background="White" Margin="15,0,5,5" ></TextBox>
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.Column="1">
+                        <DataGrid ItemsSource="{Binding OrderDetails}" SelectedItem="{Binding SelectedOrderDetail}" Background="#5F5656" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Продукты" Width="*" Binding="{Binding Path=Product}" />
+                                <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Path=Amount}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+
+                    <Grid Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Height="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Command="{Binding ComeBackFirstWindow}" >Вернуться назад</Button>
+                        <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding Path = DeleteOrder}">Удалить заказ</Button>
+                        <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding Path=SaveChanges}" >Сохранить изменения</Button>
+
+                    </Grid>
                 </Grid>
             </Grid>
-        </Grid>
-        <Grid  Grid.Row="2"  Grid.Column="3" VerticalAlignment="Stretch" Height="Auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <Button Background="#DACDCD"  Grid.Row="2" Margin="0,0,0,10"  Height="20" Width="140" Click="ButtonComeBack_AddingOrder_Click">Вернуться назад</Button>
-            <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10"  Height="20" Width="140" Command="{Binding AddOrder}">Сохранить изменения</Button>
         </Grid>
     </Grid>
     

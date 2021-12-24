@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
@@ -34,6 +35,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand GetOrderInfo { get; set; }
         public ICommand DeleteOrder { get; set; }
         public ICommand AddOrder { get; set; }
+        public ICommand OpenAddOrderWindow { get; set; }
+        public ICommand OpenOrderInfoWindow { get; set; }
+        public ICommand ComeBackFirstWindow { get; set; }
         public TabItemOrdersViewModel()
         {
 
@@ -45,6 +49,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrder = new DeleteOrderCommand(this, _orderService);
             AddOrder = new AddOrderCommand(this, _orderService);
+            OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);
+            OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this);
+            ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
             AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
             //выпадает ошибка: null
@@ -141,6 +148,60 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        
+        private Visibility _visibilityFirst;
+        public Visibility VisibilityFirst
+        {
+            get
+            {
+                return _visibilityFirst;
+            }
+            set
+            {
+                _visibilityFirst = value;
+
+                OnPropertyChanged(nameof(VisibilityFirst));
+            }
+        }
+        private Visibility _visibilitySecond;
+        public Visibility VisibilitySecond
+        {
+            get
+            {
+                return _visibilitySecond;
+            }
+            set
+            {
+                _visibilitySecond = value;
+
+                OnPropertyChanged(nameof(VisibilitySecond));
+            }
+        }
+        private Visibility _visibilityThird;
+        public Visibility VisibilityThird
+        {
+            get
+            {
+                return _visibilityThird;
+            }
+            set
+            {
+                _visibilityThird = value;
+
+                OnPropertyChanged(nameof(VisibilityThird));
+            }
+        }
+
+        private bool _stateMainDataGrid;
+        public bool StateMainDataGrid
+        {
+            get { return _stateMainDataGrid; }
+            set
+            {
+                _stateMainDataGrid = value;
+                OnPropertyChanged(nameof(StateMainDataGrid));
+            }
+        }
+
+
     }
 }
