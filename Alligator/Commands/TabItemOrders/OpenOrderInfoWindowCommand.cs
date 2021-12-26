@@ -19,10 +19,9 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
-            _viewModel.VisibilityFirst = Visibility.Collapsed;
-            _viewModel.VisibilityThird = Visibility.Collapsed;
-            _viewModel.VisibilitySecond = Visibility.Visible;
-            _viewModel.StateMainDataGrid = false;
+            _viewModel.AllOrdersWindow = Visibility.Collapsed;
+            _viewModel.AddOrderWindow = Visibility.Collapsed;
+            _viewModel.OrdersInfoWindow = Visibility.Visible;
         }
     }
 }

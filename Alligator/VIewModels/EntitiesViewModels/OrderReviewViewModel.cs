@@ -11,56 +11,50 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     class OrderReviewViewModel : BaseViewModel
     {
-        public OrderReviewViewModel(OrderReviewViewModel OrderReviewModel)
-        {
-            Id = OrderReviewModel.Id;
-            Order = OrderReviewModel.Order;
-            //Client = OrderReviewModel.Client;
-            Text = OrderReviewModel.Text;
-        }
-
-        private int id;
+       
+        private int _id;
 
         public int Id
         {
-            get { return id; }
+            get => _id; 
             set
             {
-                id = value;
+                _id = value;
                 OnPropertyChanged(nameof(Id));
             }
         }
 
-        private OrderModel order;
+        private OrderModel _order;
 
         public OrderModel Order
         {
-            get { return order; }
+            get => _order; 
             set
             {
-                order = value;
+                _order = value;
                 OnPropertyChanged(nameof(Order));
             }
         }
-        //private ClientModel clientModel;
 
-        //public ClientModel Client
-        //{
-        //    get { return clientModel; }
-        //    set
-        //    {
-        //        clientModel = value;
-        //        OnPropertyChanged(nameof(Client));
-        //    }
-        //}
+        private ClientModel _clientModel;
 
-        private string text;
-        public string Text
+        public ClientModel Client
         {
-            get { return text; }
+            get => _clientModel; 
             set
             {
-                text = value;
+                _clientModel = value;
+                OnPropertyChanged(nameof(Client));
+            }
+        }
+
+        private string _text;
+        public string Text
+        {
+            get => _text; 
+            set
+            {
+                _text = value;
                 OnPropertyChanged(nameof(Text));
             }
         }

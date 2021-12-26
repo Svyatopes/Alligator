@@ -22,16 +22,16 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
-            var ReviewToAdd = _viewModel.NewReviewText.Trim();
+            var newReview = _viewModel.NewReviewText.Trim();
 
-            if (string.IsNullOrEmpty(ReviewToAdd))
+            if (string.IsNullOrEmpty(newReview))
             {
                 MessageBox.Show("Введите текст отзыва");
                 return;
             }
-           _orderReviewService.AddOrderReviewModel(ReviewToAdd, _viewModel.SelectedOrderReview.Id);
-            var NewReviewModel = _orderReviewService.GetOrderReviewModelById(_viewModel.SelectedOrderReview.Id);
-            _viewModel.OrderReviews.Add(NewReviewModel);
+           _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrderReview.Id);
+            var newReviewModel = _orderReviewService.GetOrderReviewModelById(_viewModel.SelectedOrderReview.Id);
+            _viewModel.OrderReviews.Add(newReviewModel);
             _viewModel.NewReviewText = string.Empty;
         }
     }

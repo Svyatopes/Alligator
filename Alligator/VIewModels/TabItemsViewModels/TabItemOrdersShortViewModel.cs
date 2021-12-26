@@ -11,6 +11,10 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
     public class TabItemOrdersShortViewModel : BaseViewModel
     {
+        public TabItemOrdersShortViewModel()
+        {
+            Orders = new ObservableCollection<OrderViewShortModel>();
+        }
 
         private ObservableCollection<OrderViewShortModel> orders;
         public ObservableCollection<OrderViewShortModel> Orders
@@ -21,12 +25,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 orders = value;
                 OnPropertyChanged(nameof(Orders));
             }
-        }
-
-        public TabItemOrdersShortViewModel()
-        {
-            Orders = new ObservableCollection<OrderViewShortModel>();
-        }
+        }        
     }
 }
 

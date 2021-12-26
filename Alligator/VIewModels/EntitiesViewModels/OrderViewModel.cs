@@ -1,6 +1,7 @@
 ﻿using Alligator.BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,81 +12,66 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class OrderViewModel: BaseViewModel
     {
-        public OrderViewModel(OrderModel orderModel)
-        {
-            Id = orderModel.Id;
-            Date = orderModel.Date;
-            //Client = orderModel.Client;
-            Address = orderModel.Address;
-            OrderDetails = orderModel.OrderDetails;
-            OrderReviews = orderModel.OrderReviews;
-
-        }
-
-
-        private int id;
+       
+        private int _id;
+        private DateTime _date;
+        private ClientModel _clientModel;
+        private string _address;
+        private ObservableCollection<OrderDetailModel> _orderDetails;
+        private ObservableCollection<OrderReviewModel> orderReviews;
         public int Id
         {
-            get { return id; }
+            get => _id; 
             set
             {
-                id = value;
+                _id = value;
                 OnPropertyChanged(nameof(Id));
             }
         }
-
-        private DateTime date;
         
         public DateTime Date
         {
-            get { return date; }
+            get => _date; 
             set
             {
-                date = value;
+                _date = value;
                 OnPropertyChanged(nameof(Date));
             }
         }
 
-        //private ClientModel clientModel;
-        
-        //public ClientModel Client
-        //{
-        //    get { return clientModel; }
-        //    set
-        //    {
-        //        clientModel = value;
-        //        OnPropertyChanged(nameof(Client));
-        //    }
-        //}
-
-        private string address;
-
-        public string Address 
+        public ClientModel Client
         {
-            get { return address; }
+            get => _clientModel; 
             set
             {
-                address = value;
+                _clientModel = value;
+                OnPropertyChanged(nameof(Client));
+            }
+        }
+      
+        public string Address 
+        {
+            get => _address; 
+            set
+            {
+                _address = value;
                 OnPropertyChanged(nameof(Address));
             }
         }
 
-        private List<OrderDetailModel> orderDetails;
-        
-        public List<OrderDetailModel> OrderDetails 
+        public ObservableCollection<OrderDetailModel> OrderDetails 
         {
-            get { return orderDetails; }
+            get => _orderDetails; 
             set
             {
-                orderDetails = value;
+                _orderDetails = value;
                 OnPropertyChanged(nameof(OrderDetails));
             }
         }
 
-        private List<OrderReviewModel> orderReviews;
-        public List<OrderReviewModel> OrderReviews 
-        { 
-            get { return orderReviews; }
+        public ObservableCollection<OrderReviewModel> OrderReviews 
+        {
+            get => orderReviews; 
             set
             {
                 orderReviews = value;

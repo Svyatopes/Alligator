@@ -22,13 +22,13 @@ namespace Alligator.BusinessLayer
         public OrderReviewModel GetOrderReviewModelById(int id)
         {
             var orderReview = _repositoryOrderReview.GetOrderReviewById(id);
-            return OrderMapper.GetInstance().Map<OrderReviewModel>(orderReview);
+            return CustomMapper.GetInstance().Map<OrderReviewModel>(orderReview);
         }
 
         public List<OrderReviewModel> GetOrderReviewModelsByOrderId(int id)
         {
             var orderReviews = _repositoryOrderReview.GetOrderReviewsByOrderId(id);
-            return OrderMapper.GetInstance().Map<List<OrderReviewModel>>(orderReviews);
+            return CustomMapper.GetInstance().Map<List<OrderReviewModel>>(orderReviews);
         }
 
         public void AddOrderReviewModel(string text, int orderId)

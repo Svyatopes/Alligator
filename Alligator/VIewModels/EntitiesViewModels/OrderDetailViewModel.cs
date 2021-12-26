@@ -10,59 +10,51 @@ using System.Threading.Tasks;
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     class OrderDetailViewModel: BaseViewModel
-    {
-        public OrderDetailViewModel(OrderDetailModel OrderDetailModel)
-        {
-            Id = OrderDetailModel.Id;
-            Order = OrderDetailModel.Order;
-            //Product = OrderDetailModel.Product;
-            Amount = OrderDetailModel.Amount;
-        }
-
-        private int id;
+    {       
+        private int _id;
         
         public int Id 
         {
-            get { return id; }
+            get => _id; 
             set
             {
-                id = value;
+                _id = value;
                 OnPropertyChanged(nameof(Id));
             } 
         }
 
-        private OrderModel order;
+        private OrderModel _order;
         
         public OrderModel Order
         {
-            get { return order; }
+            get => _order; 
             set
             {
-                order = value;
+                _order = value;
                 OnPropertyChanged(nameof(Order));
             }
         }
 
-        //private ProductModel product;
-        
-        //public ProductModel Product 
-        //{ 
-        //    get { return product; }
-        //    set
-        //    {
-        //        product = value;
-        //        OnPropertyChanged(nameof(Product));
-        //    } 
-        //}
+        private ProductModel _product;
 
-        private int amount;
+        public ProductModel Product
+        {
+            get => _product; 
+            set
+            {
+                _product = value;
+                OnPropertyChanged(nameof(Product));
+            }
+        }
+
+        private int _amount;
 
         public int Amount 
         {
-            get { return amount; }
+            get => _amount; 
             set
             {
-                amount = value;
+                _amount = value;
                 OnPropertyChanged(nameof(Amount));
             }
         }

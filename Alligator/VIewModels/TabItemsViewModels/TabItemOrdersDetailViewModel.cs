@@ -11,6 +11,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
     class TabItemOrdersDetailViewModel : BaseViewModel
     {
+        public TabItemOrdersDetailViewModel()
+        {
+            OrderDetails = new ObservableCollection<OrderDetailViewModel>();
+        }
+
         private ObservableCollection<OrderDetailViewModel> orderdetails;
         public ObservableCollection<OrderDetailViewModel> OrderDetails
         {
@@ -20,12 +25,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 orderdetails = value;
                 OnPropertyChanged("OrderDetails");
             }
-        }
-
-        public TabItemOrdersDetailViewModel()
-        {
-            OrderDetails = new ObservableCollection<OrderDetailViewModel>();
-        }
-    
+        }    
     }
 }

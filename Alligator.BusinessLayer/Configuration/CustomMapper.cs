@@ -9,11 +9,11 @@ using Alligator.DataLayer.Entities;
 
 namespace Alligator.BusinessLayer.Configuration
 {
-    public static class OrderMapper
+    public static class CustomMapper
     {
-        private static Mapper _instance;
+        private static AutoMapper.Mapper _instance;
 
-        public static Mapper GetInstance()
+        public static AutoMapper.Mapper GetInstance()
         {
             if (_instance == null)
                 InitCustomMapper();
@@ -22,7 +22,7 @@ namespace Alligator.BusinessLayer.Configuration
 
         private static void InitCustomMapper()
         {
-            _instance = new Mapper(new MapperConfiguration(cfg =>
+            _instance = new AutoMapper.Mapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Order, OrderShortModel>();
                 cfg.CreateMap<Order, OrderModel>();

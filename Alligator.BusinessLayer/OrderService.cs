@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private readonly OrderRepository _repositoryOrder;
         private readonly OrderDetailRepository _repositoryOrderDetail;
@@ -22,19 +22,19 @@ namespace Alligator.BusinessLayer
         public List<OrderShortModel> GetOrderssWithoutSensitiveData()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return OrderMapper.GetInstance().Map<List<OrderShortModel>>(orders);
+            return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);
         }
 
         public List<OrderModel> GetOrders()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return OrderMapper.GetInstance().Map<List<OrderModel>>(orders);
+            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
         }
 
         public List<OrderModel> GetOrdersByClientId(int id)
         {
             var orders = _repositoryOrder.GetOrdersByClientId(id);
-            return OrderMapper.GetInstance().Map<List<OrderModel>>(orders);
+            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
         }
 
         public OrderModel GetOrderByIdWithDetailsAndReviews(int id)
@@ -42,7 +42,7 @@ namespace Alligator.BusinessLayer
             var order = _repositoryOrder.GetOrderById(id);
             order.OrderDetails = _repositoryOrderDetail.GetOrderDetailsByOrderId(id);
             order.OrderReviews = _repositoryOrderReview.GetOrderReviewsByOrderId(id);
-            return OrderMapper.GetInstance().Map<OrderModel>(order);
+            return CustomMapper.GetInstance().Map<OrderModel>(order);
         }
 
         public void AddOrderModel(DateTime date, int clientId, string address)

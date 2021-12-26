@@ -9,8 +9,7 @@ namespace Alligator.BusinessLayer.Models
     public class OrderReviewModel
     {
         public int Id { get; set; }
-        public OrderModel Order { get; set; }
-        //public ClientModel Client { get; set; }
+        public OrderModel Order { get; set; }      
         public string Text { get; set; }
     }
 }

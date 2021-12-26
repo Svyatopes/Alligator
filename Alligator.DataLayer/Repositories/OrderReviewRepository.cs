@@ -10,15 +10,11 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-   public  class OrderReviewRepository
-    {
-
-        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //private const string _connectionString = "Data Source=Local;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
-
+   public  class OrderReviewRepository : BaseRepository
+    {      
         public OrderReview GetOrderReviewById(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             return connection.Query<OrderReview, Order, Client, OrderReview>
             ("dbo.OrderReview_SelectById", (orderreview, order, client) =>
@@ -35,7 +31,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<OrderReview> GetOrderReviewsByOrderId(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             var orderReviewsDictionary = new Dictionary<int, OrderReview>();
             return connection.Query<OrderReview, Order, Client, OrderReview>
@@ -53,7 +49,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void AddOrderReview(string text, int orderId)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderReview_Insert";
             connection.Execute(procString,
@@ -63,7 +59,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteOrderReview(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderReview_Delete";
             connection.Execute(procString, 
@@ -73,7 +69,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteOrderReviewByOrderId(int orderId)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderReview_DeleteByOrderId";
             connection.Execute(procString, new { OrderId = orderId },
@@ -82,7 +78,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditOrderReview( int id, string text)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderReview_Update";
             connection.Execute(procString, new { Id = id, Text = text },

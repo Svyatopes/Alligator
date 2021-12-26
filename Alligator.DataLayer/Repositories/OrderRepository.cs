@@ -10,14 +10,11 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class OrderRepository
-    {
-        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //private const string _connectionString = "Data Source=Local;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False";
-
+    public class OrderRepository : BaseRepository
+    {        
         public List<Order> GetAllOrders()
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
 
             var orderDictionary = new Dictionary<int, Order>();
@@ -28,7 +25,7 @@ namespace Alligator.DataLayer.Repositories
 
         public Order GetOrderById(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             return connection.Query<Order, Client, Order>("dbo.Order_SelectById", (order, client) =>
             {
@@ -44,7 +41,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<Order> GetOrdersByClientId(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             var orderDictionary = new Dictionary<int, Order>();
             return connection.Query<Order, Client, Order>
@@ -61,7 +58,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void AddOrder(DateTime date, int clientId, string address)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Insert";
             connection.Execute(procString, 
@@ -71,7 +68,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteOrder(int id)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Delete";
             connection.Execute(procString, 
@@ -81,7 +78,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditOrder(DateTime date, int id, string address)
         {
-            using var connection = new SqlConnection(_connectionString);
+            using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Update";
             connection.Execute(procString, 

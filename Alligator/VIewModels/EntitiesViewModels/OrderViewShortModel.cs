@@ -11,64 +11,51 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class OrderViewShortModel : BaseViewModel
     {
-        public OrderViewShortModel(OrderShortModel orderShortModel)
-        {
-            Id = orderShortModel.Id;
-            Date = orderShortModel.Date;          
-            Address = orderShortModel.Address;
-            ClientId = orderShortModel.ClientId;
-        }
-
-
-        private int id;
+        private int _id;
         public int Id
         {
-            get { return id; }
+            get { return _id; }
             set
             {
-                id = value;
+                _id = value;
                 OnPropertyChanged(nameof(Id));
             }
         }
 
-        private DateTime date;
+        private DateTime _date;
 
         public DateTime Date
         {
-            get { return date; }
+            get { return _date; }
             set
             {
-                date = value;
+                _date = value;
                 OnPropertyChanged(nameof(Date));
             }
         }
 
       
-        private string address;
+        private string _address;
 
         public string Address
         {
-            get { return address; }
+            get { return _address; }
             set
             {
-                address = value;
+                _address = value;
                 OnPropertyChanged(nameof(Address));
             }
         }
 
-        private int clientId;
+        private int _clientId;
         public int ClientId
         {
-            get { return ClientId; }
+            get { return _clientId; }
             set
             {
-                ClientId = value;
+                _clientId = value;
                 OnPropertyChanged(nameof(ClientId));
             }
-        }
-
-      
-    }
-    
-    
+        }     
+    }   
 }

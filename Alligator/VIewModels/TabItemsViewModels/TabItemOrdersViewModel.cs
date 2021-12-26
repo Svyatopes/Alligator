@@ -19,13 +19,12 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private OrderShortModel _selectedOrder;
         private OrderDetailModel _selectedOrderDetailModel;
         private OrderReviewModel _selectedOrderReviewModel;
-
-        //private ProductModel _selectedProduct;
-        // private ClientModel _selectedClient;
+        private ProductModel _selectedProduct;
+        private ClientModel _selectedClient;
         private readonly OrderService _orderService;
         private readonly OrderReviewService _orderReviewService;
         private readonly OrderDetailService _orderDetailService;
-       // private readonly ClientService _clientService;
+        private readonly ClientService _clientService;
         private string _newReviewText;
         private string _newAdressText;
         private DateTime _newDate;
@@ -44,7 +43,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderService = new OrderService();
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
-            //_clientService = new ClientService();
+            _clientService = new ClientService();
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrder = new DeleteOrderCommand(this, _orderService);
@@ -54,21 +53,19 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
             AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
-            //выпадает ошибка: null
-            //OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
-            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));
-            //Order = new ObservableCollection<OrderModel>(_orderService.GetOrders());
-            //Clients=new ObservableCollection<ClientModel> (__clientService.GetClients());
-            //Products=new ObservableCollection<ProductModel>(_productService.GetProducts());
+            OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
+            OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));           
+            Clients = new ObservableCollection<ClientModel>(__clientService.GetClients());
+            Products = new ObservableCollection<ProductModel>(_productService.GetProducts());
         }
 
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
         public ObservableCollection<OrderDetailModel> OrderDetails { get; set; }
         public ObservableCollection<OrderReviewModel> OrderReviews { get; set; }
 
-       // public ObservableCollection<ClientModel> Clients {get;set;}
-       // public ObservableCollection<ProductModel> Products {get;set;}
-        
+        public ObservableCollection<ClientModel> Clients { get; set; }
+        public ObservableCollection<ProductModel> Products { get; set; }
+
         public OrderShortModel SelectedOrder
         {
             get { return _selectedOrder; }
@@ -97,27 +94,27 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        //public ClientModel SelectedClient
-        //{
-        //    get { return _selectedClientModel; }
-        //    set
-        //    {
-        //        _selectedClientModel = value;
-        //        OnPropertyChanged(nameof(SelectedClient));
-        //    }
-        //}
+        public ClientModel SelectedClient
+        {
+            get { return _selectedClientModel; }
+            set
+            {
+                _selectedClientModel = value;
+                OnPropertyChanged(nameof(SelectedClient));
+            }
+        }
 
-        //public ProductModel SelectedProduct
-        //{
-        //    get { return _selectedProduct; }
-        //    set
-        //    {
-        //        _selectedProduct = value;
-        //        OnPropertyChanged(nameof(SelectedProduct));
-        //    }
-        //}
+        public ProductModel SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set
+            {
+                _selectedProduct = value;
+                OnPropertyChanged(nameof(SelectedProduct));
+            }
+        }
 
-       
+
         public string NewReviewText
         {
             get { return _newReviewText; }
@@ -148,60 +145,47 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        private Visibility _visibilityFirst;
-        public Visibility VisibilityFirst
+        private Visibility _allOrdersWindow;
+        public Visibility AllOrdersWindow
         {
             get
             {
-                return _visibilityFirst;
+                return _allOrdersWindow;
             }
             set
             {
-                _visibilityFirst = value;
+                _allOrdersWindow = value;
 
-                OnPropertyChanged(nameof(VisibilityFirst));
+                OnPropertyChanged(nameof(AllOrdersWindow));
             }
         }
-        private Visibility _visibilitySecond;
-        public Visibility VisibilitySecond
+        private Visibility _ordersInfoWindow;
+        public Visibility OrdersInfoWindow
         {
             get
             {
-                return _visibilitySecond;
+                return _ordersInfoWindow;
             }
             set
             {
-                _visibilitySecond = value;
+                _ordersInfoWindow = value;
 
-                OnPropertyChanged(nameof(VisibilitySecond));
+                OnPropertyChanged(nameof(OrdersInfoWindow));
             }
         }
-        private Visibility _visibilityThird;
-        public Visibility VisibilityThird
+        private Visibility _addOrderWindow;
+        public Visibility AddOrderWindow
         {
             get
             {
-                return _visibilityThird;
+                return _addOrderWindow;
             }
             set
             {
-                _visibilityThird = value;
+                _addOrderWindow = value;
 
-                OnPropertyChanged(nameof(VisibilityThird));
+                OnPropertyChanged(nameof(AddOrderWindow));
             }
         }
-
-        private bool _stateMainDataGrid;
-        public bool StateMainDataGrid
-        {
-            get { return _stateMainDataGrid; }
-            set
-            {
-                _stateMainDataGrid = value;
-                OnPropertyChanged(nameof(StateMainDataGrid));
-            }
-        }
-
-
     }
 }
