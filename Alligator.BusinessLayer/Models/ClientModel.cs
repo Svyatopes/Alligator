@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
 {
-    public class ClientModel:ClientShortModel
+    public class ClientModel
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -27,7 +27,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private string phoneNumberTextNewPhoneNumber;
         private string emailTextNewEmail;
         private CommentViewModel selectedComment;
-        private bool selectedTabClients;
+        private bool isSelectedTabItem;
         private Visibility _allClients;
         private Visibility _clientCard;
         private Visibility _addClient;
@@ -41,6 +41,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddComment { get; set; }
         public ICommand AddNewClient { get; set; }
         public ICommand DeleteComment { get; set; }
+        public ICommand GetAllClients { get; set; }
         public TabItemClientsViewModel()
         {
             Clients = new ObservableCollection<ClientViewModel>();
@@ -53,6 +54,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddComment = new ButtonAddComment(this);
             AddNewClient = new ButtonAddNewClient(this);
             DeleteComment = new DeleteComment(this);
+            GetAllClients = new GetAllClients(this);
+        }
+        public bool IsSelectedTabItem
+        {
+            get { return isSelectedTabItem; }
+            set
+            {
+                isSelectedTabItem = value;
+                OnPropertyChanged("IsSelectedTabItem");
+            }
         }
         public CommentViewModel  SelectedComment
         {
@@ -109,15 +120,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public bool SelectedTabClients
-        {
-            get { return selectedTabClients; }
-            set
-            {
-                selectedTabClients = value;
-                OnPropertyChanged("SelectedTabClients");
-            }
-        }
 
 
         public ObservableCollection<ClientViewModel> Clients

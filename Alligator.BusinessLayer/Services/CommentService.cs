@@ -1,4 +1,6 @@
-﻿using Alligator.DataLayer.Repositories;
+﻿using Alligator.BusinessLayer.Configuration;
+using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,11 @@ namespace Alligator.BusinessLayer.Services
         public CommentService()
         {
             _commentRepository = new CommentRepository();
+        }
+        public List<CommentModel> GetAllComments()
+        {
+            var comments = _commentRepository.GetAllComments();
+            return CustomMapper.GetInstance().Map<List<CommentModel>>(comments);
         }
     }
 }

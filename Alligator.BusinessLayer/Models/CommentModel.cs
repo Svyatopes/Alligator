@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alligator.BusinessLayer.Models
 {
-   public  class CommentModel
+   public class CommentModel
     {
         public int Id { get; set; }
         public ClientModel Client { get; set; }

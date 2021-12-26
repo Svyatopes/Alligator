@@ -30,7 +30,7 @@ namespace Alligator.BusinessLayer.Configuration
                 cfg.CreateMap<Comment, CommentModel>();
                 cfg.CreateMap<CommentModel, Comment>();
             }
-                ));
+             ));
         }
     }
 }
