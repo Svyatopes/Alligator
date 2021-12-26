@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class OrderRepository : BaseRepository
-    {        
+    public interface IOrderRepository
+    {
+        void AddOrder(DateTime date, int clientId, string address);
+        void DeleteOrder(int id);
+        void EditOrder(DateTime date, int id, string address);
+        List<Order> GetAllOrders();
+        Order GetOrderById(int id);
+        List<Order> GetOrdersByClientId(int id);
+    }
+
+    public class OrderRepository : BaseRepository, IOrderRepository
+    {
+
         public List<Order> GetAllOrders()
         {
             using IDbConnection connection = GetConnection();
@@ -32,8 +43,8 @@ namespace Alligator.DataLayer.Repositories
                 order.Client = client;
 
                 return order;
-            }, 
-            new {Id=id},
+            },
+            new { Id = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             FirstOrDefault();
@@ -61,8 +72,8 @@ namespace Alligator.DataLayer.Repositories
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Insert";
-            connection.Execute(procString, 
-            new { Date = date, ClientId=clientId, Address=address }, 
+            connection.Execute(procString,
+            new { Date = date, ClientId = clientId, Address = address },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -71,8 +82,8 @@ namespace Alligator.DataLayer.Repositories
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Delete";
-            connection.Execute(procString, 
-            new { Id=id },
+            connection.Execute(procString,
+            new { Id = id },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -81,10 +92,10 @@ namespace Alligator.DataLayer.Repositories
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.Order_Update";
-            connection.Execute(procString, 
+            connection.Execute(procString,
             new { Date = date, Id = id, Address = address },
             commandType: CommandType.StoredProcedure);
         }
-   
+
     }
 }

@@ -10,8 +10,18 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-   public  class OrderReviewRepository : BaseRepository
-    {      
+    public interface IOrderReviewRepository
+    {
+        void AddOrderReview(string text, int orderId);
+        void DeleteOrderReview(int id);
+        void DeleteOrderReviewByOrderId(int orderId);
+        void EditOrderReview(int id, string text);
+        OrderReview GetOrderReviewById(int id);
+        List<OrderReview> GetOrderReviewsByOrderId(int id);
+    }
+
+    public class OrderReviewRepository : BaseRepository, IOrderReviewRepository
+    {
         public OrderReview GetOrderReviewById(int id)
         {
             using IDbConnection connection = GetConnection();
@@ -62,7 +72,7 @@ namespace Alligator.DataLayer.Repositories
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderReview_Delete";
-            connection.Execute(procString, 
+            connection.Execute(procString,
             new { Id = id },
             commandType: CommandType.StoredProcedure);
         }
@@ -76,7 +86,7 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
         }
 
-        public void EditOrderReview( int id, string text)
+        public void EditOrderReview(int id, string text)
         {
             using IDbConnection connection = GetConnection();
             connection.Open();

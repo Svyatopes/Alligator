@@ -6,18 +6,11 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
 {
-    public class OrderService : IOrderService
+    public class OrderService 
     {
-        private readonly OrderRepository _repositoryOrder;
-        private readonly OrderDetailRepository _repositoryOrderDetail;
-        private readonly OrderReviewRepository _repositoryOrderReview;
-
-        public OrderService()
-        {
-            _repositoryOrder = new OrderRepository();
-            _repositoryOrderDetail = new OrderDetailRepository();
-            _repositoryOrderReview = new OrderReviewRepository();
-        }
+        private readonly IOrderRepository _repositoryOrder;
+        private readonly IOrderDetailRepository _repositoryOrderDetail;
+        private readonly IOrderReviewRepository _repositoryOrderReview;
 
         public List<OrderShortModel> GetOrderssWithoutSensitiveData()
         {

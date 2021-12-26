@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class OrderDetailRepository : BaseRepository
-    {      
+    public interface IOrderDetailRepository
+    {
+        void AddOrderDetail(int amount, int orderId, int productId);
+        void DeleteOrderDetail(int id);
+        void DeleteOrderDetailByProductId(int id);
+        void EditOrderDetail(int id, int amount);
+        OrderDetail GetOrderDetailById(int id);
+        List<OrderDetail> GetOrderDetailsByOrderId(int id);
+        List<OrderDetail> GetOrderDetailsByProductId(int id);
+    }
+
+    public class OrderDetailRepository : BaseRepository, IOrderDetailRepository
+    {
         public OrderDetail GetOrderDetailById(int id)
         {
             using IDbConnection connection = GetConnection();
@@ -23,7 +34,7 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Order = order;
                 orderdetail.Product = product;
                 return orderdetail;
-            }, 
+            },
             new { Id = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
@@ -41,7 +52,7 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Order = order;
                 orderdetail.Product = product;
                 return orderdetail;
-            }, 
+            },
             new { OrderId = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
@@ -59,20 +70,20 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Order = order;
                 orderdetail.Product = product;
                 return orderdetail;
-            }, 
+            },
             new { ProductId = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
             .Distinct().ToList();
         }
 
-        public void AddOrderDetail(int amount,int orderId, int productId)
+        public void AddOrderDetail(int amount, int orderId, int productId)
         {
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderDetail_Insert";
-            connection.Execute(procString, 
-            new { Amount = amount, OrdertId = orderId, ProductId=productId },
+            connection.Execute(procString,
+            new { Amount = amount, OrdertId = orderId, ProductId = productId },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -81,7 +92,7 @@ namespace Alligator.DataLayer.Repositories
             using IDbConnection connection = GetConnection();
             connection.Open();
             string procString = "dbo.OrderDetail_Update";
-            connection.Execute(procString, new {Id=id, Amount = amount },
+            connection.Execute(procString, new { Id = id, Amount = amount },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -92,7 +103,7 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.OrderDetail_Delete";
             connection.Execute(procString, new { Id = id },
             commandType: CommandType.StoredProcedure);
-        }       
+        }
 
         public void DeleteOrderDetailByProductId(int id)
         {
