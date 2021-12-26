@@ -4,13 +4,13 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {
-    public class ButtonProductTagDelete : CommandBase
+    public class ProductTagDelete : CommandBase
     {
         private TabItemCategoriesViewModel viewModel;
         private ProductTagService _productTagService;
 
 
-        public ButtonProductTagDelete(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
+        public ProductTagDelete(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
         {
             this.viewModel = viewModel;
             _productTagService = productTagService;

@@ -6,12 +6,12 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {
-    internal class ButtonCategoryAdd : CommandBase
+    internal class CategoryAdd : CommandBase
     {
         private TabItemCategoriesViewModel _viewModel;
         private CategoryService _categoryService;
 
-        public ButtonCategoryAdd(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
+        public CategoryAdd(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
         {
             _viewModel = viewModel;
             _categoryService = categoryService;

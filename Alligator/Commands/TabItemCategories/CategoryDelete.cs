@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {
-    public class ButtonCategoryDelete : CommandBase
+    public class CategoryDelete : CommandBase
     {
         private TabItemCategoriesViewModel _viewModel;
         private CategoryService _categoryService;
 
-        public ButtonCategoryDelete(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
+        public CategoryDelete(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
         {
             _viewModel = viewModel;
             _categoryService = categoryService;

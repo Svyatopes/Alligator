@@ -8,13 +8,9 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemCategories : TabItem
     {
-
-        private TabItemCategoriesViewModel ViewModel;
         public TabItemCategories()
         {
             InitializeComponent();
-            ViewModel = new TabItemCategoriesViewModel();
-            DataContext = ViewModel;
         }
     }
 }
