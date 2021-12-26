@@ -15,12 +15,23 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ClientViewModel : BaseViewModel
     {
+        private int id;
         private string firstName;
         private string lastName;
         private string patronymic;
         private string phoneNumber;
         private string email;
         private ObservableCollection<CommentViewModel> comments;
+
+        public int Id
+        {
+            get { return id;}
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
         public string FirstName
         {
             get { return firstName; }

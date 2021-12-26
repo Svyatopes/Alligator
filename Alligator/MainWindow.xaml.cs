@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
-
+using Alligator.UI.ViewModels;
 
 namespace Alligator
 {
@@ -24,9 +24,12 @@ namespace Alligator
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowViewModel viewModel = new MainWindowViewModel();
         public MainWindow()
         {
              InitializeComponent();
+            viewModel = new MainWindowViewModel();
+            DataContext = viewModel;
         }
 
 

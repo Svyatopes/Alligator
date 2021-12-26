@@ -1,11 +1,11 @@
-﻿<TabItem  IsSelected="{Binding IsSelectedTabItem}"  x:Class="Alligator.UI.TabItems.TabItemClients"
+﻿<TabItem IsSelected="{Binding IsSelectedTabItem}"  x:Class="Alligator.UI.TabItems.TabItemClients"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
           
           Header="Клиенты">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+        <i:EventTrigger EventName="MouseDown">
             <i:InvokeCommandAction Command="{Binding Path=GetAllClients}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -13,7 +13,7 @@
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
 
-        <Grid Visibility="{Binding AllClients}" >
+        <Grid  Visibility="{Binding AllClients}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="9*" />
@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <Label  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">Клиенты</Label>
-            <DataGrid x:Name="dg" Grid.Column="0" SelectedItem="{Binding Selected}" MinHeight="300"  Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Clients}">
+            <DataGrid  x:Name="dg" Grid.Column="0" SelectedItem="{Binding Selected}" MinHeight="300"  Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" ItemsSource="{Binding Clients}">
                 <DataGrid.Columns>
                     <DataGridTextColumn  Header="Имя" Width="*" Binding="{Binding FirstName}"/>
                     <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding LastName}"/>

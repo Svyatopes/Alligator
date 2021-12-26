@@ -1,4 +1,5 @@
-﻿using Alligator.UI.Commands.TabItemClients;
+﻿using Alligator.BusinessLayer.Services;
+using Alligator.UI.Commands.TabItemClients;
 using Alligator.UI.ViewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
@@ -16,6 +17,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
    public  class TabItemClientsViewModel   : BaseViewModel
     {
+        private ClientService _clientService;
         private ObservableCollection<ClientViewModel> clients;
         private ObservableCollection<CommentViewModel> comments;
         private ClientViewModel selected;
@@ -28,6 +30,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private string emailTextNewEmail;
         private CommentViewModel selectedComment;
         private bool isSelectedTabItem;
+        private bool isEnabledChange;
         private Visibility _allClients;
         private Visibility _clientCard;
         private Visibility _addClient;
@@ -41,21 +44,23 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddComment { get; set; }
         public ICommand AddNewClient { get; set; }
         public ICommand DeleteComment { get; set; }
-        public ICommand GetAllClients { get; set; }
+       
         public TabItemClientsViewModel()
         {
+            _clientService = new ClientService();
             Clients = new ObservableCollection<ClientViewModel>();
-            DeleteClient = new ButtonDeleteClient_AllClients(this);
+            DeleteClient = new ButtonDeleteClient_AllClients(this, _clientService);
             ComeBack = new ButtonComeBack(this);
             OpenClientCard = new ButtonOpenClientCard(this);
             SaveChanges = new ButtonSaveChanges(this);
             AddingClient = new ButtonAddClient(this);
             DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this);
             AddComment = new ButtonAddComment(this);
-            AddNewClient = new ButtonAddNewClient(this);
+            AddNewClient = new ButtonAddNewClient(this, _clientService);
             DeleteComment = new DeleteComment(this);
-            GetAllClients = new GetAllClients(this);
+           
         }
+       
         public bool IsSelectedTabItem
         {
             get { return isSelectedTabItem; }

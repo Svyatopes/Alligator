@@ -1,4 +1,6 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Services;
+using Alligator.UI.VIewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,9 +14,11 @@ namespace Alligator.UI.Commands.TabItemClients
     class ButtonAddNewClient : CommandBase
     {
         private TabItemClientsViewModel viewModel;
-        public ButtonAddNewClient(TabItemClientsViewModel viewModel)
+        private ClientService _clientservice;
+        public ButtonAddNewClient(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             this.viewModel = viewModel;
+            _clientservice = clientService;
         }
         public override void Execute(object parameter)
         {
@@ -25,9 +29,17 @@ namespace Alligator.UI.Commands.TabItemClients
                 Patronymic = viewModel.PatronymicTextNewPatronymic,
                 PhoneNumber = viewModel.PhoneNumberTextNewPhoneNumber,
                 Email = viewModel.EmailTextNewEmail
-
             }
                 );
+            ClientModel client = new ClientModel()
+            {
+                FirstName = viewModel.FirstNameTextNewFirstName,
+                LastName = viewModel.LastNameTextNewFirstName,
+                Patronymic = viewModel.PatronymicTextNewPatronymic,
+                PhoneNumber = viewModel.PhoneNumberTextNewPhoneNumber,
+                Email = viewModel.EmailTextNewEmail
+            };
+            _clientservice.InsertNewClient(client);
             viewModel.AllClients = Visibility.Visible;
             viewModel.AddClient = Visibility.Collapsed;
         }

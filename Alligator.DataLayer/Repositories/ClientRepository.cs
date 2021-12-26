@@ -13,7 +13,11 @@ namespace Alligator.DataLayer.Repositories
     public class ClientRepository
     {
 
-        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+        public ClientRepository()
+        {
+
+        }
 
         public List<Client> GetAllClients()
         {
