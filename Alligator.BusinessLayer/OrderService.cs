@@ -12,6 +12,13 @@ namespace Alligator.BusinessLayer
         private readonly IOrderDetailRepository _repositoryOrderDetail;
         private readonly IOrderReviewRepository _repositoryOrderReview;
 
+        public OrderService(IOrderRepository repositoryOrder, IOrderDetailRepository repositoryOrderDetail, IOrderReviewRepository repositoryOrderReview)
+        {
+            _repositoryOrder = repositoryOrder;
+            _repositoryOrderDetail = repositoryOrderDetail;
+            _repositoryOrderReview = repositoryOrderReview;
+        }
+
         public List<OrderShortModel> GetOrderssWithoutSensitiveData()
         {
             var orders = _repositoryOrder.GetAllOrders();

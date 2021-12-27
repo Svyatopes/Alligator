@@ -10,16 +10,6 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public interface IOrderReviewRepository
-    {
-        void AddOrderReview(string text, int orderId);
-        void DeleteOrderReview(int id);
-        void DeleteOrderReviewByOrderId(int orderId);
-        void EditOrderReview(int id, string text);
-        OrderReview GetOrderReviewById(int id);
-        List<OrderReview> GetOrderReviewsByOrderId(int id);
-    }
-
     public class OrderReviewRepository : BaseRepository, IOrderReviewRepository
     {
         public OrderReview GetOrderReviewById(int id)

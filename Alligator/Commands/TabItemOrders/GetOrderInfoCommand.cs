@@ -24,9 +24,9 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
-            _viewModel.AllOrdersWindow = Visibility.Collapsed;
-            _viewModel.AddOrderWindow = Visibility.Collapsed;
-            _viewModel.OrdersInfoWindow = Visibility.Visible;       
+            _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
+            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.OrdersInfoWindowVisibility = Visibility.Visible;       
             var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id);
             _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel> (order.OrderReviews);
             _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);

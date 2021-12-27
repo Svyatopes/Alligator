@@ -146,7 +146,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
         private Visibility _allOrdersWindow;
-        public Visibility AllOrdersWindow
+        public Visibility OrdersWindowVisibility
         {
             get
             {
@@ -156,11 +156,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _allOrdersWindow = value;
 
-                OnPropertyChanged(nameof(AllOrdersWindow));
+                OnPropertyChanged(nameof(OrdersWindowVisibility));
             }
         }
         private Visibility _ordersInfoWindow;
-        public Visibility OrdersInfoWindow
+        public Visibility OrdersInfoWindowVisibility
         {
             get
             {
@@ -170,11 +170,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _ordersInfoWindow = value;
 
-                OnPropertyChanged(nameof(OrdersInfoWindow));
+                OnPropertyChanged(nameof(OrdersInfoWindowVisibility));
             }
         }
         private Visibility _addOrderWindow;
-        public Visibility AddOrderWindow
+        public Visibility AddOrderWindowVisibility
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _addOrderWindow = value;
 
-                OnPropertyChanged(nameof(AddOrderWindow));
+                OnPropertyChanged(nameof(AddOrderWindowVisibility));
             }
         }
     }

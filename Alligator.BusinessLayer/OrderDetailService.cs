@@ -13,6 +13,11 @@ namespace Alligator.BusinessLayer
     {
         private readonly IOrderDetailRepository _repositoryOrderdetail;
 
+        public OrderDetailService(IOrderDetailRepository repositoryOrderdetail)
+        {
+            _repositoryOrderdetail = repositoryOrderdetail;
+        }
+
         public OrderDetailModel GetOrderDetailById(int id)
         {
             var orderDetail = _repositoryOrderdetail.GetOrderDetailById(id);
