@@ -21,10 +21,9 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            var updatedClient = (ClientModel)_viewModel.Selected;
-            _clientService.UpdateClient(updatedClient);
+            _clientService.UpdateClient(_viewModel.EditableClient);
             _viewModel.AllClients = Visibility.Visible;
-            _viewModel.ClientCard = Visibility.Collapsed;
+            _viewModel.ClientCardVisibility = Visibility.Collapsed;
         }
     }
 }

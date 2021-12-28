@@ -22,17 +22,14 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            ClientModel client = new ClientModel()
-            {
-                FirstName = viewModel.FirstNameTextNewFirstName,
-                LastName = viewModel.LastNameTextNewFirstName,
-                Patronymic = viewModel.PatronymicTextNewPatronymic,
-                PhoneNumber = viewModel.PhoneNumberTextNewPhoneNumber,
-                Email = viewModel.EmailTextNewEmail
-            };
+            //TODO: verify all fields of NewClient to CORRECT filling by user
 
-            _clientservice.InsertNewClient(client);
-            viewModel.Clients = new ObservableCollection<ClientModel>(_clientservice.GetAllClients());
+            _clientservice.InsertNewClient(viewModel.NewClient);
+            viewModel.Clients.Clear();
+            foreach(var client in _clientservice.GetAllClients())
+            {
+                viewModel.Clients.Add(client); 
+            }
 
             viewModel.AllClients = Visibility.Visible;
             viewModel.AddClient = Visibility.Collapsed;

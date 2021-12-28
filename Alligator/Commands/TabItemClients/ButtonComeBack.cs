@@ -8,17 +8,21 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
+
+    //TODO rename Comeback to Return
     public class ButtonComeBack : CommandBase
     {
         private TabItemClientsViewModel viewModel;
+
         public ButtonComeBack(TabItemClientsViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
+
         public override void Execute(object parameter)
         {
             viewModel.AllClients = Visibility.Visible;
-            viewModel.ClientCard = Visibility.Collapsed;
+            viewModel.ClientCardVisibility = Visibility.Collapsed;
             viewModel.AddClient = Visibility.Collapsed;
         }
     }

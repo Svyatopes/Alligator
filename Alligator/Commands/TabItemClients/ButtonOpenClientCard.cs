@@ -13,40 +13,21 @@ namespace Alligator.UI.Commands.TabItemClients
 {
     public class ButtonOpenClientCard : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
-        private CommentService _commentService;
-        public ButtonOpenClientCard(TabItemClientsViewModel viewModel, CommentService commentService)
+        private TabItemClientsViewModel _viewModel;
+        private ClientService _clientService;
+        public ButtonOpenClientCard(TabItemClientsViewModel viewModel,ClientService clientService)
         {
-            this.viewModel = viewModel;
-            _commentService = commentService;
-
+            _viewModel = viewModel;
+            _clientService = clientService;
         }
         public override void Execute(object parameter)
         {
-            if (viewModel.Selected is null)
-            {
-                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                if (viewModel.Selected.Comments != null)
-                {
-                    viewModel.Selected.Comments.Clear();
-                }
-                viewModel.Comments = new ObservableCollection<CommentModel>();
-                viewModel.AllClients = Visibility.Collapsed;
-                viewModel.ClientCard = Visibility.Visible;
+            _viewModel.AllClients = Visibility.Collapsed;
+            _viewModel.ClientCardVisibility = Visibility.Visible;
 
-                foreach (var comment in _commentService.GetAllComments(viewModel.Selected.Id))
-                    viewModel.Selected.Comments.Add(comment);
+            _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
+            _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);
 
-                if (viewModel.Selected.Comments != null)
-                {
-                    viewModel.Comments = new ObservableCollection<CommentModel>(viewModel.Selected.Comments);
-
-                }
-                //viewModel.Comments = viewModel.Comments;
-            }
         }
     }
 }

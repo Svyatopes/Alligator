@@ -23,10 +23,10 @@ namespace Alligator.UI.Commands.TabItemClients
         public override void Execute(object parameter)
         {
             _viewModel.AllClients = Visibility.Visible;
-            _viewModel.ClientCard = Visibility.Collapsed;
-            _commentService.DeleteCommentsByClientId(_viewModel.Selected.Id);
-            _clientService.DeleteClient(_viewModel.Selected);
-            _viewModel.Clients.Remove(_viewModel.Selected);
+            _viewModel.ClientCardVisibility = Visibility.Collapsed;
+            _commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id);
+            _clientService.DeleteClient(_viewModel.SelectedClient);
+            _viewModel.Clients.Remove(_viewModel.SelectedClient);
         }
     }
 }

@@ -1,33 +1,26 @@
-﻿using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
+using Alligator.UI.VIewModels.TabItemsViewModels;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
     public class ButtonAddClient : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
-        public ButtonAddClient(TabItemClientsViewModel viewModel)
+        private readonly TabItemClientsViewModel _viewModel;
+        private readonly ClientService _clientService;
+        public ButtonAddClient(TabItemClientsViewModel viewModel, ClientService clientService)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
+            _clientService = clientService;
         }
         public override void Execute(object parameter)
         {
-            if (viewModel.Selected == null)
-            {
-                viewModel.AddClient = Visibility.Visible;
-               viewModel.AllClients = Visibility.Collapsed;  
-            }
-            else
-            {
-                MessageBox.Show("Вы не можете добавить существующего клиента", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            viewModel.Selected = null;
-            
+            _viewModel.AddClient = Visibility.Visible;
+            _viewModel.AllClients = Visibility.Collapsed;
+
+            _viewModel.NewClient = new BusinessLayer.ClientModel();
         }
     }
 }

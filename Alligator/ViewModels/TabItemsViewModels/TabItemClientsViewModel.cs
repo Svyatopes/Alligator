@@ -3,49 +3,43 @@ using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.Commands.TabItemClients;
 using MvvmHelpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
-   public  class TabItemClientsViewModel   : BaseViewModel
+    public class TabItemClientsViewModel : BaseViewModel
     {
-        private ClientService _clientService;
-        private CommentService _commentService;
+        private readonly ClientService _clientService;
+        private readonly CommentService _commentService;
+
+        private ClientModel _selectedClient;
+        
+
+
+        //TODO: naming - underscore for private fields !
         private string text;
-        private ClientModel selected;
-        private CommentModel selectedCom;
         private string comment;
-        private string firstNameTextNewFirstName;
-        private string lastNameTextNewLastName;
-        private string patronymicTextNewPatronymic;
-        private string phoneNumberTextNewPhoneNumber;
-        private string emailTextNewEmail;
         private CommentModel selectedComment;
-        private bool isSelectedTabItem;
-        private bool isEnabledChange;
         private Visibility _allClients;
-        private Visibility _clientCard;
+        private Visibility _clientCardVisibility;
         private Visibility _addClient;
         private Visibility _buttonOpenCard;
+
+        private ObservableCollection<CommentModel> comments;
+
         public ICommand DeleteClient { get; set; }
         public ICommand AddingClient { get; set; }
-       public ICommand OpenClientCard { get; set; }
+        public ICommand OpenClientCard { get; set; }
         public ICommand ComeBack { get; set; }
         public ICommand SaveChanges { get; set; }
         public ICommand DeleteClientInClientCard { get; set; }
         public ICommand AddComment { get; set; }
         public ICommand AddNewClient { get; set; }
         public ICommand DeleteComment { get; set; }
-        public ICommand LoadClientsAndComments { get; set; }
-       
+        public ICommand LoadClients { get; set; }
+
         public TabItemClientsViewModel()
         {
             _commentService = new CommentService();
@@ -56,27 +50,23 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
             DeleteClient = new ButtonDeleteClient_AllClients(this, _clientService, _commentService);
             ComeBack = new ButtonComeBack(this);
-            OpenClientCard = new ButtonOpenClientCard(this, _commentService);
+            OpenClientCard = new ButtonOpenClientCard(this, _clientService);
             SaveChanges = new ButtonSaveChanges(this, _clientService);
-            AddingClient = new ButtonAddClient(this);
+            AddingClient = new ButtonAddClient(this, _clientService);
             DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this, _clientService, _commentService);
             AddComment = new ButtonAddComment(this, _commentService);
             AddNewClient = new ButtonAddNewClient(this, _clientService);
             DeleteComment = new DeleteComment(this, _commentService);
-            LoadClientsAndComments = new LoadClientsAndComments(this, _clientService, _commentService);
-           
+            LoadClients = new LoadClients(this, _clientService);
+
+
+            AddClient = Visibility.Collapsed;
+            ClientCardVisibility = Visibility.Collapsed;
         }
-        public ObservableCollection<CommentModel> comments;
-        public ObservableCollection<ClientModel> clients;
-        public bool IsSelectedTabItem
-        {
-            get { return isSelectedTabItem; }
-            set
-            {
-                isSelectedTabItem = value;
-                OnPropertyChanged("IsSelectedTabItem");
-            }
-        }
+        public ObservableCollection<ClientModel> Clients { get; set; }
+
+
+        //TODO: need to use nameof!
         public string Text
         {
             get { return text; }
@@ -131,37 +121,27 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("AddClient");
             }
         }
-        public Visibility ClientCard
+        public Visibility ClientCardVisibility
         {
-            get { return _clientCard; }
+            get { return _clientCardVisibility; }
             set
             {
-                _clientCard = value;
-                OnPropertyChanged("ClientCard");
+                _clientCardVisibility = value;
+                OnPropertyChanged("ClientCardVisibility");
             }
         }
 
-
-
-        public ObservableCollection<ClientModel> Clients
+        public ClientModel SelectedClient
         {
-            get { return clients; }
+            get { return _selectedClient; }
             set
             {
-                clients = value;
-                OnPropertyChanged("Clients");
+                _selectedClient = value;
+                OnPropertyChanged(nameof(SelectedClient));
             }
         }
 
-        public ClientModel Selected
-        {
-            get { return selected; }
-            set
-            {
-                selected = value;
-                OnPropertyChanged("Selected");
-            }
-        }
+        //TODO rename
         public string Comment
         {
             get { return comment; }
@@ -171,50 +151,30 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("Comment");
             }
         }
-        public string FirstNameTextNewFirstName
+
+
+        private ClientModel _editableClient;
+        public ClientModel EditableClient
         {
-            get { return firstNameTextNewFirstName; }
+            get { return _editableClient; }
             set
             {
-                firstNameTextNewFirstName = value;
-                OnPropertyChanged("FirstNameTextNewFirstName");
+                _editableClient = value;
+                OnPropertyChanged(nameof(EditableClient));
             }
         }
-        public string LastNameTextNewFirstName
+
+
+        private ClientModel _newClient;
+        public ClientModel NewClient
         {
-            get { return lastNameTextNewLastName; }
+            get { return _newClient; }
             set
             {
-                lastNameTextNewLastName = value;
-                OnPropertyChanged("LastNameTextNewFirstName");
+                _newClient = value;
+                OnPropertyChanged(nameof(NewClient));
             }
         }
-        public string PatronymicTextNewPatronymic
-        {
-            get { return patronymicTextNewPatronymic; }
-            set
-            {
-                patronymicTextNewPatronymic = value;
-                OnPropertyChanged("PatronymicTextNewPatronymic");
-            }
-        }
-        public string PhoneNumberTextNewPhoneNumber
-        {
-            get { return phoneNumberTextNewPhoneNumber; }
-            set
-            {
-                phoneNumberTextNewPhoneNumber = value;
-                OnPropertyChanged("PhoneNumberTextNewPhoneNumber");
-            }
-        }
-        public string EmailTextNewEmail
-        {
-            get { return emailTextNewEmail; }
-            set
-            {
-                emailTextNewEmail = value;
-                OnPropertyChanged("EmailTextNewEmail");
-            }
-        }
+
     }
 }

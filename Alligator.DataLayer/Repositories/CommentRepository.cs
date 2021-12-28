@@ -12,8 +12,9 @@ namespace Alligator.DataLayer.Repositories
 {
     public class CommentRepository
     {
+        private const string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 
-        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+        //string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
 
         public Comment GetCommentById(int id)
         {

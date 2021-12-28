@@ -24,12 +24,12 @@ namespace Alligator.UI.Commands.TabItemClients
 
         public override void Execute(object parameter)
         {
-            if (_viewModel.Selected.Comments is null)
+            if (_viewModel.SelectedClient.Comments is null)
             {
                 
                List<CommentModel> coms = new List<CommentModel>();
                
-                _viewModel.Selected.Comments = coms;    
+                _viewModel.SelectedClient.Comments = coms;    
             }
             if(_viewModel.Comments is null)
             {
@@ -38,8 +38,7 @@ namespace Alligator.UI.Commands.TabItemClients
             }
           
             
-            var newComment = new CommentModel { Client = _viewModel.Selected, Text = _viewModel.Comment };
-            _viewModel.Selected.Comments.Add(newComment);
+            var newComment = new CommentModel { Client = _viewModel.EditableClient, Text = _viewModel.Comment };
             _viewModel.Comments.Add(newComment);
             _commentService.InsertComment(newComment);
             _viewModel.Comment = null;

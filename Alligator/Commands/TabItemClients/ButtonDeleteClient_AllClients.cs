@@ -1,20 +1,14 @@
-﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Services;
+﻿using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
     public class ButtonDeleteClient_AllClients : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
-        private ClientService _clientService;
-        private CommentService _commentService;
+        private readonly TabItemClientsViewModel viewModel;
+        private readonly ClientService _clientService;
+        private readonly CommentService _commentService;
         public ButtonDeleteClient_AllClients(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService)
         {
             this.viewModel = viewModel;
@@ -23,15 +17,19 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            if (viewModel.Selected is null)
+            if (viewModel.SelectedClient is null)
             {
                 MessageBox.Show("Выберите клиента", "Удаление клиента", MessageBoxButton.OK);
             }
             else
             {
-                _commentService.DeleteCommentsByClientId(viewModel.Selected.Id);
-                _clientService.DeleteClient(viewModel.Selected);
-                viewModel.Clients.Remove(viewModel.Selected);
+                //TODO: messagebox to make sure of deletion
+                //TODO: сделать работу с базой через try catch
+                //TODO: отлавливать ошибки, если вдруг есть связи и нельзя удалить клиента()(())(
+
+                _commentService.DeleteCommentsByClientId(viewModel.SelectedClient.Id);
+                _clientService.DeleteClient(viewModel.SelectedClient);
+                viewModel.Clients.Remove(viewModel.SelectedClient);
             }
         }
     }
