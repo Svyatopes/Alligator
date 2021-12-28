@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
@@ -22,9 +23,16 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            _commentService.DeleteCommentsByClientId(viewModel.Selected.Id);
-            _clientService.DeleteClient(viewModel.Selected);
-            viewModel.Clients.Remove(viewModel.Selected);
+            if (viewModel.Selected is null)
+            {
+                MessageBox.Show("Выберите клиента", "Удаление клиента", MessageBoxButton.OK);
+            }
+            else
+            {
+                _commentService.DeleteCommentsByClientId(viewModel.Selected.Id);
+                _clientService.DeleteClient(viewModel.Selected);
+                viewModel.Clients.Remove(viewModel.Selected);
+            }
         }
     }
 }

@@ -33,5 +33,9 @@ namespace Alligator.BusinessLayer.Services
         {
             _commentRepository.DeleteCommentById(clientId);
         }
+        public void DeleteCommentByCommentId(int commentId)
+        {
+            _commentRepository.DeleteCommentByIdoNE(commentId);
+        }
     }
 }
