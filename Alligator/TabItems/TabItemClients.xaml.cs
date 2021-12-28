@@ -1,6 +1,5 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.UI.ViewModels.EntitiesViewModels;
-using Alligator.UI.VIewModels.EntitiesViewModels;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,14 +27,7 @@ namespace Alligator.UI.TabItems
             
         }
 
-        public void CreateClients()
-        {
-            ObservableCollection<CommentViewModel> comments = new ObservableCollection<CommentViewModel>();
-            comments.Add(new CommentViewModel() { Text = "не звонить" });
 
-            viewModel.Clients.Add(new ClientViewModel() { Comments = comments, FirstName = "Ваня", LastName = "Ivanov", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
-            viewModel.Clients.Add(new ClientViewModel() { FirstName = "Дима", LastName = "ывапро", Patronymic = "Ivanovich", PhoneNumber = "12345", Email = "qwe@ru" });
-        }
 
 
 

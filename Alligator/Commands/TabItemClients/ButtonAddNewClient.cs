@@ -1,6 +1,5 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Services;
-using Alligator.UI.VIewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,7 +21,7 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            viewModel.Clients.Add(new ClientViewModel()
+            viewModel.Clients.Add(new ClientModel()
             {
                 FirstName = viewModel.FirstNameTextNewFirstName,
                 LastName = viewModel.LastNameTextNewFirstName,

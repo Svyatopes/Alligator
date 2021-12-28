@@ -13,6 +13,7 @@ namespace Alligator.BusinessLayer.Configuration
     public static class CustomMapper
     {
         private static Mapper _instance;
+
         public static Mapper GetInstance()
         {
             if (_instance == null)

@@ -1,6 +1,9 @@
-﻿using Alligator.UI.VIewModels.TabItemsViewModels;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
+using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +14,12 @@ namespace Alligator.UI.Commands.TabItemClients
     public class ButtonOpenClientCard : CommandBase
     {
         private TabItemClientsViewModel viewModel;
-        public ButtonOpenClientCard(TabItemClientsViewModel viewModel)
+        private CommentService _commentService;
+        public ButtonOpenClientCard(TabItemClientsViewModel viewModel, CommentService commentService)
         {
             this.viewModel = viewModel;
+            _commentService = commentService;
+
         }
         public override void Execute(object parameter)
         {
@@ -23,9 +29,23 @@ namespace Alligator.UI.Commands.TabItemClients
             }
             else
             {
+                if (viewModel.Selected.Comments != null)
+                {
+                    viewModel.Selected.Comments.Clear();
+                }
+                viewModel.Comments = new ObservableCollection<CommentModel>();
                 viewModel.AllClients = Visibility.Collapsed;
                 viewModel.ClientCard = Visibility.Visible;
-                viewModel.Comments = viewModel.Selected.Comments;
+
+                foreach (var comment in _commentService.GetAllComments(viewModel.Selected.Id))
+                    viewModel.Selected.Comments.Add(comment);
+
+                if (viewModel.Selected.Comments != null)
+                {
+                    viewModel.Comments = new ObservableCollection<CommentModel>(viewModel.Selected.Comments);
+
+                }
+                //viewModel.Comments = viewModel.Comments;
             }
         }
     }

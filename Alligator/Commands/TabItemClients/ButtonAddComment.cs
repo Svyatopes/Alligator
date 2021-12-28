@@ -1,4 +1,5 @@
-﻿using Alligator.UI.ViewModels.EntitiesViewModels;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,26 +13,36 @@ namespace Alligator.UI.Commands.TabItemClients
     public class ButtonAddComment : CommandBase
     {
 
-        private TabItemClientsViewModel viewModel;
-        public ButtonAddComment(TabItemClientsViewModel viewModel)
+        private TabItemClientsViewModel _viewModel;
+        private CommentService _commentService;
+        public ButtonAddComment(TabItemClientsViewModel viewModel, CommentService commentService)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
+            _commentService = commentService;
+
         }
-
-
 
         public override void Execute(object parameter)
         {
-            if (viewModel.Selected.Comments is null)
+            if (_viewModel.Selected.Comments is null)
             {
-                ObservableCollection<CommentViewModel> comments = new ObservableCollection<CommentViewModel>();
-                viewModel.Selected.Comments = comments;
+                
+               List<CommentModel> coms = new List<CommentModel>();
+               
+                _viewModel.Selected.Comments = coms;    
             }
-            viewModel.Selected.Comments.Add(new CommentViewModel()
+            if(_viewModel.Comments is null)
             {
-                Text = viewModel.Comment
-            });
-            viewModel.Comment = null;
+                ObservableCollection<CommentModel> comms = new ObservableCollection<CommentModel>();
+                _viewModel.Comments = comms;
+            }
+          
+            
+            var newComment = new CommentModel { Client = _viewModel.Selected, Text = _viewModel.Comment };
+            _viewModel.Selected.Comments.Add(newComment);
+            _viewModel.Comments.Add(newComment);
+            _commentService.InsertComment(newComment);
+            _viewModel.Comment = null;
            
 
         }

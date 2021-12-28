@@ -102,14 +102,14 @@ namespace Alligator.DataLayer.Repositories
                 );
         }
 
-        public void DeleteClient(int id)
+        public void DeleteClient(Client client)
         {
             string proc1 = "dbo.Client_Delete";
             using var connection = new SqlConnection(_connection);
             connection.Open();
             connection.Execute(proc1, new
             {
-                Id =id
+                Id =client.Id
             },
             commandType: CommandType.StoredProcedure
             );

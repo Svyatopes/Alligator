@@ -1,7 +1,7 @@
-﻿using Alligator.BusinessLayer.Services;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
 using Alligator.UI.Commands.TabItemClients;
-using Alligator.UI.ViewModels.EntitiesViewModels;
-using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -18,17 +18,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
    public  class TabItemClientsViewModel   : BaseViewModel
     {
         private ClientService _clientService;
-        private ObservableCollection<ClientViewModel> clients;
-        private ObservableCollection<CommentViewModel> comments;
-        private ClientViewModel selected;
-        private CommentViewModel selectedCom;
+        private CommentService _commentService;
+        private string text;
+        private ClientModel selected;
+        private CommentModel selectedCom;
         private string comment;
         private string firstNameTextNewFirstName;
         private string lastNameTextNewLastName;
         private string patronymicTextNewPatronymic;
         private string phoneNumberTextNewPhoneNumber;
         private string emailTextNewEmail;
-        private CommentViewModel selectedComment;
+        private CommentModel selectedComment;
         private bool isSelectedTabItem;
         private bool isEnabledChange;
         private Visibility _allClients;
@@ -44,23 +44,30 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddComment { get; set; }
         public ICommand AddNewClient { get; set; }
         public ICommand DeleteComment { get; set; }
+        public ICommand LoadClientsAndComments { get; set; }
        
         public TabItemClientsViewModel()
         {
+            _commentService = new CommentService();
             _clientService = new ClientService();
-            Clients = new ObservableCollection<ClientViewModel>();
-            DeleteClient = new ButtonDeleteClient_AllClients(this, _clientService);
+            Clients = new ObservableCollection<ClientModel>();
+            Comments = new ObservableCollection<CommentModel>();
+
+
+            DeleteClient = new ButtonDeleteClient_AllClients(this, _clientService, _commentService);
             ComeBack = new ButtonComeBack(this);
-            OpenClientCard = new ButtonOpenClientCard(this);
-            SaveChanges = new ButtonSaveChanges(this);
+            OpenClientCard = new ButtonOpenClientCard(this, _commentService);
+            SaveChanges = new ButtonSaveChanges(this, _clientService);
             AddingClient = new ButtonAddClient(this);
-            DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this);
-            AddComment = new ButtonAddComment(this);
+            DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this, _clientService, _commentService);
+            AddComment = new ButtonAddComment(this, _commentService);
             AddNewClient = new ButtonAddNewClient(this, _clientService);
-            DeleteComment = new DeleteComment(this);
+            DeleteComment = new DeleteComment(this, _commentService);
+            LoadClientsAndComments = new LoadClientsAndComments(this, _clientService, _commentService);
            
         }
-       
+        public ObservableCollection<CommentModel> comments;
+        public ObservableCollection<ClientModel> clients;
         public bool IsSelectedTabItem
         {
             get { return isSelectedTabItem; }
@@ -70,7 +77,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("IsSelectedTabItem");
             }
         }
-        public CommentViewModel  SelectedComment
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
+                OnPropertyChanged("Text");
+            }
+        }
+        public CommentModel SelectedComment
         {
             get { return selectedComment; }
             set
@@ -79,7 +95,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged("SelectedComment");
             }
         }
-        public ObservableCollection<CommentViewModel> Comments
+        public ObservableCollection<CommentModel> Comments
         {
             get { return comments; }
             set
@@ -127,7 +143,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
 
 
-        public ObservableCollection<ClientViewModel> Clients
+        public ObservableCollection<ClientModel> Clients
         {
             get { return clients; }
             set
@@ -137,7 +153,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public ClientViewModel Selected
+        public ClientModel Selected
         {
             get { return selected; }
             set

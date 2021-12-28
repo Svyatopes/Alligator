@@ -13,7 +13,7 @@ namespace Alligator.DataLayer.Repositories
     public class CommentRepository
     {
 
-        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
 
         public Comment GetCommentById(int id)
         {
@@ -32,20 +32,15 @@ namespace Alligator.DataLayer.Repositories
              .FirstOrDefault();
         }
 
-        public List<Comment> GetAllComments()
+        public List<Comment> GetAllCommentsByCLientId(int clientId)
         {
             using var connection = new SqlConnection(_connection);
-            string proc = "dbo.Comment_SelectAll";
-            return connection.Query<Comment, Client, Comment>(proc, (comment, client) =>
-            {
-                
-                comment.Client = client;
-                return comment;
-            },
-            commandType: CommandType.StoredProcedure,
-            splitOn: "Id")
-             .Distinct()
-             .ToList();
+            string proc = "dbo.Comment_SelectByClientId";
+            connection.Open();
+            var comments = connection.Query<Comment>(proc, new { ClientId = clientId },
+            commandType: CommandType.StoredProcedure)
+            .ToList();
+            return comments;
         }
 
         public void InsertCommentById(int clientId, string text)
@@ -59,13 +54,13 @@ namespace Alligator.DataLayer.Repositories
 
         }
 
-        public void DeleteCommentById(int commentId)
+        public void DeleteCommentById(int clientId)
         {
-            string proc = "dbo.Comment_Delete";
+            string proc = "dbo.Comment_DeleteByClientId_1";
             using var connection = new SqlConnection(_connection);
             connection.Open();
             connection.Execute(proc, new
-            { Id = commentId },
+            { ClientId = clientId },
             commandType: CommandType.StoredProcedure);
         }
 

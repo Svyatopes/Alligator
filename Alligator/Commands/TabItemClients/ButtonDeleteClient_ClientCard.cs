@@ -1,4 +1,5 @@
-﻿using Alligator.UI.VIewModels.TabItemsViewModels;
+﻿using Alligator.BusinessLayer.Services;
+using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,22 @@ namespace Alligator.UI.Commands.TabItemClients
 {
     public class ButtonDeleteClient_ClientCard : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
-        public ButtonDeleteClient_ClientCard(TabItemClientsViewModel viewModel)
+        private TabItemClientsViewModel _viewModel;
+        private ClientService _clientService;
+        private CommentService _commentService;
+        public ButtonDeleteClient_ClientCard(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
+            _clientService = clientService;
+            _commentService = commentService;
         }
         public override void Execute(object parameter)
         {
-            viewModel.AllClients = Visibility.Visible;
-            viewModel.ClientCard = Visibility.Collapsed;
-            viewModel.Clients.Remove(viewModel.Selected);
+            _viewModel.AllClients = Visibility.Visible;
+            _viewModel.ClientCard = Visibility.Collapsed;
+            _commentService.DeleteCommentsByClientId(_viewModel.Selected.Id);
+            _clientService.DeleteClient(_viewModel.Selected);
+            _viewModel.Clients.Remove(_viewModel.Selected);
         }
     }
 }

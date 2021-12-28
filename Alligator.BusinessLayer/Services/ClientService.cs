@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer.Configuration;
 using Alligator.DataLayer;
+using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
 using AutoMapper;
 using System;
@@ -13,8 +14,10 @@ namespace Alligator.BusinessLayer.Services
     public class ClientService : IClientService
     {
         private readonly ClientRepository _clientRepository;
+        private readonly CommentRepository _commentRepository;
         public ClientService()
         {
+            _commentRepository = new CommentRepository();
             _clientRepository = new ClientRepository();
         }
         public List<ClientModel> GetAllClients()
@@ -28,10 +31,18 @@ namespace Alligator.BusinessLayer.Services
             var justClient = mapper.Map<Client>(client);
             _clientRepository.InsertClient(justClient);
         }
-        public void DeleteClient(int id)
+        public void UpdateClient(ClientModel client)
         {
-           
-            _clientRepository.DeleteClient(id);
+            Mapper mapper = CustomMapper.GetInstance();
+            var justClient = mapper.Map<Client>(client);
+            _clientRepository.UpdateClient(justClient);
+
+        }
+        public void DeleteClient(ClientModel client)
+        {
+            Mapper mapper = CustomMapper.GetInstance();
+            var justClient = mapper.Map<Client>(client);
+            _clientRepository.DeleteClient(justClient);
         }
     }
 }
