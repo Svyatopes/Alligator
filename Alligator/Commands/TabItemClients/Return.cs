@@ -9,12 +9,11 @@ using System.Windows;
 namespace Alligator.UI.Commands.TabItemClients
 {
 
-    //TODO rename Comeback to Return
-    public class ButtonComeBack : CommandBase
+    public class Return : CommandBase
     {
         private TabItemClientsViewModel viewModel;
 
-        public ButtonComeBack(TabItemClientsViewModel viewModel)
+        public Return(TabItemClientsViewModel viewModel)
         {
             this.viewModel = viewModel;
         }

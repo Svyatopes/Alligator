@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class ButtonAddComment : CommandBase
+    public class AddComment : CommandBase
     {
 
         private TabItemClientsViewModel _viewModel;
         private CommentService _commentService;
-        public ButtonAddComment(TabItemClientsViewModel viewModel, CommentService commentService)
+        public AddComment(TabItemClientsViewModel viewModel, CommentService commentService)
         {
             _viewModel = viewModel;
             _commentService = commentService;
@@ -40,9 +40,10 @@ namespace Alligator.UI.Commands.TabItemClients
             
             var newComment = new CommentModel { Client = _viewModel.EditableClient, Text = _viewModel.Comment };
             _viewModel.Comments.Add(newComment);
+            
             _commentService.InsertComment(newComment);
             _viewModel.Comment = null;
-           
+
 
         }
     }

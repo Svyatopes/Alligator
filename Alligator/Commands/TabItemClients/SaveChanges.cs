@@ -10,20 +10,30 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class ButtonSaveChanges : CommandBase
+    public class SaveChanges : CommandBase
     {
         private readonly TabItemClientsViewModel _viewModel;
         private readonly ClientService _clientService;
-        public ButtonSaveChanges(TabItemClientsViewModel viewModel, ClientService clientService)
+        private readonly CommentService _commentService;
+        public SaveChanges(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService)
         {
             _viewModel = viewModel;
+            _commentService = commentService;
             _clientService = clientService;
         }
         public override void Execute(object parameter)
         {
-            _clientService.UpdateClient(_viewModel.EditableClient);
+            _clientService.UpdateClient(_viewModel.SelectedClient);
+            _viewModel.Clients.Clear();
+            foreach (var item in _clientService.GetAllClients())
+            {
+                _viewModel.Clients.Add(item);
+            }
+           
             _viewModel.AllClients = Visibility.Visible;
             _viewModel.ClientCardVisibility = Visibility.Collapsed;
+            _viewModel.SelectedClient = _viewModel.EditableClient;
+
         }
     }
 }

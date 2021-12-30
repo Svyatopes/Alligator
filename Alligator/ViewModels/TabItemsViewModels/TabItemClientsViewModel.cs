@@ -18,16 +18,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         
 
 
-        //TODO: naming - underscore for private fields !
-        private string text;
-        private string comment;
-        private CommentModel selectedComment;
+        
+        private string _text;
+        private string _comment;
+        private CommentModel _selectedComment;
         private Visibility _allClients;
         private Visibility _clientCardVisibility;
         private Visibility _addClient;
         private Visibility _buttonOpenCard;
 
-        private ObservableCollection<CommentModel> comments;
+        private ObservableCollection<CommentModel> _comments;
 
         public ICommand DeleteClient { get; set; }
         public ICommand AddingClient { get; set; }
@@ -48,14 +48,14 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             Comments = new ObservableCollection<CommentModel>();
 
 
-            DeleteClient = new ButtonDeleteClient_AllClients(this, _clientService, _commentService);
-            ComeBack = new ButtonComeBack(this);
-            OpenClientCard = new ButtonOpenClientCard(this, _clientService);
-            SaveChanges = new ButtonSaveChanges(this, _clientService);
-            AddingClient = new ButtonAddClient(this, _clientService);
-            DeleteClientInClientCard = new ButtonDeleteClient_ClientCard(this, _clientService, _commentService);
-            AddComment = new ButtonAddComment(this, _commentService);
-            AddNewClient = new ButtonAddNewClient(this, _clientService);
+            DeleteClient = new DeleteClient_AllClientsPage(this, _clientService, _commentService);
+            ComeBack = new Return(this);
+            OpenClientCard = new OpenClientCard(this, _clientService, _commentService);
+            SaveChanges = new SaveChanges(this, _clientService, _commentService);
+            AddingClient = new AddClientPage(this, _clientService);
+            DeleteClientInClientCard = new DeleteClient_ClientCardPage(this, _clientService, _commentService);
+            AddComment = new AddComment(this, _commentService);
+            AddNewClient = new AddNewClient(this, _clientService);
             DeleteComment = new DeleteComment(this, _commentService);
             LoadClients = new LoadClients(this, _clientService);
 
@@ -64,33 +64,33 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             ClientCardVisibility = Visibility.Collapsed;
         }
         public ObservableCollection<ClientModel> Clients { get; set; }
-
+        
 
         //TODO: need to use nameof!
         public string Text
         {
-            get { return text; }
+            get { return _text; }
             set
             {
-                text = value;
+                _text = value;
                 OnPropertyChanged("Text");
             }
         }
         public CommentModel SelectedComment
         {
-            get { return selectedComment; }
+            get { return _selectedComment; }
             set
             {
-                selectedComment = value;
+                _selectedComment = value;
                 OnPropertyChanged("SelectedComment");
             }
         }
         public ObservableCollection<CommentModel> Comments
         {
-            get { return comments; }
+            get { return _comments; }
             set
             {
-                comments = value;
+                _comments = value;
                 OnPropertyChanged("Comments");
             }
         }
@@ -144,10 +144,10 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         //TODO rename
         public string Comment
         {
-            get { return comment; }
+            get { return _comment; }
             set
             {
-                comment = value;
+                _comment = value;
                 OnPropertyChanged("Comment");
             }
         }

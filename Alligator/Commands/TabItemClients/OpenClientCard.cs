@@ -11,14 +11,16 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class ButtonOpenClientCard : CommandBase
+    public class OpenClientCard : CommandBase
     {
         private TabItemClientsViewModel _viewModel;
         private ClientService _clientService;
-        public ButtonOpenClientCard(TabItemClientsViewModel viewModel,ClientService clientService)
+        private CommentService _commentService;
+        public OpenClientCard(TabItemClientsViewModel viewModel,ClientService clientService, CommentService commentService)
         {
             _viewModel = viewModel;
             _clientService = clientService;
+            _commentService = commentService;
         }
         public override void Execute(object parameter)
         {
@@ -26,8 +28,14 @@ namespace Alligator.UI.Commands.TabItemClients
             _viewModel.ClientCardVisibility = Visibility.Visible;
 
             _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
+            _viewModel.EditableClient = _viewModel.SelectedClient;
+            _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.SelectedClient.Comments);
             _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);
-
+            _viewModel.SelectedClient.Comments.Clear();
+            foreach (var item in _commentService.GetAllComments(_viewModel.SelectedClient.Id))
+            {
+                _viewModel.Comments.Add(item);
+            }
         }
     }
 }

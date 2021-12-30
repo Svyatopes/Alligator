@@ -6,11 +6,11 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class ButtonAddClient : CommandBase
+    public class AddClientPage : CommandBase
     {
         private readonly TabItemClientsViewModel _viewModel;
         private readonly ClientService _clientService;
-        public ButtonAddClient(TabItemClientsViewModel viewModel, ClientService clientService)
+        public AddClientPage(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             _viewModel = viewModel;
             _clientService = clientService;

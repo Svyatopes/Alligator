@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class ButtonDeleteClient_AllClients : CommandBase
+    public class DeleteClient_AllClientsPage : CommandBase
     {
         private readonly TabItemClientsViewModel viewModel;
         private readonly ClientService _clientService;
         private readonly CommentService _commentService;
-        public ButtonDeleteClient_AllClients(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService)
+        public DeleteClient_AllClientsPage(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService)
         {
             this.viewModel = viewModel;
             _clientService = clientService;

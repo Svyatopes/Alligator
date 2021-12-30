@@ -28,26 +28,6 @@ namespace Alligator.UI.Commands.TabItemClients
             {
                 MessageBox.Show("Выберите комментарий", "Мочь или не мочь", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            //else if (_viewModel.SelectedComment.Client is null)
-            //{
-            //    var olist = new ObservableCollection<CommentModel>();
-            //    var list = new List<CommentModel>();
-            //    olist = _viewModel.Comments;
-
-            //    var client = new ClientModel() { Id = _viewModel.Selected.Id, FirstName = _viewModel.Selected.FirstName, LastName = _viewModel.Selected.LastName, Patronymic = _viewModel.Selected.Patronymic, Email = _viewModel.Selected.Email, PhoneNumber = _viewModel.Selected.PhoneNumber, Comments = list };
-            //    list = client.Comments;
-            //    foreach(var item in olist)
-            //    {
-            //        list.Add(item);
-            //    }
-            //    client.Comments = list;
-            //    _viewModel.SelectedComment.Client = client;
-            //    if(_viewModel.SelectedComment.Client is not null)
-            //    {
-            //        _commentService.DeleteCommentByCommentId(_viewModel.SelectedComment.Id);
-            //        _viewModel.Comments.Remove(_viewModel.SelectedComment);
-            //    }
-            //}
             else
             {
                 _commentService.DeleteCommentByCommentId(_viewModel.SelectedComment.Id);
