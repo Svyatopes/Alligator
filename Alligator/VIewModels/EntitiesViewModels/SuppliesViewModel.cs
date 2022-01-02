@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Alligator.BusinessLayer.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +11,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
     {
         private int _id;
         private DateTime _date;
-        private ObservableCollection<SupplyDelailsViewModel> _details;
+        private List<SupplyDetailModel> _details;
 
 
         public int Id
@@ -32,7 +34,7 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        public ObservableCollection<SupplyDelailsViewModel> Details
+        public List<SupplyDetailModel> Details
         {
             get { return _details; }
             set

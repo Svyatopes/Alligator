@@ -131,6 +131,7 @@
     <Build Include="Procedures\OrderReview_SelectByOrderId.sql" />
     <Build Include="Procedures\OrderReview_SelectById.sql" />
     <Build Include="Procedures\Order_SelectAll.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectBySupplyId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />

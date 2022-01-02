@@ -1,38 +1,39 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
     public class ChangeCardSupply : CommandBase
     {
-        private TabItemSuppliesViewModel viewModel; 
+        private TabItemSuppliesViewModel _viewModel;
+        private SupplyService _supplyService;
         public ChangeCardSupply(TabItemSuppliesViewModel viewModel) : base()
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            viewModel.TextBoxNewIdText = viewModel.Supply.Id;
-            //viewModel.TextBoxNewProductText = "";
-            //viewModel.TextBoxNewAmountText = 0;
-            viewModel.TextBoxNewDateText = viewModel.Supply.Date;
-            //viewModel.Supply = new SuppliesViewModel();
-            //viewModel.SupplyDetails = new ObservableCollection<SupplyDelailsViewModel>();
-            //viewModel.Product = new ObservableCollection<ProductViewModel>();
+            _viewModel.VisibilityWindowAllSupplies = Visibility.Collapsed;
+            _viewModel.VisibilityWindowAddNewSupply = Visibility.Visible;
+            _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Collapsed;
+            //_viewModel.StateMainDataGrid = false;
 
-            viewModel.VisibilityFirst = Visibility.Collapsed;
-            viewModel.VisibilitySecond = Visibility.Visible;
-            viewModel.VisibilityThird = Visibility.Collapsed;
+            _viewModel.TextBoxNewIdText = _viewModel.Selected.Id;
+            _viewModel.TextBoxNewDateText = _viewModel.Selected.Date;
+            _viewModel.SupplyDetails = _viewModel.Selected.Details;
 
-            
-            viewModel.StateMainDataGrid = false;
-            viewModel.Supply = viewModel.Selected;
-            viewModel.SupplyDetails = viewModel.Supply.Details;
+            var supply = new SupplyModel()
+            {
+                Id = _viewModel.TextBoxNewIdText,
+                Date = _viewModel.TextBoxNewDateText,
+                Details = _viewModel.Details
+            };
+            //TODO
+            //_supplyService.UpdateSupply(supply); doesn't work yet
 
         }
     }
-    
 }

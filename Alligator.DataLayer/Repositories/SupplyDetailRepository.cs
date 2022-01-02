@@ -7,23 +7,22 @@ using System.Data;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class SupplyDetailRepository
+    public class SupplyDetailRepository : ISupplyDetailRepository
     {
 
         private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        
-        public List<SupplyDetail> GetAllSupplyDetails() 
+
+        public List<SupplyDetail> GetAllSupplyDetails()
         {
             using var sqlConnection = new SqlConnection(_connString);
             sqlConnection.Open();
 
-            string dbo = "dbo.SupplyDetail_SelectAll";
+            string procName = "dbo.SupplyDetail_SelectAll";
             return sqlConnection
-                .Query<SupplyDetail, Supply, Product, Category, SupplyDetail>(
-                    dbo,
-                    (supplyDetail, supply, product, category) =>
+                .Query<SupplyDetail, Product, Category, SupplyDetail>(
+                    procName,
+                    (supplyDetail, product, category) =>
                     {
-                        supplyDetail.Supply = supply;
                         supplyDetail.Product = product;
                         product.Category = category;
 
@@ -36,54 +35,58 @@ namespace Alligator.DataLayer.Repositories
                 .ToList();
         }
 
-        public List<SupplyDetail> GetSupplyDetailById(int id)
+        public List<SupplyDetail> GetSupplyDetailBySupplyId(int id)
         {
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            string dbo = "dbo.SupplyDetail_SelectById";
+            string procName = "dbo.SupplyDetail_SelectBySupplyId";
+            var supplyDictionary = new Dictionary<int, SupplyDetail>();
             return connection
-                .Query<SupplyDetail, Supply, Product, Category, SupplyDetail>(
-                    dbo,
-                    (supplyDetail, supply, product, category) =>
-                    {
-                        supplyDetail.Supply = supply;
-                        supplyDetail.Product = product;
-                        product.Category = category;
+                 .Query<SupplyDetail, Product, SupplyDetail>(
+                    procName,
+                (supplyDetail, product) =>
+                {
+                    supplyDetail.Product = product;
+                    return supplyDetail;
+                },
+                    new { SupplyId = id },
+                    commandType: CommandType.StoredProcedure
 
-                        return supplyDetail;
-                    },
-                    new { Id = id },
-                    commandType: CommandType.StoredProcedure,
-                    splitOn: "Id"
-                 )
-                .ToList();
+               ).ToList();
         }
 
-        public void AddSupplyDetail(int amount, int supplyId, int productId)
+        public int AddSupplyDetail(SupplyDetail supplyDetail)
         {
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            string dbo = "dbo.SupplyDetail_Insert";
-            connection
+            string procName = "dbo.SupplyDetail_Insert";
+
+            return connection
                 .Execute(
-                    dbo,
-                    new { Amount = amount, SupplyId = supplyId, ProductId = productId },
+                    procName,
+                    new
+                    {
+                        supplyDetail.Amount,
+                        supplyDetail.SupplyId,
+                        ProductId = supplyDetail.Product.Id
+
+                    },
                     commandType: CommandType.StoredProcedure
                 );
         }
 
-        public void EditSupplyDetail(int id, int amount)
+        public void EditSupplyDetail(List<SupplyDetail> supplyDetail)
         {
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            string dbo = "dbo.SupplyDetail_Update";
+            string procName = "dbo.SupplyDetail_Update";
             connection
                 .Execute(
-                    dbo,
-                    new { Id = id, Amount = amount },
+                    procName,
+                    new { Id = supplyDetail, Amount = supplyDetail },
                     commandType: CommandType.StoredProcedure
                 );
         }
@@ -93,10 +96,10 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            string dbo = "dbo.SupplyDetail_Delete";
+            string procName = "dbo.SupplyDetail_Delete";
             connection
                 .Execute(
-                    dbo,
+                    procName,
                     new { Id = id },
                     commandType: CommandType.StoredProcedure
                 );

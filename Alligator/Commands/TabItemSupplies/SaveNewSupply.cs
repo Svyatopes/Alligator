@@ -1,64 +1,68 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
     public class SaveNewSupply : CommandBase
     {
-        private TabItemSuppliesViewModel viewModel;
+        private TabItemSuppliesViewModel _viewModel;
+        private SupplyService _supplyService;
+        private SupplyDetailService _supplyDetailService;
 
-        public SaveNewSupply(TabItemSuppliesViewModel viewModel)
+        public SaveNewSupply(TabItemSuppliesViewModel viewModel, SupplyService supplyService, SupplyDetailService supplyDetailService)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
+            _supplyService = supplyService;
+            _supplyDetailService = supplyDetailService;
         }
 
         public override void Execute(object parameter)
         {
-            viewModel.Supply = new SuppliesViewModel()
+
+            if (_viewModel.Supplies == null)
             {
-                Id = viewModel.TextBoxNewIdText,
-                Date = viewModel.TextBoxNewDateText,
-                Details = viewModel.SupplyDetails
-            };
-            var count = viewModel.Supplies.Count;
+                _viewModel.Supplies = new ObservableCollection<SupplyModel>();                
+            }
+            
             var userAnswer = MessageBox.Show("Данные введены верно? Сохранить поставку?", "Сохранение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            
             if (userAnswer == MessageBoxResult.Yes)
             {
-                for (int i = 0; i < viewModel.Supplies.Count; i++)
+                
+                var idSupplyInDatabase = _supplyService.InsertSupply(_viewModel.Supply);
+                foreach (var item in _viewModel.Supply.Details)
                 {
-                    if (viewModel.Supplies[i].Id == viewModel.Supply.Id)
-                    {
-                        var userAnswer1 = MessageBox.Show("Такой номер поставки существует, перезаписать данные?", "Сохранение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (userAnswer1 == MessageBoxResult.Yes)
-                        {
-                            viewModel.Supply = new SuppliesViewModel()
-                            {
-                                Id = viewModel.TextBoxNewIdText,
-                                Date = viewModel.TextBoxNewDateText,
-                                Details = viewModel.SupplyDetails
-                            };
-                            viewModel.VisibilitySecond = Visibility.Collapsed;
-                            viewModel.VisibilityThird = Visibility.Visible;
-                        }                 
-                                                
-                    }
-                    else
-                    {
-                        count--;
-                    }
-                }
-                if (count == 0)
-                {
-                    viewModel.Supplies.Add(viewModel.Supply);
-                    viewModel.VisibilitySecond = Visibility.Collapsed;
-                    viewModel.VisibilityThird = Visibility.Visible;
-                }               
+                    item.SupplyId = idSupplyInDatabase;
+                    _supplyDetailService.InsertSupplyDetail(item);
+                    
+                }                 
+                
+                _supplyService.UpdateSupply(_viewModel.Supply);
 
-            }            
+                _viewModel.Supplies.Clear();
+                var supplies = _supplyService.GetAllSupplies();
+                foreach (var item in supplies)
+                {
+                    _viewModel.Supplies.Add(item);
+                }
+                _viewModel.PSelected.Clear();
+                _viewModel.TextBoxNewAmountText = 0;
+                _viewModel.TextBoxNewDateText = DateTime.Now;
+                _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
+                _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;
+
+
+               
+
+            }
         }
     }
 }
+//TODO 
+// новую команду сохранения на изменение данных в поставке
 
 

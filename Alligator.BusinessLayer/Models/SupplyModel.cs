@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Alligator.BusinessLayer.Models
 {
@@ -7,6 +8,6 @@ namespace Alligator.BusinessLayer.Models
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public List<SupplyDetailModel> Detail { get; set; }
+        public List<SupplyDetailModel> Details { get; set; }
     }
 }
