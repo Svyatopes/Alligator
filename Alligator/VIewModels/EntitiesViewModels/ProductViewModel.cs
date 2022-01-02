@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Alligator.UI.VIewModels.EntitiesViewModels
+﻿namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
@@ -24,13 +21,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 _name = value;
                 OnPropertyChanged(nameof(Name));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

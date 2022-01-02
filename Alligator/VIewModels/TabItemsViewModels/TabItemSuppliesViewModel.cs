@@ -250,31 +250,5 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(VisibilityWindowOpenSupplyDetailCard));
             }
         }
-
-
-
-
-        //private bool _stateMainDataGrid;
-        //public bool StateMainDataGrid
-        //{
-        //    get { return _stateMainDataGrid; }
-        //    set
-        //    {
-        //        _stateMainDataGrid = value;
-        //        OnPropertyChanged(nameof(StateMainDataGrid));
-        //    }
-        //}
-
-
-        //private string _textBoxNewProductText;
-        //public string TextBoxNewProductText
-        //{
-        //    get { return _textBoxNewProductText; }
-        //    set
-        //    {
-        //        _textBoxNewProductText = value;
-        //        OnPropertyChanged(nameof(TextBoxNewProductText));
-        //    }
-        //}
     }
 }

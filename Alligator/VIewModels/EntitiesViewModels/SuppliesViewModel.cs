@@ -1,9 +1,6 @@
 ﻿using Alligator.BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
@@ -42,14 +39,6 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 _details = value;
                 OnPropertyChanged(nameof(Details));
             }
-        }
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

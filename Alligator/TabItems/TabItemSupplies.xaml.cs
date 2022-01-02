@@ -1,11 +1,9 @@
 ﻿using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Service;
-using Alligator.UI.VIewModels.EntitiesViewModels;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -16,10 +14,10 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemSupplies : TabItem
     {
-        public TabItemSuppliesViewModel _viewModel;
-        public SupplyService _supplyService;
-        public SupplyDetailService _supplyDetailService;
-        
+        private readonly TabItemSuppliesViewModel _viewModel;
+        private SupplyService _supplyService;
+        private SupplyDetailService _supplyDetailService;
+
         public TabItemSupplies()
         {
             InitializeComponent();
@@ -48,7 +46,7 @@ namespace Alligator.UI.TabItems
             var supplies = _supplyService.GetAllSupplies();
             var product = _supplyDetailService.GetProduct();
             var suppliesDetail = _supplyDetailService.GetAllSupplyDetails();
-            
+
 
             foreach (var item in supplies)
             {
@@ -61,7 +59,7 @@ namespace Alligator.UI.TabItems
                 ddd.Add(item.Name);
             }
             Product.ItemsSource = ddd;
-           
+
         }
     }
 }

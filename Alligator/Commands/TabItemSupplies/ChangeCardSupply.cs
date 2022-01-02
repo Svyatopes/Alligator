@@ -19,8 +19,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowAllSupplies = Visibility.Collapsed;
             _viewModel.VisibilityWindowAddNewSupply = Visibility.Visible;
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Collapsed;
-            //_viewModel.StateMainDataGrid = false;
-
+            
             _viewModel.TextBoxNewIdText = _viewModel.Selected.Id;
             _viewModel.TextBoxNewDateText = _viewModel.Selected.Date;
             _viewModel.SupplyDetails = _viewModel.Selected.Details;
