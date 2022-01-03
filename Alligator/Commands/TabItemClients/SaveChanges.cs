@@ -23,6 +23,21 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
+            bool canExecute = TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.FirstName) &&
+                   TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.LastName) &&
+                   TextBoxesValidation.PhoneNumberValidation(_viewModel.SelectedClient.PhoneNumber) &&
+                   TextBoxesValidation.EmailValidation(_viewModel.SelectedClient.Email) &&
+                   TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.Patronymic);
+            if (!canExecute)
+            {
+
+                var userAnswer = MessageBox.Show("Корректно ли введены данные? ", "Проверь ну", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (userAnswer == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+            }
             _clientService.UpdateClient(_viewModel.SelectedClient);
             _viewModel.Clients.Clear();
             foreach (var item in _clientService.GetAllClients())

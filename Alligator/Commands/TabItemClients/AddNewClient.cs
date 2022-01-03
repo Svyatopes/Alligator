@@ -13,34 +13,60 @@ namespace Alligator.UI.Commands.TabItemClients
 {
     class AddNewClient : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
+        private TabItemClientsViewModel _viewModel;
         private ClientService _clientservice;
         public AddNewClient(TabItemClientsViewModel viewModel, ClientService clientService)
         {
-            this.viewModel = viewModel;
+           _viewModel = viewModel;
             _clientservice = clientService;
         }
+        //public override bool CanExecute(object parameter)
+        //{
+        //bool canExecute = TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.FirstName) &&
+        //                  TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.LastName) &&
+        //                  TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.Patronymic);
+        //    return canExecute;
+
+        //}
         public override void Execute(object parameter)
         {
             //TODO: verify all fields of NewClient to CORRECT filling by user
-            var Fname = viewModel.NewClient.FirstName.Trim();
+
+            bool canExecute = TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.FirstName) &&
+                  TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.LastName) &&
+                  TextBoxesValidation.PhoneNumberValidation(_viewModel.NewClient.PhoneNumber)&&
+                  TextBoxesValidation.EmailValidation(_viewModel.NewClient.Email) &&
+                  TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.Patronymic);
+            if (!canExecute)
+            {
+                
+                var userAnswer = MessageBox.Show ("Корректно ли введены данные? ", "Проверь ну", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (userAnswer == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+            }
+           
+            var Fname = _viewModel.NewClient.FirstName;
+            Fname = Fname.Trim();
             var clientt = new ClientModel()
             {
                 FirstName = Fname,
-                LastName = viewModel.NewClient.LastName.Trim(),
-                Patronymic = viewModel.NewClient.Patronymic.Trim(),
-                PhoneNumber = viewModel.NewClient.PhoneNumber.Trim(),
-                Email = viewModel.NewClient.Email.Trim()
+                LastName = _viewModel.NewClient.LastName.Trim(),
+                Patronymic = _viewModel.NewClient.Patronymic.Trim(),
+                PhoneNumber = _viewModel.NewClient.PhoneNumber.Trim(),
+                Email = _viewModel.NewClient.Email.Trim()
             };
             
             _clientservice.InsertNewClient(clientt);
-            viewModel.Clients.Clear();
+            _viewModel.Clients.Clear();
             foreach(var client in _clientservice.GetAllClients())
             {
-                viewModel.Clients.Add(client); 
+                _viewModel.Clients.Add(client); 
             }
-            viewModel.AllClients = Visibility.Visible;
-            viewModel.AddClient = Visibility.Collapsed;
+            _viewModel.AllClients = Visibility.Visible;
+            _viewModel.AddClient = Visibility.Collapsed;
         }
     }
 }
