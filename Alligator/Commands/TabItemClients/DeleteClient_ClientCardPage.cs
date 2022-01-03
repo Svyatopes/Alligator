@@ -22,11 +22,15 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            _viewModel.AllClients = Visibility.Visible;
-            _viewModel.ClientCardVisibility = Visibility.Collapsed;
-            _commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id);
-            _clientService.DeleteClient(_viewModel.SelectedClient);
-            _viewModel.Clients.Remove(_viewModel.SelectedClient);
+            var userAnswer = MessageBox.Show("Вы правда хотите удалить этого клиента?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (userAnswer == MessageBoxResult.Yes)
+            {
+                _viewModel.AllClients = Visibility.Visible;
+                _viewModel.ClientCardVisibility = Visibility.Collapsed;
+                _commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id);
+                _clientService.DeleteClient(_viewModel.SelectedClient);
+                _viewModel.Clients.Remove(_viewModel.SelectedClient);
+            }
         }
     }
 }

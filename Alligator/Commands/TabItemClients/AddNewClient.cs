@@ -30,7 +30,7 @@ namespace Alligator.UI.Commands.TabItemClients
         //}
         public override void Execute(object parameter)
         {
-            //TODO: verify all fields of NewClient to CORRECT filling by user
+           
 
             bool canExecute = TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.FirstName) &&
                   TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.LastName) &&
