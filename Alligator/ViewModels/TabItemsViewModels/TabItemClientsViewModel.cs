@@ -73,7 +73,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _text = value;
-                OnPropertyChanged("Text");
+                OnPropertyChanged(nameof(Text));
             }
         }
         public CommentModel SelectedComment
@@ -82,7 +82,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedComment = value;
-                OnPropertyChanged("SelectedComment");
+                OnPropertyChanged(nameof(SelectedComment));
             }
         }
         public ObservableCollection<CommentModel> Comments
@@ -91,7 +91,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _comments = value;
-                OnPropertyChanged("Comments");
+                OnPropertyChanged(nameof(Comments));
             }
         }
         public Visibility ButtonOpenCard
@@ -100,7 +100,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _buttonOpenCard = value;
-                OnPropertyChanged("ButtonOpenCard");
+                OnPropertyChanged(nameof(ButtonOpenCard));
             }
         }
         public Visibility AllClients
@@ -109,7 +109,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _allClients = value;
-                OnPropertyChanged("AllClients");
+                OnPropertyChanged(nameof(AllClients));
             }
         }
         public Visibility AddClient
@@ -118,7 +118,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _addClient = value;
-                OnPropertyChanged("AddClient");
+                OnPropertyChanged(nameof(AddClient));
             }
         }
         public Visibility ClientCardVisibility
@@ -127,7 +127,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _clientCardVisibility = value;
-                OnPropertyChanged("ClientCardVisibility");
+                OnPropertyChanged(nameof(ClientCardVisibility));
             }
         }
 
@@ -148,7 +148,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _comment = value;
-                OnPropertyChanged("Comment");
+                OnPropertyChanged(nameof(Comment));
             }
         }
 
