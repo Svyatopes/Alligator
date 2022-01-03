@@ -27,21 +27,6 @@ namespace Alligator.DataLayer.Repositories
 
         }
 
-        //public Supply GetSupplyById(int id)
-        //{
-        //    using var sqlConnection = new SqlConnection(_connString);
-        //    sqlConnection.Open();
-
-        //    string procName = "dbo.Supply_SelectById";
-        //    return sqlConnection
-        //        .Query<Supply>(procName,
-        //            new 
-        //            { 
-        //                Id = id 
-        //            },
-        //            commandType: CommandType.StoredProcedure)
-        //        .FirstOrDefault();
-        //}   
         public Supply GetSupplyById(int id)
         {
             using var sqlConnection = new SqlConnection(_connString);
@@ -107,15 +92,12 @@ namespace Alligator.DataLayer.Repositories
             string procName = "dbo.Supply_Update";
 
             sqlConnection
-                .Execute
-                (
+                
+                .Execute(
                     procName,
-                    new
-                    {
-                        supply.Id,
-                        supply.Date,
-                    },
-                    commandType: CommandType.StoredProcedure
+                    new {Id = supply.Id, 
+                        Date = supply.Date },
+                    commandType: CommandType.StoredProcedure 
                 );
         }
     }

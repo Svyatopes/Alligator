@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Alligator.UI.TabItems
 {
@@ -25,7 +26,7 @@ namespace Alligator.UI.TabItems
             DataContext = _viewModel;
             _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Collapsed;
-
+            _viewModel.VisibilityWindowChangeSupply = Visibility.Collapsed;
             InitialFillViewModel();
         }
 
@@ -59,6 +60,8 @@ namespace Alligator.UI.TabItems
                 ddd.Add(item.Name);
             }
             Product.ItemsSource = ddd;
+            Product1.ItemsSource = ddd;
+
 
         }
     }

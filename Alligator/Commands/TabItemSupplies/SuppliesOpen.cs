@@ -24,6 +24,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;
             _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Collapsed;            
+            _viewModel.VisibilityWindowChangeSupply = Visibility.Collapsed;            
 
         }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 
@@ -22,11 +23,12 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _supplyDetailService = new SupplyDetailService();
             AddNewSupply = new SupplyAdd(this);
             OpenCardSupply = new SupplyDetailOpen(this, _supplyDetailService);
-            ReturnBackCardSupply = new SuppliesOpen(this, _supplyService);
+            SuppliesOpen = new SuppliesOpen(this, _supplyService);
             AddProductInSupply = new ProductAddInSupply(this, _supplyDetailService);
             SaveNewSupply = new SaveNewSupply(this, _supplyService, _supplyDetailService);
+            SaveChangSupply = new SaveChangSupply(this, _supplyService, _supplyDetailService);
             ChangeCardSupply = new ChangeCardSupply(this);
-            DeleteProductInSupply = new ProductDeleteFromSupply(this, _supplyDetailService);
+            ProductDeleteFromSupply = new ProductDeleteFromSupply(this, _supplyDetailService);
             DeleteSupply = new SupplyDelete(this, _supplyService, _supplyDetailService);
         }
 
@@ -35,12 +37,12 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand OpenCardSupply { get; set; }
         public ICommand DeleteSupply { get; set; }
         public ICommand AddNewSupply { get; set; }
-        public ICommand ReturnBackNewSupply { get; set; }
-        public ICommand ReturnBackCardSupply { get; set; }
+        public ICommand SuppliesOpen { get; set; }
         public ICommand AddProductInSupply { get; set; }
         public ICommand SaveNewSupply { get; set; }
+        public ICommand SaveChangSupply { get; set; }
         public ICommand ChangeCardSupply { get; set; }
-        public ICommand DeleteProductInSupply { get; set; }
+        public ICommand ProductDeleteFromSupply { get; set; }
 
 
         private List<ProductModel> _products;
@@ -141,9 +143,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
 
-        private ObservableCollection<SupplyDetailModel> _pselected;
+        private List<SupplyDetailModel> _pselected;
 
-        public ObservableCollection<SupplyDetailModel> PSelected
+        public List<SupplyDetailModel> PSelected
         {
             get { return _pselected; }
             set
@@ -207,6 +209,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(TextBoxNewAmountText));
             }
         }
+        
+        private ButtonBase _deleteProduct;
+        public ButtonBase DeleteProduct
+        {
+            get { return _deleteProduct; }
+            set
+            {
+                _deleteProduct = value;
+                OnPropertyChanged(nameof(DeleteProduct));
+            }
+        }
 
         private Visibility _visibilityWindowAllSupplies;
         public Visibility VisibilityWindowAllSupplies
@@ -248,6 +261,20 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 _visibilityWindowOpenSupplyDetailCard = value;
 
                 OnPropertyChanged(nameof(VisibilityWindowOpenSupplyDetailCard));
+            }
+        }
+        private Visibility _visibilityWindowChangeSupply;
+        public Visibility VisibilityWindowChangeSupply
+        {
+            get
+            {
+                return _visibilityWindowChangeSupply;
+            }
+            set
+            {
+                _visibilityWindowChangeSupply = value;
+
+                OnPropertyChanged(nameof(VisibilityWindowChangeSupply));
             }
         }
     }

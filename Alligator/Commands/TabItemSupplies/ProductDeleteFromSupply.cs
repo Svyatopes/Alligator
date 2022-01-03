@@ -18,10 +18,17 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override void Execute(object parameter)
         {
+            
             var userAnswer = MessageBox.Show("Вы правда хотите удалить продукт?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes) { }
-                //_supplyDetailService.DeleteSupplyDetail(_viewModel.PrSelected.Id);
-                //todo
+            if (_viewModel.PrSelected.Id != 0)
+            {
+                _supplyDetailService.DeleteSupplyDetailById(_viewModel.PrSelected.Id);
+
+            }
+            _viewModel.PSelected.Remove(_viewModel.PrSelected);
+            _viewModel.Supply.Details.Remove(_viewModel.PrSelected);
+
         }
     }
 }

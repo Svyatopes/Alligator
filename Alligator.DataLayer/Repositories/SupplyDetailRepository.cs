@@ -91,12 +91,25 @@ namespace Alligator.DataLayer.Repositories
                 );
         }
 
-        public void DeleteSupplyDetail(int id)
+        public void DeleteSupplyDetailBySupplyId(int id)
         {
             using var connection = new SqlConnection(_connString);
             connection.Open();
 
-            string procName = "dbo.SupplyDetail_Delete";
+            string procName = "dbo.SupplyDetail_DeleteBySupplyId";
+            connection
+                .Execute(
+                    procName,
+                    new { SupplyId = id },
+                    commandType: CommandType.StoredProcedure
+                );
+        }
+        public void DeleteSupplyDetailById(int id)
+        {
+            using var connection = new SqlConnection(_connString);
+            connection.Open();
+
+            string procName = "dbo.SupplyDetail_DeleteById";
             connection
                 .Execute(
                     procName,

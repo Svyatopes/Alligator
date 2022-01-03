@@ -8,13 +8,13 @@ using System.Collections.Generic;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
-    public class SaveNewSupply : CommandBase
+    public class SaveChangSupply : CommandBase
     {
         private TabItemSuppliesViewModel _viewModel;
         private SupplyService _supplyService;
         private SupplyDetailService _supplyDetailService;
 
-        public SaveNewSupply(TabItemSuppliesViewModel viewModel, SupplyService supplyService, SupplyDetailService supplyDetailService)
+        public SaveChangSupply(TabItemSuppliesViewModel viewModel, SupplyService supplyService, SupplyDetailService supplyDetailService)
         {
             _viewModel = viewModel;
             _supplyService = supplyService;
@@ -26,23 +26,25 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
             if (_viewModel.Supplies == null)
             {
-                _viewModel.Supplies = new ObservableCollection<SupplyModel>();                
+                _viewModel.Supplies = new ObservableCollection<SupplyModel>();
             }
-            
-            var userAnswer = MessageBox.Show("Данные введены верно? Сохранить поставку?", "Сохранение", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            
+
+            var userAnswer = MessageBox.Show("Данные введены верно? Изменить текущую поставку?", "Сохранение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
             if (userAnswer == MessageBoxResult.Yes)
             {
-                _viewModel.Supply.Date = _viewModel.NewSupply.Date;
 
-                var idSupplyInDatabase = _supplyService.InsertSupply(_viewModel.Supply);
+                var idSupplyInDatabase = _viewModel.SupplyDetails[0].SupplyId;
                 foreach (var item in _viewModel.Supply.Details)
                 {
                     item.SupplyId = idSupplyInDatabase;
                     _supplyDetailService.InsertSupplyDetail(item);
-                    
-                }                 
-                
+
+                }
+                _viewModel.Supply = _supplyService.GetSupplyById(idSupplyInDatabase);
+                _viewModel.Supply.Date = _viewModel.Selected.Date;
+
+
                 _supplyService.UpdateSupply(_viewModel.Supply);
 
                 _viewModel.Supplies.Clear();
@@ -54,18 +56,18 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 _viewModel.PSelected = new List<SupplyDetailModel>();
                 _viewModel.SupplyDetails = new List<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
-
                 _viewModel.TextBoxNewAmountText = 0;
                 _viewModel.TextBoxNewDateText = DateTime.Now;
-                _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
+                _viewModel.VisibilityWindowChangeSupply = Visibility.Collapsed;
                 _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;
 
 
-               
+
 
             }
         }
     }
 }
+
 
 

@@ -22,7 +22,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             var userAnswer = MessageBox.Show("Вы правда хотите удалить поставку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
             { 
-                _supplyDetailService.DeleteSupplyDetail(_viewModel.Selected.Id);
+                _supplyDetailService.DeleteSupplyDetailBySupplyId(_viewModel.Selected.Id);
                 _supplyService.DeleteSupply(_viewModel.Selected.Id);
                 _viewModel.Supplies.Remove(_viewModel.Selected);
             }  

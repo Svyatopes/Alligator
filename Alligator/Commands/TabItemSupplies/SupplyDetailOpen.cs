@@ -1,7 +1,7 @@
 ﻿using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemSupplies
@@ -25,7 +25,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Visible;
 
-            _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
+            _viewModel.PSelected = new List<SupplyDetailModel>(supplyDetailSelected);
             
         }
     }

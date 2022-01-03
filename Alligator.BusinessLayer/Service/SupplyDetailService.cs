@@ -30,9 +30,13 @@ namespace Alligator.BusinessLayer.Service
             return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
         }
 
-        public void DeleteSupplyDetail(int id)
+        public void DeleteSupplyDetailBySupplyId(int id)
         {
-            _supplyDetailRepository.DeleteSupplyDetail(id);
+            _supplyDetailRepository.DeleteSupplyDetailBySupplyId(id);
+        }
+        public void DeleteSupplyDetailById(int id)
+        {
+            _supplyDetailRepository.DeleteSupplyDetailById(id);
         }
 
         public void UpdateSupplyDetail(List<SupplyDetailModel> supplyDetail)
