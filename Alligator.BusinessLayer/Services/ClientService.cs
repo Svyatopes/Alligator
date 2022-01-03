@@ -34,11 +34,23 @@ namespace Alligator.BusinessLayer.Services
             return CustomMapper.GetInstance().Map<ClientModel>(client);
         }
 
-        public void InsertNewClient(ClientModel client)
+        public ClientModel InsertNewClient(ClientModel client)
         {
-            Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.InsertClient(justClient);
+            ClientModel clientToAdd;
+            try
+            {
+                Mapper mapper = CustomMapper.GetInstance();
+                var justClient = mapper.Map<Client>(client);
+                _clientRepository.InsertClient(justClient);
+                var cl = mapper.Map<ClientModel>(justClient);
+                clientToAdd = cl;
+            }
+            catch
+            {
+                clientToAdd = null;
+            }
+            return clientToAdd;
+            
         }
 
         public void UpdateClient(ClientModel client)

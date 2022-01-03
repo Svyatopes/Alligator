@@ -58,8 +58,12 @@ namespace Alligator.UI.Commands.TabItemClients
                 PhoneNumber = _viewModel.NewClient.PhoneNumber.Trim(),
                 Email = _viewModel.NewClient.Email.Trim()
             };
-            
-            _clientservice.InsertNewClient(clientt);
+           var clientToAdd = _clientservice.InsertNewClient(clientt);
+            if (clientToAdd == null)
+            {
+                MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             _viewModel.Clients.Clear();
             foreach(var client in _clientservice.GetAllClients())
             {
