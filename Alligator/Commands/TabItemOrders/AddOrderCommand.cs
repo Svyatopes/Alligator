@@ -29,8 +29,8 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _viewModel.NewAdressText=string.Empty;
             }
             else
-            _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, AddAddress);
-            _viewModel.AllOrders.Add(_orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, AddAddress));
+            _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);
+            _viewModel.AllOrders.Add(_orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress));
 
         }
     }
