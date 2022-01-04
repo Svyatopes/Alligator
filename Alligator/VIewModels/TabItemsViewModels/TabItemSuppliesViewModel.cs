@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Service;
+using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemSupplies;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using System;
@@ -33,6 +34,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
 
+
+        //private bool _isEnabledDeleteSupply;
+        //public bool IsEnabledDeleteSupply
+        //{
+        //    get { return Selected is not null; }
+        //    set
+        //    {
+        //        _isEnabledDeleteSupply = value;
+        //        OnPropertyChanged(nameof(IsEnabledDeleteSupply));
+        //    }
+        //}
 
         public ICommand OpenCardSupply { get; set; }
         public ICommand DeleteSupply { get; set; }
@@ -138,6 +150,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selected = value;
+                ((CommandBase)DeleteSupply).RaiseCanExecutedChanged();
                 OnPropertyChanged(nameof(Selected));
             }
         }

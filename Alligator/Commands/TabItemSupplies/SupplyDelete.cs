@@ -17,6 +17,11 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _supplyDetailService = supplyDetailService;
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.Selected is not null;
+        }
+
         public override void Execute(object parameter)
         {
             var userAnswer = MessageBox.Show("Вы правда хотите удалить поставку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
