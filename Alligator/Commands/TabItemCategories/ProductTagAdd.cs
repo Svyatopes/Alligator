@@ -1,5 +1,4 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.TabItemsViewModels;
 using System.Linq;
 using System.Windows;
@@ -8,8 +7,8 @@ namespace Alligator.UI.Commands.TabItemCategories
 {
     public class ProductTagAdd : CommandBase
     {
-        private TabItemCategoriesViewModel _viewModel;
-        private ProductTagService _productTagService;
+        private readonly TabItemCategoriesViewModel _viewModel;
+        private readonly ProductTagService _productTagService;
 
         public ProductTagAdd(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
         {

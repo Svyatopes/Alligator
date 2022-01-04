@@ -20,7 +20,15 @@ namespace Alligator.BusinessLayer
         public List<CategoryModel> GetAllCategories()
         {
             var categories = _categoryRepository.GetAllCategories();
-            return CustomMapper.GetInstance().Map<List<CategoryModel>>(categories);
+            try
+            {
+                return CustomMapper.GetInstance().Map<List<CategoryModel>>(categories);
+
+            }
+            catch
+            {
+                return new List<CategoryModel>();
+            }
         }
 
         public CategoryModel AddCategory(string name)
@@ -37,6 +45,20 @@ namespace Alligator.BusinessLayer
             }
 
             return categoryModel;
+        }
+
+        public bool UpdateCategory(CategoryModel category)
+        {
+            var categoryInRepo = CustomMapper.GetInstance().Map<Category>(category);
+            try
+            {
+                _categoryRepository.UpdateCategory(categoryInRepo);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool DeleteCategory(CategoryModel category)

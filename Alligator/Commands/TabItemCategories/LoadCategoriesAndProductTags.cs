@@ -1,7 +1,5 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.TabItemsViewModels;
-using System.Collections.ObjectModel;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {

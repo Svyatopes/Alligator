@@ -6,8 +6,8 @@ namespace Alligator.UI.Commands.TabItemCategories
 {
     public class CategoryDelete : CommandBase
     {
-        private TabItemCategoriesViewModel _viewModel;
-        private CategoryService _categoryService;
+        private readonly TabItemCategoriesViewModel _viewModel;
+        private readonly CategoryService _categoryService;
 
         public CategoryDelete(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
         {

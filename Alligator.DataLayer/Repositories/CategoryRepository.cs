@@ -2,21 +2,17 @@
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class CategoryRepository
+    public class CategoryRepository : BaseRepository
     {
-        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 
         public Category GetCategoryById(int id)
         {
             string procString = "dbo.Category_SelectById";
-            using var connection = new SqlConnection(_connectionString);
-
-            connection.Open();
+            using var connection = ProvideConnection();
 
             var category = connection.QueryFirstOrDefault<Category>
                 (procString, new
@@ -31,9 +27,7 @@ namespace Alligator.DataLayer.Repositories
         public List<Category> GetAllCategories()
         {
             string procString = "dbo.Category_SelectAll";
-            using var connection = new SqlConnection(_connectionString);
-
-            connection.Open();
+            using var connection = ProvideConnection();
 
             var categories = connection.Query<Category>(procString).ToList();
 
@@ -43,9 +37,8 @@ namespace Alligator.DataLayer.Repositories
         public int InsertCategory(string name)
         {
             string procString = "dbo.Category_Insert";
-            using var connection = new SqlConnection(_connectionString);
 
-            connection.Open();
+            using var connection = ProvideConnection();
 
             return connection.QuerySingle<int>(procString, new
             {
@@ -57,9 +50,7 @@ namespace Alligator.DataLayer.Repositories
         public void UpdateCategory(Category category)
         {
             string procString = "dbo.Category_Update";
-            using var connection = new SqlConnection(_connectionString);
-
-            connection.Open();
+            using var connection = ProvideConnection();
 
             connection.Execute(procString, new
             {
@@ -72,9 +63,7 @@ namespace Alligator.DataLayer.Repositories
         public bool DeleteCategory(Category category)
         {
             string procString = "dbo.Category_Delete";
-            using var connection = new SqlConnection(_connectionString);
-
-            connection.Open();
+            using var connection = ProvideConnection();
 
             return connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure) == 1;
         }

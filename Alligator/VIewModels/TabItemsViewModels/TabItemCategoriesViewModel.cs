@@ -2,6 +2,7 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.UI.Commands.TabItemCategories;
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Alligator.UI.ViewModels.TabItemsViewModels
@@ -18,6 +19,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
 
 
         public ICommand AddCategory { get; set; }
+        public ICommand StartEditingCategory { get; set; }
         public ICommand DeleteCategory { get; set; }
         public ICommand AddProductTag { get; set; }
         public ICommand DeleteProductTag { get; set; }
@@ -37,6 +39,9 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             DeleteCategory = new CategoryDelete(this, _categoryService);
             AddProductTag = new ProductTagAdd(this, _productTagService);
             DeleteProductTag = new ProductTagDelete(this, _productTagService);
+
+            MainGridVisibilty = Visibility.Visible;
+            GridEditProductTagVisibility = Visibility.Collapsed;
         }
 
         public ObservableCollection<CategoryModel> Categories { get; set; }
@@ -81,6 +86,30 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             {
                 _selectedProductTag = value;
                 OnPropertyChanged(nameof(SelectedProductTag));
+            }
+        }
+
+
+        private Visibility _mainGridVisibility;
+        public Visibility MainGridVisibilty
+        {
+            get { return _mainGridVisibility; }
+            set
+            {
+                _mainGridVisibility = value;
+                OnPropertyChanged(nameof(MainGridVisibilty));
+            }
+        }
+
+
+        private Visibility _gridEditProductTagVisibility;
+        public Visibility GridEditProductTagVisibility
+        {
+            get { return _gridEditProductTagVisibility; }
+            set
+            {
+                _gridEditProductTagVisibility = value;
+                OnPropertyChanged(nameof(GridEditProductTagVisibility));
             }
         }
 

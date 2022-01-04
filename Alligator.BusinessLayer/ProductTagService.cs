@@ -37,6 +37,20 @@ namespace Alligator.BusinessLayer
             return productTagModel;
         }
 
+        public bool UpdateProductTag(ProductTagModel productTag)
+        {
+            var productTagInRepo = CustomMapper.GetInstance().Map<ProductTag>(productTag);
+            try
+            {
+                _productTagRepository.UpdateProductTag(productTagInRepo);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool DeleteProductTag(ProductTagModel productTag)
         {
             var productTagInRepo = CustomMapper.GetInstance().Map<ProductTag>(productTag);

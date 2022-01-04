@@ -1,15 +1,14 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.TabItemsViewModels;
 using System.Linq;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {
-    internal class CategoryAdd : CommandBase
+    public class CategoryAdd : CommandBase
     {
-        private TabItemCategoriesViewModel _viewModel;
-        private CategoryService _categoryService;
+        private readonly TabItemCategoriesViewModel _viewModel;
+        private readonly CategoryService _categoryService;
 
         public CategoryAdd(TabItemCategoriesViewModel viewModel, CategoryService categoryService)
         {

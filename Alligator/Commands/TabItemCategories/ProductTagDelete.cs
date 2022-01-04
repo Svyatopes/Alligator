@@ -6,8 +6,8 @@ namespace Alligator.UI.Commands.TabItemCategories
 {
     public class ProductTagDelete : CommandBase
     {
-        private TabItemCategoriesViewModel viewModel;
-        private ProductTagService _productTagService;
+        private readonly TabItemCategoriesViewModel viewModel;
+        private readonly ProductTagService _productTagService;
 
 
         public ProductTagDelete(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
