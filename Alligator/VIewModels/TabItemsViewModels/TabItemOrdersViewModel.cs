@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer.Repositories;
 using Alligator.UI.Commands.TabItemOrders;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
@@ -53,10 +54,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
             AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
-            OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
-            OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));           
-            Clients = new ObservableCollection<ClientModel>(__clientService.GetClients());
-            Products = new ObservableCollection<ProductModel>(_productService.GetProducts());
+            //OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
+            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));           
+            Clients = new ObservableCollection<ClientModel>(_clientService.GetAllClients());
+           //Products закомменчен в виду отсутствия productService
+            // Products = new ObservableCollection<ProductModel>(_productService.GetProducts());
         }
 
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
@@ -96,10 +98,10 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
         public ClientModel SelectedClient
         {
-            get { return _selectedClientModel; }
+            get { return _selectedClient; }
             set
             {
-                _selectedClientModel = value;
+                _selectedClient = value;
                 OnPropertyChanged(nameof(SelectedClient));
             }
         }

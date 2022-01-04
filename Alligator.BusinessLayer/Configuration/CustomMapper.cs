@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
+using Alligator.DataLayer;
 
 namespace Alligator.BusinessLayer.Configuration
 {
@@ -28,6 +29,11 @@ namespace Alligator.BusinessLayer.Configuration
                 cfg.CreateMap<Order, OrderModel>();
                 cfg.CreateMap<OrderDetail, OrderDetailModel>();
                 cfg.CreateMap<OrderReview, OrderReviewModel>();
+                cfg.CreateMap<Client, ClientModel>();
+                cfg.CreateMap<ClientModel, Client>();
+
+                cfg.CreateMap<Comment, CommentModel>();
+                cfg.CreateMap<CommentModel, Comment>();
             }));
         }
     }
