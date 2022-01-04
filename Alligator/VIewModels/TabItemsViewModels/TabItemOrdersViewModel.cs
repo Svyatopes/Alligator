@@ -35,6 +35,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand GetOrderInfo { get; set; }
         public ICommand DeleteOrder { get; set; }
         public ICommand AddOrder { get; set; }
+        public ICommand SaveChanges { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
         public ICommand OpenOrderInfoWindow { get; set; }
         public ICommand ComeBackFirstWindow { get; set; }
@@ -49,13 +50,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrder = new DeleteOrderCommand(this, _orderService);
             AddOrder = new AddOrderCommand(this, _orderService);
+            SaveChanges = new SaveChangesCommand(this, _orderService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
             AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
+           //вылетает ошибка
             //OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
-            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));           
+            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));
             Clients = new ObservableCollection<ClientModel>(_clientService.GetAllClients());
            //Products закомменчен в виду отсутствия productService
             // Products = new ObservableCollection<ProductModel>(_productService.GetProducts());
