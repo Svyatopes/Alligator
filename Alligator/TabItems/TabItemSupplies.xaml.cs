@@ -35,11 +35,11 @@ namespace Alligator.UI.TabItems
             _supplyService = new SupplyService();
             _supplyDetailService = new SupplyDetailService();
             _viewModel.Supply = new SupplyModel();
-            _viewModel.Products = new List<ProductModel>();
+            _viewModel.Products = new ObservableCollection<ProductModel>();
             _viewModel.SelectProduct = "";
             _viewModel.Supplies = new ObservableCollection<SupplyModel>();
             _viewModel.Supply.Details = new List<SupplyDetailModel>();
-            _viewModel.SupplyDetails = new List<SupplyDetailModel>();
+            _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
             _viewModel.TextBoxNewIdText = 0;
             _viewModel.TextBoxNewAmountText = 0;
             _viewModel.NewSupply = new SupplyModel() { Date = DateTime.Now };

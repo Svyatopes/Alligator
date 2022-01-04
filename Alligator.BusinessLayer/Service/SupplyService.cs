@@ -28,15 +28,23 @@ namespace Alligator.BusinessLayer.Service
             return Mapper.GetInstance().Map<SupplyModel>(entities);
         }
 
-        public void DeleteSupply(int id)
+        public bool DeleteSupply(int id)
         {
-            _supplyRepository.DeleteSupply(id);
+            try
+            {
+                _supplyRepository.DeleteSupply(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public void UpdateSupply(SupplyModel supply)
         {
             var supplyModel = Mapper.GetInstance().Map<Supply>(supply);
-            _supplyRepository.EditSupply(supplyModel); 
+            _supplyRepository.EditSupply(supplyModel);
         }
 
         public int InsertSupply(SupplyModel supply)

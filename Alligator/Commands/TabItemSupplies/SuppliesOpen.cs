@@ -18,6 +18,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override void Execute(object parameter)
         {
+            //TODO: error when click on add and return
             _viewModel.PSelected.Clear();
             _viewModel.TextBoxNewAmountText = 0;
             _viewModel.TextBoxNewDateText = DateTime.Now;

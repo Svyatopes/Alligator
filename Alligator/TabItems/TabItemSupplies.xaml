@@ -67,11 +67,11 @@
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="1" Width="150" >Продукт</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="2" Width="150">Количесвто</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="2" Width="150">Дата поставки</TextBlock>
-                <ComboBox x:Name="Product"  ItemsSource="{Binding Path = Products.Name}" SelectedItem="{Binding SelectProduct }"  SelectedValuePath="Name" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="1" Width="150"   Background="White" />
+                <ComboBox x:Name="Product"  ItemsSource="{Binding Path = Products.Name}" SelectedItem="{Binding SelectProduct}"  SelectedValuePath="Name" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="1" Width="150"   Background="White" />
                 <TextBox x:Name="Amount" Text="{Binding TextBoxNewAmountText}" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="2" Width="150"   Background="White" ></TextBox>
                 <DatePicker Name="TextBoxNewDateText" Grid.Column="1" Grid.Row="2" Margin="0,0,0,5" Width="150" Background="White" SelectedDate="{Binding NewSupply.Date}" />
 
-                <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Height="20" Width="180" Command="{Binding SappliesOpen}" Content="Вернуться назад"/>
+                <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Height="20" Width="180" Command="{Binding SuppliesOpen}" Content="Вернуться назад"/>
                 <Button  Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="7" Height="20" Width="180" Command="{Binding SaveNewSupply}" Content="Сохранить поставку"/>
                 <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Height="20" Width="180" Command="{Binding AddProductInSupply}" Content="Добавить продукт в таблицу"/>
                 <!--<Button  Grid.Column="0"  Grid.Row="4" Height="20" Width="180" Command="{Binding ProductDeleteFromSupply}" Content="Удалить"/>-->

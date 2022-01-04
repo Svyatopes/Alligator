@@ -11,6 +11,7 @@ namespace Alligator.DataLayer.Repositories
     public class SupplyRepository : ISupplyRepository
     {
         private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
+        //TODO: baserepository for connection
 
 
         public List<Supply> GetSupplies()

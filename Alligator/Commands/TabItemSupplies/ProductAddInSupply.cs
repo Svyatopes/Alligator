@@ -2,6 +2,8 @@
 using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
@@ -19,40 +21,40 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override void Execute(object parameter)
         {
-                        
+
             var nameSelectedProduct = _viewModel.SelectProduct;
             var idSelectedProduct = 0;
             foreach (var item in _viewModel.Products)
             {
-                if (item.Name== nameSelectedProduct)
+                if (item.Name == nameSelectedProduct)
                 {
                     idSelectedProduct = item.Id;
                 }
             }
             var idProductInDatabase = _supplyDetailService.GetProductById(idSelectedProduct);
-                
+
             var supplyProduct = new SupplyDetailModel()
             {
                 Product = idProductInDatabase,
                 Amount = _viewModel.TextBoxNewAmountText,
-                
+
             };
-            if (_viewModel.SupplyDetails.Count != 0)
+
+            _viewModel.Supply.Date = _viewModel.NewSupply.Date;
+            _viewModel.Supply.Details.Add(supplyProduct);
+
+            if (_viewModel.SupplyDetails.Any())
             {
+                //TODO: уйти от использования индексов
                 supplyProduct.SupplyId = _viewModel.SupplyDetails[0].SupplyId;
                 _viewModel.SupplyDetails.Add(supplyProduct);
-                _viewModel.Supply.Date = _viewModel.NewSupply.Date;
-                _viewModel.Supply.Details.Add(supplyProduct);
-                _viewModel.PSelected = new List<SupplyDetailModel>(_viewModel.SupplyDetails);
-
+                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(_viewModel.SupplyDetails);
             }
             else
             {
-                _viewModel.Supply.Details.Add(supplyProduct);
-                _viewModel.Supply.Date = _viewModel.NewSupply.Date;
-                _viewModel.PSelected = new List<SupplyDetailModel>(_viewModel.Supply.Details);
-
+                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(_viewModel.Supply.Details);
             }
+
         }
     }
 }

@@ -11,6 +11,8 @@ namespace Alligator.BusinessLayer.Service
         private readonly ISupplyDetailRepository _supplyDetailRepository;
         private readonly IProductRepository _productRepository;
 
+        //TODO: add try catch for exceptions from DB
+
         public SupplyDetailService()
         {
             _supplyDetailRepository = new SupplyDetailRepository();
@@ -24,15 +26,23 @@ namespace Alligator.BusinessLayer.Service
             return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
         }
 
-        public List<SupplyDetailModel> GetSupplyDetailById (int id) 
+        public List<SupplyDetailModel> GetSupplyDetailById(int id)
         {
             var entities = _supplyDetailRepository.GetSupplyDetailBySupplyId(id);
             return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
         }
 
-        public void DeleteSupplyDetailBySupplyId(int id)
+        public bool DeleteSupplyDetailBySupplyId(int id)
         {
-            _supplyDetailRepository.DeleteSupplyDetailBySupplyId(id);
+            try
+            {
+                _supplyDetailRepository.DeleteSupplyDetailBySupplyId(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public void DeleteSupplyDetailById(int id)
         {
@@ -49,21 +59,21 @@ namespace Alligator.BusinessLayer.Service
         {
             var supplyModel = Mapper.GetInstance().Map<SupplyDetail>(supplyDetail);
             return _supplyDetailRepository.AddSupplyDetail(supplyModel);
-            
+
         }
         public List<ProductModel> GetProduct()
         {
             var entities = _productRepository.GetAllProducts();
 
-            return Mapper.GetInstance().Map<List<ProductModel>>(entities);            
-            
-        }   
+            return Mapper.GetInstance().Map<List<ProductModel>>(entities);
+
+        }
         public ProductModel GetProductById(int id)
         {
             var entities = _productRepository.GetProductById(id);
 
-            return Mapper.GetInstance().Map<ProductModel>(entities);            
-            
-        }        
+            return Mapper.GetInstance().Map<ProductModel>(entities);
+
+        }
     }
 }

@@ -3,7 +3,6 @@ using Alligator.BusinessLayer.Service;
 using Alligator.UI.Commands.TabItemSupplies;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -12,6 +11,7 @@ using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
+    //TODO: Rename all non-infortive variables
     public class TabItemSuppliesViewModel : BaseViewModel
     {
         private readonly SupplyService _supplyService;
@@ -45,8 +45,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand ProductDeleteFromSupply { get; set; }
 
 
-        private List<ProductModel> _products;
-        public List<ProductModel> Products
+        private ObservableCollection<ProductModel> _products;
+        public ObservableCollection<ProductModel> Products
         {
             get { return _products; }
             set
@@ -79,8 +79,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        private List<SupplyDetailModel> _details;
-        public List<SupplyDetailModel> Details
+        private ObservableCollection<SupplyDetailModel> _details;
+        public ObservableCollection<SupplyDetailModel> Details
         {
             get { return _details; }
             set
@@ -115,11 +115,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(Supply));
             }
         }
-       
 
-        private List<SupplyDetailModel> _supplyDetails;
 
-        public List<SupplyDetailModel> SupplyDetails
+        private ObservableCollection<SupplyDetailModel> _supplyDetails;
+
+        public ObservableCollection<SupplyDetailModel> SupplyDetails
         {
             get { return _supplyDetails; }
             set
@@ -143,9 +143,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
 
-        private List<SupplyDetailModel> _pselected;
+        private ObservableCollection<SupplyDetailModel> _pselected;
 
-        public List<SupplyDetailModel> PSelected
+        public ObservableCollection<SupplyDetailModel> PSelected
         {
             get { return _pselected; }
             set
@@ -209,7 +209,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(TextBoxNewAmountText));
             }
         }
-        
+
         private ButtonBase _deleteProduct;
         public ButtonBase DeleteProduct
         {

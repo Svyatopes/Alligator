@@ -33,7 +33,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
             if (userAnswer == MessageBoxResult.Yes)
             {
-
+                //TODO: сделать один список на supply detail и для добавления новых строк деталей
+                //использовать Id supplydetail - если 0, то надо добавить в БД
                 var idSupplyInDatabase = _viewModel.SupplyDetails[0].SupplyId;
                 foreach (var item in _viewModel.Supply.Details)
                 {
@@ -53,17 +54,13 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-                _viewModel.PSelected = new List<SupplyDetailModel>();
-                _viewModel.SupplyDetails = new List<SupplyDetailModel>();
+                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>();
+                _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
                 _viewModel.TextBoxNewAmountText = 0;
                 _viewModel.TextBoxNewDateText = DateTime.Now;
                 _viewModel.VisibilityWindowChangeSupply = Visibility.Collapsed;
                 _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;
-
-
-
-
             }
         }
     }

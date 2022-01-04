@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
-    public class SupplyDelete: CommandBase
+    public class SupplyDelete : CommandBase
     {
         private TabItemSuppliesViewModel _viewModel;
         private SupplyService _supplyService;
@@ -21,12 +21,18 @@ namespace Alligator.UI.Commands.TabItemSupplies
         {
             var userAnswer = MessageBox.Show("Вы правда хотите удалить поставку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
-            { 
-                _supplyDetailService.DeleteSupplyDetailBySupplyId(_viewModel.Selected.Id);
-                _supplyService.DeleteSupply(_viewModel.Selected.Id);
-                _viewModel.Supplies.Remove(_viewModel.Selected);
-            }  
-            
+            {
+                if (_supplyDetailService.DeleteSupplyDetailBySupplyId(_viewModel.Selected.Id)
+                    && _supplyService.DeleteSupply(_viewModel.Selected.Id))
+                {
+                    _viewModel.Supplies.Remove(_viewModel.Selected);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при удалении. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
         }
     }
 }
