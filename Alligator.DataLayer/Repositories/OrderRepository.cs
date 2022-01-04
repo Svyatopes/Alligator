@@ -16,8 +16,6 @@ namespace Alligator.DataLayer.Repositories
         public List<Order> GetAllOrders()
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
-
             var orderDictionary = new Dictionary<int, Order>();
             return connection.Query<Order>("dbo.Order_SelectAll",
             commandType: CommandType.StoredProcedure)
@@ -27,7 +25,6 @@ namespace Alligator.DataLayer.Repositories
         public Order GetOrderById(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             return connection.Query<Order, Client, Order>("dbo.Order_SelectById", (order, client) =>
             {
                 order.Client = client;
@@ -43,7 +40,6 @@ namespace Alligator.DataLayer.Repositories
         public List<Order> GetOrdersByClientId(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             var orderDictionary = new Dictionary<int, Order>();
             return connection.Query<Order, Client, Order>
             ("dbo.Order_SelectByClientId", (order, client) =>
@@ -60,7 +56,6 @@ namespace Alligator.DataLayer.Repositories
         public void AddOrder(DateTime date, int clientId, string address)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.Order_Insert";
             connection.Execute(procString,
             new { Date = date, ClientId = clientId, Address = address },
@@ -70,7 +65,6 @@ namespace Alligator.DataLayer.Repositories
         public void DeleteOrder(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.Order_Delete";
             connection.Execute(procString,
             new { Id = id },
@@ -80,7 +74,6 @@ namespace Alligator.DataLayer.Repositories
         public void EditOrder(DateTime date, int id, string address)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
             new { Date = date, Id = id, Address = address },

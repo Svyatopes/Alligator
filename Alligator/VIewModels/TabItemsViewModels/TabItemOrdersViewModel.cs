@@ -55,13 +55,18 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
-            AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrderssWithoutSensitiveData());
-           //вылетает ошибка
-            //OrderDetails = new ObservableCollection<OrderDetailModel>(_orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id));
-            //OrderReviews = new ObservableCollection<OrderReviewModel>(_orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id));
-            Clients = new ObservableCollection<ClientModel>(_clientService.GetAllClients());
-           //Products закомменчен в виду отсутствия productService
-            // Products = new ObservableCollection<ProductModel>(_productService.GetProducts());
+            var ordersWithoutSensitiveData = _orderService.GetOrdersWithoutSensitiveData();
+            AllOrders = new ObservableCollection<OrderShortModel>(ordersWithoutSensitiveData);
+            //ошибка 
+            //var orderDetails = _orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id);
+            //OrderDetails = new ObservableCollection<OrderDetailModel>(orderDetails);
+            //var orderReviews = _orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id);
+            //OrderReviews = new ObservableCollection<OrderReviewModel>(orderReviews);
+            var clients = _clientService.GetAllClients();
+            Clients = new ObservableCollection<ClientModel>(clients);
+            //Products закомменчен в виду отсутствия productService
+            //var products=_productService.GetProducts()
+            // Products = new ObservableCollection<ProductModel>(products);
         }
 
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }

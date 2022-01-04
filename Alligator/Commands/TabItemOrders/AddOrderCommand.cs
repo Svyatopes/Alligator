@@ -30,8 +30,8 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
             else
             _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);
-            var newOrder = _orderService.GetOrders().Last();
-            _viewModel.AllOrders.Add(newOrder);
+            int newOrderId = _orderService.GetOrders().Last().Id;           
+            _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(newOrderId));
 
         }
     }

@@ -26,7 +26,7 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview = new OrderReviewRepository();
         }
 
-        public List<OrderShortModel> GetOrderssWithoutSensitiveData()
+        public List<OrderShortModel> GetOrdersWithoutSensitiveData()
         {
             var orders = _repositoryOrder.GetAllOrders();
             return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);

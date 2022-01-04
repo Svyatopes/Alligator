@@ -15,7 +15,6 @@ namespace Alligator.DataLayer.Repositories
         public OrderReview GetOrderReviewById(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             return connection.Query<OrderReview, Order, Client, OrderReview>
             ("dbo.OrderReview_SelectById", (orderreview, order, client) =>
             {
@@ -32,7 +31,6 @@ namespace Alligator.DataLayer.Repositories
         public List<OrderReview> GetOrderReviewsByOrderId(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             var orderReviewsDictionary = new Dictionary<int, OrderReview>();
             return connection.Query<OrderReview, Order, Client, OrderReview>
             ("dbo.OrderReview_SelectByOrderId", (orderreview, order, client) =>
@@ -50,7 +48,6 @@ namespace Alligator.DataLayer.Repositories
         public void AddOrderReview(string text, int orderId)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.OrderReview_Insert";
             connection.Execute(procString,
             new { Text = text, OrdertId = orderId },
@@ -60,7 +57,6 @@ namespace Alligator.DataLayer.Repositories
         public void DeleteOrderReview(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.OrderReview_Delete";
             connection.Execute(procString,
             new { Id = id },
@@ -70,7 +66,6 @@ namespace Alligator.DataLayer.Repositories
         public void DeleteOrderReviewByOrderId(int orderId)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.OrderReview_DeleteByOrderId";
             connection.Execute(procString, new { OrderId = orderId },
             commandType: CommandType.StoredProcedure);
@@ -79,7 +74,6 @@ namespace Alligator.DataLayer.Repositories
         public void EditOrderReview(int id, string text)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
             string procString = "dbo.OrderReview_Update";
             connection.Execute(procString, new { Id = id, Text = text },
             commandType: CommandType.StoredProcedure);

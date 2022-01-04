@@ -14,7 +14,7 @@ namespace Alligator.DataLayer.Repositories
     {
 
         private const string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
+       
         public ClientRepository()
         {
 
@@ -22,8 +22,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<Client> GetAllClients()
         {
-            using IDbConnection connection = GetConnection();
-            connection.Open();
+            using IDbConnection connection = GetConnection();            
             var clients = connection.Query<Client>("dbo.Client_SelectAll")
             .ToList();
             return clients;
@@ -32,8 +31,6 @@ namespace Alligator.DataLayer.Repositories
         public Client GetClientById(int id)
         {
             using IDbConnection connection = GetConnection();
-            connection.Open();
-
             var clientDictionary = new Dictionary<int, Client>();
 
             return connection.Query<Client, Comment, Client>
@@ -63,7 +60,6 @@ namespace Alligator.DataLayer.Repositories
         {
             string proc = "dbo.Client_SelectByCommentId";
             using IDbConnection connection = GetConnection();
-            connection.Open();
             Client client = connection.QueryFirstOrDefault<Client>
             (proc,
             new
@@ -78,7 +74,6 @@ namespace Alligator.DataLayer.Repositories
         {
             string proc = "dbo.Insert_Client";
             using IDbConnection connection = GetConnection();
-            connection.Open();
             connection.Execute(proc, new
             {
                 FirstName = client.FirstName,
@@ -95,7 +90,6 @@ namespace Alligator.DataLayer.Repositories
         {
             string proc = "dbo.Client_Update";
             using IDbConnection connection = GetConnection();
-            connection.Open();
             connection.Execute(proc, new
             {
                 client.Id,
@@ -112,7 +106,6 @@ namespace Alligator.DataLayer.Repositories
         {
             string proc1 = "dbo.Client_Delete";
             using IDbConnection connection = GetConnection();
-            connection.Open();
             connection.Execute(proc1, new
             {
                 Id = client.Id
