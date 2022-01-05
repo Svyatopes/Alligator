@@ -22,13 +22,26 @@ namespace Alligator.UI.Commands.TabItemClients
             _clientService = clientService;
             _commentService = commentService;
         }
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedClient is not  null;
+        }
         public override void Execute(object parameter)
         {
             _viewModel.AllClients = Visibility.Collapsed;
             _viewModel.ClientCardVisibility = Visibility.Visible;
+            if (_viewModel.EditableClient is not null)
+            {
+                _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
+                _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка при загрузке данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                _viewModel.AllClients = Visibility.Visible;
+                _viewModel.ClientCardVisibility = Visibility.Collapsed;
 
-            _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
-            _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);
+            }
         }
     }
 }

@@ -47,7 +47,14 @@ namespace Alligator.BusinessLayer.Services
             ClientModel client1;
             Mapper mapper = CustomMapper.GetInstance();
             var clientMap = mapper.Map<Client>(client);
-            return _clientRepository.InsertClient(clientMap);
+            try
+            {
+                return _clientRepository.InsertClient(clientMap);
+            }
+            catch
+            {
+                return -1;
+            }
 
         }
 
@@ -55,15 +62,26 @@ namespace Alligator.BusinessLayer.Services
         {
             Mapper mapper = CustomMapper.GetInstance();
             var clientMap = mapper.Map<Client>(client);
-            _clientRepository.UpdateClient(clientMap);
+
+                _clientRepository.UpdateClient(clientMap);
+
+            
 
         }
 
-        public void DeleteClient(ClientModel client)
+        public bool DeleteClient(ClientModel client)
         {
             Mapper mapper = CustomMapper.GetInstance();
             var clientMap = mapper.Map<Client>(client);
-            _clientRepository.DeleteClient(clientMap);
+            try
+            {
+                _clientRepository.DeleteClient(clientMap);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

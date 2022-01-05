@@ -29,9 +29,17 @@ namespace Alligator.BusinessLayer.Services
             var comm = mapper.Map<Comment>(comment);
             _commentRepository.InsertCommentById(comm.Client.Id, comm.Text);
         }
-        public void DeleteCommentsByClientId(int clientId)
+        public bool  DeleteCommentsByClientId(int clientId)
         {
-            _commentRepository.DeleteCommentById(clientId);
+            try
+            {
+                _commentRepository.DeleteCommentById(clientId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public void DeleteCommentByCommentId(int commentId)
         {

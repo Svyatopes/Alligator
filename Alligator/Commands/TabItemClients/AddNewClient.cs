@@ -30,11 +30,14 @@ namespace Alligator.UI.Commands.TabItemClients
                 MessageBox.Show("данные введены НЕКОРРЕКТНО\r\nПроверьте количество введенных символов, и валидность емейла", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
-            var idNewClient = _clientservice.InsertNewClient(_viewModel.NewClient);
+            int idNewClient = _clientservice.InsertNewClient(_viewModel.NewClient);
+            if (idNewClient == -1)
+            {
+                MessageBox.Show("Ошибка при добавлении клиента в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             _viewModel.NewClient.Id = idNewClient;
             _viewModel.Clients.Add(_viewModel.NewClient);
-
             _viewModel.Return.Execute(null);
         }
     }

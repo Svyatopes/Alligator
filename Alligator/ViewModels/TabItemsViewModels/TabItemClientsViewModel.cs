@@ -1,6 +1,7 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
+using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemClients;
 using MvvmHelpers;
 using System.Collections.ObjectModel;
@@ -137,6 +138,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedClient = value;
+                ((CommandBase)OpenClientCard).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteClient).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedClient));
             }
         }
