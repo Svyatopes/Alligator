@@ -33,7 +33,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddReview { get; set; }
         public ICommand GetOrders { get; set; }
         public ICommand GetOrderInfo { get; set; }
-        public ICommand DeleteOrder { get; set; }
+        public ICommand DeleteOrderWindowOfAllOrders { get; set; }
         public ICommand AddOrder { get; set; }
         public ICommand SaveChanges { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
@@ -48,25 +48,21 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _clientService = new ClientService();
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
-            DeleteOrder = new DeleteOrderCommand(this, _orderService);
+            DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService);
             AddOrder = new AddOrderCommand(this, _orderService);
             SaveChanges = new SaveChangesCommand(this, _orderService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);
-            OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this);
+            OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
 
             var ordersWithoutSensitiveData = _orderService.GetOrdersWithoutSensitiveData();
             AllOrders = new ObservableCollection<OrderShortModel>(ordersWithoutSensitiveData);
-            //ошибка 
-            //var orderDetails = _orderDetailService.GetOrderDetailsByOrderId(SelectedOrder.Id);
-            //OrderDetails = new ObservableCollection<OrderDetailModel>(orderDetails);
-            //var orderReviews = _orderReviewService.GetOrderReviewModelsByOrderId(SelectedOrder.Id);
-            //OrderReviews = new ObservableCollection<OrderReviewModel>(orderReviews);
+           
+            OrderDetails = new ObservableCollection<OrderDetailModel>();
+            OrderReviews = new ObservableCollection<OrderReviewModel>();
             var clients = _clientService.GetAllClients();
             Clients = new ObservableCollection<ClientModel>(clients);
-            //Products закомменчен в виду отсутствия productService
-            //var products=_productService.GetProducts()
-            // Products = new ObservableCollection<ProductModel>(products);
+            Products = new ObservableCollection<ProductModel>();
         }
 
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
