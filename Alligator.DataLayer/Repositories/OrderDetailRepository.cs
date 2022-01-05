@@ -15,7 +15,7 @@ namespace Alligator.DataLayer.Repositories
     {
         public OrderDetail GetOrderDetailById(int id)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             var orderDetailDictionary = new Dictionary<int, OrderDetail>();
             return connection.Query<OrderDetail, Order, Product, OrderDetail>
             ("dbo.OrderDetail_SelectById", (orderdetail, order, product) =>
@@ -32,7 +32,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<OrderDetail> GetOrderDetailsByOrderId(int id)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             var orderDetailDictionary = new Dictionary<int, OrderDetail>();
             return connection.Query<OrderDetail, Order, Product, OrderDetail>
             ("dbo.OrderDetail_SelectByOrderId", (orderdetail, order, product) =>
@@ -49,7 +49,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<OrderDetail> GetOrderDetailsByProductId(int id)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             var orderDetailDictionary = new Dictionary<int, OrderDetail>();
             return connection.Query<OrderDetail, Order, Product, OrderDetail>
             ("dbo.OrderDetail_SelectByProductId", (orderdetail, order, product) =>
@@ -66,7 +66,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void AddOrderDetail(int amount, int orderId, int productId)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Insert";
             connection.Execute(procString,
             new { Amount = amount, OrdertId = orderId, ProductId = productId },
@@ -75,7 +75,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditOrderDetail(int id, int amount)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Update";
             connection.Execute(procString, new { Id = id, Amount = amount },
             commandType: CommandType.StoredProcedure);
@@ -83,7 +83,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteOrderDetail(int id)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Delete";
             connection.Execute(procString, new { Id = id },
             commandType: CommandType.StoredProcedure);
@@ -91,7 +91,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteOrderDetailByProductId(int id)
         {
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_DeleteByProductId";
             connection.Execute(procString, new { ProductId = id },
             commandType: CommandType.StoredProcedure);

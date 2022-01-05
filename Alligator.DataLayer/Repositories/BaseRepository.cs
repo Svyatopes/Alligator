@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class BaseRepository
+    public abstract class BaseRepository
     {
-        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        protected IDbConnection GetConnection()
-        {
-            IDbConnection connection= new SqlConnection(_connectionString);
-            return connection;
-        }
+        private const string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 
+        protected static SqlConnection ProvideConnection() => new SqlConnection(_connection);
     }
 }

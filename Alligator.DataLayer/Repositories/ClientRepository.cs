@@ -12,29 +12,36 @@ namespace Alligator.DataLayer.Repositories
 {
     public class ClientRepository : BaseRepository
     {
-
-        private const string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-       
-        public ClientRepository()
-        {
-
-        }
-
         public List<Client> GetAllClients()
         {
-            using IDbConnection connection = GetConnection();            
-            var clients = connection.Query<Client>("dbo.Client_SelectAll")
-            .ToList();
-            return clients;
+            string proc = "dbo.Client_SelectAll";
+            using var connection = ProvideConnection();
+
+            try
+            {
+
+                var clients = connection.Query<Client>(proc)
+                .ToList();
+                return clients;
+            }
+            catch
+            {
+                List<Client> clients = new List<Client>();
+                return clients;
+            }
+
+
         }
 
         public Client GetClientById(int id)
         {
-            using IDbConnection connection = GetConnection();
+            string proc = "dbo.Client_SelectById";
+            using var connection = ProvideConnection();
+
             var clientDictionary = new Dictionary<int, Client>();
 
             return connection.Query<Client, Comment, Client>
-            ("dbo.Client_SelectById",
+            (proc,
             (client, comment) =>
             {
                 Client clientEntry;
@@ -59,7 +66,7 @@ namespace Alligator.DataLayer.Repositories
         public Client GetClientByCommentId(int id)
         {
             string proc = "dbo.Client_SelectByCommentId";
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             Client client = connection.QueryFirstOrDefault<Client>
             (proc,
             new
@@ -70,33 +77,33 @@ namespace Alligator.DataLayer.Repositories
             return client;
         }
 
-        public void InsertClient(Client client)
+        public int InsertClient(Client client)
         {
-            string proc = "dbo.Insert_Client";
-            using IDbConnection connection = GetConnection();
-            connection.Execute(proc, new
+            string proc = "dbo.Client_Insert";
+            using var connection = ProvideConnection();
+            return connection.QueryFirstOrDefault<int>(proc, new
             {
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                Patronymic = client.Patronymic,
-                PhoneNumber = client.PhoneNumber,
-                Email = client.Email
+                client.FirstName,
+                client.LastName,
+                client.Patronymic,
+                client.PhoneNumber,
+                client.Email
             },
-            commandType: CommandType.StoredProcedure
-                );
+             commandType: CommandType.StoredProcedure);
         }
 
         public void UpdateClient(Client client)
         {
             string proc = "dbo.Client_Update";
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             connection.Execute(proc, new
             {
                 client.Id,
                 client.FirstName,
                 client.LastName,
                 client.Patronymic,
-                client.PhoneNumber
+                client.PhoneNumber,
+                client.Email
             },
             commandType: CommandType.StoredProcedure
                 );
@@ -105,7 +112,7 @@ namespace Alligator.DataLayer.Repositories
         public void DeleteClient(Client client)
         {
             string proc1 = "dbo.Client_Delete";
-            using IDbConnection connection = GetConnection();
+            using var connection = ProvideConnection();
             connection.Execute(proc1, new
             {
                 Id = client.Id

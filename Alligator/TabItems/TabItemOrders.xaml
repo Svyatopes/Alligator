@@ -11,6 +11,7 @@
     </i:Interaction.Triggers>
 
     <Grid>
+        
         <!--Первое окно Все заказы-->
         <Grid Visibility="{Binding OrdersWindowVisibility}" Background="#C4C4C4">
             <Grid.ColumnDefinitions>
@@ -27,7 +28,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn  Header="Id" Width="*" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding Date}"/>
-                <DataGridTextColumn Header="Id клиента" Width="*" Binding="{Binding ClientId}"/>
+                <DataGridTextColumn Header="Id клиента" Width="*" Binding="{Binding Client.Id}"/>
                 <DataGridTextColumn Header="Адрес" Width="*" Binding="{Binding Address}"/>
             </DataGrid.Columns>
         </DataGrid >

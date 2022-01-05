@@ -49,22 +49,19 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService);
-            AddOrder = new AddOrderCommand(this, _orderService);
+            AddOrder = new AddOrderCommand(this, _orderService, _clientService);
             SaveChanges = new SaveChangesCommand(this, _orderService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
-
-            var ordersWithoutSensitiveData = _orderService.GetOrdersWithoutSensitiveData();
-            AllOrders = new ObservableCollection<OrderShortModel>(ordersWithoutSensitiveData);
            
+            AllOrders = new ObservableCollection<OrderShortModel>();           
             OrderDetails = new ObservableCollection<OrderDetailModel>();
-            OrderReviews = new ObservableCollection<OrderReviewModel>();
-            var clients = _clientService.GetAllClients();
-            Clients = new ObservableCollection<ClientModel>(clients);
+            OrderReviews = new ObservableCollection<OrderReviewModel>();           
+            Clients = new ObservableCollection<ClientModel>();
             Products = new ObservableCollection<ProductModel>();
         }
-
+        
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
         public ObservableCollection<OrderDetailModel> OrderDetails { get; set; }
         public ObservableCollection<OrderReviewModel> OrderReviews { get; set; }

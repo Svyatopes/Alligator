@@ -25,7 +25,15 @@ namespace Alligator.BusinessLayer
         public List<ClientModel> GetAllClients()
         {
             var clients = _clientRepository.GetAllClients();
-            return CustomMapper.GetInstance().Map<List<ClientModel>>(clients);
+            try
+            {
+                return CustomMapper.GetInstance().Map<List<ClientModel>>(clients);
+            }
+            catch
+            {
+                return new List<ClientModel>();
+            }
+
         }
 
         public ClientModel GetClientById(int id)
@@ -34,26 +42,28 @@ namespace Alligator.BusinessLayer
             return CustomMapper.GetInstance().Map<ClientModel>(client);
         }
 
-        public void InsertNewClient(ClientModel client)
+        public int InsertNewClient(ClientModel client)
         {
+            ClientModel client1;
             Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.InsertClient(justClient);
+            var clientMap = mapper.Map<Client>(client);
+            return _clientRepository.InsertClient(clientMap);
+
         }
 
         public void UpdateClient(ClientModel client)
         {
             Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.UpdateClient(justClient);
+            var clientMap = mapper.Map<Client>(client);
+            _clientRepository.UpdateClient(clientMap);
 
         }
 
         public void DeleteClient(ClientModel client)
         {
             Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.DeleteClient(justClient);
+            var clientMap = mapper.Map<Client>(client);
+            _clientRepository.DeleteClient(clientMap);
         }
     }
 }
