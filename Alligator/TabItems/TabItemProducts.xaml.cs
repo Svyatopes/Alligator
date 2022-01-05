@@ -11,10 +11,12 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemProducts : TabItem
     {
+        TabItemProductsViewModel viewModel = new TabItemProductsViewModel();
+
         public TabItemProducts()
         {
             InitializeComponent();
-            viewModel = new ProductsTabItemViewModel();
+            viewModel = new TabItemProductsViewModel();
             DataContext = viewModel;
             
             ObservableCollection<ProductViewModel> productsList = new ObservableCollection<ProductViewModel>();
@@ -26,26 +28,25 @@ namespace Alligator.UI.TabItems
             );
             dg_Products.ItemsSource = productsList;
             viewModel.Selected = null;
-        }
 
+            viewModel.ViewProductGrid = Visibility.Collapsed;
+            viewModel.AddProductGrid = Visibility.Collapsed;
+        }      
         
-        ProductsTabItemViewModel viewModel = new ProductsTabItemViewModel();
 
-        private void Button_AddProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void AddProduct(object sender, System.Windows.RoutedEventArgs e)
         {           
            
-            AllProductsGrid.Width = new GridLength(0, GridUnitType.Star);
-            AddProductGrid.Width = new GridLength(1, GridUnitType.Star);
-            SeeProductGrid.Width = new GridLength(0, GridUnitType.Star);
+            
         }
 
-        private void Button_SeeProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ViewProduct(object sender, System.Windows.RoutedEventArgs e)
         {
             if (viewModel.Selected != null)
             {
                 AllProductsGrid.Width = new GridLength(0, GridUnitType.Star);
                 AddProductGrid.Width = new GridLength(0, GridUnitType.Star);
-                SeeProductGrid.Width = new GridLength(1, GridUnitType.Star);
+                ViewProductGrid.Width = new GridLength(1, GridUnitType.Star);
             }
             else
             {
@@ -54,21 +55,19 @@ namespace Alligator.UI.TabItems
             
         }
 
-        private void Button_DeleteProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DeleteProduct(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Comeback_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void Comeback(object sender, System.Windows.RoutedEventArgs e)
         {
-            AllProductsGrid.Width = new GridLength(1, GridUnitType.Star);
-            AddProductGrid.Width = new GridLength(0, GridUnitType.Star);
-            SeeProductGrid.Width = new GridLength(0, GridUnitType.Star);
+            
         }
 
-        private void Button_SaveProduct_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void SaveProduct(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            //TODO do it later
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Alligator.BusinessLayer.Models.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
-        public object CategoryId { get; internal set; }
+        //public CategoryModel Category { get; set; }
     }
 }

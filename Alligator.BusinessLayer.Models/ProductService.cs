@@ -24,7 +24,7 @@ namespace Alligator.BusinessLayer.Models
                 {
                     Id = entity.Id,
                     Name = entity.Name,
-                    CategoryId = entity.Category.Id
+                    //CategoryId = entity.Category.Id
                 });
             return productList;
         }
