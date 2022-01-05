@@ -19,7 +19,7 @@ namespace Alligator.DataLayer.Repositories
             ("dbo.OrderReview_SelectById", (orderreview, order, client) =>
             {
                 orderreview.Order = order;
-                orderreview.Client = client;
+                //orderreview.Client = client;
                 return orderreview;
             },
             new { Id = id },
@@ -36,7 +36,7 @@ namespace Alligator.DataLayer.Repositories
             ("dbo.OrderReview_SelectByOrderId", (orderreview, order, client) =>
             {
                 orderreview.Order = order;
-                orderreview.Client = client;
+                //orderreview.Client = client;
                 return orderreview;
             },
             new { OrderId = id },
