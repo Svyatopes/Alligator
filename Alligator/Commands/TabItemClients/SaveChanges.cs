@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Services;
+using Alligator.UI.Helpers;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,22 +24,16 @@ namespace Alligator.UI.Commands.TabItemClients
         }
         public override void Execute(object parameter)
         {
-            bool canExecute = TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.FirstName) &&
-                   TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.LastName) &&
-                   TextBoxesValidation.PhoneNumberValidation(_viewModel.SelectedClient.PhoneNumber) &&
-                   TextBoxesValidation.EmailValidation(_viewModel.SelectedClient.Email) &&
-                   TextBoxesValidation.ClientsNameValidation(_viewModel.SelectedClient.Patronymic);
+            bool canExecute = ClientValidation.TrimAndCheckIsValid(_viewModel.EditableClient);
             if (!canExecute)
             {
-
                 var userAnswer = MessageBox.Show("Корректно ли введены данные? ", "Проверь ну", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (userAnswer == MessageBoxResult.No)
                 {
                     return;
                 }
-
             }
-            _clientService.UpdateClient(_viewModel.SelectedClient);
+            _clientService.UpdateClient(_viewModel.EditableClient);
             _viewModel.Clients.Clear();
             foreach (var item in _clientService.GetAllClients())
             {

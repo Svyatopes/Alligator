@@ -7,24 +7,31 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ClientRepository
+    public class ClientRepository : BaseRepository
     {
 
-       // private const string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";/* "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";*/
-        string _connection = "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";
-        public ClientRepository()
-        {
+        private const string _connection =/* "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";*/ "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 
-        }
 
         public List<Client> GetAllClients()
         {
             string proc = "dbo.Client_SelectAll";
-            using var conn = new SqlConnection(_connection);
-            conn.Open();
-            var clients = conn.Query<Client>(proc)
-            .ToList();
-            return clients;
+            using var conn = GetConnection();
+         
+            try
+            {
+                
+                var clients = conn.Query<Client>(proc)
+                .ToList();
+                return clients;
+            }
+            catch
+            {
+                List<Client> clients = new List<Client>();
+                return clients;
+            }
+
+
         }
 
         public Client GetClientById(int id)
@@ -60,8 +67,7 @@ namespace Alligator.DataLayer.Repositories
         public Client GetClientByCommentId(int id)
         {
             string proc = "dbo.Client_SelectByCommentId";
-            using SqlConnection conn = new SqlConnection(_connection);
-            conn.Open();
+            using var conn = GetConnection();
             Client client = conn.QueryFirstOrDefault<Client>
             (proc,
             new
@@ -72,35 +78,33 @@ namespace Alligator.DataLayer.Repositories
             return client;
         }
 
-        public void InsertClient(Client client)
+        public int InsertClient(Client client)
         {
-            string proc = "dbo.Insert_Client";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
-            connection.Execute(proc, new
+            string proc = "dbo.Client_Insert";
+            using var connection = GetConnection();
+            return connection.QueryFirstOrDefault<int>(proc, new
             {
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                Patronymic = client.Patronymic,
-                PhoneNumber = client.PhoneNumber,
-                Email = client.Email
+                client.FirstName,
+                client.LastName,
+                client.Patronymic,
+                client.PhoneNumber,
+                client.Email
             },
-            commandType: CommandType.StoredProcedure
-                );
+             commandType: CommandType.StoredProcedure);
         }
 
         public void UpdateClient(Client client)
         {
             string proc = "dbo.Client_Update";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
+            using var connection = GetConnection();
             connection.Execute(proc, new
             {
                 client.Id,
                 client.FirstName,
                 client.LastName,
                 client.Patronymic,
-                client.PhoneNumber
+                client.PhoneNumber,
+                client.Email
             },
             commandType: CommandType.StoredProcedure
                 );
@@ -109,8 +113,7 @@ namespace Alligator.DataLayer.Repositories
         public void DeleteClient(Client client)
         {
             string proc1 = "dbo.Client_Delete";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
+            using var connection = GetConnection();
             connection.Execute(proc1, new
             {
                 Id = client.Id

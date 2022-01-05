@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Services;
+using Alligator.UI.Helpers;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,60 +18,24 @@ namespace Alligator.UI.Commands.TabItemClients
         private ClientService _clientservice;
         public AddNewClient(TabItemClientsViewModel viewModel, ClientService clientService)
         {
-           _viewModel = viewModel;
+            _viewModel = viewModel;
             _clientservice = clientService;
         }
-        //public override bool CanExecute(object parameter)
-        //{
-        //bool canExecute = TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.FirstName) &&
-        //                  TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.LastName) &&
-        //                  TextBoxesValidation.ClientsNameValidation(viewModel.NewClient.Patronymic);
-        //    return canExecute;
-
-        //}
+        
         public override void Execute(object parameter)
         {
-           
-
-            bool canExecute = TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.FirstName) &&
-                  TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.LastName) &&
-                  TextBoxesValidation.PhoneNumberValidation(_viewModel.NewClient.PhoneNumber)&&
-                  TextBoxesValidation.EmailValidation(_viewModel.NewClient.Email) &&
-                  TextBoxesValidation.ClientsNameValidation(_viewModel.NewClient.Patronymic);
-            if (!canExecute)
+            bool isValid = ClientValidation.TrimAndCheckIsValid(_viewModel.NewClient);
+            if (!isValid)
             {
-                
-                var userAnswer = MessageBox.Show ("Корректно ли введены данные? ", "Проверь ну", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (userAnswer == MessageBoxResult.No)
-                {
-                    return;
-                }
-
-            }
-           
-            var Fname = _viewModel.NewClient.FirstName;
-            Fname = Fname.Trim();
-            var clientt = new ClientModel()
-            {
-                FirstName = Fname,
-                LastName = _viewModel.NewClient.LastName.Trim(),
-                Patronymic = _viewModel.NewClient.Patronymic.Trim(),
-                PhoneNumber = _viewModel.NewClient.PhoneNumber.Trim(),
-                Email = _viewModel.NewClient.Email.Trim()
-            };
-           var clientToAdd = _clientservice.InsertNewClient(clientt);
-            if (clientToAdd == null)
-            {
-                MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("данные введены НЕКОРРЕКТНО\r\nПроверьте количество введенных символов, и валидность емейла", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            _viewModel.Clients.Clear();
-            foreach(var client in _clientservice.GetAllClients())
-            {
-                _viewModel.Clients.Add(client); 
-            }
-            _viewModel.AllClients = Visibility.Visible;
-            _viewModel.AddClient = Visibility.Collapsed;
+
+            var idNewClient = _clientservice.InsertNewClient(_viewModel.NewClient);
+            _viewModel.NewClient.Id = idNewClient;
+            _viewModel.Clients.Add(_viewModel.NewClient);
+
+            _viewModel.Return.Execute(null);
         }
     }
 }

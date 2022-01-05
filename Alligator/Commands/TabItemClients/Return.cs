@@ -11,18 +11,18 @@ namespace Alligator.UI.Commands.TabItemClients
 
     public class Return : CommandBase
     {
-        private TabItemClientsViewModel viewModel;
+        private TabItemClientsViewModel _viewModel;
 
         public Return(TabItemClientsViewModel viewModel)
         {
-            this.viewModel = viewModel;
+            _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            viewModel.AllClients = Visibility.Visible;
-            viewModel.ClientCardVisibility = Visibility.Collapsed;
-            viewModel.AddClient = Visibility.Collapsed;
+            _viewModel.AllClients = Visibility.Visible;
+            _viewModel.ClientCardVisibility = Visibility.Collapsed;
+            _viewModel.AddClient = Visibility.Collapsed;
         }
     }
 }

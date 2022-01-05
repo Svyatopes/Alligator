@@ -28,14 +28,7 @@ namespace Alligator.UI.Commands.TabItemClients
             _viewModel.ClientCardVisibility = Visibility.Visible;
 
             _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
-            _viewModel.EditableClient = _viewModel.SelectedClient;
-            _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.SelectedClient.Comments);
             _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);
-            _viewModel.SelectedClient.Comments.Clear();
-            foreach (var item in _commentService.GetAllComments(_viewModel.SelectedClient.Id))
-            {
-                _viewModel.Comments.Add(item);
-            }
         }
     }
 }

@@ -25,7 +25,15 @@ namespace Alligator.BusinessLayer.Services
         public List<ClientModel> GetAllClients()
         {
             var clients = _clientRepository.GetAllClients();
-            return CustomMapper.GetInstance().Map<List<ClientModel>>(clients);
+            try
+            {
+                return CustomMapper.GetInstance().Map<List<ClientModel>>(clients);
+            }
+            catch
+            {
+                return new List<ClientModel>();
+            }
+
         }
 
         public ClientModel GetClientById(int id)
@@ -34,38 +42,28 @@ namespace Alligator.BusinessLayer.Services
             return CustomMapper.GetInstance().Map<ClientModel>(client);
         }
 
-        public ClientModel InsertNewClient(ClientModel client)
+        public int InsertNewClient(ClientModel client)
         {
-            ClientModel clientToAdd;
-            try
-            {
-                Mapper mapper = CustomMapper.GetInstance();
-                var justClient = mapper.Map<Client>(client);
-                _clientRepository.InsertClient(justClient);
-                var cl = mapper.Map<ClientModel>(justClient);
-                clientToAdd = cl;
-            }
-            catch
-            {
-                clientToAdd = null;
-            }
-            return clientToAdd;
-            
+            ClientModel client1;
+            Mapper mapper = CustomMapper.GetInstance();
+            var clientMap = mapper.Map<Client>(client);
+            return _clientRepository.InsertClient(clientMap);
+
         }
 
         public void UpdateClient(ClientModel client)
         {
             Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.UpdateClient(justClient);
+            var clientMap = mapper.Map<Client>(client);
+            _clientRepository.UpdateClient(clientMap);
 
         }
 
         public void DeleteClient(ClientModel client)
         {
             Mapper mapper = CustomMapper.GetInstance();
-            var justClient = mapper.Map<Client>(client);
-            _clientRepository.DeleteClient(justClient);
+            var clientMap = mapper.Map<Client>(client);
+            _clientRepository.DeleteClient(clientMap);
         }
     }
 }

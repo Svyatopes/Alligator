@@ -32,7 +32,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand DeleteClient { get; set; }
         public ICommand AddingClient { get; set; }
         public ICommand OpenClientCard { get; set; }
-        public ICommand ComeBack { get; set; }
+        public ICommand Return { get; set; }
         public ICommand SaveChanges { get; set; }
         public ICommand DeleteClientInClientCard { get; set; }
         public ICommand AddComment { get; set; }
@@ -49,7 +49,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
 
             DeleteClient = new DeleteClient_AllClientsPage(this, _clientService, _commentService);
-            ComeBack = new Return(this);
+            Return = new Return(this);
             OpenClientCard = new OpenClientCard(this, _clientService, _commentService);
             SaveChanges = new SaveChanges(this, _clientService, _commentService);
             AddingClient = new AddClientPage(this, _clientService);

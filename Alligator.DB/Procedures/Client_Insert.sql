@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE dbo.Insert_Client
+﻿CREATE PROCEDURE dbo.Client_Insert
 	@FirstName varchar(50),
     @LastName varchar(50),
     @Patronymic varchar(50),
@@ -12,6 +12,7 @@ INSERT INTO dbo.Client
             Patronymic,
             PhoneNumber,
             Email)
+     OUTPUT Inserted.ID
      VALUES
            (@FirstName,
             @LastName,

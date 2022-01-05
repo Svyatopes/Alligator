@@ -3,7 +3,8 @@
 	@FirstName varchar(50),
     @LastName varchar(50),
     @Patronymic varchar(50),
-    @PhoneNumber varchar(50)
+    @PhoneNumber varchar(50),
+    @Email varchar(200)
     
 AS
 BEGIN
@@ -11,6 +12,7 @@ BEGIN
    SET FirstName = @FirstName,
       LastName = @LastName,
       Patronymic = @Patronymic,
-      PhoneNumber = @PhoneNumber
+      PhoneNumber = @PhoneNumber,
+      Email = @Email
  WHERE Id = @Id;
 END
