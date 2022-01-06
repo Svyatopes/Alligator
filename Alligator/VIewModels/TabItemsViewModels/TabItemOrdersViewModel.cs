@@ -36,6 +36,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand GetOrders { get; set; }
         public ICommand GetOrderInfo { get; set; }
         public ICommand DeleteOrderWindowOfAllOrders { get; set; }
+        public ICommand DeleteOrderWindowOfOrderInfo { get; set; }
         public ICommand AddOrder { get; set; }
         public ICommand SaveChanges { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
@@ -56,9 +57,10 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             Products = new ObservableCollection<ProductModel>();
 
             AddReview = new AddReviewCommand(this, _orderReviewService);
-            DeleteReview = new DeleteOrderReviewCommand(this, _orderReviewService);
+            DeleteReview = new DeleteReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
+            DeleteOrderWindowOfOrderInfo=new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _clientService);
             SaveChanges = new SaveChangesCommand(this, _orderService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);

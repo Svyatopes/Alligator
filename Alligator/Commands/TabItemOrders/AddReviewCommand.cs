@@ -49,9 +49,7 @@ namespace Alligator.UI.Commands.TabItemOrders
 
             var newOrderReview = new OrderReviewModel() {Order=_viewModel.SelectedOrder, Text=newReview };
             _viewModel.OrderReviews.Add(newOrderReview);
-            _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrder.Id);
-           // var newReviewModel = _orderReviewService.GetOrderReviewModelById(_viewModel.SelectedOrderReview.Id);
-           // _viewModel.OrderReviews.Add(newReviewModel);
+            _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrder.Id);           
             _viewModel.NewReviewText = string.Empty;
 
         }
