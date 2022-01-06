@@ -56,7 +56,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
-            DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService);
+            DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _clientService);
             SaveChanges = new SaveChangesCommand(this, _orderService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);

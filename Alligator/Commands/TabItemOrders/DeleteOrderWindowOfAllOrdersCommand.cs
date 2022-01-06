@@ -13,15 +13,21 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         private TabItemOrdersViewModel _viewModel;
         private OrderService _orderService;
+        private OrderDetailService _orderDetailService;
+        private OrderReviewService _orderReviewService;
 
-        public DeleteOrderWindowOfAllOrdersCommand(TabItemOrdersViewModel viewModel, OrderService orderService)
+        public DeleteOrderWindowOfAllOrdersCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderDetailService orderDetailService, OrderReviewService orderReviewService)
         {
             _viewModel = viewModel;
             _orderService = orderService;
+            _orderReviewService = orderReviewService;
+            _orderDetailService = orderDetailService;
         }
 
         public override void Execute(object parameter)
         {
+            _orderReviewService.DeleteOrderReviewModelByOrderId(_viewModel.SelectedOrder.Id);
+            _orderDetailService.DeleteOrderDetailModelByOrderId(_viewModel.SelectedOrder.Id);
             _orderService.DeleteOrderModel(_viewModel.SelectedOrder.Id);
             _viewModel.AllOrders.Remove(_viewModel.SelectedOrder);
         }

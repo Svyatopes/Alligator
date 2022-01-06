@@ -8,6 +8,7 @@ namespace Alligator.DataLayer.Repositories
         void AddOrderDetail(int amount, int orderId, int productId);
         void DeleteOrderDetail(int id);
         void DeleteOrderDetailByProductId(int id);
+        void DeleteOrderDetailByOrderId(int orderId);
         void EditOrderDetail(int id, int amount);
         OrderDetail GetOrderDetailById(int id);
         List<OrderDetail> GetOrderDetailsByOrderId(int id);

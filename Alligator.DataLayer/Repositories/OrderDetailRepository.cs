@@ -89,6 +89,13 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
         }
 
+        public void DeleteOrderDetailByOrderId(int id)
+        {
+            using var connection = ProvideConnection();
+            string procString = "dbo.OrderDetail_DeleteByOrderId";
+            connection.Execute(procString, new { OrderId=id },
+            commandType: CommandType.StoredProcedure);
+        }
         public void DeleteOrderDetailByProductId(int id)
         {
             using var connection = ProvideConnection();
