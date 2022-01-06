@@ -32,6 +32,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private DateTime _newDate;
 
         public ICommand AddReview { get; set; }
+        public ICommand DeleteReview { get; set; }
         public ICommand GetOrders { get; set; }
         public ICommand GetOrderInfo { get; set; }
         public ICommand DeleteOrderWindowOfAllOrders { get; set; }
@@ -49,12 +50,13 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _clientService = new ClientService();
 
             AllOrders = new ObservableCollection<OrderModel>();
-            OrderDetails = new ObservableCollection<OrderDetailModel>();
-            //OrderReviews = new ObservableCollection<OrderReviewModel>();           
+           
+                     
             Clients = new ObservableCollection<ClientModel>();
             Products = new ObservableCollection<ProductModel>();
 
             AddReview = new AddReviewCommand(this, _orderReviewService);
+            DeleteReview = new DeleteOrderReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _clientService);
@@ -66,8 +68,19 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
         
         public ObservableCollection<OrderModel> AllOrders { get; set; }
-        public ObservableCollection<OrderDetailModel> OrderDetails { get; set; }
-        
+        private ObservableCollection<OrderDetailModel> _orderDetails;
+        public ObservableCollection<OrderDetailModel> OrderDetails
+        {
+            get { return _orderDetails; }
+            set
+            {
+                _orderDetails = value;
+                OnPropertyChanged(nameof(OrderDetails));
+            }
+        }
+
+
+
         private ObservableCollection<OrderReviewModel> _orderReviews;
         public ObservableCollection<OrderReviewModel> OrderReviews
         {
