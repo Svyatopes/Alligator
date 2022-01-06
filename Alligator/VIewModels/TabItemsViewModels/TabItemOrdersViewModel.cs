@@ -17,7 +17,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
     public class TabItemOrdersViewModel : BaseViewModel
     {
-        private OrderShortModel _selectedOrder;
+       
+        private OrderModel _selectedOrder;
         private OrderDetailModel _selectedOrderDetailModel;
         private OrderReviewModel _selectedOrderReviewModel;
         private ProductModel _selectedProduct;
@@ -41,16 +42,18 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand ComeBackFirstWindow { get; set; }
         public TabItemOrdersViewModel()
         {
-            AllOrders = new ObservableCollection<OrderShortModel>();           
-            OrderDetails = new ObservableCollection<OrderDetailModel>();
-            OrderReviews = new ObservableCollection<OrderReviewModel>();           
-            Clients = new ObservableCollection<ClientModel>();
-            Products = new ObservableCollection<ProductModel>();
 
             _orderService = new OrderService();
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
+
+            AllOrders = new ObservableCollection<OrderModel>();
+            OrderDetails = new ObservableCollection<OrderDetailModel>();
+            //OrderReviews = new ObservableCollection<OrderReviewModel>();           
+            Clients = new ObservableCollection<ClientModel>();
+            Products = new ObservableCollection<ProductModel>();
+
             AddReview = new AddReviewCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService);
@@ -62,14 +65,23 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
            
         }
         
-        public ObservableCollection<OrderShortModel> AllOrders { get; set; }
+        public ObservableCollection<OrderModel> AllOrders { get; set; }
         public ObservableCollection<OrderDetailModel> OrderDetails { get; set; }
-        public ObservableCollection<OrderReviewModel> OrderReviews { get; set; }
-
+        
+        private ObservableCollection<OrderReviewModel> _orderReviews;
+        public ObservableCollection<OrderReviewModel> OrderReviews
+        {
+            get { return _orderReviews; }
+            set
+            {
+                _orderReviews = value;
+                OnPropertyChanged(nameof(OrderReviews));
+            }
+        }
         public ObservableCollection<ClientModel> Clients { get; set; }
         public ObservableCollection<ProductModel> Products { get; set; }
 
-        public OrderShortModel SelectedOrder
+        public OrderModel SelectedOrder
         {
             get { return _selectedOrder; }
             set

@@ -24,8 +24,12 @@ namespace Alligator.UI.Commands.TabItemOrders
         public override void Execute(object parameter)
         {
 
-            _viewModel.AllOrders = new ObservableCollection<OrderShortModel>(_orderService.GetOrdersWithoutSensitiveData());
-                
+            _viewModel.AllOrders.Clear();
+            foreach (var order in _orderService.GetOrders())
+            {
+                _viewModel.AllOrders.Add(order);
+            }
+
         }
     }
 }

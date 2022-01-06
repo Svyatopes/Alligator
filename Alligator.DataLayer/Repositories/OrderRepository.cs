@@ -67,7 +67,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Delete";
             connection.Execute(procString,
-            new { Id = id },
+            new {id },
             commandType: CommandType.StoredProcedure);
         }
 
