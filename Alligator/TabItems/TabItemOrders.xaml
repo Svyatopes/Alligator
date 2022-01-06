@@ -137,7 +137,7 @@
                         </Grid.ColumnDefinitions>
                     <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Command="{Binding ComeBackFirstWindow}" >Вернуться назад</Button>
                     <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding DeleteOrderWindowOfOrderInfo}">Удалить заказ</Button>
-                        <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding SaveChanges}" >Сохранить изменения</Button>
+                    <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding SaveChangesWindowOfOrderInfo}" >Сохранить изменения</Button>
 
                     </Grid>
                 </Grid>
@@ -237,7 +237,6 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Command="{Binding ComeBackFirstWindow}" >Вернуться назад</Button>
-                        <!--<Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding DeleteOrder}">Удалить заказ</Button>-->
                         <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding SaveChanges}" >Сохранить изменения</Button>
 
                     </Grid>

@@ -38,7 +38,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand DeleteOrderWindowOfAllOrders { get; set; }
         public ICommand DeleteOrderWindowOfOrderInfo { get; set; }
         public ICommand AddOrder { get; set; }
-        public ICommand SaveChanges { get; set; }
+        public ICommand SaveChangesWindowOfOrderInfo { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
         public ICommand OpenOrderInfoWindow { get; set; }
         public ICommand ComeBackFirstWindow { get; set; }
@@ -62,7 +62,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
             DeleteOrderWindowOfOrderInfo=new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _clientService);
-            SaveChanges = new SaveChangesCommand(this, _orderService);
+            SaveChangesWindowOfOrderInfo = new SaveChangesWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this);
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
