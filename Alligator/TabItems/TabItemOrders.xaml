@@ -162,7 +162,7 @@
                     <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="3">Адрес</TextBlock>
                     <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="1">Продукты</TextBlock>
                     <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="2">Количество</TextBlock>
-                    <TextBlock Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="3">Список продуктов</TextBlock>
+                    <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Grid.Row="3" Command="{Binding AddProduct}">Добавить продукт</Button>
                     <Grid Grid.Row="1" Grid.RowSpan="3" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -173,9 +173,9 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <DatePicker x:Name="Date" Text="{Binding NewDate}" Grid.Column="1" Grid.Row="0" Margin="15,0,5,7" Width="220" Background="White" ></DatePicker>
-                        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Clients.Id}" SelectedItem="{Binding SelectedClient.Id}" Background="White" Width="220" Margin="15,0,5,5" ></ComboBox>
-                        <TextBox Text="{Binding NewAdressText}" Grid.Column="1" Grid.Row="2" Width="220" Background="White" Margin="15,0,5,5" ></TextBox>
+                        <DatePicker x:Name="Date" SelectedDate="{Binding NewDate}" Grid.Column="1" Grid.Row="0" Margin="15,0,10,5" Width="220" HorizontalAlignment="Right" Background="White" />
+                        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Clients.Id}" SelectedItem="{Binding SelectedClient.Id}"  HorizontalAlignment="Right" Background="White" Width="220" Margin="15,0,10,5" ></ComboBox>
+                        <TextBox Text="{Binding NewAdressText}" Grid.Column="1" Grid.Row="2" Width="220"  HorizontalAlignment="Right" Background="White" Margin="15,0,10,5" ></TextBox>
                     </Grid>
                     <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="1" >
                         <Grid.ColumnDefinitions>
@@ -189,6 +189,7 @@
                         </Grid.RowDefinitions>
                         <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}" Grid.Column="1"  Grid.Row="1" Margin="15,0,5,5" Width="220" HorizontalAlignment="Right" Background="White" ></ComboBox>
                         <TextBox Grid.Column="2" Grid.Row="2" Text="{Binding NewAmount}" Background="White" Width="220" HorizontalAlignment="Right" Margin="15,0,5,5" ></TextBox>
+                        <!--<Button  Margin="0,0,0,10" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" Background="#DACDCD" Command="{Binding AddProduct}" Height="20" Width="140">Добавить продукт</Button>-->
 
                     </Grid>
                     <Grid Grid.Row="4" Grid.Column="0">
@@ -233,7 +234,7 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <Button Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Command="{Binding ComeBackFirstWindow}" >Вернуться назад</Button>
-                        <Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding DeleteOrder}">Удалить заказ</Button>
+                        <!--<Button Background="#DACDCD" Grid.Column="1" Margin="0,0,0,10" Command ="{Binding DeleteOrder}">Удалить заказ</Button>-->
                         <Button Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Command="{Binding SaveChanges}" >Сохранить изменения</Button>
 
                     </Grid>

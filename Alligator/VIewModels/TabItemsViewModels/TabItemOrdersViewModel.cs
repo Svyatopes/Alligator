@@ -41,6 +41,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand ComeBackFirstWindow { get; set; }
         public TabItemOrdersViewModel()
         {
+            AllOrders = new ObservableCollection<OrderShortModel>();           
+            OrderDetails = new ObservableCollection<OrderDetailModel>();
+            OrderReviews = new ObservableCollection<OrderReviewModel>();           
+            Clients = new ObservableCollection<ClientModel>();
+            Products = new ObservableCollection<ProductModel>();
 
             _orderService = new OrderService();
             _orderReviewService = new OrderReviewService();
@@ -55,11 +60,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
            
-            AllOrders = new ObservableCollection<OrderShortModel>();           
-            OrderDetails = new ObservableCollection<OrderDetailModel>();
-            OrderReviews = new ObservableCollection<OrderReviewModel>();           
-            Clients = new ObservableCollection<ClientModel>();
-            Products = new ObservableCollection<ProductModel>();
         }
         
         public ObservableCollection<OrderShortModel> AllOrders { get; set; }
