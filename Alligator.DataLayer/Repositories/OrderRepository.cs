@@ -53,11 +53,11 @@ namespace Alligator.DataLayer.Repositories
             Distinct().ToList();
         }
 
-        public void AddOrder(DateTime date, int clientId, string address)
+        public int AddOrder(DateTime date, int clientId, string address)
         {
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Insert";
-            connection.Execute(procString,
+            return connection.QueryFirstOrDefault<int>(procString,
             new { Date = date, ClientId = clientId, Address = address },
             commandType: CommandType.StoredProcedure);
         }

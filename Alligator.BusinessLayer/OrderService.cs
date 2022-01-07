@@ -52,9 +52,10 @@ namespace Alligator.BusinessLayer
             return CustomMapper.GetInstance().Map<OrderModel>(order);
         }
 
-        public void AddOrderModel(DateTime date, int clientId, string address)
-        {
-             _repositoryOrder.AddOrder(date, clientId, address);            
+        public int AddOrderModel(DateTime date, int clientId, string address)
+        {           
+           int id =_repositoryOrder.AddOrder(date, clientId, address);
+           return id;
         }
 
         public void DeleteOrderModel(int id)

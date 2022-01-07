@@ -33,13 +33,11 @@ namespace Alligator.UI.Commands.TabItemOrders
             if (string.IsNullOrEmpty(newAddress))
             {
                 MessageBox.Show("Введите адрес");
-                _viewModel.NewAdressText=string.Empty;
-            }
-            else
-            _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);
-            int newOrderId = _orderService.GetOrders().Last().Id;           
-            _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(newOrderId));
-
+                _viewModel.NewAdressText = string.Empty;
+            }           
+            else           
+            _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews
+            (_orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress)));
         }
     }
 }
