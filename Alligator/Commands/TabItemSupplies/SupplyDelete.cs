@@ -19,7 +19,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override bool CanExecute(object parameter)
         {
-            return _viewModel.Selected is not null;
+            return _viewModel.SelectedSupply is not null;
         }
 
         public override void Execute(object parameter)
@@ -27,10 +27,10 @@ namespace Alligator.UI.Commands.TabItemSupplies
             var userAnswer = MessageBox.Show("Вы правда хотите удалить поставку?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
             {
-                if (_supplyDetailService.DeleteSupplyDetailBySupplyId(_viewModel.Selected.Id)
-                    && _supplyService.DeleteSupply(_viewModel.Selected.Id))
+                if (_supplyDetailService.DeleteSupplyDetailBySupplyId(_viewModel.SelectedSupply.Id)
+                    && _supplyService.DeleteSupply(_viewModel.SelectedSupply.Id))
                 {
-                    _viewModel.Supplies.Remove(_viewModel.Selected);
+                    _viewModel.Supplies.Remove(_viewModel.SelectedSupply);
                 }
                 else
                 {

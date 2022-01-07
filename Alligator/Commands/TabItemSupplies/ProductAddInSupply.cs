@@ -18,11 +18,15 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _supplyDetailService = supplyDetailService;
 
         }
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.TextBoxNewAmountText !=0 && _viewModel.NameSelectProduct !="";
+        }
 
         public override void Execute(object parameter)
         {
 
-            var nameSelectedProduct = _viewModel.SelectProduct;
+            var nameSelectedProduct = _viewModel.NameSelectProduct;
             var idSelectedProduct = 0;
             foreach (var item in _viewModel.Products)
             {
@@ -32,28 +36,37 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 }
             }
             var idProductInDatabase = _supplyDetailService.GetProductById(idSelectedProduct);
+            _viewModel.Supply.Date = _viewModel.NewSupply.Date;
 
+            var idSupplyInDatabase = 0;
+            if (_viewModel.SelectedSupply is not null)
+            {
+                _viewModel.Supply = _viewModel.SelectedSupply;
+                idSupplyInDatabase = _viewModel.Supply.Id;
+
+            }
             var supplyProduct = new SupplyDetailModel()
             {
                 Product = idProductInDatabase,
                 Amount = _viewModel.TextBoxNewAmountText,
+                SupplyId = idSupplyInDatabase,
 
             };
-
-            _viewModel.Supply.Date = _viewModel.NewSupply.Date;
-            _viewModel.Supply.Details.Add(supplyProduct);
-
-            if (_viewModel.SupplyDetails.Any())
-            {
-                //TODO: уйти от использования индексов
-                supplyProduct.SupplyId = _viewModel.SupplyDetails[0].SupplyId;
-                _viewModel.SupplyDetails.Add(supplyProduct);
-                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(_viewModel.SupplyDetails);
+            if (_viewModel.SelectedDetails is not null)
+            {                
+                _viewModel.Supply.Details = new List<SupplyDetailModel>();
+                foreach (var item in _viewModel.SelectedDetails)
+                {
+                        _viewModel.Supply.Details.Add(item) ;
+                }               
+                
             }
             else
             {
-                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(_viewModel.Supply.Details);
+                _viewModel.Supply.Details = new List<SupplyDetailModel>();
             }
+            _viewModel.Supply.Details.Add(supplyProduct);
+            _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>(_viewModel.Supply.Details);
 
         }
     }

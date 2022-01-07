@@ -1,6 +1,7 @@
 ﻿using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -16,7 +17,10 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel = viewModel;
             _supplyDetailService = supplyDetailService;
         }
-
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedSupply is not null;
+        }
         public override void Execute(object parameter)
         {
             _viewModel.VisibilityWindowAllSupplies = Visibility.Collapsed;
@@ -24,8 +28,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Visible;
 
 
-            var supplyDetailSelected = _supplyDetailService.GetSupplyDetailById(_viewModel.Selected.Id);
-            _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
+            var supplyDetailSelected = _supplyDetailService.GetSupplyDetailById(_viewModel.SelectedSupply.Id);
+            _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
 
         }
     }

@@ -12,8 +12,9 @@ namespace Alligator.UI.Commands.TabItemSupplies
         
         public ChangeCardSupply(TabItemSuppliesViewModel viewModel)
         {
-            _viewModel = viewModel;            
+            _viewModel = viewModel;         
         }
+        
 
         public override void Execute(object parameter)
         {
@@ -22,9 +23,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Collapsed;
             _viewModel.VisibilityWindowChangeSupply = Visibility.Visible;
             
-            _viewModel.TextBoxNewIdText = _viewModel.Selected.Id;
-            _viewModel.TextBoxNewDateText = _viewModel.Selected.Date;
-            _viewModel.SupplyDetails = _viewModel.PSelected;
+            _viewModel.TextBoxNewIdText = _viewModel.SelectedSupply.Id;
+            _viewModel.TextBoxNewDateText = _viewModel.SelectedSupply.Date;
             
 
         }

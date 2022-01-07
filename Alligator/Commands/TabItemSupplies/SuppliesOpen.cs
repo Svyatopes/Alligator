@@ -1,6 +1,8 @@
-﻿using Alligator.BusinessLayer.Service;
+﻿using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemSupplies
@@ -8,18 +10,25 @@ namespace Alligator.UI.Commands.TabItemSupplies
     public class SuppliesOpen : CommandBase
     {
         private TabItemSuppliesViewModel _viewModel;
-        private SupplyService _supplyService;
-
-        public SuppliesOpen(TabItemSuppliesViewModel viewModel, SupplyService supplyService)
+        
+        public SuppliesOpen(TabItemSuppliesViewModel viewModel)
         {
             _viewModel = viewModel;
-            _supplyService = supplyService;
         }
 
         public override void Execute(object parameter)
         {
-            //TODO: error when click on add and return
-            _viewModel.PSelected.Clear();
+            if (_viewModel.SelectedDetails is not null)
+            {
+                _viewModel.SelectedDetails.Clear();
+                _viewModel.Supply.Details.Clear();
+            }
+            if (_viewModel.SelectedSupply is not null)
+            {
+                _viewModel.SelectedSupply = new SupplyModel();
+                
+            }
+
             _viewModel.TextBoxNewAmountText = 0;
             _viewModel.TextBoxNewDateText = DateTime.Now;
             _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;

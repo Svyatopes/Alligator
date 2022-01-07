@@ -33,19 +33,21 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
             if (userAnswer == MessageBoxResult.Yes)
             {
-                //TODO: сделать один список на supply detail и для добавления новых строк деталей
-                //использовать Id supplydetail - если 0, то надо добавить в БД
-                var idSupplyInDatabase = _viewModel.SupplyDetails[0].SupplyId;
                 foreach (var item in _viewModel.Supply.Details)
                 {
-                    item.SupplyId = idSupplyInDatabase;
-                    _supplyDetailService.InsertSupplyDetail(item);
+                    if (item.Id==0)
+                    {                        
+                        _supplyDetailService.InsertSupplyDetail(item);
+                    }                   
 
                 }
-                _viewModel.Supply = _supplyService.GetSupplyById(idSupplyInDatabase);
-                _viewModel.Supply.Date = _viewModel.Selected.Date;
+                foreach (var item in _viewModel.SelectedDetailForDelete)
+                {
+                    _supplyDetailService.DeleteSupplyDetailById(item.Id);
 
-
+                }
+                
+                _viewModel.Supply = _viewModel.SelectedSupply;
                 _supplyService.UpdateSupply(_viewModel.Supply);
 
                 _viewModel.Supplies.Clear();
@@ -54,8 +56,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>();
-                _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
+                _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
                 _viewModel.TextBoxNewAmountText = 0;
                 _viewModel.TextBoxNewDateText = DateTime.Now;

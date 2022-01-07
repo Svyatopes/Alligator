@@ -51,17 +51,13 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-                _viewModel.PSelected = new ObservableCollection<SupplyDetailModel>();
-                _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
+                _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
 
                 _viewModel.TextBoxNewAmountText = 0;
                 _viewModel.TextBoxNewDateText = DateTime.Now;
                 _viewModel.VisibilityWindowAddNewSupply = Visibility.Collapsed;
-                _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;
-
-
-               
+                _viewModel.VisibilityWindowAllSupplies = Visibility.Visible;              
 
             }
         }

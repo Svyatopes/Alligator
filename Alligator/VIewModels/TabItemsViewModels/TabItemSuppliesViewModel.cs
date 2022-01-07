@@ -4,9 +4,9 @@ using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemSupplies;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 
@@ -23,28 +23,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _supplyService = new SupplyService();
             _supplyDetailService = new SupplyDetailService();
             AddNewSupply = new SupplyAdd(this);
+            LoadSupplies = new LoadSupplies(this, _supplyService, _supplyDetailService);
             OpenCardSupply = new SupplyDetailOpen(this, _supplyDetailService);
-            SuppliesOpen = new SuppliesOpen(this, _supplyService);
+            SuppliesOpen = new SuppliesOpen(this);
             AddProductInSupply = new ProductAddInSupply(this, _supplyDetailService);
             SaveNewSupply = new SaveNewSupply(this, _supplyService, _supplyDetailService);
             SaveChangSupply = new SaveChangSupply(this, _supplyService, _supplyDetailService);
             ChangeCardSupply = new ChangeCardSupply(this);
-            ProductDeleteFromSupply = new ProductDeleteFromSupply(this, _supplyDetailService);
+            ProductDeleteFromSupply = new ProductDeleteFromSupply(this);
             DeleteSupply = new SupplyDelete(this, _supplyService, _supplyDetailService);
         }
-
-
-
-        //private bool _isEnabledDeleteSupply;
-        //public bool IsEnabledDeleteSupply
-        //{
-        //    get { return Selected is not null; }
-        //    set
-        //    {
-        //        _isEnabledDeleteSupply = value;
-        //        OnPropertyChanged(nameof(IsEnabledDeleteSupply));
-        //    }
-        //}
 
         public ICommand OpenCardSupply { get; set; }
         public ICommand DeleteSupply { get; set; }
@@ -54,27 +42,20 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand SaveNewSupply { get; set; }
         public ICommand SaveChangSupply { get; set; }
         public ICommand ChangeCardSupply { get; set; }
+        public ICommand LoadSupplies { get; set; }
         public ICommand ProductDeleteFromSupply { get; set; }
 
 
         private ObservableCollection<ProductModel> _products;
+
         public ObservableCollection<ProductModel> Products
         {
             get { return _products; }
             set
             {
                 _products = value;
+                
                 OnPropertyChanged(nameof(Products));
-            }
-        }
-        private string _selectProduct;
-        public string SelectProduct
-        {
-            get { return _selectProduct; }
-            set
-            {
-                _selectProduct = value;
-                OnPropertyChanged(nameof(SelectProduct));
             }
         }
 
@@ -88,30 +69,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _supplies = value;
                 OnPropertyChanged(nameof(Supplies));
-            }
-        }
-
-        private ObservableCollection<SupplyDetailModel> _details;
-        public ObservableCollection<SupplyDetailModel> Details
-        {
-            get { return _details; }
-            set
-            {
-                _details = value;
-                OnPropertyChanged(nameof(Details));
-            }
-        }
-
-
-        private SupplyModel _newSupply;
-
-        public SupplyModel NewSupply
-        {
-            get { return _newSupply; }
-            set
-            {
-                _newSupply = value;
-                OnPropertyChanged(nameof(NewSupply));
             }
         }
 
@@ -129,53 +86,88 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
 
-        private ObservableCollection<SupplyDetailModel> _supplyDetails;
 
-        public ObservableCollection<SupplyDetailModel> SupplyDetails
+        private string _nameSelectProduct;
+        public string NameSelectProduct
         {
-            get { return _supplyDetails; }
+            get { return _nameSelectProduct; }
             set
             {
-                _supplyDetails = value;
-                OnPropertyChanged(nameof(SupplyDetails));
+                _nameSelectProduct = value;
+                ((CommandBase)AddProductInSupply).RaiseCanExecutedChanged();
+
+                OnPropertyChanged(nameof(NameSelectProduct));
             }
         }
 
 
-        private SupplyModel _selected;
 
-        public SupplyModel Selected
+
+        private SupplyModel _newSupply;
+
+        public SupplyModel NewSupply
         {
-            get { return _selected; }
+            get { return _newSupply; }
             set
             {
-                _selected = value;
+                _newSupply = value;
+                OnPropertyChanged(nameof(NewSupply));
+            }
+        }
+
+
+
+
+        private SupplyModel _selectedSupply;
+
+        public SupplyModel SelectedSupply
+        {
+            get { return _selectedSupply; }
+            set
+            {
+                _selectedSupply = value;
+                ((CommandBase)OpenCardSupply).RaiseCanExecutedChanged();
                 ((CommandBase)DeleteSupply).RaiseCanExecutedChanged();
-                OnPropertyChanged(nameof(Selected));
+                
+                OnPropertyChanged(nameof(SelectedSupply));
             }
         }
 
 
-        private ObservableCollection<SupplyDetailModel> _pselected;
+        private ObservableCollection<SupplyDetailModel> _selectedDetails;
 
-        public ObservableCollection<SupplyDetailModel> PSelected
+        public ObservableCollection<SupplyDetailModel> SelectedDetails
         {
-            get { return _pselected; }
+            get { return _selectedDetails; }
             set
             {
-                _pselected = value;
-                OnPropertyChanged(nameof(PSelected));
+                _selectedDetails = value;
+                OnPropertyChanged(nameof(SelectedDetails));
             }
         }
-        private SupplyDetailModel _prSelected;
+        
+        private List<SupplyDetailModel> _selectedDetailForDelete;
 
-        public SupplyDetailModel PrSelected
+        public List<SupplyDetailModel> SelectedDetailForDelete
         {
-            get { return _prSelected; }
+            get { return _selectedDetailForDelete; }
             set
             {
-                _prSelected = value;
-                OnPropertyChanged(nameof(PrSelected));
+                _selectedDetailForDelete = value;
+                OnPropertyChanged(nameof(SelectedDetailForDelete));
+            }
+        }
+        
+        
+        private SupplyDetailModel _selectedDetail;
+
+        public SupplyDetailModel SelectedDetail
+        {
+            get { return _selectedDetail; }
+            set
+            {
+                _selectedDetail = value;
+                OnPropertyChanged(nameof(SelectedDetail));
             }
         }
 
@@ -210,6 +202,21 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(TextBoxNewIdText));
             }
         }
+        
+        private List<string> _comboBoxProduct;
+
+        public List<string> ComboBoxProduct
+        {
+            get
+            {
+                return _comboBoxProduct;
+            }
+            set
+            {
+                _comboBoxProduct = value;
+                OnPropertyChanged(nameof(ComboBoxProduct));
+            }
+        }
 
 
         private int _textBoxNewAmountText;
@@ -219,20 +226,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _textBoxNewAmountText = value;
+                ((CommandBase)AddProductInSupply).RaiseCanExecutedChanged();
                 OnPropertyChanged(nameof(TextBoxNewAmountText));
             }
         }
-
-        private ButtonBase _deleteProduct;
-        public ButtonBase DeleteProduct
-        {
-            get { return _deleteProduct; }
-            set
-            {
-                _deleteProduct = value;
-                OnPropertyChanged(nameof(DeleteProduct));
-            }
-        }
+        
 
         private Visibility _visibilityWindowAllSupplies;
         public Visibility VisibilityWindowAllSupplies
