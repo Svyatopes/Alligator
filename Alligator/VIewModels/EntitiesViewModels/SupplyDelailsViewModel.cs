@@ -1,11 +1,12 @@
-﻿namespace Alligator.UI.VIewModels.EntitiesViewModels
+﻿using Alligator.BusinessLayer.Models;
+
+namespace Alligator.UI.VIewModels.EntitiesViewModels
+    
 {
     public class SupplyDelailsViewModel : BaseViewModel
-    {
-
+    {        
+        
         private int _id;
-        private int _amount;
-        private ProductViewModel _product;
 
         public int Id
         {
@@ -17,6 +18,9 @@
             }
         }
 
+
+        private int _amount;
+
         public int Amount
         {
             get { return _amount; }
@@ -27,7 +31,10 @@
             }
         }
 
-        public ProductViewModel Product
+
+        private ProductModel _product;
+
+        public ProductModel Product
         {
             get { return _product; }
             set

@@ -2,7 +2,9 @@
 {
     public class ProductViewModel : BaseViewModel
     {
+
         private int _id;
+
         public int Id
         {
             get { return _id; }
@@ -12,7 +14,10 @@
                 OnPropertyChanged(nameof(Id));
             }
         }
+
+
         private string _name;
+
         public string Name
         {
             get { return _name; }

@@ -6,10 +6,8 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class SuppliesViewModel : BaseViewModel
     {
-        private int _id;
-        private DateTime _date;
-        private List<SupplyDetailModel> _details;
 
+        private int _id;
 
         public int Id
         {
@@ -21,6 +19,9 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
+
+        private DateTime _date;
+
         public DateTime Date
         {
             get { return _date; }
@@ -30,6 +31,9 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Date));
             }
         }
+
+
+        private List<SupplyDetailModel> _details;
 
         public List<SupplyDetailModel> Details
         {

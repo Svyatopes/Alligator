@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using Alligator.BusinessLayer.Models;
 
 namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class SupplyViewModel : BaseViewModel
     {
-        private int _id;
-        private ObservableCollection<SupplyDelailsViewModel> _supplyDetails;
-        private SupplyViewModel _supply;
         
+        private int _id;
+
         public int Id
         {
             get { return _id; }
@@ -18,7 +18,10 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
             }
         }
 
-        public ObservableCollection<SupplyDelailsViewModel> SupplyDetails
+
+        private ObservableCollection<SupplyDetailModel> _supplyDetails;
+
+        public ObservableCollection<SupplyDetailModel> SupplyDetails
         {
             get { return _supplyDetails; }
             set
@@ -27,7 +30,11 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(SupplyDetails));
             }
         }
-        public SupplyViewModel Supply
+
+
+        private SupplyModel _supply;
+
+        public SupplyModel Supply
         {
             get { return _supply; }
             set
