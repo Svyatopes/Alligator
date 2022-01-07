@@ -15,7 +15,7 @@ namespace Alligator.BusinessLayer.Services
     {
         private readonly IClientRepository _clientRepository;
 
-      
+
 
         public ClientService()
         {
@@ -61,8 +61,20 @@ namespace Alligator.BusinessLayer.Services
 
         }
 
-        public void UpdateClient(ClientModel client)
+        public bool UpdateClient(ClientModel client)
         {
+            Mapper mapper = CustomMapper.GetInstance();
+            var clientMap = mapper.Map<Client>(client);
+            try
+            {
+                _clientRepository.UpdateClient(clientMap);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
             
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             _clientRepository.UpdateClient(clientMap);
