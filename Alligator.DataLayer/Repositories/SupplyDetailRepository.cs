@@ -2,20 +2,16 @@
 using Alligator.DataLayer.Entities;
 using System.Linq;
 using Dapper;
-using System.Data.SqlClient;
 using System.Data;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class SupplyDetailRepository : ISupplyDetailRepository
+    public class SupplyDetailRepository : BaseRepository, ISupplyDetailRepository 
     {
-
-        private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-
+        
         public List<SupplyDetail> GetAllSupplyDetails()
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.SupplyDetail_SelectAll";
             return sqlConnection
@@ -37,8 +33,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<SupplyDetail> GetSupplyDetailBySupplyId(int id)
         {
-            using var connection = new SqlConnection(_connString);
-            connection.Open();
+            using var connection = GetConnection();
 
             string procName = "dbo.SupplyDetail_SelectBySupplyId";
             var supplyDictionary = new Dictionary<int, SupplyDetail>();
@@ -58,8 +53,7 @@ namespace Alligator.DataLayer.Repositories
 
         public int AddSupplyDetail(SupplyDetail supplyDetail)
         {
-            using var connection = new SqlConnection(_connString);
-            connection.Open();
+            using var connection = GetConnection();
 
             string procName = "dbo.SupplyDetail_Insert";
 
@@ -79,8 +73,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditSupplyDetail(List<SupplyDetail> supplyDetail)
         {
-            using var connection = new SqlConnection(_connString);
-            connection.Open();
+            using var connection = GetConnection();
 
             string procName = "dbo.SupplyDetail_Update";
             connection
@@ -93,8 +86,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteSupplyDetailBySupplyId(int id)
         {
-            using var connection = new SqlConnection(_connString);
-            connection.Open();
+            using var connection = GetConnection();
 
             string procName = "dbo.SupplyDetail_DeleteBySupplyId";
             connection
@@ -106,8 +98,7 @@ namespace Alligator.DataLayer.Repositories
         }
         public void DeleteSupplyDetailById(int id)
         {
-            using var connection = new SqlConnection(_connString);
-            connection.Open();
+            using var connection = GetConnection();
 
             string procName = "dbo.SupplyDetail_DeleteById";
             connection

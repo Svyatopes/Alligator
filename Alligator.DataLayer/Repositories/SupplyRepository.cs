@@ -1,23 +1,17 @@
 ﻿using Alligator.DataLayer.Entities;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using System.Data;
-using System;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class SupplyRepository : ISupplyRepository
+    public class SupplyRepository : BaseRepository, ISupplyRepository
     {
-        private const string _connString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //TODO: baserepository for connection
-
-
+        
         public List<Supply> GetSupplies()
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.Supply_SelectAll";
             return sqlConnection
@@ -30,8 +24,7 @@ namespace Alligator.DataLayer.Repositories
 
         public Supply GetSupplyById(int id)
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.Supply_SelectById";
             var supplyDictionary = new Dictionary<int, Supply>();
@@ -59,8 +52,7 @@ namespace Alligator.DataLayer.Repositories
 
         public int AddSupply(Supply supply)
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.Supply_Insert";
             return sqlConnection
@@ -73,8 +65,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteSupply(int id)
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.Supply_Delete";
             sqlConnection
@@ -87,8 +78,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditSupply(Supply supply)
         {
-            using var sqlConnection = new SqlConnection(_connString);
-            sqlConnection.Open();
+            using var sqlConnection = GetConnection();
 
             string procName = "dbo.Supply_Update";
 
