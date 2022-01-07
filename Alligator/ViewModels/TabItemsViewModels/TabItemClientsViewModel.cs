@@ -16,10 +16,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private readonly CommentService _commentService;
 
         private ClientModel _selectedClient;
-        
-
-
-        
         private string _text;
         private string _comment;
         private CommentModel _selectedComment;
@@ -67,7 +63,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ObservableCollection<ClientModel> Clients { get; set; }
         
 
-        //TODO: need to use nameof!
+       
         public string Text
         {
             get { return _text; }
@@ -88,7 +84,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
         public ObservableCollection<CommentModel> Comments
         {
-            get { return _comments; }
+            get { return _comments; }   
             set
             {
                 _comments = value;

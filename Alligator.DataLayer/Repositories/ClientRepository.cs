@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ClientRepository : BaseRepository
+    public class ClientRepository : BaseRepository, IClientRepository
     {
 
         private const string _connection =/* "Data Source=(Local);Database=Alligator.DB;Integrated Security=True;";*/ "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
@@ -17,21 +17,9 @@ namespace Alligator.DataLayer.Repositories
         {
             string proc = "dbo.Client_SelectAll";
             using var conn = GetConnection();
-         
-            try
-            {
-                
-                var clients = conn.Query<Client>(proc)
-                .ToList();
-                return clients;
-            }
-            catch
-            {
-                List<Client> clients = new List<Client>();
-                return clients;
-            }
-
-
+            var clients = conn.Query<Client>(proc)
+            .ToList();
+            return clients;
         }
 
         public Client GetClientById(int id)

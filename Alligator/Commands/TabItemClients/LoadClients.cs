@@ -18,10 +18,9 @@ namespace Alligator.UI.Commands.TabItemClients
         public override void Execute(object parameter)
         {
             _viewModel.Clients.Clear();
-            var clients = _clientService.GetAllClients();
+            //var clients = _clientService.GetAllClients();
             foreach (var client in _clientService.GetAllClients())
             _viewModel.Clients.Add(client);
-
         }
 
     }

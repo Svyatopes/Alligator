@@ -25,8 +25,7 @@ namespace Alligator.BusinessLayer.Services
         }
         public void InsertComment(CommentModel comment)
         {
-            Mapper mapper = CustomMapper.GetInstance();
-            var comm = mapper.Map<Comment>(comment);
+            var comm = CustomMapper.GetInstance().Map<Comment>(comment);
             _commentRepository.InsertCommentById(comm.Client.Id, comm.Text);
         }
         public bool  DeleteCommentsByClientId(int clientId)

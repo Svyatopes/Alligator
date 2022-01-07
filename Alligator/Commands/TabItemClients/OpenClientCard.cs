@@ -30,7 +30,7 @@ namespace Alligator.UI.Commands.TabItemClients
         {
             _viewModel.AllClients = Visibility.Collapsed;
             _viewModel.ClientCardVisibility = Visibility.Visible;
-            if (_viewModel.EditableClient is not null)
+            if (_viewModel.SelectedClient is not null)
             {
                 _viewModel.EditableClient = _clientService.GetClientById(_viewModel.SelectedClient.Id);
                 _viewModel.Comments = new ObservableCollection<CommentModel>(_viewModel.EditableClient.Comments);

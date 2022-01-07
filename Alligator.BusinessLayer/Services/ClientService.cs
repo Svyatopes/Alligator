@@ -13,13 +13,17 @@ namespace Alligator.BusinessLayer.Services
 {
     public class ClientService : IClientService
     {
-        private readonly ClientRepository _clientRepository;
+        private readonly IClientRepository _clientRepository;
 
-        //TODO: rename "just" to smth with info about how it uses
+      
 
         public ClientService()
         {
             _clientRepository = new ClientRepository();
+        }
+        public ClientService(IClientRepository fakeClientRepository)
+        {
+            _clientRepository = fakeClientRepository;
         }
 
         public List<ClientModel> GetAllClients()
@@ -44,9 +48,8 @@ namespace Alligator.BusinessLayer.Services
 
         public int InsertNewClient(ClientModel client)
         {
-            ClientModel client1;
-            Mapper mapper = CustomMapper.GetInstance();
-            var clientMap = mapper.Map<Client>(client);
+            
+            var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
                 return _clientRepository.InsertClient(clientMap);
@@ -60,13 +63,9 @@ namespace Alligator.BusinessLayer.Services
 
         public void UpdateClient(ClientModel client)
         {
-            Mapper mapper = CustomMapper.GetInstance();
-            var clientMap = mapper.Map<Client>(client);
-
-                _clientRepository.UpdateClient(clientMap);
-
             
-
+            var clientMap = CustomMapper.GetInstance().Map<Client>(client);
+            _clientRepository.UpdateClient(clientMap);
         }
 
         public bool DeleteClient(ClientModel client)
