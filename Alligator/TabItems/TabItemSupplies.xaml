@@ -84,7 +84,7 @@
                 <Button  Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="7" Height="20" Width="180" Command="{Binding SaveNewSupply}" Content="Сохранить поставку"/>
                 <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Height="20" Width="180" Command="{Binding AddProductInSupply}" Content="Добавить продукт в таблицу"/>
 
-                <DataGrid ItemsSource="{Binding SelectedDetails}" SelectedItem="{Binding SelectedDetail}" Grid.ColumnSpan="2"   Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
+                <DataGrid ItemsSource="{Binding SupplyDetails}" SelectedItem="{Binding SelectedDetail}" Grid.ColumnSpan="2"   Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Product.Name}" />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" />
@@ -133,7 +133,7 @@
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="1" Width="140" >Дата поставки</TextBlock>
 
 
-                <DataGrid  ItemsSource="{Binding SelectedDetails}" Grid.Column="1" Grid.ColumnSpan="2"   Grid.Row="2" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
+                <DataGrid  ItemsSource="{Binding SupplyDetails}" Grid.Column="1" Grid.ColumnSpan="2"   Grid.Row="2" Grid.RowSpan ="4"  Margin="10" AutoGenerateColumns="False" CanUserAddRows="False"  >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Product.Name}" IsReadOnly="True" />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" IsReadOnly="True" />
@@ -180,10 +180,10 @@
                 <DatePicker Name="TextBoxNewDateText1" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,5" Width="150" Background="White" SelectedDate="{Binding SelectedSupply.Date}" />
 
                 <Button  Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Height="20" Width="180" Command="{Binding SuppliesOpen}"  Content="Вернуться назад"/>
-                <Button  Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="7" Height="20" Width="180" Command="{Binding SaveChangSupply}" Content="Изменить поставку"/>
+                <Button  Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="7" Height="20" Width="180" Command="{Binding SaveModifiedSupply}" Content="Изменить поставку"/>
                 <Button  Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" Height="20" Width="180" Command="{Binding AddProductInSupply}" Content="Добавить продукт в таблицу"/>
 
-                <DataGrid ItemsSource="{Binding SelectedDetails}" SelectedItem="{Binding SelectedDetail}" Grid.ColumnSpan="2"   Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
+                <DataGrid ItemsSource="{Binding SupplyDetails}" SelectedItem="{Binding SelectedDetail}" Grid.ColumnSpan="2"   Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Продукт" Width="1*" Binding="{Binding Product.Name}" IsReadOnly="True"  />
                         <DataGridTextColumn Header="Количество" Width="1*" Binding="{Binding Amount}" IsReadOnly="True" />

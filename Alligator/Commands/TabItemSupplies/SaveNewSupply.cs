@@ -51,7 +51,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-                _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>();
+                _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
 
                 _viewModel.TextBoxNewAmountText = 0;

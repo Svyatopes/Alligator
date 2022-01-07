@@ -29,7 +29,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
 
             var supplyDetailSelected = _supplyDetailService.GetSupplyDetailById(_viewModel.SelectedSupply.Id);
-            _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
+            _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
 
         }
     }

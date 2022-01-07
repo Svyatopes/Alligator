@@ -18,9 +18,9 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
         public override void Execute(object parameter)
         {
-            if (_viewModel.SelectedDetails is not null)
+            if (_viewModel.SupplyDetails is not null)
             {
-                _viewModel.SelectedDetails.Clear();
+                _viewModel.SupplyDetails.Clear();
                 _viewModel.Supply.Details.Clear();
             }
             if (_viewModel.SelectedSupply is not null)

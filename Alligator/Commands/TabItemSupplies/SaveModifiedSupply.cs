@@ -8,13 +8,13 @@ using System.Collections.Generic;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
-    public class SaveChangSupply : CommandBase
+    public class SaveModifiedSupply : CommandBase
     {
         private TabItemSuppliesViewModel _viewModel;
         private SupplyService _supplyService;
         private SupplyDetailService _supplyDetailService;
 
-        public SaveChangSupply(TabItemSuppliesViewModel viewModel, SupplyService supplyService, SupplyDetailService supplyDetailService)
+        public SaveModifiedSupply(TabItemSuppliesViewModel viewModel, SupplyService supplyService, SupplyDetailService supplyDetailService)
         {
             _viewModel = viewModel;
             _supplyService = supplyService;
@@ -56,7 +56,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-                _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>();
+                _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
                 _viewModel.TextBoxNewAmountText = 0;
                 _viewModel.TextBoxNewDateText = DateTime.Now;

@@ -28,7 +28,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             SuppliesOpen = new SuppliesOpen(this);
             AddProductInSupply = new ProductAddInSupply(this, _supplyDetailService);
             SaveNewSupply = new SaveNewSupply(this, _supplyService, _supplyDetailService);
-            SaveChangSupply = new SaveChangSupply(this, _supplyService, _supplyDetailService);
+            SaveModifiedSupply = new SaveModifiedSupply(this, _supplyService, _supplyDetailService);
             ChangeCardSupply = new ChangeCardSupply(this);
             ProductDeleteFromSupply = new ProductDeleteFromSupply(this);
             DeleteSupply = new SupplyDelete(this, _supplyService, _supplyDetailService);
@@ -40,7 +40,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand SuppliesOpen { get; set; }
         public ICommand AddProductInSupply { get; set; }
         public ICommand SaveNewSupply { get; set; }
-        public ICommand SaveChangSupply { get; set; }
+        public ICommand SaveModifiedSupply { get; set; }
         public ICommand ChangeCardSupply { get; set; }
         public ICommand LoadSupplies { get; set; }
         public ICommand ProductDeleteFromSupply { get; set; }
@@ -134,15 +134,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
 
-        private ObservableCollection<SupplyDetailModel> _selectedDetails;
+        private ObservableCollection<SupplyDetailModel> _supplyDetails;
 
-        public ObservableCollection<SupplyDetailModel> SelectedDetails
+        public ObservableCollection<SupplyDetailModel> SupplyDetails
         {
-            get { return _selectedDetails; }
+            get { return _supplyDetails; }
             set
             {
-                _selectedDetails = value;
-                OnPropertyChanged(nameof(SelectedDetails));
+                _supplyDetails = value;
+                OnPropertyChanged(nameof(SupplyDetails));
             }
         }
         

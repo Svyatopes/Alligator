@@ -21,8 +21,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
             if (userAnswer == MessageBoxResult.Yes) { }
             
             _viewModel.SelectedDetailForDelete.Add(_viewModel.SelectedDetail);
-            _viewModel.SelectedDetails.Remove(_viewModel.SelectedDetail);
-            _viewModel.Supply.Details = new System.Collections.Generic.List<BusinessLayer.Models.SupplyDetailModel>(_viewModel.SelectedDetails);
+            _viewModel.SupplyDetails.Remove(_viewModel.SelectedDetail);
+            _viewModel.Supply.Details = new System.Collections.Generic.List<BusinessLayer.Models.SupplyDetailModel>(_viewModel.SupplyDetails);
             
         }
     }

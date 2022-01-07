@@ -52,10 +52,10 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 SupplyId = idSupplyInDatabase,
 
             };
-            if (_viewModel.SelectedDetails is not null)
+            if (_viewModel.SupplyDetails is not null)
             {                
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
-                foreach (var item in _viewModel.SelectedDetails)
+                foreach (var item in _viewModel.SupplyDetails)
                 {
                         _viewModel.Supply.Details.Add(item) ;
                 }               
@@ -66,7 +66,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
             }
             _viewModel.Supply.Details.Add(supplyProduct);
-            _viewModel.SelectedDetails = new ObservableCollection<SupplyDetailModel>(_viewModel.Supply.Details);
+            _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>(_viewModel.Supply.Details);
 
         }
     }
