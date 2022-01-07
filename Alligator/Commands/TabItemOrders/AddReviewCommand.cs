@@ -51,7 +51,6 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.OrderReviews.Add(newOrderReview);
             _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrder.Id);           
             _viewModel.NewReviewText = string.Empty;
-
         }
     }
 }

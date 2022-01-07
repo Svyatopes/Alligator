@@ -132,6 +132,7 @@
     <Build Include="Procedures\OrderReview_SelectById.sql" />
     <Build Include="Procedures\Order_SelectAll.sql" />
     <Build Include="Procedures\OrderDetail_DeleteByOrderId.sql" />
+    <Build Include="Procedures\Comment_DeleteByClientId_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />

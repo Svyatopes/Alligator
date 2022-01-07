@@ -45,9 +45,9 @@ namespace Alligator.DataLayer.Repositories
             connection.Execute(proc, new
             { text, clientId },
             commandType: CommandType.StoredProcedure);
-
         }
-        public void DeleteCommentByIdoNE(int id)
+
+        public void DeleteCommentByCommentId(int id)
         {
             string proc = "dbo.Comment_DeleteByCommentId";
             using var connection = ProvideConnection();
@@ -55,7 +55,8 @@ namespace Alligator.DataLayer.Repositories
             { Id = id },
             commandType: CommandType.StoredProcedure);
         }
-        public void DeleteCommentById(int clientId)
+
+        public void DeleteCommentByClientId(int clientId)
         {
             string proc = "dbo.Comment_DeleteByClientId_1";
             using var connection = ProvideConnection();
@@ -73,8 +74,7 @@ namespace Alligator.DataLayer.Repositories
                 Id = id,
                 Text = text
             },
-            commandType: CommandType.StoredProcedure
-            );
+            commandType: CommandType.StoredProcedure);
         }
     }
 }

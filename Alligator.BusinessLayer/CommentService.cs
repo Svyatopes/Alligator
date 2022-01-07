@@ -21,24 +21,35 @@ namespace Alligator.BusinessLayer
         {
             _commentRepository = new CommentRepository();
         }
+
         public List<CommentModel> GetAllComments(int id)
         {
             var comments = _commentRepository.GetAllCommentsByCLientId(id);
             return CustomMapper.GetInstance().Map<List<CommentModel>>(comments);
         }
+
         public void InsertComment(CommentModel comment)
         {
-            Mapper mapper = CustomMapper.GetInstance();
-            var comm = mapper.Map<Comment>(comment);
+            var comm = CustomMapper.GetInstance().Map<Comment>(comment);
             _commentRepository.InsertCommentById(comm.Client.Id, comm.Text);
         }
-        public void DeleteCommentsByClientId(int clientId)
+
+        public bool DeleteCommentsByClientId(int clientId)
         {
-            _commentRepository.DeleteCommentById(clientId);
+            try
+            {
+                _commentRepository.DeleteCommentByClientId(clientId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
+
         public void DeleteCommentByCommentId(int commentId)
         {
-            _commentRepository.DeleteCommentByIdoNE(commentId);
+            _commentRepository.DeleteCommentByCommentId(commentId);
         }
     }
 }
