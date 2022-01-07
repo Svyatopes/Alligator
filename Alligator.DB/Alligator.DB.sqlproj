@@ -69,7 +69,6 @@
     <Build Include="Procedures\Client_Update.sql" />
     <Build Include="Procedures\Comment_Update.sql" />
     <Build Include="Procedures\Client_Delete.sql" />
-    <Build Include="Procedures\Comment.Delete.sql" />
     <Build Include="Tables\Product.sql" />
     <Build Include="Tables\Order.sql" />
     <Build Include="Tables\OrderDetail.sql" />
@@ -131,7 +130,7 @@
     <Build Include="Procedures\OrderReview_SelectByOrderId.sql" />
     <Build Include="Procedures\OrderReview_SelectById.sql" />
     <Build Include="Procedures\Order_SelectAll.sql" />
-    <Build Include="Procedures\Comment_DeleteByClientId_1.sql" />
+    <Build Include="Procedures\Comment_DeleteByClient.sql" />
     <Build Include="Procedures\Comment_DeleteByCommentId.sql" />
   </ItemGroup>
   <ItemGroup>

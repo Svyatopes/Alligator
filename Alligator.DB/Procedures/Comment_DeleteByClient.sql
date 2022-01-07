@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[Comment_DeleteByClientId_1]
+﻿CREATE PROCEDURE [dbo].[Comment_DeleteByClient]
 	@ClientId int 
 AS
 BEGIN
