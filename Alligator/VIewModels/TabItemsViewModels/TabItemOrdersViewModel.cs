@@ -1,6 +1,7 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Repositories;
+using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemOrders;
 using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
@@ -164,6 +165,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedOrder = value;
+                ((CommandBase)OpenOrderInfoWindow).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteOrderWindowOfAllOrders).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrder));
             }
         }
@@ -182,6 +185,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedOrderReviewModel = value;
+                ((CommandBase)DeleteReviewWindowOfOrderInfo).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrderReview));
             }
         }
@@ -201,6 +205,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedNewOrderReviewModel = value;
+                ((CommandBase)DeleteReviewWindowOfAddOrder).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedNewOrderReview));
             }
         }
@@ -224,7 +229,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SelectedProduct));
             }
         }
-
 
         public string NewReviewText
         {
@@ -306,6 +310,50 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 _addOrderWindow = value;
 
                 OnPropertyChanged(nameof(AddOrderWindowVisibility));
+            }
+        }
+
+        private Visibility _buttonOpenOrderInfo;
+        public Visibility ButtonOpenOrderInfo
+        {
+            get { return _buttonOpenOrderInfo; }
+            set
+            {
+                _buttonOpenOrderInfo = value;
+                OnPropertyChanged(nameof(ButtonOpenOrderInfo));
+            }
+        }
+
+        private Visibility _buttonDeleteOrder;
+        public Visibility ButtonDeleteOrder
+        {
+            get { return _buttonDeleteOrder; }
+            set
+            {
+                _buttonDeleteOrder = value;
+                OnPropertyChanged(nameof(ButtonDeleteOrder));
+            }
+        }
+
+        private Visibility _buttonDeleteReview;
+        public Visibility ButtonDeleteReview
+        {
+            get { return _buttonDeleteReview; }
+            set
+            {
+                _buttonDeleteReview = value;
+                OnPropertyChanged(nameof(ButtonDeleteReview));
+            }
+        }
+
+        private Visibility _buttonDeleteNewReview;
+        public Visibility ButtonDeleteNewReview
+        {
+            get { return _buttonDeleteNewReview; }
+            set
+            {
+                _buttonDeleteNewReview = value;
+                OnPropertyChanged(nameof(ButtonDeleteNewReview));
             }
         }
     }

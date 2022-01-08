@@ -23,6 +23,10 @@ namespace Alligator.UI.Commands.TabItemOrders
             _orderReviewService = orderReviewService;
             _orderDetailService = orderDetailService;
         }
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedOrder is not null;
+        }
 
         public override void Execute(object parameter)
         {

@@ -18,6 +18,11 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel = viewModel;
             _orderReviewService = orderReviewService;
         }
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedOrderReview is not null;
+        }
+
         public override void Execute(object parameter)
         {
             _orderReviewService.DeleteOrderReviewModel(_viewModel.SelectedOrderReview.Id);

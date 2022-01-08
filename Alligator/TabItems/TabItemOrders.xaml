@@ -42,8 +42,8 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
                 <Button Command="{Binding OpenAddOrderWindow}" Grid.Column="0" Background="#DACDCD"  Height="20" Width="140">Добавить заказ</Button>
-            <Button  Command="{Binding DeleteOrderWindowOfAllOrders}" Grid.Column="2" Background="#DACDCD" Height="20" Width="140" >Удалить заказ</Button>
-                <Button  Command="{Binding OpenOrderInfoWindow}"  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" >Просмотреть заказ</Button>
+                <Button  Visibility="{Binding ButtonDeleteOrder}" Command="{Binding DeleteOrderWindowOfAllOrders}" Grid.Column="2" Background="#DACDCD" Height="20" Width="140" >Удалить заказ</Button>
+                <Button  Visibility="{Binding ButtonOpenOrderInfo}" Command="{Binding OpenOrderInfoWindow}"  Grid.Column="1" Background="#DACDCD"  Height="20" Width="140" >Просмотреть заказ</Button>
             </Grid>
         </Grid>
 
@@ -115,7 +115,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                         <Button Grid.Column="1" Grid.Row="0" Background="#DACDCD" Command="{Binding AddReviewWindowOfOrderInfo}" Height="20" Width="140" >Добавить отзыв</Button>
-                        <Button Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReviewWindowOfOrderInfo}" Height="20" Width="140" >Удалить отзыв</Button>
+                        <Button Visibility="{Binding ButtonDeleteReview}" Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReviewWindowOfOrderInfo}" Height="20" Width="140" >Удалить отзыв</Button>
                             <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewReviewText}" Background="White" Margin="15,0,5,5" ></TextBox>
                         </Grid>
 
@@ -217,7 +217,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Button Grid.Column="1" Grid.Row="0" Background="#DACDCD" Command="{Binding AddReviewWindowOfAddOrder}" Height="20" Width="140" >Добавить отзыв</Button>
-                            <Button Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReviewWindowOfAddOrder}" Height="20" Width="140" >Удалить отзыв</Button>
+                            <Button Visibility="{Binding ButtonDeleteNewReview}" Grid.ColumnSpan="2" Grid.Row="1" Background="#DACDCD" Command="{Binding DeleteReviewWindowOfAddOrder}" Height="20" Width="140" >Удалить отзыв</Button>
                             <TextBox Grid.Column="0" Grid.Row="0" Text="{Binding NewReviewText}" Background="White" Margin="15,0,5,5" ></TextBox>
                         </Grid>
 
