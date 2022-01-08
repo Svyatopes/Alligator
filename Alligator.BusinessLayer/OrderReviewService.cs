@@ -19,6 +19,11 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview = repositoryOrderReview;
         }
 
+        public OrderReviewService()
+        {
+            _repositoryOrderReview = new OrderReviewRepository();
+        }
+
         public OrderReviewModel GetOrderReviewModelById(int id)
         {
             var orderReview = _repositoryOrderReview.GetOrderReviewById(id);

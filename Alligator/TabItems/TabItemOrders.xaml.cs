@@ -17,7 +17,7 @@ namespace Alligator.UI.TabItems
             InitializeComponent();
             _viewModel = new TabItemOrdersViewModel();
             DataContext = _viewModel;
-            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;             
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
         }
     }

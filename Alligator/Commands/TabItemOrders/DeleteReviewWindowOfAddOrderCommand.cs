@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class DeleteOrderCommand : CommandBase
+    class DeleteReviewWindowOfAddOrderCommand : CommandBase
     {
-
         private TabItemOrdersViewModel _viewModel;
-        private OrderService _orderService;
-
-        public DeleteOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService)
+       
+        public DeleteReviewWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
         {
             _viewModel = viewModel;
-            _orderService = orderService;
         }
 
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedNewOrderReview is not null;
+        }
         public override void Execute(object parameter)
         {
-            _orderService.DeleteOrderModel(_viewModel.SelectedOrder.Id);
-            _viewModel.AllOrders.Remove(_viewModel.SelectedOrder);
+            _viewModel.NewOrderReviews.Remove(_viewModel.SelectedNewOrderReview);
         }
-    }
+    }   
 }

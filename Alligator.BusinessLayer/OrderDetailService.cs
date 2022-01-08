@@ -17,6 +17,12 @@ namespace Alligator.BusinessLayer
         {
             _repositoryOrderdetail = repositoryOrderdetail;
         }
+        
+        public OrderDetailService()
+        {
+            _repositoryOrderdetail = new OrderDetailRepository();
+        }
+
 
         public OrderDetailModel GetOrderDetailById(int id)
         {
@@ -49,6 +55,11 @@ namespace Alligator.BusinessLayer
         public void DeleteOrderDetailModel(int id)
         {
             _repositoryOrderdetail.DeleteOrderDetail(id);
+        }
+
+        public void DeleteOrderDetailModelByOrderId(int orderId)
+        {
+            _repositoryOrderdetail.DeleteOrderDetailByOrderId(orderId);
         }
 
         public void DeleteOrderDetailByProductId(int id)

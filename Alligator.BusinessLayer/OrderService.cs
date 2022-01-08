@@ -19,7 +19,14 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview = repositoryOrderReview;
         }
 
-        public List<OrderShortModel> GetOrderssWithoutSensitiveData()
+        public OrderService()
+        {
+            _repositoryOrder = new OrderRepository();
+            _repositoryOrderDetail = new OrderDetailRepository();
+            _repositoryOrderReview = new OrderReviewRepository();
+        }
+
+        public List<OrderShortModel> GetOrdersWithoutSensitiveData()
         {
             var orders = _repositoryOrder.GetAllOrders();
             return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);
@@ -45,9 +52,10 @@ namespace Alligator.BusinessLayer
             return CustomMapper.GetInstance().Map<OrderModel>(order);
         }
 
-        public void AddOrderModel(DateTime date, int clientId, string address)
-        {
-             _repositoryOrder.AddOrder(date, clientId, address);            
+        public int AddOrderModel(DateTime date, int clientId, string address)
+        {           
+           int id =_repositoryOrder.AddOrder(date, clientId, address);
+           return id;
         }
 
         public void DeleteOrderModel(int id)
