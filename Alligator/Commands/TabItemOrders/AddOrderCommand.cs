@@ -40,7 +40,11 @@ namespace Alligator.UI.Commands.TabItemOrders
             foreach (var orderReview in _viewModel.NewOrderReviews)
             {
                 _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
-            }           
+            }
+            foreach (var orderDetail in _viewModel.NewOrderDetails)
+            {
+                _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
+            }
             _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId));
         }
     }

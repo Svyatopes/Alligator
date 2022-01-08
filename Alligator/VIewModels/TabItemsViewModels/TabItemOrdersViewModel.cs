@@ -46,6 +46,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand ComeBackFirstWindow { get; set; }
         public ICommand AddReviewWindowOfAddOrder { get; set; }
         public ICommand DeleteReviewWindowOfAddOrder { get; set; }
+        public ICommand AddProductWindowOfAddOrder { get; set; }
         public TabItemOrdersViewModel()
         {
 
@@ -54,9 +55,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
 
-            AllOrders = new ObservableCollection<OrderModel>();
-           
-                     
+            AllOrders = new ObservableCollection<OrderModel>();                               
             Clients = new ObservableCollection<ClientModel>();
             Products = new ObservableCollection<ProductModel>();
 
@@ -72,6 +71,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
             AddReviewWindowOfAddOrder = new AddReviewWindowOfAddOrderCommand(this);
             DeleteReviewWindowOfAddOrder = new DeleteReviewWindowOfAddOrderCommand(this);
+            AddProductWindowOfAddOrder = new AddProductWindowOfAddOrderCommand(this);
 
 
         }
@@ -120,8 +120,27 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(NewOrderReviews));
             }
         }
-        public ObservableCollection<ClientModel> Clients { get; set; }
-        public ObservableCollection<ProductModel> Products { get; set; }
+
+        private ObservableCollection<ClientModel> _clients;
+        public ObservableCollection<ClientModel> Clients
+        {
+            get { return _clients; }
+            set
+            {
+                _clients = value;
+                OnPropertyChanged(nameof(Clients));
+            }
+        }
+        private ObservableCollection<ProductModel> _products;
+        public ObservableCollection<ProductModel> Products
+        {
+            get { return _products; }
+            set
+            {
+                _products = value;
+                OnPropertyChanged(nameof(Products));
+            }
+        }
 
         public OrderModel SelectedOrder
         {
@@ -221,6 +240,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
+        private string _newAmount;
+        public string NewAmount
+        {
+            get { return _newAmount; }
+            set
+            {
+                _newAmount = value;
+                OnPropertyChanged(nameof(NewAmount));
+            }
+        }
         private Visibility _allOrdersWindow;
         public Visibility OrdersWindowVisibility
         {
