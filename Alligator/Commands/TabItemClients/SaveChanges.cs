@@ -35,7 +35,7 @@ namespace Alligator.UI.Commands.TabItemClients
             }
             _clientService.UpdateClient(_viewModel.EditableClient);
             _viewModel.Clients.Clear();
-            foreach (var item in _clientService.GetAllClients())
+            foreach (var item in _clientService.GetAllClients().Data)
             {
                 _viewModel.Clients.Add(item);
             }
