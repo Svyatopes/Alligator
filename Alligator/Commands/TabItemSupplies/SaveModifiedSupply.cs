@@ -47,22 +47,19 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 }
                 foreach (var item in _viewModel.SelectedDetailForDelete)
                 {
-                    if (_supplyDetailService.DeleteSupplyDetailById(item.Id) ==false)
+                    if (!_supplyDetailService.DeleteSupplyDetailById(item.Id))
                     {
                         MessageBox.Show("Ошибка при удалении. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     }
-
-
                 }
                 
                 _viewModel.Supply = _viewModel.SelectedSupply;
-                if (_supplyService.UpdateSupply(_viewModel.Supply) == false)
+                if (!_supplyService.UpdateSupply(_viewModel.Supply))
                 {
                     MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 }
-
 
                 _viewModel.Supplies.Clear();
                 var supplies = _supplyService.GetAllSupplies();
@@ -70,7 +67,6 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
-
 
                 _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();

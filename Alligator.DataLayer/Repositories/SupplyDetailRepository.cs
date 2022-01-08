@@ -6,7 +6,7 @@ using System.Data;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class SupplyDetailRepository : BaseRepository, ISupplyDetailRepository, ISupplyDetailRepository1
+    public class SupplyDetailRepository : BaseRepository, ISupplyDetailRepository
     {
 
         public List<SupplyDetail> GetAllSupplyDetails()

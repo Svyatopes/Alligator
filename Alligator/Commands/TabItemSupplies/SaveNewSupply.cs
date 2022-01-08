@@ -51,7 +51,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
                 }                 
                 
-                if (_supplyService.UpdateSupply(_viewModel.Supply) ==false)
+                if (!_supplyService.UpdateSupply(_viewModel.Supply))
                 { 
                     MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     
