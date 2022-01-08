@@ -16,21 +16,10 @@ namespace Alligator.UI.TabItems
         public TabItemProducts()
         {
             InitializeComponent();
-            viewModel = new TabItemProductsViewModel();
-            DataContext = viewModel;
-            
-            ObservableCollection<ProductViewModel> productsList = new ObservableCollection<ProductViewModel>();
-            productsList.Add(new ProductViewModel()
-            {
-                Name = "pr1",
-                Category = "cat1"
-            }
-            );
-            dg_Products.ItemsSource = productsList;
-            viewModel.Selected = null;
-
-            viewModel.ViewProductGrid = Visibility.Collapsed;
-            viewModel.AddProductGrid = Visibility.Collapsed;
+            _viewModel = new TabItemProductsViewModel();
+            DataContext = _viewModel;
+            _viewModel.VisibilityAddProduct = Visibility.Collapsed;
+            _viewModel.VisibilityProduct = Visibility.Collapsed;
         }      
         
 

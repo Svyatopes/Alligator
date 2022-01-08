@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemProducts
 {
-    class DeleteProduct : CommandBase
+    public class DeleteProduct : CommandBase
     {
         private TabItemProductsViewModel viewModel;
 

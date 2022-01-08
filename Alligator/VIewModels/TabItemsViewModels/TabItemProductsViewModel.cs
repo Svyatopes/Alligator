@@ -15,9 +15,9 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
     {
         private ObservableCollection<ProductViewModel> _product;
         private ProductViewModel _selected;
-        private Visibility _addProduct;
-        private Visibility _viewProduct;
-
+        private Visibility _visibilityAddProduct;
+        private Visibility _visibilityProduct;
+        private Visibility _visibilityAllProducts;
 
         public ObservableCollection<ProductViewModel> Products
         {
@@ -47,29 +47,42 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public Visibility AddProductGrid
+        public Visibility VisibilityAllProducts
         {
             get
             {
-                return _addProduct;
+                return _visibilityAllProducts;
             }
             set
             {
-                _addProduct = value;
-                OnPropertyChanged(nameof(AddProductGrid));
+                _visibilityAllProducts = value;
+                OnPropertyChanged(nameof(VisibilityAllProducts));
             }
         }
 
-        public Visibility ViewProductGrid
+        public Visibility VisibilityAddProduct
         {
             get
             {
-                return _viewProduct;
+                return _visibilityAddProduct;
             }
             set
             {
-                _viewProduct = value;
-                OnPropertyChanged(nameof(ViewProductGrid));
+                _visibilityAddProduct = value;
+                OnPropertyChanged(nameof(VisibilityAddProduct));
+            }
+        }
+
+        public Visibility VisibilityProduct
+        {
+            get
+            {
+                return _visibilityProduct;
+            }
+            set
+            {
+                _visibilityProduct = value;
+                OnPropertyChanged(nameof(VisibilityProduct));
             }
         }
     }

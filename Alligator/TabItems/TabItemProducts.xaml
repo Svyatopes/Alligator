@@ -4,7 +4,7 @@
               Header="Товары/услуги">
 
     <Grid>
-        <Grid Visibility="{Binding AllProductsGrid}">
+        <Grid Visibility="{Binding VisibilityAllProducts}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="9*" />
@@ -29,7 +29,7 @@
             </Grid>
         </Grid>
 
-        <Grid Visibility="{Binding ViewProductGrid}" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
+        <Grid Visibility="{Binding VisibilityProduct}" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
@@ -51,7 +51,7 @@
 
         </Grid>
 
-        <Grid Visibility="{Binding AddProductGrid}" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
+        <Grid Visibility="{Binding VisibilityAddProduct}" VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
 
             <Grid  Grid.Column="1" Grid.Row="1">
                 <Grid.ColumnDefinitions>
