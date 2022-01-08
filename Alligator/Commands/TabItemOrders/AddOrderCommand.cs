@@ -28,7 +28,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         }
 
         public override void Execute(object parameter)
-        {
+        {            
             var newAddress = _viewModel.NewAddressText;
             if (string.IsNullOrEmpty(newAddress))
             {
