@@ -31,6 +31,7 @@ namespace Alligator.DataLayer.Repositories
                 },
                 commandType: CommandType.StoredProcedure, splitOn: "Id")
                 .FirstOrDefault();
+
         }
 
         public List<Product> GetAllProducts()
@@ -41,13 +42,18 @@ namespace Alligator.DataLayer.Repositories
             connection.Open();
 
             return connection
-                .Query<Product, Category, Product>(procString, (product, category) =>
-                {
-                    product.Category = category;
-                    return product;
-                },
-                commandType: CommandType.StoredProcedure, splitOn: "Id")
-                .Distinct()
+                //.Query<Product, Category, Product>(procString, (product, category) =>
+                //{
+                //    //product.Category
+                //    product.Category = category;
+                //    return product;
+                //},
+                //commandType: CommandType.StoredProcedure, splitOn: "Id")
+                //.Distinct()
+                //.ToList();
+
+                .Query<Product>(procString
+                , commandType: CommandType.StoredProcedure)
                 .ToList();
         }
 

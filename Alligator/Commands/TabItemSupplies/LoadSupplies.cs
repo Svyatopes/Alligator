@@ -33,7 +33,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
 
             _viewModel.Supply = new SupplyModel();
             _viewModel.Products = new ObservableCollection<ProductModel>();
-            _viewModel.NameSelectProduct = "";
+            _viewModel.NameSelectProduct = new ProductModel();
             _viewModel.Supplies = new ObservableCollection<SupplyModel>();            
             _viewModel.Supply.Details = new List<SupplyDetailModel>();
             _viewModel.SelectedDetailForDelete = new List<SupplyDetailModel>();

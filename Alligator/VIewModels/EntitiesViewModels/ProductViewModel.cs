@@ -1,4 +1,6 @@
-﻿namespace Alligator.UI.VIewModels.EntitiesViewModels
+﻿using Alligator.BusinessLayer.Models;
+
+namespace Alligator.UI.VIewModels.EntitiesViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
@@ -25,6 +27,17 @@
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
+            }
+        }
+        private CategoryModel _category;
+
+        public CategoryModel Category
+        {
+            get { return _category; }
+            set
+            {
+                _category = value;
+                OnPropertyChanged(nameof(Category));
             }
         }
     }

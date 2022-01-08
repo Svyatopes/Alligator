@@ -86,8 +86,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
 
 
-        private string _nameSelectProduct;
-        public string NameSelectProduct
+        private ProductModel _nameSelectProduct;
+        public ProductModel NameSelectProduct
         {
             get { return _nameSelectProduct; }
             set

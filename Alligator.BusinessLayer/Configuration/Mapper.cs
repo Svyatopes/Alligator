@@ -24,7 +24,9 @@ namespace Alligator.BusinessLayer.Configuration
                 cfg.CreateMap<SupplyDetail, SupplyDetailModel>();
                 cfg.CreateMap<SupplyDetailModel, SupplyDetail>();                
                 cfg.CreateMap<ProductModel, Product>();                
-                cfg.CreateMap<Product, ProductModel>();                
+                cfg.CreateMap<Product, ProductModel>();
+                cfg.CreateMap<Category, CategoryModel>();      
+                cfg.CreateMap<CategoryModel, Category>();                
                 
             }));
         }

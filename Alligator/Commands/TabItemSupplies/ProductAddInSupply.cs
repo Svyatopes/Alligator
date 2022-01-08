@@ -20,21 +20,14 @@ namespace Alligator.UI.Commands.TabItemSupplies
         }
         public override bool CanExecute(object parameter)
         {
-            return _viewModel.TextBoxNewAmountText !=0 && _viewModel.NameSelectProduct !="";
+            return _viewModel.TextBoxNewAmountText !=0 && _viewModel.NameSelectProduct.Name is not null;
         }
 
         public override void Execute(object parameter)
         {
 
-            var nameSelectedProduct = _viewModel.NameSelectProduct;
-            var idSelectedProduct = 0;
-            foreach (var item in _viewModel.Products)
-            {
-                if (item.Name == nameSelectedProduct)
-                {
-                    idSelectedProduct = item.Id;
-                }
-            }
+            var idSelectedProduct = _viewModel.NameSelectProduct.Id;
+            
             var ProductInDatabase = _supplyDetailService.GetProductById(idSelectedProduct);
             if (ProductInDatabase.Id==-1)
             {
