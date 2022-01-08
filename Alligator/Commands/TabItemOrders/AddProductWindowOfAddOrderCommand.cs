@@ -27,14 +27,19 @@ namespace Alligator.UI.Commands.TabItemOrders
                 return;
             }
             int amount = Convert.ToInt32(newAmount);
-            if (_viewModel.OrderDetails is null)
+            if (_viewModel.NewOrder.OrderDetails is null)
             {
-                ObservableCollection<OrderDetailModel> orderDetails = new ObservableCollection<OrderDetailModel>();
+                List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
 
-                _viewModel.NewOrderDetails = orderDetails;
+                _viewModel.NewOrder.OrderDetails = orderDetails;
+            }
+            if (_viewModel.NewOrderDetails is null)
+            {
+                _viewModel.NewOrderDetails = new ObservableCollection<OrderDetailModel>();
             }
 
-            var newOrderDetail = new OrderDetailModel() { Product=_viewModel.SelectedProduct, Amount=amount};
+            var newOrderDetail = new OrderDetailModel() { Product=_viewModel.SelectedProduct, Amount=amount, Order=_viewModel.NewOrder};
+            _viewModel.NewOrder.OrderDetails.Add(newOrderDetail);
             _viewModel.NewOrderDetails.Add(newOrderDetail);           
         }
     } 

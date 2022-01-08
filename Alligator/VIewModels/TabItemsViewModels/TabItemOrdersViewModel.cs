@@ -60,6 +60,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             Products = new ObservableCollection<ProductModel>();
             NewOrderReviews = new ObservableCollection<OrderReviewModel>();
             OrderReviews = new ObservableCollection<OrderReviewModel>();
+            OrderDetails = new ObservableCollection<OrderDetailModel>();
+            NewOrderDetails = new ObservableCollection<OrderDetailModel>();
             NewOrder = new OrderModel();
 
             AddReviewWindowOfOrderInfo = new AddReviewWindowOfOrderInfoCommand(this, _orderReviewService);
@@ -108,7 +110,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             get { return _newOrderDetails; }
             set
             {
-                _orderDetails = value;
+                _newOrderDetails = value;
                 OnPropertyChanged(nameof(NewOrderDetails));
             }
         }
@@ -189,7 +191,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             get { return _selectedNewOrderDetailModel; }
             set
             {
-                _selectedOrderDetailModel = value;
+                _selectedNewOrderDetailModel = value;
                 OnPropertyChanged(nameof(SelectedNewOrderDetail));
             }
         }
@@ -198,7 +200,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             get { return _selectedNewOrderReviewModel; }
             set
             {
-                _selectedOrderReviewModel = value;
+                _selectedNewOrderReviewModel = value;
                 OnPropertyChanged(nameof(SelectedNewOrderReview));
             }
         }
