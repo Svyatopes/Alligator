@@ -200,23 +200,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 _textBoxNewIdText = value;
                 OnPropertyChanged(nameof(TextBoxNewIdText));
             }
-        }
+        }        
         
-        private List<string> _comboBoxProduct;
-
-        public List<string> ComboBoxProduct
-        {
-            get
-            {
-                return _comboBoxProduct;
-            }
-            set
-            {
-                _comboBoxProduct = value;
-                OnPropertyChanged(nameof(ComboBoxProduct));
-            }
-        }
-
 
         private int _textBoxNewAmountText;
         public int TextBoxNewAmountText

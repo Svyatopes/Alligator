@@ -76,7 +76,7 @@
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="2" Width="150" >Продукт</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="2" Margin="0,0,0,10" Grid.Row="1" Width="150">Количесвто</TextBlock>
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1" Grid.RowSpan="2" Width="150">Дата поставки</TextBlock>
-                <ComboBox   ItemsSource="{Binding Path = ComboBoxProduct}" SelectedItem="{Binding NameSelectProduct}"  Grid.Column="3" Margin="0,0,0,5"  Grid.Row="2" Width="150"   Background="White" />
+                <ComboBox   ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedItem="{Binding NameSelectProduct}"  Grid.Column="3" Margin="0,0,0,5"  Grid.Row="2" Width="150"   Background="White" />
                 <TextBox x:Name="Amount" Text="{Binding TextBoxNewAmountText}" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="1" Width="150"   Background="White" ></TextBox>
                 <DatePicker Name="TextBoxNewDateText" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="0,0,0,5" Width="150" Background="White" SelectedDate="{Binding NewSupply.Date}" />
 
@@ -175,7 +175,7 @@
                 <TextBlock  Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1" Width="150" Text="Номер поставки" />
 
                 <TextBlock  Text="{Binding SelectedSupply.Id}" Grid.Column="1" Grid.Row="1" Width="140"   Background="White" Margin="15,0,5,5" ></TextBlock>
-                <ComboBox ItemsSource="{Binding Path = ComboBoxProduct}" SelectedItem="{Binding NameSelectProduct }"  Grid.Column="3" Margin="0,0,0,5"  Grid.Row="2" Width="150"   Background="White" />
+                <ComboBox ItemsSource="{Binding Products}" DisplayMemberPath="Name" SelectedItem="{Binding NameSelectProduct }"  Grid.Column="3" Margin="0,0,0,5"  Grid.Row="2" Width="150"   Background="White" />
                 <TextBox x:Name="Amount1" Text="{Binding TextBoxNewAmountText}" Grid.Column="3" Margin="0,0,0,5"  Grid.Row="1" Width="150"   Background="White" ></TextBox>
                 <DatePicker Name="TextBoxNewDateText1" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,5" Width="150" Background="White" SelectedDate="{Binding SelectedSupply.Date}" />
 

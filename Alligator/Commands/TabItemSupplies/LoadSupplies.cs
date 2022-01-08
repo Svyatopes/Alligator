@@ -34,8 +34,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.Supply = new SupplyModel();
             _viewModel.Products = new ObservableCollection<ProductModel>();
             _viewModel.NameSelectProduct = "";
-            _viewModel.Supplies = new ObservableCollection<SupplyModel>();
-            _viewModel.ComboBoxProduct = new List<string>();
+            _viewModel.Supplies = new ObservableCollection<SupplyModel>();            
             _viewModel.Supply.Details = new List<SupplyDetailModel>();
             _viewModel.SelectedDetailForDelete = new List<SupplyDetailModel>();
             _viewModel.TextBoxNewIdText = 0;
@@ -54,7 +53,6 @@ namespace Alligator.UI.Commands.TabItemSupplies
             foreach (var item in product)
             {
                 _viewModel.Products.Add(item);
-                _viewModel.ComboBoxProduct.Add(item.Name);
             }
         }
 
