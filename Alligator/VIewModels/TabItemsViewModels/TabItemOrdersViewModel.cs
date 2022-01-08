@@ -48,6 +48,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddReviewWindowOfAddOrder { get; set; }
         public ICommand DeleteReviewWindowOfAddOrder { get; set; }
         public ICommand AddProductWindowOfAddOrder { get; set; }
+        public ICommand DeleteDetailWindowOfOrderInfo { get; set; }
         public TabItemOrdersViewModel()
         {
 
@@ -78,6 +79,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddReviewWindowOfAddOrder = new AddReviewWindowOfAddOrderCommand(this);
             DeleteReviewWindowOfAddOrder = new DeleteReviewWindowOfAddOrderCommand(this);
             AddProductWindowOfAddOrder = new AddProductWindowOfAddOrderCommand(this);
+            DeleteDetailWindowOfOrderInfo = new DeleteDetailWindowOfOrderInfoCommand(this, _orderDetailService);
 
 
         }
@@ -176,6 +178,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedOrderDetailModel = value;
+                ((CommandBase)DeleteDetailWindowOfOrderInfo).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrderDetail));
             }
         }
@@ -354,6 +357,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _buttonDeleteNewReview = value;
                 OnPropertyChanged(nameof(ButtonDeleteNewReview));
+            }
+        }
+
+        private Visibility _buttonDeleteDetail;
+        public Visibility ButtonDeleteDetail
+        {
+            get { return _buttonDeleteDetail; }
+            set
+            {
+                _buttonDeleteDetail = value;
+                OnPropertyChanged(nameof(ButtonDeleteDetail));
             }
         }
     }
