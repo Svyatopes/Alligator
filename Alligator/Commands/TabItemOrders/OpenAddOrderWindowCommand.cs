@@ -24,7 +24,7 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
-            _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAdressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
+            _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAddressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
             _viewModel.Clients.Clear();
             if (_clientService.GetAllClients().Success is true)
             {

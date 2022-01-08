@@ -236,13 +236,13 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-        public string NewAdressText
+        public string NewAddressText
         {
             get { return _newAdressText; }
             set
             {
                 _newAdressText = value;
-                OnPropertyChanged(nameof(NewAdressText));
+                OnPropertyChanged(nameof(NewAddressText));
             }
         }
 

@@ -27,6 +27,11 @@ namespace Alligator.UI.Commands.TabItemOrders
                 return;
             }
             int amount = Convert.ToInt32(newAmount);
+            if (_viewModel.SelectedProduct is null)
+            {
+                MessageBox.Show("Выберите продукт");
+                return;
+            }
             if (_viewModel.NewOrder.OrderDetails is null)
             {
                 List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
