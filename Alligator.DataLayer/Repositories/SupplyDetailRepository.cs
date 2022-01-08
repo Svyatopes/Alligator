@@ -11,7 +11,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<SupplyDetail> GetAllSupplyDetails()
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_SelectAll";
             return sqlConnection
@@ -33,7 +33,7 @@ namespace Alligator.DataLayer.Repositories
 
         public List<SupplyDetail> GetSupplyDetailBySupplyId(int id)
         {
-            using var connection = GetConnection();
+            using var connection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_SelectBySupplyId";
             var supplyDictionary = new Dictionary<int, SupplyDetail>();
@@ -53,7 +53,7 @@ namespace Alligator.DataLayer.Repositories
 
         public int AddSupplyDetail(SupplyDetail supplyDetail)
         {
-            using var connection = GetConnection();
+            using var connection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_Insert";
 
@@ -73,7 +73,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditSupplyDetail(List<SupplyDetail> supplyDetail)
         {
-            using var connection = GetConnection();
+            using var connection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_Update";
             connection
@@ -86,7 +86,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteSupplyDetailBySupplyId(int id)
         {
-            using var connection = GetConnection();
+            using var connection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_DeleteBySupplyId";
             connection
@@ -98,7 +98,7 @@ namespace Alligator.DataLayer.Repositories
         }
         public void DeleteSupplyDetailById(int id)
         {
-            using var connection = GetConnection();
+            using var connection = ProvideConnection();
 
             string procName = "dbo.SupplyDetail_DeleteById";
             connection

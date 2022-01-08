@@ -12,7 +12,6 @@ using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
-    //TODO: Rename all non-infortive variables
     public class TabItemSuppliesViewModel : BaseViewModel
     {
         private readonly SupplyService _supplyService;

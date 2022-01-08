@@ -11,7 +11,7 @@ namespace Alligator.DataLayer.Repositories
         
         public List<Supply> GetSupplies()
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.Supply_SelectAll";
             return sqlConnection
@@ -24,7 +24,7 @@ namespace Alligator.DataLayer.Repositories
 
         public Supply GetSupplyById(int id)
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.Supply_SelectById";
             var supplyDictionary = new Dictionary<int, Supply>();
@@ -52,7 +52,7 @@ namespace Alligator.DataLayer.Repositories
 
         public int AddSupply(Supply supply)
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.Supply_Insert";
             return sqlConnection
@@ -65,7 +65,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteSupply(int id)
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.Supply_Delete";
             sqlConnection
@@ -78,7 +78,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void EditSupply(Supply supply)
         {
-            using var sqlConnection = GetConnection();
+            using var sqlConnection = ProvideConnection();
 
             string procName = "dbo.Supply_Update";
 
