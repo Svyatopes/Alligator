@@ -38,13 +38,14 @@ namespace Alligator.DataLayer.Repositories
             return comments;
         }
 
-        public void InsertCommentById(int clientId, string text)
+        public int InsertCommentById(int clientId, string text)
         {
             string proc = "dbo.Comment_Insert";
             using var connection = ProvideConnection();
-            connection.Execute(proc, new
+            return connection.QueryFirstOrDefault<int>(proc, new
             { text, clientId },
             commandType: CommandType.StoredProcedure);
+
         }
 
         public void DeleteCommentByCommentId(int id)

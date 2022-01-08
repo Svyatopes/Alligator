@@ -17,21 +17,37 @@ namespace Alligator.BusinessLayer
     public class CommentService
     {
         private readonly CommentRepository _commentRepository;
+
         public CommentService()
         {
             _commentRepository = new CommentRepository();
         }
 
-        public List<CommentModel> GetAllComments(int id)
+        public ActionResult<List<CommentModel>> GetAllComments(int id)
         {
             var comments = _commentRepository.GetAllCommentsByCLientId(id);
-            return CustomMapper.GetInstance().Map<List<CommentModel>>(comments);
+            try
+            {
+                return new ActionResult<List<CommentModel>>(true, CustomMapper.GetInstance().Map<List<CommentModel>>(comments));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<List<CommentModel>>(false, new List<CommentModel>()) { ErrorMessage = exception.Message };
+            }
         }
 
-        public void InsertComment(CommentModel comment)
+        public int InsertComment(CommentModel comment)
         {
             var comm = CustomMapper.GetInstance().Map<Comment>(comment);
-            _commentRepository.InsertCommentById(comm.Client.Id, comm.Text);
+            try
+            {
+                return _commentRepository.InsertCommentById(comm.Client.Id, comm.Text);
+            }
+            catch
+            {
+                return -1;
+            }
+
         }
 
         public bool DeleteCommentsByClientId(int clientId)

@@ -22,28 +22,36 @@ namespace Alligator.BusinessLayer
             _clientRepository = new ClientRepository();
         }
 
-        public List<ClientModel> GetAllClients()
+        public ActionResult<List<ClientModel>> GetAllClients()
         {
             var clients = _clientRepository.GetAllClients();
             try
             {
-                return CustomMapper.GetInstance().Map<List<ClientModel>>(clients);
+                return new ActionResult<List<ClientModel>>(true, CustomMapper.GetInstance().Map<List<ClientModel>>(clients));
             }
-            catch
+            catch (Exception exception)
             {
-                return new List<ClientModel>();
+                return new ActionResult<List<ClientModel>>(false, new List<ClientModel>()) { ErrorMessage = exception.Message };
             }
 
         }
 
-        public ClientModel GetClientById(int id)
+        public ActionResult<ClientModel> GetClientById(int id)
         {
             var client = _clientRepository.GetClientById(id);
-            return CustomMapper.GetInstance().Map<ClientModel>(client);
+            try
+            {
+                return new ActionResult<ClientModel>(true, CustomMapper.GetInstance().Map<ClientModel>(client));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<ClientModel>(false, new ClientModel()) { ErrorMessage = exception.Message };
+            }
         }
 
         public int InsertNewClient(ClientModel client)
         {
+
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
@@ -53,10 +61,12 @@ namespace Alligator.BusinessLayer
             {
                 return -1;
             }
+
         }
 
         public bool UpdateClient(ClientModel client)
         {
+
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
@@ -67,10 +77,12 @@ namespace Alligator.BusinessLayer
             {
                 return false;
             }
+
         }
 
         public bool DeleteClient(ClientModel client)
         {
+
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
