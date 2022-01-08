@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    class DeleteReviewCommand : CommandBase
+    class DeleteReviewWindowOfOrderInfoCommand : CommandBase
     {
         private TabItemOrdersViewModel _viewModel;
         private OrderReviewService _orderReviewService;
 
-        public DeleteReviewCommand(TabItemOrdersViewModel viewModel, OrderReviewService orderReviewService)
+        public DeleteReviewWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderReviewService orderReviewService)
         {
             _viewModel = viewModel;
             _orderReviewService = orderReviewService;
