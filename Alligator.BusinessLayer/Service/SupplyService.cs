@@ -7,12 +7,17 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer.Service
 {
-    public class SupplyService
+    public class SupplyService : ISupplyService
     {
         private readonly ISupplyRepository _supplyRepository;
         public SupplyService()
         {
             _supplyRepository = new SupplyRepository();
+
+        }
+        public SupplyService(ISupplyRepository fakeSupplyRepository)
+        {
+            _supplyRepository = fakeSupplyRepository;
 
         }
         public List<SupplyModel> GetAllSupplies()
@@ -22,7 +27,7 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<List<SupplyModel>>(entities);
             }
-            catch 
+            catch
             {
                 return new List<SupplyModel>();
             }
@@ -35,11 +40,11 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<SupplyModel>(entities);
             }
-            catch 
+            catch
             {
                 return new SupplyModel() { Id = -1 };
             }
-            
+
         }
 
         public bool DeleteSupply(int id)
@@ -63,11 +68,11 @@ namespace Alligator.BusinessLayer.Service
                 _supplyRepository.EditSupply(supplyModel);
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
-            
+
         }
 
         public int InsertSupply(SupplyModel supply)
@@ -77,11 +82,11 @@ namespace Alligator.BusinessLayer.Service
             {
                 return _supplyRepository.AddSupply(supplyModel);
             }
-            catch 
+            catch
             {
-                return -1;                
+                return -1;
             }
-            
+
         }
     }
 }

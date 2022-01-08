@@ -6,11 +6,11 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer.Service
 {
-    public class SupplyDetailService
+    public class SupplyDetailService : ISupplyDetailService
     {
         private readonly ISupplyDetailRepository _supplyDetailRepository;
         private readonly IProductRepository _productRepository;
-                
+
 
         public SupplyDetailService()
         {
@@ -25,11 +25,11 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
             }
-            catch 
+            catch
             {
-                return new List<SupplyDetailModel>();                
+                return new List<SupplyDetailModel>();
             }
-            
+
         }
 
         public List<SupplyDetailModel> GetSupplyDetailById(int id)
@@ -39,11 +39,11 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
             }
-            catch 
+            catch
             {
                 return new List<SupplyDetailModel>();
             }
-            
+
         }
 
         public bool DeleteSupplyDetailBySupplyId(int id)
@@ -79,11 +79,11 @@ namespace Alligator.BusinessLayer.Service
                 _supplyDetailRepository.EditSupplyDetail(supplyModel);
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
-            
+
         }
 
         public int InsertSupplyDetail(SupplyDetailModel supplyDetail)
@@ -93,11 +93,11 @@ namespace Alligator.BusinessLayer.Service
                 var supplyModel = Mapper.GetInstance().Map<SupplyDetail>(supplyDetail);
                 return _supplyDetailRepository.AddSupplyDetail(supplyModel);
             }
-            catch 
+            catch
             {
-                return -1;                
+                return -1;
             }
-            
+
 
         }
         public List<ProductModel> GetProduct()
@@ -107,11 +107,11 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<List<ProductModel>>(entities);
             }
-            catch 
+            catch
             {
                 return new List<ProductModel>();
             }
-            
+
 
         }
         public ProductModel GetProductById(int id)
@@ -121,10 +121,10 @@ namespace Alligator.BusinessLayer.Service
             {
                 return Mapper.GetInstance().Map<ProductModel>(entities);
             }
-            catch 
+            catch
             {
-                return new ProductModel() { Id = -1};                
-            }          
+                return new ProductModel() { Id = -1 };
+            }
 
         }
     }
