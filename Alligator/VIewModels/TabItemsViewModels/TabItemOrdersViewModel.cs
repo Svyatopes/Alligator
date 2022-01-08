@@ -121,6 +121,17 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
+        private OrderModel _newOrder;
+        public OrderModel NewOrder
+        {
+            get { return _newOrder; }
+            set
+            {
+                _newOrder = value;
+                OnPropertyChanged(nameof(NewOrder));
+            }
+        }
+
         private ObservableCollection<ClientModel> _clients;
         public ObservableCollection<ClientModel> Clients
         {

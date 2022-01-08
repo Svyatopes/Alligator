@@ -1,4 +1,5 @@
 ﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,17 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
+            _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAdressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
             _viewModel.Clients.Clear();
-            foreach (var client in _clientService.GetAllClients())
+            if (_clientService.GetAllClients().Success is true)
             {
-                _viewModel.Clients.Add(client);
+                var clients = _clientService.GetAllClients().Data;
+                foreach (var client in clients)
+                    _viewModel.Clients.Add(client);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }
             //пока нет productServic'а
             //foreach (var product in _productService.GetAllProducts())

@@ -29,15 +29,22 @@ namespace Alligator.UI.Commands.TabItemOrders
                 MessageBox.Show("Введите текст отзыва");
                 return;
             }
-
-            if (_viewModel.OrderReviews is null)
+            
+            if (_viewModel.NewOrder.OrderReviews is null)
             {
-                ObservableCollection<OrderReviewModel> orderReviews = new ObservableCollection<OrderReviewModel>();
+                List<OrderReviewModel> orderReviews = new List<OrderReviewModel>();
 
-                _viewModel.NewOrderReviews = orderReviews;
+                _viewModel.NewOrder.OrderReviews = orderReviews;
+            }
+            if (_viewModel.NewOrderReviews is null)
+            {
+               
+                _viewModel.NewOrderReviews = new ObservableCollection<OrderReviewModel>();
+
             }
 
-            var newOrderReview = new OrderReviewModel() { Text = newReview };
+            var newOrderReview = new OrderReviewModel() { Order=_viewModel.NewOrder, Text = newReview };
+            _viewModel.NewOrder.OrderReviews.Add(newOrderReview);
             _viewModel.NewOrderReviews.Add(newOrderReview);          
             _viewModel.NewReviewText = string.Empty;
         }
