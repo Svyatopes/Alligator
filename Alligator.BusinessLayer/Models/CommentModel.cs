@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Alligator.BusinessLayer.Models
 {
-    public class ProductModel
+    public class CommentModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public CategoryModel Category { get; set; }
+        public ClientModel Client { get; set; }
+        public string Text { get; set; }
     }
 }

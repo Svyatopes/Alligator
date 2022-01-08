@@ -131,8 +131,9 @@
     <Build Include="Procedures\OrderReview_SelectByOrderId.sql" />
     <Build Include="Procedures\OrderReview_SelectById.sql" />
     <Build Include="Procedures\Order_SelectAll.sql" />
+    <Build Include="Procedures\OrderDetail_DeleteByOrderId.sql" />
+    <Build Include="Procedures\Comment_DeleteByClientId_1.sql" />
     <Build Include="Procedures\SupplyDetail_SelectBySupplyId.sql" />
-    <Build Include="Procedures\Script2.sql" />
     <Build Include="Procedures\SupplyDetail_DeleteById.sql" />
   </ItemGroup>
   <ItemGroup>

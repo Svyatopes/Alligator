@@ -20,3 +20,7 @@ namespace Alligator.UI.Commands
         }
     }
 }
+        protected void OnCanExecutedChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
