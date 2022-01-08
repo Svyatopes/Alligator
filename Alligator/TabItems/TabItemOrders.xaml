@@ -229,12 +229,17 @@
 
                     </Grid>
                     <Grid Grid.Row="4" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
                         <DataGrid ItemsSource="{Binding NewOrderDetails}" SelectedItem="{Binding SelectedNewOrderDetail}" Background="#5F5656" Margin="5,15,5,5" AutoGenerateColumns="False" CanUserAddRows="True">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Продукты" Width="*" Binding="{Binding Path=Product.Name}" />
                                 <DataGridTextColumn Header="Количество" Width="*" Binding="{Binding Path=Amount}" />
                             </DataGrid.Columns>
                         </DataGrid>
+                        <Button  Visibility="{Binding ButtonDeleteNewDetail}" Command="{Binding DeleteNewDetail}" Height="20" Width="140" Grid.ColumnSpan="2" Grid.Row="4" Background="#DACDCD">Удалить продукт</Button>
                     </Grid>
 
                     <Grid Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Stretch" Height="Auto">
