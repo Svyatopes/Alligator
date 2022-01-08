@@ -58,7 +58,7 @@ namespace Alligator.DataLayer.Repositories
             string procName = "dbo.SupplyDetail_Insert";
 
             return connection
-                .Execute(
+                .QueryFirstOrDefault<int>(
                     procName,
                     new
                     {

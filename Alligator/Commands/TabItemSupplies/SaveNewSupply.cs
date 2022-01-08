@@ -36,14 +36,26 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 _viewModel.Supply.Date = _viewModel.NewSupply.Date;
 
                 var idSupplyInDatabase = _supplyService.InsertSupply(_viewModel.Supply);
+                if (idSupplyInDatabase == -1)
+                {
+                    MessageBox.Show("Ошибка при добавлении поставки в БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
                 foreach (var item in _viewModel.Supply.Details)
                 {
                     item.SupplyId = idSupplyInDatabase;
-                    _supplyDetailService.InsertSupplyDetail(item);
-                    
+                    var idSupplyDetailInDatabase = _supplyDetailService.InsertSupplyDetail(item);
+                    if (idSupplyDetailInDatabase == -1)
+                    {
+                        MessageBox.Show("Ошибка при добавлении деталей поставки в БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+
                 }                 
                 
-                _supplyService.UpdateSupply(_viewModel.Supply);
+                if (_supplyService.UpdateSupply(_viewModel.Supply) ==false)
+                { 
+                    MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                }
 
                 _viewModel.Supplies.Clear();
                 var supplies = _supplyService.GetAllSupplies();
@@ -51,6 +63,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
+
+
                 _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
 

@@ -18,14 +18,28 @@ namespace Alligator.BusinessLayer.Service
         public List<SupplyModel> GetAllSupplies()
         {
             var entities = _supplyRepository.GetSupplies();
-
-            return Mapper.GetInstance().Map<List<SupplyModel>>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<List<SupplyModel>>(entities);
+            }
+            catch 
+            {
+                return new List<SupplyModel>();
+            }
         }
 
         public SupplyModel GetSupplyById(int id)
         {
             var entities = _supplyRepository.GetSupplyById(id);
-            return Mapper.GetInstance().Map<SupplyModel>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<SupplyModel>(entities);
+            }
+            catch 
+            {
+                return new SupplyModel() { Id = -1 };
+            }
+            
         }
 
         public bool DeleteSupply(int id)
@@ -41,16 +55,33 @@ namespace Alligator.BusinessLayer.Service
             }
         }
 
-        public void UpdateSupply(SupplyModel supply)
+        public bool UpdateSupply(SupplyModel supply)
         {
             var supplyModel = Mapper.GetInstance().Map<Supply>(supply);
-            _supplyRepository.EditSupply(supplyModel);
+            try
+            {
+                _supplyRepository.EditSupply(supplyModel);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+            
         }
 
         public int InsertSupply(SupplyModel supply)
         {
             var supplyModel = Mapper.GetInstance().Map<Supply>(supply);
-            return _supplyRepository.AddSupply(supplyModel);
+            try
+            {
+                return _supplyRepository.AddSupply(supplyModel);
+            }
+            catch 
+            {
+                return -1;                
+            }
+            
         }
     }
 }

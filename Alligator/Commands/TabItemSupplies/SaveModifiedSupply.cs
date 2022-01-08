@@ -37,18 +37,32 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     if (item.Id==0)
                     {                        
-                        _supplyDetailService.InsertSupplyDetail(item);
+                        var idSupplyDetailInDatabase = _supplyDetailService.InsertSupplyDetail(item);
+                        if (idSupplyDetailInDatabase == -1)
+                        {
+                            MessageBox.Show("Ошибка при добавлении деталей поставки в БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
                     }                   
 
                 }
                 foreach (var item in _viewModel.SelectedDetailForDelete)
                 {
-                    _supplyDetailService.DeleteSupplyDetailById(item.Id);
+                    if (_supplyDetailService.DeleteSupplyDetailById(item.Id) ==false)
+                    {
+                        MessageBox.Show("Ошибка при удалении. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    }
+
 
                 }
                 
                 _viewModel.Supply = _viewModel.SelectedSupply;
-                _supplyService.UpdateSupply(_viewModel.Supply);
+                if (_supplyService.UpdateSupply(_viewModel.Supply) == false)
+                {
+                    MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+
 
                 _viewModel.Supplies.Clear();
                 var supplies = _supplyService.GetAllSupplies();
@@ -56,6 +70,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 {
                     _viewModel.Supplies.Add(item);
                 }
+
+
                 _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>();
                 _viewModel.Supply.Details = new List<SupplyDetailModel>();
                 _viewModel.TextBoxNewAmountText = 0;

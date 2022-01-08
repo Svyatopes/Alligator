@@ -10,8 +10,7 @@ namespace Alligator.BusinessLayer.Service
     {
         private readonly ISupplyDetailRepository _supplyDetailRepository;
         private readonly IProductRepository _productRepository;
-
-        //TODO: add try catch for exceptions from DB
+                
 
         public SupplyDetailService()
         {
@@ -22,14 +21,29 @@ namespace Alligator.BusinessLayer.Service
         public List<SupplyDetailModel> GetAllSupplyDetails()
         {
             var entities = _supplyDetailRepository.GetAllSupplyDetails();
-
-            return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+            }
+            catch 
+            {
+                return new List<SupplyDetailModel>();                
+            }
+            
         }
 
         public List<SupplyDetailModel> GetSupplyDetailById(int id)
         {
             var entities = _supplyDetailRepository.GetSupplyDetailBySupplyId(id);
-            return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+            }
+            catch 
+            {
+                return new List<SupplyDetailModel>();
+            }
+            
         }
 
         public bool DeleteSupplyDetailBySupplyId(int id)
@@ -44,35 +58,73 @@ namespace Alligator.BusinessLayer.Service
                 return false;
             }
         }
-        public void DeleteSupplyDetailById(int id)
+        public bool DeleteSupplyDetailById(int id)
         {
-            _supplyDetailRepository.DeleteSupplyDetailById(id);
+            try
+            {
+                _supplyDetailRepository.DeleteSupplyDetailById(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void UpdateSupplyDetail(List<SupplyDetailModel> supplyDetail)
+        public bool UpdateSupplyDetail(List<SupplyDetailModel> supplyDetail)
         {
             var supplyModel = Mapper.GetInstance().Map<List<SupplyDetail>>(supplyDetail);
-            _supplyDetailRepository.EditSupplyDetail(supplyModel);
+            try
+            {
+                _supplyDetailRepository.EditSupplyDetail(supplyModel);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+            
         }
 
         public int InsertSupplyDetail(SupplyDetailModel supplyDetail)
         {
-            var supplyModel = Mapper.GetInstance().Map<SupplyDetail>(supplyDetail);
-            return _supplyDetailRepository.AddSupplyDetail(supplyModel);
+            try
+            {
+                var supplyModel = Mapper.GetInstance().Map<SupplyDetail>(supplyDetail);
+                return _supplyDetailRepository.AddSupplyDetail(supplyModel);
+            }
+            catch 
+            {
+                return -1;                
+            }
+            
 
         }
         public List<ProductModel> GetProduct()
         {
             var entities = _productRepository.GetAllProducts();
-
-            return Mapper.GetInstance().Map<List<ProductModel>>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<List<ProductModel>>(entities);
+            }
+            catch 
+            {
+                return new List<ProductModel>();
+            }
+            
 
         }
         public ProductModel GetProductById(int id)
         {
             var entities = _productRepository.GetProductById(id);
-
-            return Mapper.GetInstance().Map<ProductModel>(entities);
+            try
+            {
+                return Mapper.GetInstance().Map<ProductModel>(entities);
+            }
+            catch 
+            {
+                return new ProductModel() { Id = -1};                
+            }          
 
         }
     }

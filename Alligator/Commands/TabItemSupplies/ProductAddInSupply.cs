@@ -3,7 +3,7 @@ using Alligator.BusinessLayer.Service;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemSupplies
 {
@@ -35,7 +35,12 @@ namespace Alligator.UI.Commands.TabItemSupplies
                     idSelectedProduct = item.Id;
                 }
             }
-            var idProductInDatabase = _supplyDetailService.GetProductById(idSelectedProduct);
+            var ProductInDatabase = _supplyDetailService.GetProductById(idSelectedProduct);
+            if (ProductInDatabase.Id==-1)
+            {
+                MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                ProductInDatabase = new ProductModel();
+            }
             _viewModel.Supply.Date = _viewModel.NewSupply.Date;
 
             var idSupplyInDatabase = 0;
@@ -47,7 +52,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             }
             var supplyProduct = new SupplyDetailModel()
             {
-                Product = idProductInDatabase,
+                Product = ProductInDatabase,
                 Amount = _viewModel.TextBoxNewAmountText,
                 SupplyId = idSupplyInDatabase,
 
