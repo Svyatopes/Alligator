@@ -1,4 +1,5 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
+﻿using Alligator.UI.Commands.TabItemProducts;
+using Alligator.UI.VIewModels.EntitiesViewModels;
 using MvvmHelpers;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
@@ -18,6 +20,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private Visibility _visibilityAddProduct;
         private Visibility _visibilityProduct;
         private Visibility _visibilityAllProducts;
+        public ICommand OpenProductCard { get; set; }
 
         public ObservableCollection<ProductViewModel> Products
         {
@@ -35,6 +38,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public TabItemProductsViewModel()
         {
             Products = new ObservableCollection<ProductViewModel>();
+            OpenProductCard = new OpenProductCard(this);
         }
 
         public ProductViewModel Selected

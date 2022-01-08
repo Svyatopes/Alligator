@@ -23,9 +23,9 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Click="AddProduct">Добавить товар</Button>
-                <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" Click="ViewProduct">Просмотреть товар</Button>
-                <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Click="DeleteProduct">Удалить товар</Button>
+                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" >Добавить товар</Button>
+                <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" Command="{Binding OpenProductCard}" >Просмотреть товар</Button>
+                <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" >Удалить товар</Button>
             </Grid>
         </Grid>
 
@@ -44,9 +44,9 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Click="Comeback">Вернуться назад</Button>
-                <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" Click="DeleteProduct">Удалить товар</Button>
-                <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Click="SaveProduct">Сохранить изменения</Button>
+                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" >Вернуться назад</Button>
+                <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" >Удалить товар</Button>
+                <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" >Сохранить изменения</Button>
             </Grid>
 
         </Grid>
@@ -79,8 +79,8 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <Button  Grid.Column="0" Grid.Row="2" Background="#DACDCD"  Height="20" Width="210" Click="Comeback">Вернуться назад</Button>
-                    <Button  Grid.Column="1" Grid.Row="2" Background="#DACDCD"  Height="20" Width="210" Click="SaveProduct">Сохранить изменения</Button>
+                    <Button  Grid.Column="0" Grid.Row="2" Background="#DACDCD"  Height="20" Width="210" >Вернуться назад</Button>
+                    <Button  Grid.Column="1" Grid.Row="2" Background="#DACDCD"  Height="20" Width="210" >Сохранить изменения</Button>
                 </Grid>
 
             </Grid>
