@@ -21,6 +21,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         {
             _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
+            _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersWindowVisibility = Visibility.Visible;
             _viewModel.NewReviewText = string.Empty;
             _viewModel.NewAmount = string.Empty;

@@ -8,21 +8,21 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class ComeBackFirstWindowCommand : CommandBase
+    class ComeBackWindowOfOrderInfoFromChangeOrderWindowCommand : CommandBase
     {
         private TabItemOrdersViewModel _viewModel;
 
-        public ComeBackFirstWindowCommand(TabItemOrdersViewModel viewModel)
+        public ComeBackWindowOfOrderInfoFromChangeOrderWindowCommand(TabItemOrdersViewModel viewModel)
         {
             _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _viewModel.AddOrderWindowVisibility= Visibility.Collapsed;
-            _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
+            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.OrdersInfoWindowVisibility = Visibility.Visible;
             _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
-            _viewModel.OrdersWindowVisibility = Visibility.Visible;           
-        }
+            _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
+        }    
     }
 }

@@ -30,6 +30,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         {
             _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
             _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.ChangeOrderWindowVisibility= Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Visible;
             var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id);
             _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel>(order.OrderReviews);
