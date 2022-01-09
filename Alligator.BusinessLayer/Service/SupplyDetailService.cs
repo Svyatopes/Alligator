@@ -23,7 +23,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _supplyDetailRepository.GetAllSupplyDetails();
             try
             {
-                return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+                return CustomMapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
             }
             catch
             {
@@ -37,7 +37,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _supplyDetailRepository.GetSupplyDetailBySupplyId(id);
             try
             {
-                return Mapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
+                return CustomMapper.GetInstance().Map<List<SupplyDetailModel>>(entities);
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace Alligator.BusinessLayer.Service
 
         public bool UpdateSupplyDetail(List<SupplyDetailModel> supplyDetail)
         {
-            var supplyModel = Mapper.GetInstance().Map<List<SupplyDetail>>(supplyDetail);
+            var supplyModel = CustomMapper.GetInstance().Map<List<SupplyDetail>>(supplyDetail);
             try
             {
                 _supplyDetailRepository.EditSupplyDetail(supplyModel);
@@ -90,7 +90,7 @@ namespace Alligator.BusinessLayer.Service
         {
             try
             {
-                var supplyModel = Mapper.GetInstance().Map<SupplyDetail>(supplyDetail);
+                var supplyModel = CustomMapper.GetInstance().Map<SupplyDetail>(supplyDetail);
                 return _supplyDetailRepository.AddSupplyDetail(supplyModel);
             }
             catch
@@ -105,7 +105,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _productRepository.GetAllProducts();
             try
             {
-                return Mapper.GetInstance().Map<List<ProductModel>>(entities);
+                return CustomMapper.GetInstance().Map<List<ProductModel>>(entities);
             }
             catch
             {
@@ -119,7 +119,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _productRepository.GetProductById(id);
             try
             {
-                return Mapper.GetInstance().Map<ProductModel>(entities);
+                return CustomMapper.GetInstance().Map<ProductModel>(entities);
             }
             catch
             {

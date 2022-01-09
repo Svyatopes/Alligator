@@ -1,13 +1,9 @@
 ﻿using Alligator.BusinessLayer.Configuration;
 using Alligator.BusinessLayer.Models;
-using Alligator.DataLayer;
+using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.BusinessLayer
 {
