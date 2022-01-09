@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.UI", "Alligator\Alligator.UI.csproj", "{A8A60628-F8CF-4EFE-BB50-C718C6A34C50}"
 EndProject
@@ -9,7 +9,12 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Alligator.DB", "Alligator.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.DataLayer", "Alligator.DataLayer\Alligator.DataLayer.csproj", "{81787F65-1BC9-42B2-A18F-DC2284C2558C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.BusinessLayer", "Alligator.BusinessLayer\Alligator.BusinessLayer.csproj", "{87CC4C4D-BBE0-4899-929E-C466AD857D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alligator.BusinessLayer", "Alligator.BusinessLayer\Alligator.BusinessLayer.csproj", "{4CA51772-E591-4338-9ECC-BC174384CF46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alligator.BusinessLayer.Tests", "Alligator.BusinessLayer.Tests\Alligator.BusinessLayer.Tests.csproj", "{F856C088-6BC2-4098-BB7C-90C41D1A74AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4CA51772-E591-4338-9ECC-BC174384CF46} = {4CA51772-E591-4338-9ECC-BC174384CF46}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,10 +36,14 @@ Global
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81787F65-1BC9-42B2-A18F-DC2284C2558C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{87CC4C4D-BBE0-4899-929E-C466AD857D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87CC4C4D-BBE0-4899-929E-C466AD857D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87CC4C4D-BBE0-4899-929E-C466AD857D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{87CC4C4D-BBE0-4899-929E-C466AD857D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA51772-E591-4338-9ECC-BC174384CF46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA51772-E591-4338-9ECC-BC174384CF46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA51772-E591-4338-9ECC-BC174384CF46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA51772-E591-4338-9ECC-BC174384CF46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F856C088-6BC2-4098-BB7C-90C41D1A74AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F856C088-6BC2-4098-BB7C-90C41D1A74AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F856C088-6BC2-4098-BB7C-90C41D1A74AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F856C088-6BC2-4098-BB7C-90C41D1A74AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
