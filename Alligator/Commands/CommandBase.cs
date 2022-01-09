@@ -14,9 +14,15 @@ namespace Alligator.UI.Commands
 
         public abstract void Execute(object parameter);
 
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
+
         protected void OnCanExecutedChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
+        

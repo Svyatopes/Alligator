@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
         //private const string _connectionString = "Data Source=(local);Database=AggregatorAlligator;Integrated Security=true";
@@ -22,7 +22,7 @@ namespace Alligator.DataLayer.Repositories
             return connection
                 .Query<Product, Category, Product>(procString, (product, category) =>
                 {
-                    product.Category = category; 
+                    product.Category = category;
                     return product;
                 },
                 new
@@ -31,6 +31,7 @@ namespace Alligator.DataLayer.Repositories
                 },
                 commandType: CommandType.StoredProcedure, splitOn: "Id")
                 .FirstOrDefault();
+
         }
 
         public List<Product> GetAllProducts()
@@ -39,16 +40,18 @@ namespace Alligator.DataLayer.Repositories
             using var connection = new SqlConnection(_connectionString);
 
             connection.Open();
-            
+
             return connection
                 .Query<Product, Category, Product>(procString, (product, category) =>
                 {
                     product.Category = category;
                     return product;
                 },
-                commandType: CommandType.StoredProcedure,splitOn: "Id")
-                .Distinct()
+                commandType: CommandType.StoredProcedure, splitOn: "Id")
+                
                 .ToList();
+
+                
         }
 
         public int AddProduct(Product product)
@@ -58,11 +61,11 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            return connection.QueryFirstOrDefault<int>(procString, new 
-                { 
-                   product.Name, 
-                   product.Category.Id 
-                }, 
+            connection.Execute(procString, new
+            {
+                Name = product.Name,
+                CategoryId = product.Category.Id
+            },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -73,12 +76,12 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new 
-                { 
-                    Id = product.Id, 
-                    Name = product.Name, 
-                    CategoryId = product.Category.Id 
-                }, 
+            connection.Execute(procString, new
+            {
+                Id = product.Id,
+                Name = product.Name,
+                CategoryId = product.Category.Id
+            },
                 commandType: CommandType.StoredProcedure);
         }
 
@@ -89,10 +92,10 @@ namespace Alligator.DataLayer.Repositories
 
             connection.Open();
 
-            connection.Execute(procString, new 
-                { 
-                    Id = id 
-                }, 
+            connection.Execute(procString, new
+            {
+                Id = id
+            },
                 commandType: CommandType.StoredProcedure);
         }
     }

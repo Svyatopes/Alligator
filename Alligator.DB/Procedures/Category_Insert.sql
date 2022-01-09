@@ -3,5 +3,6 @@
 AS
 BEGIN
 	INSERT INTO dbo.Category (Name)
- VALUES (@Name)
+	OUTPUT Inserted.ID
+	VALUES (@Name)
 END

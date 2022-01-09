@@ -1,65 +1,123 @@
 ﻿<TabItem x:Class="Alligator.UI.TabItems.TabItemCategories"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:vms="clr-namespace:Alligator.UI.ViewModels.TabItemsViewModels"
              Header="Категории и теги">
+    <TabItem.DataContext>
+        <vms:TabItemCategoriesViewModel/>
+    </TabItem.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadCategoriesAndProductTags}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="9*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Center" VerticalAlignment="Center">Категории</Label>
-        <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Теги</Label>
-        <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding Categories}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Наименование" Width="200" Binding="{Binding Name}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button >Удалить</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <DataGrid Grid.Row="1" Grid.Column="1" Margin="10" AutoGenerateColumns="False" CanUserAddRows="False" ItemsSource="{Binding ProductTags}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Наименование" Width="200" Binding="{Binding Name}"/>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button>Удалить</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-
-        <Grid Grid.Row="2" VerticalAlignment="Stretch" Height="Auto">
+        <Grid Visibility="{Binding MainGridVisibilty}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Margin="10" MinWidth="140" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewCategoryText}" />
-            <Button Grid.Column="1" Margin="10" MinWidth="100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Добавить"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center">Категории</Label>
+            <Label Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">Теги</Label>
+            <DataGrid Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedCategory}"  ItemsSource="{Binding Categories}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Наименование" Width="200" Binding="{Binding Name}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.StartEditingCategory}">Изменить</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteCategory}">Удалить</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid Grid.Row="1" Grid.Column="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectedProductTag}" ItemsSource="{Binding ProductTags}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Наименование" Width="200" Binding="{Binding Name}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.StartEditingProductTag}">Изменить</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteProductTag}">Удалить</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="2" VerticalAlignment="Stretch" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Margin="10" MinWidth="140" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewCategoryText}" />
+                <Button Grid.Column="1" Margin="10" MinWidth="100" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddCategory}" Content="Добавить"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <TextBox Margin="10" MinWidth="140" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewProductTagText}" />
+                <Button Grid.Column="1" Margin="10" MinWidth="100" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddProductTag}" Content="Добавить"/>
+            </Grid>
         </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" Height="Auto">
+        <Grid Visibility="{Binding GridEditCategoryVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <TextBox Margin="10" MinWidth="140" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextBoxNewProductTagText}" />
-            <Button Grid.Column="1" Margin="10" MinWidth="100" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Добавить"/>
+            <Label Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Изменение категории
+            </Label>
+            <TextBox Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxCategoryEditText}"></TextBox>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding ReturnToMainGrid}">Назад</Button>
+            <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding SaveCategory}">Сохранить изменения</Button>
         </Grid>
 
-
+        <Grid Visibility="{Binding GridEditProdutTagVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Изменение тэга
+            </Label>
+            <TextBox Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxProductTagEditText}"></TextBox>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding ReturnToMainGrid}">Назад</Button>
+            <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding SaveProductTag}">Сохранить изменения</Button>
+        </Grid>
 
     </Grid>
 </TabItem>

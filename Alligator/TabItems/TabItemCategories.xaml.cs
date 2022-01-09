@@ -1,6 +1,4 @@
 ﻿using Alligator.UI.ViewModels.TabItemsViewModels;
-using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Alligator.UI.TabItems
@@ -10,15 +8,9 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemCategories : TabItem
     {
-
-        private TabItemCategoriesViewModel ViewModel;
         public TabItemCategories()
         {
             InitializeComponent();
-            ViewModel = new TabItemCategoriesViewModel();
-            DataContext = ViewModel;
-
         }
-
     }
 }
