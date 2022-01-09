@@ -25,7 +25,7 @@ namespace Alligator.BusinessLayer.Services
             }
             catch (Exception exception)
             {
-                return new ActionResult<List<CommentModel>>(false, new List<CommentModel>()) { ErrorMessage = exception.Message };
+                return new ActionResult<List<CommentModel>>(false, null) { ErrorMessage = exception.Message };
             }
         }
 
