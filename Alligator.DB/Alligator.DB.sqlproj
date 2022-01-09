@@ -114,7 +114,7 @@
     <Build Include="Procedures\Supply_Insert.sql" />
     <Build Include="Procedures\SupplyDetail_SelectAll.sql" />
     <Build Include="Procedures\SupplyDetail_SelectById.sql" />
-    <Build Include="Procedures\SupplyDetail_Delete.sql" />
+    <Build Include="Procedures\SupplyDetail_DeleteBySupplyId.sql" />
     <Build Include="Procedures\SupplyDetail_Insert.sql" />
     <Build Include="Procedures\SupplyDetail_Update.sql" />
     <Build Include="Tables\Category.sql" />
@@ -132,8 +132,15 @@
     <Build Include="Procedures\Order_SelectAll.sql" />
     <Build Include="Procedures\Comment_DeleteByClient.sql" />
     <Build Include="Procedures\Comment_DeleteByCommentId.sql" />
+    <Build Include="Procedures\OrderDetail_DeleteByOrderId.sql" />
+    <Build Include="Procedures\Comment_DeleteByClientId_1.sql" />
+    <Build Include="Procedures\SupplyDetail_SelectBySupplyId.sql" />
+    <Build Include="Procedures\SupplyDetail_DeleteById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Alligator.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\Script1.sql" />
   </ItemGroup>
 </Project>

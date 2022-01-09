@@ -5,6 +5,7 @@
 AS
 BEGIN
 	insert into dbo.[Order] (Date, ClientId, Address) 
+	output Inserted.Id
 	values (@Date, @ClientId, @Address);
 END
 

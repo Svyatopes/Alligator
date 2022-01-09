@@ -19,6 +19,10 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Folder Include="TabItems\NewFolder\" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Folder Include="ViewModels\EntitiesViewModels\" />
   </ItemGroup>
 

@@ -4,7 +4,9 @@ BEGIN
 	SELECT
 		p.Id,
 		p.Name,
-		p.Id,
+		c.Id,
 		c.Name
-	from dbo.Product p inner join dbo.Category c on p.CategoryId = c.Id
+
+		
+	from dbo.Product p left join dbo.Category c on p.CategoryId = c.Id
 END

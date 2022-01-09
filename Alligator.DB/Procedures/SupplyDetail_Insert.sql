@@ -6,4 +6,5 @@ AS
 BEGIN
 	INSERT INTO dbo.SupplyDetail (Amount, SupplyId, ProductId) 
 	VALUES (@Amount, @SupplyId, @ProductId)
+	select scope_identity()
 END
