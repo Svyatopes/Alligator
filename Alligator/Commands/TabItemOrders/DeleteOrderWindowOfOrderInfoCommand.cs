@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    class DeleteOrderWindowOfOrderInfoCommand : CommandBase
+    public class DeleteOrderWindowOfOrderInfoCommand : CommandBase
     {
 
         private TabItemOrdersViewModel _viewModel;

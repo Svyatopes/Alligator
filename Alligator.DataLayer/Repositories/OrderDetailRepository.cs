@@ -69,7 +69,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Insert";
             connection.Execute(procString,
-            new { Amount = amount, OrdertId = orderId, ProductId = productId },
+            new { amount, orderId, productId },
             commandType: CommandType.StoredProcedure);
         }
 

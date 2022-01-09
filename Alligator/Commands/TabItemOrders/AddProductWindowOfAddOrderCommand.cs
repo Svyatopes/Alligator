@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    class AddProductWindowOfAddOrderCommand : CommandBase
+    public class AddProductWindowOfAddOrderCommand : CommandBase
     {
         private TabItemOrdersViewModel _viewModel;
         public AddProductWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
@@ -27,6 +27,7 @@ namespace Alligator.UI.Commands.TabItemOrders
                 return;
             }
             int amount = Convert.ToInt32(newAmount);
+            
             if (_viewModel.SelectedProduct is null)
             {
                 MessageBox.Show("Выберите продукт");

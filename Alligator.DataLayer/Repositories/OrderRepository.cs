@@ -58,7 +58,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Insert";
             return connection.QueryFirstOrDefault<int>(procString,
-            new { Date = date, ClientId = clientId, Address = address },
+            new { date,clientId, address },
             commandType: CommandType.StoredProcedure);
         }
 

@@ -11,7 +11,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    class AddReviewWindowOfAddOrderCommand : CommandBase
+    public class AddReviewWindowOfAddOrderCommand : CommandBase
     {
         private TabItemOrdersViewModel _viewModel;       
 

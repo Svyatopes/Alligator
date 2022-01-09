@@ -50,6 +50,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand AddProductWindowOfAddOrder { get; set; }
         public ICommand DeleteDetailWindowOfOrderInfo { get; set; }
         public ICommand DeleteNewDetail { get; set; }
+        public ICommand ComeBackFirstWindowFromAddOrderWindow { get; set; }
         public TabItemOrdersViewModel()
         {
 
@@ -57,6 +58,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
+            
+            //NewOrder = new OrderModel();
 
             AllOrders = new ObservableCollection<OrderModel>();                               
             Clients = new ObservableCollection<ClientModel>();
@@ -65,7 +68,6 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             OrderReviews = new ObservableCollection<OrderReviewModel>();
             OrderDetails = new ObservableCollection<OrderDetailModel>();
             NewOrderDetails = new ObservableCollection<OrderDetailModel>();
-            NewOrder = new OrderModel();
 
             AddReviewWindowOfOrderInfo = new AddReviewWindowOfOrderInfoCommand(this, _orderReviewService);
             DeleteReviewWindowOfOrderInfo = new DeleteReviewWindowOfOrderInfoCommand(this, _orderReviewService);
@@ -82,6 +84,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddProductWindowOfAddOrder = new AddProductWindowOfAddOrderCommand(this);
             DeleteDetailWindowOfOrderInfo = new DeleteDetailWindowOfOrderInfoCommand(this, _orderDetailService);
             DeleteNewDetail = new DeleteNewDetailCommand(this);
+            ComeBackFirstWindowFromAddOrderWindow = new ComeBackFirstWindowFromAddOrderWindowCommand(this);
 
         }
         

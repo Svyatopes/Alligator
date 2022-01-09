@@ -36,16 +36,29 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _viewModel.NewAddressText = string.Empty;
             }
             newAddress = _viewModel.NewAddressText.Trim();
+            
             if (_viewModel.SelectedClient is null)
             {
                 MessageBox.Show("Выберите клиента");
                 return;
-            } 
+            }
+            
+            if (_viewModel.NewOrder.OrderDetails is null)
+            {
+                List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
+
+                _viewModel.NewOrder.OrderDetails = orderDetails;
+            }
+            if (_viewModel.NewOrderDetails is null)
+            {
+                _viewModel.NewOrderDetails = new ObservableCollection<OrderDetailModel>();
+            }
             if (_viewModel.NewOrder.OrderDetails.Count==0)
             {
                 MessageBox.Show("Выберите продукты и их количество");
                 return;
             }
+
            int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);             
             foreach (var orderReview in _viewModel.NewOrderReviews)
             {
