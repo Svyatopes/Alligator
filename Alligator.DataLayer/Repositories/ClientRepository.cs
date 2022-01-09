@@ -10,37 +10,51 @@ using Alligator.DataLayer.Repositories;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ClientRepository
+    public class ClientRepository : BaseRepository
     {
-
-        string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-
         public List<Client> GetAllClients()
         {
             string proc = "dbo.Client_SelectAll";
-            using var conn = new SqlConnection(_connection);
-            conn.Open();
-            var clients = conn.Query<Client>(proc)
-            .ToList();
-            return clients;
+            using var connection = ProvideConnection();
+
+            try
+            {
+
+                var clients = connection.Query<Client>(proc)
+                .ToList();
+                return clients;
+            }
+            catch
+            {
+                List<Client> clients = new List<Client>();
+                return clients;
+            }
+
+
         }
 
         public Client GetClientById(int id)
         {
             string proc = "dbo.Client_SelectById";
-            using SqlConnection conn = new SqlConnection(_connection);
-            conn.Open();
-            return conn.Query<Client, Comment, Client>
-            (proc,(client, comment)=>
+            using var connection = ProvideConnection();
+
+            var clientDictionary = new Dictionary<int, Client>();
+
+            return connection.Query<Client, Comment, Client>
+            (proc,
+            (client, comment) =>
             {
-                if (client.Comments == null)
+                Client clientEntry;
+
+                if (!clientDictionary.TryGetValue(client.Id, out clientEntry))
                 {
-                    client.Comments = new List<Comment>();
-                    client.Comments.Add(comment);
-                    return client;
+                    clientEntry = client;
+                    clientEntry.Comments = new List<Comment>();
+                    clientDictionary.Add(clientEntry.Id, clientEntry);
                 }
-                client.Comments.Add(comment);
-                return client;
+                if (comment != null)
+                    clientEntry.Comments.Add(comment);
+                return clientEntry;
             },
              new { Id = id },
              commandType: CommandType.StoredProcedure,
@@ -52,60 +66,56 @@ namespace Alligator.DataLayer.Repositories
         public Client GetClientByCommentId(int id)
         {
             string proc = "dbo.Client_SelectByCommentId";
-            using SqlConnection conn = new SqlConnection(_connection);
-            conn.Open();
-            Client client = conn.QueryFirstOrDefault<Client>
+            using var connection = ProvideConnection();
+            Client client = connection.QueryFirstOrDefault<Client>
             (proc,
             new
             {
-                commentId = id 
+                commentId = id
             },
             commandType: CommandType.StoredProcedure);
             return client;
         }
 
-        public void InsertClient(Client client)
+        public int InsertClient(Client client)
         {
-            string proc = "dbo.Insert_Client";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
-            connection.Execute(proc,new
-            { 
-                FirstName = client.FirstName,
-                LastName = client.LastName,
-                Patronymic = client.Patronymic,
-                PhoneNumber = client.PhoneNumber, 
-                Email = client.Email 
+            string proc = "dbo.Client_Insert";
+            using var connection = ProvideConnection();
+            return connection.QueryFirstOrDefault<int>(proc, new
+            {
+                client.FirstName,
+                client.LastName,
+                client.Patronymic,
+                client.PhoneNumber,
+                client.Email
             },
-            commandType: CommandType.StoredProcedure
-                );
+             commandType: CommandType.StoredProcedure);
         }
 
         public void UpdateClient(Client client)
         {
             string proc = "dbo.Client_Update";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
-            connection.Execute(proc, new 
+            using var connection = ProvideConnection();
+            connection.Execute(proc, new
             {
                 client.Id,
                 client.FirstName,
                 client.LastName,
                 client.Patronymic,
-                client.PhoneNumber 
+                client.PhoneNumber,
+                client.Email
             },
             commandType: CommandType.StoredProcedure
                 );
         }
 
-        public void DeleteClient(int id)
+        public void DeleteClient(Client client)
         {
             string proc1 = "dbo.Client_Delete";
-            using var connection = new SqlConnection(_connection);
-            connection.Open();
+            using var connection = ProvideConnection();
             connection.Execute(proc1, new
             {
-                Id =id
+                Id = client.Id
             },
             commandType: CommandType.StoredProcedure
             );
