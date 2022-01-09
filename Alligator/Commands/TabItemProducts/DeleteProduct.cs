@@ -1,4 +1,4 @@
-﻿using Alligator.UI.VIewModels.TabItemsViewModels;
+﻿using Alligator.UI.ViewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace Alligator.UI.Commands.TabItemProducts
         {
             var userAnswer = MessageBox.Show("Вы правда хотите удалить этот товар?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
-                viewModel.Products.Remove(viewModel.Selected);
+                viewModel.Products.Remove(viewModel.SelectedProduct);
         }
     }
 }

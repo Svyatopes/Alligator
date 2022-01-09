@@ -1,5 +1,5 @@
-﻿using Alligator.UI.VIewModels.EntitiesViewModels;
-using Alligator.UI.VIewModels.TabItemsViewModels;
+﻿
+using Alligator.UI.ViewModels.TabItemsViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

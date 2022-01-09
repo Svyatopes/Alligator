@@ -51,17 +51,17 @@ namespace Alligator.DataLayer.Repositories
                 .ToList();
         }
 
-        public void AddProduct(Product product)
+        public int AddProduct(Product product)
         {
             string procString = "dbo.Product_Insert";
             using var connection = new SqlConnection(_connectionString);
 
             connection.Open();
 
-            connection.Execute(procString, new 
+            return connection.QueryFirstOrDefault<int>(procString, new 
                 { 
-                    Name = product.Name, 
-                    CategoryId = product.Category.Id 
+                   product.Name, 
+                   product.Category.Id 
                 }, 
                 commandType: CommandType.StoredProcedure);
         }
@@ -82,9 +82,9 @@ namespace Alligator.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure);
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteProduct(int id)
         {
-            string procString = "dbo.Category_Delete";
+            string procString = "dbo.Product_Delete";
             using var connection = new SqlConnection(_connectionString);
 
             connection.Open();
