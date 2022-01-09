@@ -113,18 +113,29 @@ namespace Alligator.BusinessLayer.Tests
             Assert.IsInstanceOf(typeof(int), actual);
             
         }
-        [Test]
+        [TestCase(1)]
         public void DeleteClient(int id)
         {
             //arrange 
             var sut = new ClientService(_clientRepositoryMock.Object);
-            var testClient   =GetClientModelToFillRepositoryMock(id);
+            var testClient=GetClientModelToFillRepositoryMock(id);
             //act 
-            var actual = sut.DeleteClient(testClient);
+            sut.DeleteClient(testClient);
+            var a = sut.DeleteClient(testClient);
             //assert
-            Assert.AreEqual(_clientRepositoryMock.Object.GetAllClients().Count, 1);
-            //Assert.Contains(testClient, _clientRepositoryMock.Object.GetAllClients());
+            Assert.That(a, Is.EqualTo(true));
 
+
+        }
+        [TestCase(1)]
+        public void UpDateClient(int id)
+        {
+            //arrange
+            var sut = new ClientService(_clientRepositoryMock.Object);
+            var existingClient = GetClientModelToFillRepositoryMock(id);
+            var newClient = GetClientModelToFillRepositoryMock(2);
+            var a = sut.UpdateClient(newClient);
+            Assert.That(a, Is.EqualTo(true));
         }
     }
 }
