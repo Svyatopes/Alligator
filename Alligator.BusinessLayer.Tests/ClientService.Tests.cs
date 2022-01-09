@@ -10,7 +10,8 @@ namespace Alligator.BusinessLayer.Tests
     public class ClientServiceTests
     {
         private readonly Mock<IClientRepository> _clientRepositoryMock;
-        
+       
+
         public ClientServiceTests()
         {
             _clientRepositoryMock = new Mock<IClientRepository>();
@@ -19,70 +20,111 @@ namespace Alligator.BusinessLayer.Tests
         public void Setup()
         {
         }
+        public void FillRepositoryMockGetAllClients()
+        {
+            _clientRepositoryMock.Setup(m => m.GetAllClients()).Returns(new List<Client>
+            {
+                new Client
+                {
+                    Id = 1,
+                    FirstName = "TestFirstName1",
+                    LastName = "TestLastName1",
+                    Patronymic = "TestPatronymic1",
+                    PhoneNumber = "1234567",
+                    Email = "TestEmail1"
+
+                },
+                new Client
+                    {
+                    Id = 2,
+                    FirstName = "TestFirstName2",
+                    LastName = "TestLastName2",
+                    Patronymic = "TestPatronymic2",
+                    PhoneNumber = "1234567",
+                    Email = "TestEmail2"
+                }
+            });
+        }
+        public ClientModel GetClientModelToFillRepositoryMock(int key)
+        {
+            ClientModel client;
+            switch (key)
+            {
+                case 1:
+                    client = new ClientModel
+                    {
+                        Id = 1,
+                        FirstName = "TestFirstName1",
+                        LastName = "TestLastName1",
+                        Patronymic = "TestPatronymic1",
+                        PhoneNumber = "TestPhoneNumber1",
+                        Email = "TestEmail1"
+                    };
+                    break;
+                case 2:
+                    client = new ClientModel
+                    {
+                        Id = 2,
+                        FirstName = "TestFirstName2",
+                        LastName = "TestLastName2",
+                        Patronymic = "TestPatronymic2",
+                        PhoneNumber = "TestPhoneNumber2",
+                        Email = "TestEmail2"
+                    };
+                    break;
+                default:
+                    client = null;
+                    break;
+            }
+            return client;
+        }
+
 
         [Test]
         public void GetAllClients_ShouldReturnAllClients()
         {
             //arrange
-            _clientRepositoryMock.Setup(m => m.GetAllClients()).Returns(new List<Client>
-            {
-                new Client{
-                    Id=1,
-                    FirstName = "qwer",
-                    LastName = "asdf",
-                    Patronymic = "zxc",
-                    PhoneNumber = "2356",
-                    Email = "qwer@erty"
-                }
-            });
+
             var sut = new ClientService(_clientRepositoryMock.Object);
+            FillRepositoryMockGetAllClients();  
             //act
             var actual = sut.GetAllClients().Data;
             //assert
             _clientRepositoryMock.Verify(m => m.GetAllClients(), Times.Once());
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.Count > 0);
-   
+            Assert.IsInstanceOf(typeof(ClientModel), actual[0]);
+
+
+        }
+        [TestCase(1)]
+        [TestCase(2)]
+        public void InsertNewClient(int id)
+        {
+            //arrange 
+            var testClient = GetClientModelToFillRepositoryMock(id);
+           
+            var sut = new ClientService(_clientRepositoryMock.Object);
+            //act 
+            var actual = sut.InsertNewClient(testClient);
+
+            //assert
+            Assert.IsNotNull(actual);
+            Assert.IsInstanceOf(typeof(int), actual);
             
         }
         [Test]
-        public void InsertNewClient()
+        public void DeleteClient(int id)
         {
             //arrange 
-            var client = new ClientModel()
-            {
-                Id = 1,
-                FirstName = "qwer",
-                LastName = "asdf",
-                Patronymic = "zxc",
-                PhoneNumber = "2356",
-                Email = "qwer@erty"
-            };
-            _clientRepositoryMock.Setup(m => m.InsertClient(It.IsAny<Client>())).Returns(1);
             var sut = new ClientService(_clientRepositoryMock.Object);
+            var testClient   =GetClientModelToFillRepositoryMock(id);
             //act 
-            var actual = sut.InsertNewClient(client);
+            var actual = sut.DeleteClient(testClient);
             //assert
-            _clientRepositoryMock.Verify(m => m.InsertClient(It.IsAny<Client>()), Times.Once);
-        }
-        [Test]
-        public void DeleteClient()
-        {
-            //arrange 
-            var client = new ClientModel()
-            {
-                Id = 1,
-                FirstName = "qwer",
-                LastName = "asdf",
-                Patronymic = "zxc",
-                PhoneNumber = "2356",
-                Email = "qwer@erty"
-            };
-            _clientRepositoryMock.Setup(m => m.InsertClient(It.IsAny<Client>())).Returns(1);
-            var sut = new ClientService(_clientRepositoryMock.Object);
-            //act 
-            var actual = sut.DeleteClient(client);
-            //_clientRepositoryMock.Verify(m=>m.DeleteClient(It.IsAny<Client>))
+            Assert.AreEqual(_clientRepositoryMock.Object.GetAllClients().Count, 1);
+            //Assert.Contains(testClient, _clientRepositoryMock.Object.GetAllClients());
+
         }
     }
 }
