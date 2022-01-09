@@ -35,6 +35,9 @@ namespace Alligator.UI.Commands.TabItemOrders
             var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id);
             _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel>(order.OrderReviews);
             _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);
+            _viewModel.SelectedOrderDate = _viewModel.SelectedOrder.Date;
+            _viewModel.SelectedOrderAddress = _viewModel.SelectedOrder.Address;
+            _viewModel.SelectedOrderClient = _viewModel.SelectedOrder.Client;
         }
     }
 }

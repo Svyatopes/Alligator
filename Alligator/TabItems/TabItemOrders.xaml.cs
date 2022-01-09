@@ -19,10 +19,7 @@ namespace Alligator.UI.TabItems
             DataContext = _viewModel;
             _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
-            _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
-            //_viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
-            //_viewModel.AddOrderWindowVisibility = Visibility.Visible;
-            //_viewModel.OrdersWindowVisibility = Visibility.Collapsed;
+            _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;          
         }
     }
 }

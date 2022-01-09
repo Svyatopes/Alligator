@@ -1,4 +1,5 @@
-﻿using Alligator.UI.VIewModels.TabItemsViewModels;
+﻿using Alligator.BusinessLayer;
+using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,12 @@ namespace Alligator.UI.Commands.TabItemOrders
     class ComeBackFirstWindowFromAddOrderWindowCommand : CommandBase
     {
         private TabItemOrdersViewModel _viewModel;
+        private OrderService _orderService;
 
-        public ComeBackFirstWindowFromAddOrderWindowCommand(TabItemOrdersViewModel viewModel)
+        public ComeBackFirstWindowFromAddOrderWindowCommand(TabItemOrdersViewModel viewModel, OrderService orderService)
         {
             _viewModel = viewModel;
+            _orderService = orderService;
         }
 
         public override void Execute(object parameter)
@@ -28,6 +31,11 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.NewAddressText = string.Empty;
             _viewModel.NewOrderReviews.Clear();
             _viewModel.NewOrderDetails.Clear();
+            _viewModel.AllOrders.Clear();
+            foreach (var order in _orderService.GetOrders())
+            {
+                _viewModel.AllOrders.Add(order);
+            }
         }
     }
     
