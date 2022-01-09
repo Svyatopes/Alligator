@@ -31,7 +31,7 @@ namespace Alligator.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new ActionResult<List<ProductTagModel>>(false, new List<ProductTagModel>()) { ErrorMessage = ex.Message };
+                return new ActionResult<List<ProductTagModel>>(false, null) { ErrorMessage = ex.Message };
             }
         }
 
@@ -45,7 +45,7 @@ namespace Alligator.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new ActionResult<ProductTagModel>(false, new ProductTagModel()) { ErrorMessage = ex.Message };
+                return new ActionResult<ProductTagModel>(false, null) { ErrorMessage = ex.Message };
             }
 
         }

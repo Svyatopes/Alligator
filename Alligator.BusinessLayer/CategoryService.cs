@@ -33,7 +33,7 @@ namespace Alligator.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new ActionResult<List<CategoryModel>>(false, new List<CategoryModel>()) { ErrorMessage = ex.Message };
+                return new ActionResult<List<CategoryModel>>(false, null) { ErrorMessage = ex.Message };
             }
         }
 
@@ -47,7 +47,7 @@ namespace Alligator.BusinessLayer
             }
             catch (Exception ex)
             {
-                return new ActionResult<CategoryModel>(false, categoryModel) { ErrorMessage = ex.Message };
+                return new ActionResult<CategoryModel>(false, null) { ErrorMessage = ex.Message };
             }
 
             return new ActionResult<CategoryModel>(true, categoryModel);
