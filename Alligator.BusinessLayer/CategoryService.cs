@@ -11,18 +11,23 @@ namespace Alligator.BusinessLayer
     public class CategoryService
     {
 
-        private readonly CategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
 
         public CategoryService()
         {
             _categoryRepository = new CategoryRepository();
         }
 
+        public CategoryService(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
+
         public ActionResult<List<CategoryModel>> GetAllCategories()
         {
-            var categories = _categoryRepository.GetAllCategories();
             try
             {
+                var categories = _categoryRepository.GetAllCategories();
                 return new ActionResult<List<CategoryModel>>(true, CustomMapper.GetInstance().Map<List<CategoryModel>>(categories));
 
             }

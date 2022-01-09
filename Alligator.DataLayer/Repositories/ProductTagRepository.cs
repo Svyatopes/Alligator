@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ProductTagRepository : BaseRepository
+    public class ProductTagRepository : BaseRepository, IProductTagRepository
     {
 
         public ProductTag GetProductTagById(int id)
@@ -44,13 +44,13 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.ProductTag_Update";
             using var connection = ProvideConnection();
 
-            return connection.Execute(procString, 
-                new 
-                { 
-                    productTag.Id, 
-                    productTag.Name 
-                }, 
-                commandType: CommandType.StoredProcedure) 
+            return connection.Execute(procString,
+                new
+                {
+                    productTag.Id,
+                    productTag.Name
+                },
+                commandType: CommandType.StoredProcedure)
                 == (int)AffectedRows.One;
 
         }

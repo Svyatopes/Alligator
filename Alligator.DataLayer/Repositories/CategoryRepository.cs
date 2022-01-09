@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class CategoryRepository : BaseRepository
+    public class CategoryRepository : BaseRepository, ICategoryRepository
     {
         public Category GetCategoryById(int id)
         {
@@ -51,7 +51,7 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.Category_Update";
             using var connection = ProvideConnection();
 
-            return connection.Execute(procString, 
+            return connection.Execute(procString,
                 new
                 {
                     category.Id,

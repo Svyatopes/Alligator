@@ -9,11 +9,16 @@ namespace Alligator.BusinessLayer
 {
     public class ProductTagService
     {
-        private readonly ProductTagRepository _productTagRepository;
+        private readonly IProductTagRepository _productTagRepository;
 
         public ProductTagService()
         {
             _productTagRepository = new ProductTagRepository();
+        }
+
+        public ProductTagService(IProductTagRepository productTagRepository)
+        {
+            _productTagRepository = productTagRepository;
         }
 
         public ActionResult<List<ProductTagModel>> GetAllProductTags()
