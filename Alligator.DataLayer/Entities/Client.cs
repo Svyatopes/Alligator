@@ -1,7 +1,6 @@
-using Alligator.DataLayer.Entities;
 using System.Collections.Generic;
 
-namespace Alligator.DataLayer
+namespace Alligator.DataLayer.Entities
 {
     public class Client
     {

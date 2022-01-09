@@ -1,22 +1,23 @@
 ﻿using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using AutoMapper;
+
 namespace Alligator.BusinessLayer.Configuration
 {
+    public static class CustomMapper
     {
         private static Mapper _instance;
-    public static class CustomMapper
 
         public static Mapper GetInstance()
+        {
             if (_instance == null)
-        {
-            return _instance;
                 InitializeInstance();
-
+            return _instance;
         }
+
         private static void InitializeInstance()
-            _instance = new Mapper(new MapperConfiguration(cfg =>
         {
+            _instance = new Mapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<ProductTag, ProductTagModel>();
                 cfg.CreateMap<ProductTagModel, ProductTag>();
@@ -39,6 +40,11 @@ namespace Alligator.BusinessLayer.Configuration
 
                 cfg.CreateMap<Comment, CommentModel>();
                 cfg.CreateMap<CommentModel, Comment>();
+
+                cfg.CreateMap<Supply, SupplyModel>();
+                cfg.CreateMap<SupplyModel, Supply>();
+                cfg.CreateMap<SupplyDetail, SupplyDetailModel>();
+                cfg.CreateMap<SupplyDetailModel, SupplyDetail>();
             }));
         }
     }

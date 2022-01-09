@@ -25,7 +25,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _supplyRepository.GetSupplies();
             try
             {
-                return Mapper.GetInstance().Map<List<SupplyModel>>(entities);
+                return CustomMapper.GetInstance().Map<List<SupplyModel>>(entities);
             }
             catch
             {
@@ -38,7 +38,7 @@ namespace Alligator.BusinessLayer.Service
             var entities = _supplyRepository.GetSupplyById(id);
             try
             {
-                return Mapper.GetInstance().Map<SupplyModel>(entities);
+                return CustomMapper.GetInstance().Map<SupplyModel>(entities);
             }
             catch
             {
@@ -62,7 +62,7 @@ namespace Alligator.BusinessLayer.Service
 
         public bool UpdateSupply(SupplyModel supply)
         {
-            var supplyModel = Mapper.GetInstance().Map<Supply>(supply);
+            var supplyModel = CustomMapper.GetInstance().Map<Supply>(supply);
             try
             {
                 _supplyRepository.EditSupply(supplyModel);
@@ -77,7 +77,7 @@ namespace Alligator.BusinessLayer.Service
 
         public int InsertSupply(SupplyModel supply)
         {
-            var supplyModel = Mapper.GetInstance().Map<Supply>(supply);
+            var supplyModel = CustomMapper.GetInstance().Map<Supply>(supply);
             try
             {
                 return _supplyRepository.AddSupply(supplyModel);

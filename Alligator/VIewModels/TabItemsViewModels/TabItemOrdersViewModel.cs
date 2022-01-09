@@ -1,16 +1,10 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
-using Alligator.DataLayer.Repositories;
 using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemOrders;
 using Alligator.UI.VIewModels.EntitiesViewModels;
-using MvvmHelpers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,7 +12,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 {
     public class TabItemOrdersViewModel : BaseViewModel
     {
-       
+
         private OrderModel _selectedOrder;
         private OrderDetailModel _selectedOrderDetailModel;
         private OrderReviewModel _selectedOrderReviewModel;
@@ -56,7 +50,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
 
-            AllOrders = new ObservableCollection<OrderModel>();                               
+            AllOrders = new ObservableCollection<OrderModel>();
             Clients = new ObservableCollection<ClientModel>();
             Products = new ObservableCollection<ProductModel>();
             NewOrderReviews = new ObservableCollection<OrderReviewModel>();
@@ -69,7 +63,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             DeleteReviewWindowOfOrderInfo = new DeleteReviewWindowOfOrderInfoCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
-            DeleteOrderWindowOfOrderInfo=new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
+            DeleteOrderWindowOfOrderInfo = new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _orderReviewService, _orderDetailService);
             SaveChangesWindowOfOrderInfo = new SaveChangesWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService);
@@ -81,7 +75,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
 
 
         }
-        
+
         public ObservableCollection<OrderModel> AllOrders { get; set; }
         private ObservableCollection<OrderDetailModel> _orderDetails;
         public ObservableCollection<OrderDetailModel> OrderDetails
