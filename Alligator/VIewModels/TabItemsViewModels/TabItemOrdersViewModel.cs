@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
 using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemOrders;
 using Alligator.UI.VIewModels.EntitiesViewModels;

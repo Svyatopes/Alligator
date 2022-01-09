@@ -4,6 +4,7 @@ using Moq;
 using Alligator.DataLayer.Repositories;
 using Alligator.DataLayer;
 using System.Collections.Generic;
+using Alligator.DataLayer.Entities;
 
 namespace Alligator.BusinessLayer.Tests
 {

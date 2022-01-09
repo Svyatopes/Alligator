@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Alligator.DataLayer.Entities;
+using System.Collections.Generic;
 
 namespace Alligator.DataLayer.Repositories
 {

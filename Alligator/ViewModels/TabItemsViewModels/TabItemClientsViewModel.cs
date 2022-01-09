@@ -3,7 +3,7 @@ using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.Commands;
 using Alligator.UI.Commands.TabItemClients;
-using MvvmHelpers;
+using Alligator.UI.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
