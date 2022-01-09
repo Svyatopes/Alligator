@@ -24,7 +24,7 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Product = product;
                 return orderdetail;
             },
-            new { Id = id },
+            new { id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
             .FirstOrDefault();
@@ -41,7 +41,7 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Product = product;
                 return orderdetail;
             },
-            new { OrderId = id },
+            new { orderId=id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
             .Distinct().ToList();
@@ -58,7 +58,7 @@ namespace Alligator.DataLayer.Repositories
                 orderdetail.Product = product;
                 return orderdetail;
             },
-            new { ProductId = id },
+            new { id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id")
             .Distinct().ToList();
@@ -77,7 +77,7 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Update";
-            connection.Execute(procString, new { Id = id, Amount = amount },
+            connection.Execute(procString, new { id, amount },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -85,7 +85,7 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_Delete";
-            connection.Execute(procString, new { Id = id },
+            connection.Execute(procString, new { id },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -93,14 +93,14 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_DeleteByOrderId";
-            connection.Execute(procString, new { OrderId=id },
+            connection.Execute(procString, new { orderId=id },
             commandType: CommandType.StoredProcedure);
         }
         public void DeleteOrderDetailByProductId(int id)
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderDetail_DeleteByProductId";
-            connection.Execute(procString, new { ProductId = id },
+            connection.Execute(procString, new { id },
             commandType: CommandType.StoredProcedure);
         }
     }

@@ -28,7 +28,7 @@
         
         <DataGrid x:Name="dg" ItemsSource="{Binding AllOrders}" SelectedItem="{Binding SelectedOrder}" Grid.Row="1" Margin="10" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn  Header="Id" Width="Auto" Binding="{Binding Id}"/>
+                    <DataGridTextColumn  Header="Id" Width="Auto" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Дата" Width="Auto" Binding="{Binding Date}"/>
                     <DataGridTextColumn Header="Имя клиента" Width="Auto" Binding="{Binding Client.FirstName}"/>
                     <DataGridTextColumn Header="Фамилия клиента" Width="Auto" Binding="{Binding Client.LastName}"/>

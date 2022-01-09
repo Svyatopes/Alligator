@@ -31,7 +31,7 @@ namespace Alligator.DataLayer.Repositories
 
                 return order;
             },
-            new { Id = id },
+            new { id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             FirstOrDefault();
@@ -47,7 +47,7 @@ namespace Alligator.DataLayer.Repositories
                 order.Client = client;
                 return order;
             },
-            new { ClientId = id },
+            new { id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             Distinct().ToList();
@@ -76,7 +76,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
-            new { Date = date, Id = id, Address = address },
+            new { date, id, address },
             commandType: CommandType.StoredProcedure);
         }
 
