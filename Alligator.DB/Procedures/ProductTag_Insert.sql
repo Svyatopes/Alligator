@@ -2,5 +2,7 @@
 			@Name varchar(50)
 AS
 BEGIN
-	INSERT INTO dbo.ProductTag (Name) VALUES (@Name)
+	INSERT INTO dbo.ProductTag (Name)
+	OUTPUT Inserted.ID
+	VALUES (@Name)
 END
