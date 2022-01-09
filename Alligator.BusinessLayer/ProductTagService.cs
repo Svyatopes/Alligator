@@ -2,6 +2,7 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
@@ -15,26 +16,33 @@ namespace Alligator.BusinessLayer
             _productTagRepository = new ProductTagRepository();
         }
 
-        public List<ProductTagModel> GetAllProductTags()
+        public ActionResult<List<ProductTagModel>> GetAllProductTags()
         {
-            var productTags = _productTagRepository.GetProductTags();
-            return CustomMapper.GetInstance().Map<List<ProductTagModel>>(productTags);
+            try
+            {
+                var productTags = _productTagRepository.GetProductTags();
+                var productTagsModels = CustomMapper.GetInstance().Map<List<ProductTagModel>>(productTags);
+                return new ActionResult<List<ProductTagModel>>(true, productTagsModels);
+            }
+            catch (Exception ex)
+            {
+                return new ActionResult<List<ProductTagModel>>(false, new List<ProductTagModel>()) { ErrorMessage = ex.Message };
+            }
         }
 
-        public ProductTagModel AddProductTag(string name)
+        public ActionResult<ProductTagModel> AddProductTag(string name)
         {
-            ProductTagModel productTagModel;
             try
             {
                 var id = _productTagRepository.AddProductTag(name);
-                productTagModel = new ProductTagModel() { Id = id, Name = name };
+                var productTagModel = new ProductTagModel() { Id = id, Name = name };
+                return new ActionResult<ProductTagModel>(true, productTagModel);
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ActionResult<ProductTagModel>(false, new ProductTagModel()) { ErrorMessage = ex.Message };
             }
 
-            return productTagModel;
         }
 
         public bool UpdateProductTag(ProductTagModel productTag)
@@ -42,8 +50,7 @@ namespace Alligator.BusinessLayer
             var productTagInRepo = CustomMapper.GetInstance().Map<ProductTag>(productTag);
             try
             {
-                _productTagRepository.UpdateProductTag(productTagInRepo);
-                return true;
+                return _productTagRepository.UpdateProductTag(productTagInRepo);
             }
             catch
             {

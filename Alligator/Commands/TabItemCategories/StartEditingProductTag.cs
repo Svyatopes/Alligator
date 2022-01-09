@@ -3,11 +3,11 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemCategories
 {
-    public class StartEditingCategory : CommandBase
+    public class StartEditingProductTag : CommandBase
     {
         private readonly TabItemCategoriesViewModel _viewModel;
 
-        public StartEditingCategory(TabItemCategoriesViewModel viewModel)
+        public StartEditingProductTag(TabItemCategoriesViewModel viewModel)
         {
             _viewModel = viewModel;
         }
@@ -15,8 +15,8 @@ namespace Alligator.UI.Commands.TabItemCategories
         public override void Execute(object parameter)
         {
             _viewModel.MainGridVisibilty = Visibility.Collapsed;
-            _viewModel.GridEditCategoryVisibility = Visibility.Visible;
-            _viewModel.TextBoxCategoryEditText = _viewModel.SelectedCategory.Name;
+            _viewModel.GridEditProdutTagVisibility = Visibility.Visible;
+            _viewModel.TextBoxProductTagEditText = _viewModel.SelectedProductTag.Name;
         }
     }
 }

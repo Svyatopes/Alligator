@@ -19,12 +19,20 @@ namespace Alligator.UI.Commands.TabItemCategories
         public override void Execute(object parameter)
         {
             _viewModel.Categories.Clear();
-            foreach (var category in _categoryService.GetAllCategories())
-                _viewModel.Categories.Add(category);
+            var categosriesActionResult = _categoryService.GetAllCategories();
+            if (categosriesActionResult.Success)
+            {
+                foreach (var category in categosriesActionResult.Data)
+                    _viewModel.Categories.Add(category);
+            }
 
             _viewModel.ProductTags.Clear();
-            foreach (var productTag in _productTagService.GetAllProductTags())
-                _viewModel.ProductTags.Add(productTag);
+            var productTagsActionResult = _productTagService.GetAllProductTags();
+            if (productTagsActionResult.Success)
+            {
+                foreach (var productTag in productTagsActionResult.Data)
+                    _viewModel.ProductTags.Add(productTag);
+            }
         }
 
     }

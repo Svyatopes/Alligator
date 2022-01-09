@@ -6,13 +6,13 @@ namespace Alligator.UI.Commands.TabItemCategories
 {
     public class ProductTagDelete : CommandBase
     {
-        private readonly TabItemCategoriesViewModel viewModel;
+        private readonly TabItemCategoriesViewModel _viewModel;
         private readonly ProductTagService _productTagService;
 
 
         public ProductTagDelete(TabItemCategoriesViewModel viewModel, ProductTagService productTagService)
         {
-            this.viewModel = viewModel;
+            this._viewModel = viewModel;
             _productTagService = productTagService;
         }
 
@@ -21,8 +21,8 @@ namespace Alligator.UI.Commands.TabItemCategories
             var userAnswer = MessageBox.Show("Вы правда хотите удалить этот тэг?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
             {
-                if (_productTagService.DeleteProductTag(viewModel.SelectedProductTag))
-                    viewModel.ProductTags.Remove(viewModel.SelectedProductTag);
+                if (_productTagService.DeleteProductTag(_viewModel.SelectedProductTag))
+                    _viewModel.ProductTags.Remove(_viewModel.SelectedProductTag);
                 else
                     MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }

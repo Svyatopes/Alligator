@@ -32,14 +32,15 @@ namespace Alligator.UI.Commands.TabItemCategories
                 return;
             }
 
-            var category = _categoryService.AddCategory(categoryNameToAdd);
-            if (category == null)
+            var categoryActionResult = _categoryService.AddCategory(categoryNameToAdd);
+            if (!categoryActionResult.Success)
             {
-                MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при записи в базу данных\r\n{categoryActionResult.ErrorMessage}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            _viewModel.Categories.Add(category);
+
+            _viewModel.Categories.Add(categoryActionResult.Data);
             _viewModel.TextBoxNewCategoryText = string.Empty;
         }
     }

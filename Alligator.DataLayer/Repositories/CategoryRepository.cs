@@ -8,7 +8,6 @@ namespace Alligator.DataLayer.Repositories
 {
     public class CategoryRepository : BaseRepository
     {
-
         public Category GetCategoryById(int id)
         {
             string procString = "dbo.Category_SelectById";
@@ -40,24 +39,26 @@ namespace Alligator.DataLayer.Repositories
 
             using var connection = ProvideConnection();
 
-            return connection.QuerySingle<int>(procString, new
+            return connection.QueryFirstOrDefault<int>(procString, new
             {
                 Name = name
             },
                 commandType: CommandType.StoredProcedure);
         }
 
-        public void UpdateCategory(Category category)
+        public bool UpdateCategory(Category category)
         {
             string procString = "dbo.Category_Update";
             using var connection = ProvideConnection();
 
-            connection.Execute(procString, new
-            {
-                category.Id,
-                category.Name
-            },
-                commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString, 
+                new
+                {
+                    category.Id,
+                    category.Name
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
         }
 
         public bool DeleteCategory(Category category)
@@ -65,7 +66,7 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.Category_Delete";
             using var connection = ProvideConnection();
 
-            return connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure) == 1;
+            return connection.Execute(procString, new { category.Id }, commandType: CommandType.StoredProcedure) == (int)AffectedRows.One;
         }
     }
 }

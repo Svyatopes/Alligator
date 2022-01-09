@@ -24,6 +24,10 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
         public ICommand AddProductTag { get; set; }
         public ICommand DeleteProductTag { get; set; }
         public ICommand LoadCategoriesAndProductTags { get; set; }
+        public ICommand ReturnToMainGrid { get; set; }
+        public ICommand SaveCategory { get; set; }
+        public ICommand SaveProductTag { get; set; }
+        public ICommand StartEditingProductTag { get; set; }
 
         public TabItemCategoriesViewModel()
         {
@@ -39,9 +43,39 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             DeleteCategory = new CategoryDelete(this, _categoryService);
             AddProductTag = new ProductTagAdd(this, _productTagService);
             DeleteProductTag = new ProductTagDelete(this, _productTagService);
+            ReturnToMainGrid = new ReturnToMainGrid(this);
+            SaveCategory = new SaveCategory(this, _categoryService);
+            StartEditingCategory = new StartEditingCategory(this);
+            StartEditingProductTag = new StartEditingProductTag(this);
+            SaveProductTag = new SaveProductTag(this, _productTagService);
 
             MainGridVisibilty = Visibility.Visible;
-            GridEditProductTagVisibility = Visibility.Collapsed;
+            GridEditCategoryVisibility = Visibility.Collapsed;
+            GridEditProdutTagVisibility = Visibility.Collapsed;
+        }
+
+
+        private string _textBoxCategoryEditText;
+        public string TextBoxCategoryEditText
+        {
+            get { return _textBoxCategoryEditText; }
+            set
+            {
+                _textBoxCategoryEditText = value;
+                OnPropertyChanged(nameof(TextBoxCategoryEditText));
+            }
+        }
+
+
+        private string _textBoxProductTagEditText;
+        public string TextBoxProductTagEditText
+        {
+            get { return _textBoxProductTagEditText; }
+            set
+            {
+                _textBoxProductTagEditText = value;
+                OnPropertyChanged(nameof(TextBoxProductTagEditText));
+            }
         }
 
         public ObservableCollection<CategoryModel> Categories { get; set; }
@@ -102,14 +136,26 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
         }
 
 
+        private Visibility _gridEditCategoryVisibility;
+        public Visibility GridEditCategoryVisibility
+        {
+            get { return _gridEditCategoryVisibility; }
+            set
+            {
+                _gridEditCategoryVisibility = value;
+                OnPropertyChanged(nameof(GridEditCategoryVisibility));
+            }
+        }
+
+
         private Visibility _gridEditProductTagVisibility;
-        public Visibility GridEditProductTagVisibility
+        public Visibility GridEditProdutTagVisibility
         {
             get { return _gridEditProductTagVisibility; }
             set
             {
                 _gridEditProductTagVisibility = value;
-                OnPropertyChanged(nameof(GridEditProductTagVisibility));
+                OnPropertyChanged(nameof(GridEditProdutTagVisibility));
             }
         }
 

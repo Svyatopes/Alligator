@@ -36,15 +36,22 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.ProductTag_Insert";
             using var connection = ProvideConnection();
 
-            return connection.QuerySingle<int>(procString, new { Name = name }, commandType: CommandType.StoredProcedure);
+            return connection.QueryFirstOrDefault<int>(procString, new { Name = name }, commandType: CommandType.StoredProcedure);
         }
 
-        public void UpdateProductTag(ProductTag productTag)
+        public bool UpdateProductTag(ProductTag productTag)
         {
             string procString = "dbo.ProductTag_Update";
             using var connection = ProvideConnection();
 
-            connection.Execute(procString, new { productTag.Id, productTag.Name }, commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString, 
+                new 
+                { 
+                    productTag.Id, 
+                    productTag.Name 
+                }, 
+                commandType: CommandType.StoredProcedure) 
+                == (int)AffectedRows.One;
 
         }
 
@@ -54,7 +61,7 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.ProductTag_Delete";
             using var connection = ProvideConnection();
 
-            return connection.Execute(procString, new { productTag.Id }, commandType: CommandType.StoredProcedure) == 1;
+            return connection.Execute(procString, new { productTag.Id }, commandType: CommandType.StoredProcedure) == (int)AffectedRows.One;
 
         }
     }

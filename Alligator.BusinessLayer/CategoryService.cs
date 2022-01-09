@@ -2,6 +2,7 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
@@ -17,34 +18,34 @@ namespace Alligator.BusinessLayer
             _categoryRepository = new CategoryRepository();
         }
 
-        public List<CategoryModel> GetAllCategories()
+        public ActionResult<List<CategoryModel>> GetAllCategories()
         {
             var categories = _categoryRepository.GetAllCategories();
             try
             {
-                return CustomMapper.GetInstance().Map<List<CategoryModel>>(categories);
+                return new ActionResult<List<CategoryModel>>(true, CustomMapper.GetInstance().Map<List<CategoryModel>>(categories));
 
             }
-            catch
+            catch (Exception ex)
             {
-                return new List<CategoryModel>();
+                return new ActionResult<List<CategoryModel>>(false, new List<CategoryModel>()) { ErrorMessage = ex.Message };
             }
         }
 
-        public CategoryModel AddCategory(string name)
+        public ActionResult<CategoryModel> AddCategory(string name)
         {
-            CategoryModel categoryModel;
+            CategoryModel categoryModel = new CategoryModel();
             try
             {
                 var id = _categoryRepository.InsertCategory(name);
                 categoryModel = new CategoryModel() { Id = id, Name = name };
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                return new ActionResult<CategoryModel>(false, categoryModel) { ErrorMessage = ex.Message };
             }
 
-            return categoryModel;
+            return new ActionResult<CategoryModel>(true, categoryModel);
         }
 
         public bool UpdateCategory(CategoryModel category)
@@ -52,8 +53,7 @@ namespace Alligator.BusinessLayer
             var categoryInRepo = CustomMapper.GetInstance().Map<Category>(category);
             try
             {
-                _categoryRepository.UpdateCategory(categoryInRepo);
-                return true;
+                return _categoryRepository.UpdateCategory(categoryInRepo);
             }
             catch
             {
@@ -68,7 +68,7 @@ namespace Alligator.BusinessLayer
             {
                 return _categoryRepository.DeleteCategory(categoryInRepo);
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

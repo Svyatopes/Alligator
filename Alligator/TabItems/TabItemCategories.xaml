@@ -52,6 +52,13 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.StartEditingProductTag}">Изменить</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
                                 <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteProductTag}">Удалить</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -78,9 +85,39 @@
             </Grid>
         </Grid>
 
-        <Grid Visibility="{Binding GridEditProductTagVisibility}">
-            
+        <Grid Visibility="{Binding GridEditCategoryVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Изменение категории
+            </Label>
+            <TextBox Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxCategoryEditText}"></TextBox>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding ReturnToMainGrid}">Назад</Button>
+            <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding SaveCategory}">Сохранить изменения</Button>
         </Grid>
-        
+
+        <Grid Visibility="{Binding GridEditProdutTagVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                Изменение тэга
+            </Label>
+            <TextBox Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding TextBoxProductTagEditText}"></TextBox>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding ReturnToMainGrid}">Назад</Button>
+            <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Command="{Binding SaveProductTag}">Сохранить изменения</Button>
+        </Grid>
+
     </Grid>
 </TabItem>

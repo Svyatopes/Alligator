@@ -32,14 +32,14 @@ namespace Alligator.UI.Commands.TabItemCategories
                 return;
             }
 
-            var productTag = _productTagService.AddProductTag(productTagNameToAdd);
-            if (productTag == null)
+            var productTagActionResult = _productTagService.AddProductTag(productTagNameToAdd);
+            if (!productTagActionResult.Success)
             {
-                MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при записи в базу данных\r\n{productTagActionResult.ErrorMessage}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            _viewModel.ProductTags.Add(productTag);
+            _viewModel.ProductTags.Add(productTagActionResult.Data);
             _viewModel.TextBoxNewProductTagText = string.Empty;
         }
     }
