@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ClientRepository : BaseRepository
+    public class ClientRepository : BaseRepository, IClientRepository 
     {
         public List<Client> GetAllClients()
         {

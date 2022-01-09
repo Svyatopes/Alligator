@@ -2,12 +2,8 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
-using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.BusinessLayer.Services
 {
@@ -27,7 +23,7 @@ namespace Alligator.BusinessLayer.Services
             {
                 return new ActionResult<List<CommentModel>>(true, CustomMapper.GetInstance().Map<List<CommentModel>>(comments));
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 return new ActionResult<List<CommentModel>>(false, new List<CommentModel>()) { ErrorMessage = exception.Message };
             }
@@ -44,10 +40,10 @@ namespace Alligator.BusinessLayer.Services
             {
                 return -1;
             }
-           
+
         }
 
-        public bool  DeleteCommentsByClientId(int clientId)
+        public bool DeleteCommentsByClientId(int clientId)
         {
             try
             {

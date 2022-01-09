@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
+using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;

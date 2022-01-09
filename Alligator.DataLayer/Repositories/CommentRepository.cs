@@ -56,14 +56,7 @@ namespace Alligator.DataLayer.Repositories
             { Id = id },
             commandType: CommandType.StoredProcedure);
         }
-        public void DeleteCommentByClientId(int clientId)
-        {
-            string proc = "dbo.Comment_DeleteByClient";
-            using var connection = GetConnection();
-            connection.Execute(proc, new
-            { ClientId = clientId },
-            commandType: CommandType.StoredProcedure);
-        }
+
 
         public void DeleteCommentByClientId(int clientId)
         {
