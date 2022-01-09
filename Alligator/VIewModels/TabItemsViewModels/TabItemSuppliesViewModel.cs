@@ -93,7 +93,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _nameSelectProduct = value;
-                ((CommandBase)AddProductInSupply).RaiseCanExecutedChanged();
+                ((CommandBase)AddProductInSupply).RaiseCanExecuteChanged();
 
                 OnPropertyChanged(nameof(NameSelectProduct));
             }
@@ -125,8 +125,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedSupply = value;
-                ((CommandBase)OpenCardSupply).RaiseCanExecutedChanged();
-                ((CommandBase)DeleteSupply).RaiseCanExecutedChanged();
+                ((CommandBase)OpenCardSupply).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteSupply).RaiseCanExecuteChanged();
                 
                 OnPropertyChanged(nameof(SelectedSupply));
             }
@@ -210,7 +210,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _textBoxNewAmountText = value;
-                ((CommandBase)AddProductInSupply).RaiseCanExecutedChanged();
+                ((CommandBase)AddProductInSupply).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(TextBoxNewAmountText));
             }
         }
