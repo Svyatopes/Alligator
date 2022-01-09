@@ -20,6 +20,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private Visibility _visibilityAddProduct;
         private Visibility _visibilityProduct;
         private Visibility _visibilityAllProducts;
+        public ICommand OpenAddProductCard { get; set; }
+        public ICommand Return { get; set; }
         public ICommand OpenProductCard { get; set; }
 
         public ObservableCollection<ProductViewModel> Products
@@ -39,6 +41,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         {
             Products = new ObservableCollection<ProductViewModel>();
             OpenProductCard = new OpenProductCard(this);
+            OpenAddProductCard = new OpenAddProductCard(this);
+            Return = new Return(this);
         }
 
         public ProductViewModel Selected
