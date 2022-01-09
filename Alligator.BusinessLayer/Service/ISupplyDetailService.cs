@@ -8,9 +8,9 @@ namespace Alligator.BusinessLayer.Service
         bool DeleteSupplyDetailById(int id);
         bool DeleteSupplyDetailBySupplyId(int id);
         List<SupplyDetailModel> GetAllSupplyDetails();
-        List<ProductModel> GetProduct();
+        List<ProductModel> GetProducts();
         ProductModel GetProductById(int id);
-        List<SupplyDetailModel> GetSupplyDetailById(int id);
+        List<SupplyDetailModel> GetSupplyDetailBySupplyId(int id);
         int InsertSupplyDetail(SupplyDetailModel supplyDetail);
         bool UpdateSupplyDetail(List<SupplyDetailModel> supplyDetail);
     }

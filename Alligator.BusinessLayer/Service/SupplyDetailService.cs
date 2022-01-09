@@ -18,6 +18,12 @@ namespace Alligator.BusinessLayer.Service
             _productRepository = new ProductRepository();
 
         }
+        public SupplyDetailService(ISupplyDetailRepository fakeSupplyRepository, IProductRepository fakeProductRepository)
+        {
+            _supplyDetailRepository = fakeSupplyRepository;
+            _productRepository = fakeProductRepository;
+
+        }
         public List<SupplyDetailModel> GetAllSupplyDetails()
         {
             var entities = _supplyDetailRepository.GetAllSupplyDetails();
@@ -32,7 +38,7 @@ namespace Alligator.BusinessLayer.Service
 
         }
 
-        public List<SupplyDetailModel> GetSupplyDetailById(int id)
+        public List<SupplyDetailModel> GetSupplyDetailBySupplyId(int id)
         {
             var entities = _supplyDetailRepository.GetSupplyDetailBySupplyId(id);
             try
@@ -100,7 +106,7 @@ namespace Alligator.BusinessLayer.Service
 
 
         }
-        public List<ProductModel> GetProduct()
+        public List<ProductModel> GetProducts()
         {
             var entities = _productRepository.GetAllProducts();
             try
