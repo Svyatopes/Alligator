@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Alligator.UI.Commands
@@ -18,14 +14,18 @@ namespace Alligator.UI.Commands
 
         public abstract void Execute(object parameter);
 
-        protected void OnCanExecutedChanged()
+        public void RaiseCanExecutedChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
-
-        internal void RaiseCanExecuteChanged()
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
+        protected void OnCanExecutedChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
+        

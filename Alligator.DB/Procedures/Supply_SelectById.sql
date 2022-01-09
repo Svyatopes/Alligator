@@ -3,8 +3,14 @@
 AS
 BEGIN
 	SELECT
-		Id,
-		Date
-	from dbo.Supply
-	where Id = @Id
+		s.Id,
+		s.Date,
+		sd.Id,
+		sd.ProductId,
+		sd.SupplyId,
+		sd.Amount
+	from dbo.[Supply] s
+	left join dbo.SupplyDetail sd on 
+	s.Id = sd.SupplyId
+	where s.Id = @Id	
 END

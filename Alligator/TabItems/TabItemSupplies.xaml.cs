@@ -7,9 +7,11 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemSupplies : TabItem
     {
+        
         public TabItemSupplies()
         {
-            InitializeComponent();
+            InitializeComponent();          
+            
         }
     }
 }
