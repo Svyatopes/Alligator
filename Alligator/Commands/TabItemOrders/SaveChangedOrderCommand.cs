@@ -32,18 +32,18 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
             address = _viewModel.ChangedAddressText.Trim();
 
-            if (_viewModel.SelectedClient is null)
+            if (_viewModel.SelectedChangeClient is null)
             {
                 MessageBox.Show("Выберите клиента");
                 return;
             }
 
-            if (_viewModel.SelectedOrder.OrderDetails.Count==0)
+            if (_viewModel.SelectedOrder.OrderDetails.Count == 0)
             {
                 MessageBox.Show("Выберите продукты и их количество");
                 return;
             }
-            _orderService.EditOrderModel(_viewModel.ChangedDate, _viewModel.SelectedOrder.Id, _viewModel.SelectedClient.Id, address);
+            _orderService.EditOrderModel(_viewModel.ChangedDate, _viewModel.SelectedOrder.Id, _viewModel.SelectedChangeClient.Id, address);
             _viewModel.SelectedOrder.Address = address;
             _viewModel.SelectedOrder.Date = _viewModel.ChangedDate;
             _viewModel.SelectedOrder.Client = _viewModel.SelectedClient;

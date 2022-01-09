@@ -17,7 +17,12 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             var orderDictionary = new Dictionary<int, Order>();
-            return connection.Query<Order>("dbo.Order_SelectAll",
+            return connection.Query<Order, Client, Order>("dbo.Order_SelectAll", (order, client) =>
+            {
+                order.Client = client;
+
+                return order;
+            },
             commandType: CommandType.StoredProcedure)
             .ToList();
         }
@@ -76,7 +81,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
-            new { date, orderId, clientId, address },
+            new { date, Id=orderId, clientId, address },
             commandType: CommandType.StoredProcedure);
         }
 

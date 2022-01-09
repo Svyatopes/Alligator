@@ -50,6 +50,7 @@ namespace Alligator.UI.Commands.TabItemOrders
                 MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }            
             _viewModel.SelectedChangeClient = _viewModel.SelectedOrder.Client;
+            _viewModel.SelectedOrder.OrderDetails = _orderDetailService.GetOrderDetailsByOrderId(_viewModel.SelectedOrder.Id);
             //пока нет productServic'а
             //foreach (var product in _productService.GetAllProducts())
             //{

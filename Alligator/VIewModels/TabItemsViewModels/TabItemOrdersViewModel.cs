@@ -132,7 +132,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
        
-            private ObservableCollection<OrderDetailModel> _changeOrderDetails;
+        private ObservableCollection<OrderDetailModel> _changeOrderDetails;
         public ObservableCollection<OrderDetailModel> ChangeOrderDetails
         {
             get { return _changeOrderDetails; }
@@ -272,7 +272,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         }
 
         
-            public ClientModel SelectedChangeClient
+        public ClientModel SelectedChangeClient
         {
             get { return _selectedChangeClient; }
             set
