@@ -1,15 +1,7 @@
 ﻿using Alligator.BusinessLayer.Models;
-using Alligator.BusinessLayer.Models.Models;
 using Alligator.UI.Commands.TabItemProducts;
-using MvvmHelpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Alligator.UI.ViewModels.TabItemsViewModels

@@ -15,10 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Alligator.BusinessLayer\Alligator.BusinessLayer.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Alligator.BusinessLayer.Models\Alligator.BusinessLayer.Models.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Alligator.BusinessLayer\Alligator.BusinessLayer.csproj" />

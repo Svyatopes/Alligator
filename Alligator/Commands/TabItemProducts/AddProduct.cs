@@ -1,10 +1,5 @@
-﻿using Alligator.BusinessLayer.Models.Models;
+﻿using Alligator.BusinessLayer.Models;
 using Alligator.UI.ViewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemProducts
 {
