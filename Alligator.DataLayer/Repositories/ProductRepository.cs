@@ -42,19 +42,16 @@ namespace Alligator.DataLayer.Repositories
             connection.Open();
 
             return connection
-                //.Query<Product, Category, Product>(procString, (product, category) =>
-                //{
-                //    //product.Category
-                //    product.Category = category;
-                //    return product;
-                //},
-                //commandType: CommandType.StoredProcedure, splitOn: "Id")
-                //.Distinct()
-                //.ToList();
-
-                .Query<Product>(procString
-                , commandType: CommandType.StoredProcedure)
+                .Query<Product, Category, Product>(procString, (product, category) =>
+                {
+                    product.Category = category;
+                    return product;
+                },
+                commandType: CommandType.StoredProcedure, splitOn: "Id")
+                
                 .ToList();
+
+                
         }
 
         public void AddProduct(Product product)
