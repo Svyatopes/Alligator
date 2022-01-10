@@ -17,11 +17,13 @@ namespace Alligator.UI.Commands.TabItemClients
     {
         private TabItemClientsViewModel _viewModel;
         private CommentService _commentService;
+
         public DeleteCommentCommand(TabItemClientsViewModel viewModel, CommentService commentService)
         {
             _viewModel = viewModel;
             _commentService = commentService;
         }
+
         public override void Execute(object parameter)
         {
             if (_viewModel.SelectedComment is null)

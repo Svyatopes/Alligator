@@ -10,11 +10,13 @@ namespace Alligator.UI.Commands.TabItemClients
     {
         private readonly TabItemClientsViewModel _viewModel;
         private readonly ClientService _clientService;
+
         public AddClientPageCommand(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             _viewModel = viewModel;
             _clientService = clientService;
         }
+
         public override void Execute(object parameter)
         {
             _viewModel.AddClient = Visibility.Visible;

@@ -25,10 +25,12 @@ namespace Alligator.UI.Commands.TabItemClients
             _commentService = commentService;
             _orderService = orderService;
         }
+
         public override bool CanExecute(object parameter)
         {
             return _viewModel.SelectedClient is not  null;
         }
+
         public override void Execute(object parameter)
         {
 

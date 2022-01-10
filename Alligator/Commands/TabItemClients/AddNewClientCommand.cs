@@ -16,6 +16,7 @@ namespace Alligator.UI.Commands.TabItemClients
     {
         private TabItemClientsViewModel _viewModel;
         private ClientService _clientservice;
+
         public AddNewClientCommand(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             _viewModel = viewModel;
