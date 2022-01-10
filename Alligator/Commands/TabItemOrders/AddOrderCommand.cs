@@ -80,6 +80,11 @@ namespace Alligator.UI.Commands.TabItemOrders
                      var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
                      _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
                      MessageBox.Show("Заказ добавлен");
+                    _viewModel.NewReviewText = string.Empty;
+                    _viewModel.NewAmount = string.Empty;
+                    _viewModel.NewAddressText = string.Empty;
+                    _viewModel.NewOrderReviews.Clear();
+                    _viewModel.NewOrderDetails.Clear();
                     _viewModel.ComeBackFirstWindow.Execute(null);
                 }
                 else

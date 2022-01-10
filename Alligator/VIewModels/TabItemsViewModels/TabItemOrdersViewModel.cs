@@ -37,8 +37,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand DeleteReview { get; set; }
         public ICommand GetOrders { get; set; }
         public ICommand GetOrderInfo { get; set; }
-        public ICommand DeleteOrderWindowOfAllOrders { get; set; }
-        public ICommand DeleteOrderWindowOfOrderInfo { get; set; }
+        public ICommand DeleteOrder { get; set; }
         public ICommand AddOrder { get; set; }
         public ICommand ChangeOrderWindowOfOrderInfo { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
@@ -48,9 +47,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         public ICommand DeleteReviewWindowOfAddOrder { get; set; }
         public ICommand AddProductWindowOfAddOrder { get; set; }
         public ICommand DeleteDetail { get; set; }
-        public ICommand DeleteNewDetail { get; set; }
-        public ICommand ComeBackFirstWindowFromAddOrderWindow { get; set; }
-        public ICommand ComeBackWindowOfOrderInfoFromChangeOrderWindow { get; set; }
+        public ICommand DeleteNewDetail { get; set; }            
         public ICommand AddProductWindowOfChangeOrder { get; set; }
         public ICommand SaveChangedOrder { get; set; }
         public TabItemOrdersViewModel()
@@ -71,8 +68,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddReview = new AddReviewWindowOfOrderInfoCommand(this, _orderReviewService);
             DeleteReview = new DeleteReviewWindowOfOrderInfoCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
-            DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
-            DeleteOrderWindowOfOrderInfo = new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
+            DeleteOrder = new DeleteOrderCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _orderReviewService, _orderDetailService);
             ChangeOrderWindowOfOrderInfo = new OpenChangeOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService, _clientService);
             OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService);
@@ -83,9 +79,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             AddProductWindowOfAddOrder = new AddProductWindowOfAddOrderCommand(this);
             DeleteDetail = new DeleteDetailCommand(this, _orderDetailService);
             DeleteNewDetail = new DeleteNewDetailCommand(this);
-            AddProductWindowOfChangeOrder = new AddProductWindowOfChangeOrderCommand(this, _orderDetailService);
-            ComeBackFirstWindowFromAddOrderWindow = new ComeBackFirstWindowFromAddOrderWindowCommand(this, _orderService);
-            ComeBackWindowOfOrderInfoFromChangeOrderWindow = new ComeBackWindowOfOrderInfoFromChangeOrderWindowCommand(this, _orderService);
+            AddProductWindowOfChangeOrder = new AddProductWindowOfChangeOrderCommand(this, _orderDetailService);          
             SaveChangedOrder = new SaveChangedOrderCommand(this, _orderService);
 
         }
@@ -174,7 +168,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _selectedOrder = value;
                 ((CommandBase)OpenOrderInfoWindow).RaiseCanExecuteChanged();
-                ((CommandBase)DeleteOrderWindowOfAllOrders).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteOrder).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrder));
             }
         }

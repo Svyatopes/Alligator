@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class DeleteOrderWindowOfOrderInfoCommand : CommandBase
+    public class DeleteOrderCommand : CommandBase
     {
 
         private TabItemOrdersViewModel _viewModel;
@@ -17,17 +17,20 @@ namespace Alligator.UI.Commands.TabItemOrders
         private OrderDetailService _orderDetailService;
         private OrderReviewService _orderReviewService;
 
-        public DeleteOrderWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderDetailService orderDetailService, OrderReviewService orderReviewService)
+        public DeleteOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderDetailService orderDetailService, OrderReviewService orderReviewService)
         {
             _viewModel = viewModel;
             _orderService = orderService;
             _orderReviewService = orderReviewService;
             _orderDetailService = orderDetailService;
         }
+        public override bool CanExecute(object parameter)
+        {
+            return _viewModel.SelectedOrder is not null;
+        }
 
         public override void Execute(object parameter)
         {
-
             var userAnswer = MessageBox.Show("Удалить заказ?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (userAnswer == MessageBoxResult.Yes)
             {
@@ -37,9 +40,9 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _viewModel.AllOrders.Remove(_viewModel.SelectedOrder);
                 _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
                 _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
+                _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
                 _viewModel.OrdersWindowVisibility = Visibility.Visible;
             }
         }
-    
     }
 }
