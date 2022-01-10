@@ -3,6 +3,7 @@ using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,15 @@ namespace Alligator.BusinessLayer
         public void AddOrderDetailModel(int amount, int orderId, int productId)
         {
             _repositoryOrderDetail.AddOrderDetail(amount, orderId, productId);
+        }
+
+        public void AddOrderDetailModels(ObservableCollection<OrderDetailModel> orderDetails)
+        {
+            var newOrderDetails = CustomMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
+            foreach (var orderDetail in newOrderDetails)
+            {
+                _repositoryOrderDetail.AddOrderDetail(orderDetail.Amount, orderDetail.Order.Id, orderDetail.Product.Id);
+            }
         }
 
         public void EditOrderDetailModel(int id, int amount)

@@ -62,17 +62,10 @@ namespace Alligator.UI.Commands.TabItemOrders
            {
                  MessageBox.Show("Ошибка при добавлении заказа в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                  return;
-           }
+           }                     
+               _orderReviewService.AddOrderReviewModels(_viewModel.NewOrderReviews);        
+               _orderDetailService.AddOrderDetailModels(_viewModel.NewOrderDetails);
            
-           
-           foreach (var orderReview in _viewModel.NewOrderReviews)
-           {
-               _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
-           }
-           foreach (var orderDetail in _viewModel.NewOrderDetails)
-           {
-                _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
-           }
            if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success)
            {
                 var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
