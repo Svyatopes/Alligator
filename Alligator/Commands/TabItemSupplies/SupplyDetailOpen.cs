@@ -28,7 +28,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.VisibilityWindowOpenSupplyDetailCard = Visibility.Visible;
 
 
-            var supplyDetailSelected = _supplyDetailService.GetSupplyDetailById(_viewModel.SelectedSupply.Id);
+            var supplyDetailSelected = _supplyDetailService.GetSupplyDetailBySupplyId(_viewModel.SelectedSupply.Id);
             _viewModel.SupplyDetails = new ObservableCollection<SupplyDetailModel>(supplyDetailSelected);
 
         }
