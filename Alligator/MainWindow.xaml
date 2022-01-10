@@ -8,13 +8,14 @@
         mc:Ignorable="d"
         Title="АЛЛИГАТОР ЙОУ" Height="450" Width="800">
     <Grid>
-        <TabControl TabStripPlacement="Left">
-            <tabItems:TabItemMain />
-            <tabItems:TabItemClients />
-            <tabItems:TabItemOrders />
-            <tabItems:TabItemProducts />
-            <tabItems:TabItemCategories />
-            <tabItems:TabItemSupplies />
+        <TabControl  TabStripPlacement="Left" >
+            
+            <tabItems:TabItemMain Foreground="LightCoral"  Height="70" />
+            <tabItems:TabItemClients Foreground="LightCoral" Height="70" />
+            <tabItems:TabItemOrders Foreground="LightCoral" Height="70" />
+            <tabItems:TabItemProducts Foreground="LightCoral" Height="70" />
+            <tabItems:TabItemCategories Foreground="LightCoral" Height="70" />
+            <tabItems:TabItemSupplies Foreground="LightCoral" Height="70" />
         </TabControl>
     </Grid>
 </Window>

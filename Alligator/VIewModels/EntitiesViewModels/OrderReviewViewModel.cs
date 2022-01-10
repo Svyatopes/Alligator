@@ -1,4 +1,5 @@
-﻿using Alligator.BusinessLayer.Models;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

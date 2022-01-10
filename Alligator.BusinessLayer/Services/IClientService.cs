@@ -1,11 +1,6 @@
-﻿using Alligator.BusinessLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Alligator.BusinessLayer
+namespace Alligator.BusinessLayer.Services
 {
     public interface IClientService
     {
@@ -14,5 +9,7 @@ namespace Alligator.BusinessLayer
         int InsertNewClient(ClientModel client);
         bool UpdateClient(ClientModel client);
         bool DeleteClient(ClientModel client);
+
+
     }
 }

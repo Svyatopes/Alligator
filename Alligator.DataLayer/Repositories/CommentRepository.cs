@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class CommentRepository: BaseRepository
-    {       
+    public class CommentRepository : BaseRepository, ICommentRepository
+    {
         public Comment GetCommentById(int id)
         {
             string proc = "dbo.Comment_SelectById";
@@ -57,9 +57,10 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
         }
 
+
         public void DeleteCommentByClientId(int clientId)
         {
-            string proc = "dbo.Comment_DeleteByClientId_1";
+            string proc = "dbo.Comment_DeleteByClient";
             using var connection = ProvideConnection();
             connection.Execute(proc, new
             { ClientId = clientId },

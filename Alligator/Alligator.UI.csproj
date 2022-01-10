@@ -19,5 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Alligator.BusinessLayer\Alligator.BusinessLayer.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="ViewModels\EntitiesViewModels\" />
+  </ItemGroup>
 
 </Project>

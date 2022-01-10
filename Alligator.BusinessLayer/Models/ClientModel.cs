@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Alligator.BusinessLayer.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
-namespace Alligator.BusinessLayer.Models
+namespace Alligator.BusinessLayer
 {
     public class ClientModel
     {
@@ -15,6 +14,24 @@ namespace Alligator.BusinessLayer.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<CommentModel> Comments { get; set; }
+        public List<OrderModel> Orders { get; set; }
+
+      
+
+        public bool IsValid()
+        {
+            if (FirstName.Length > 50)
+                return false;
+            if (LastName.Length > 50)
+                return false;
+            if (Patronymic.Length > 50)
+                return false;
+            if (PhoneNumber.Length > 50)
+                return false;
+            if (Email.Length > 200)
+                return false;
+            return true;
+        }
 
     }
 }
