@@ -54,9 +54,7 @@ namespace Alligator.UI.ViewModels.EntitiesViewModels
 
         public bool IsValid()
         {
-            if (Name.Length > 100 || Name.Length == 0)
-                return false;
-            return true;
+            return Name.Length <= 100 && Name.Length > 0;
         }
     }
 }

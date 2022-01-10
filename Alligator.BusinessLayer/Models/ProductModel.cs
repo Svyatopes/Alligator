@@ -11,9 +11,7 @@ namespace Alligator.BusinessLayer.Models
 
         public bool IsValid()
         {
-            if(Name.Length > 100)
-                return false;
-            return true;
+            return Name.Length <= 100 && Name.Length > 0;
         }
     }
 }
