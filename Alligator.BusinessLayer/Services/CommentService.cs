@@ -7,15 +7,19 @@ using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer.Services
 {
-    public class CommentService
+    public class CommentService : ICommentService
     {
-        private readonly CommentRepository _commentRepository;
+        private readonly ICommentRepository _commentRepository;
 
         public CommentService()
         {
             _commentRepository = new CommentRepository();
         }
+        public CommentService(ICommentRepository fakeCommentRepository)
+        {
+            _commentRepository = fakeCommentRepository;
 
+        }
         public ActionResult<List<CommentModel>> GetAllComments(int id)
         {
             var comments = _commentRepository.GetAllCommentsByCLientId(id);

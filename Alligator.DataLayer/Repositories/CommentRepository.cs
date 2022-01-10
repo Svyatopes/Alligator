@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class CommentRepository: BaseRepository
-    {       
+    public class CommentRepository : BaseRepository, ICommentRepository
+    {
         public Comment GetCommentById(int id)
         {
             string proc = "dbo.Comment_SelectById";

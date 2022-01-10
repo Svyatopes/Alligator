@@ -11,11 +11,9 @@ using System.Threading.Tasks;
 
 namespace Alligator.BusinessLayer.Services
 {
-    public class ClientService : IClientService
+    public class ClientService : IClientService 
     {
         private readonly IClientRepository _clientRepository;
-   
-
 
         public ClientService()
         {
@@ -25,6 +23,7 @@ namespace Alligator.BusinessLayer.Services
         public ClientService(IClientRepository fakeClientRepository)
         {
             _clientRepository = fakeClientRepository;
+            
         }
 
         public ActionResult<List<ClientModel>> GetAllClients()

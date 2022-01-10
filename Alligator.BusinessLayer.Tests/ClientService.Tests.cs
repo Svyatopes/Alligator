@@ -11,16 +11,17 @@ namespace Alligator.BusinessLayer.Tests
     public class ClientServiceTests
     {
         private readonly Mock<IClientRepository> _clientRepositoryMock;
-       
 
         public ClientServiceTests()
         {
             _clientRepositoryMock = new Mock<IClientRepository>();
+            
         }
         [SetUp]
         public void Setup()
         {
         }
+
         public void FillRepositoryMockGetAllClients()
         {
             _clientRepositoryMock.Setup(m => m.GetAllClients()).Returns(new List<Client>
@@ -46,6 +47,9 @@ namespace Alligator.BusinessLayer.Tests
                 }
             });
         }
+
+        
+
         public ClientModel GetClientModelToFillRepositoryMock(int key)
         {
             ClientModel client;
@@ -87,7 +91,7 @@ namespace Alligator.BusinessLayer.Tests
             //arrange
 
             var sut = new ClientService(_clientRepositoryMock.Object);
-            FillRepositoryMockGetAllClients();  
+            FillRepositoryMockGetAllClients();
             //act
             var actual = sut.GetAllClients().Data;
             //assert
@@ -98,8 +102,23 @@ namespace Alligator.BusinessLayer.Tests
 
 
         }
+
+
+
+        [TestCase(1)]
+
+        public void GetClientById_ShouldReturnClient(int id)
+        {
+            var sut = new ClientService(_clientRepositoryMock.Object);
+            var actual = sut.GetClientById(id);
+            Assert.IsNotNull(actual);
+            Assert.IsTrue(actual.Success);
+            Assert.IsNotNull(actual.Data);
+           
+        }
         [TestCase(1)]
         [TestCase(2)]
+
         public void InsertNewClient(int id)
         {
             //arrange 
@@ -115,7 +134,8 @@ namespace Alligator.BusinessLayer.Tests
             
         }
         [TestCase(1)]
-        public void DeleteClient(int id)
+
+        public void DeleteClient_ShouldReturnDeleted(int id)
         {
             //arrange 
             var sut = new ClientService(_clientRepositoryMock.Object);
@@ -129,14 +149,19 @@ namespace Alligator.BusinessLayer.Tests
 
         }
         [TestCase(1)]
-        public void UpDateClient(int id)
+
+        public void UpDateClient_ShouldUpdate(int id)
         {
             //arrange
             var sut = new ClientService(_clientRepositoryMock.Object);
             var existingClient = GetClientModelToFillRepositoryMock(id);
-            var newClient = GetClientModelToFillRepositoryMock(2);
-            var a = sut.UpdateClient(newClient);
-            Assert.That(a, Is.EqualTo(true));
+            var actual = sut.UpdateClient(existingClient);
+            Assert.IsTrue(actual);
+        }
+
+        public void GetAllComments_ShouldReturnComments()
+        {
+            
         }
     }
 }
