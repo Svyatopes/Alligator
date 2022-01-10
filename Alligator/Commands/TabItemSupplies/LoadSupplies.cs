@@ -42,7 +42,7 @@ namespace Alligator.UI.Commands.TabItemSupplies
             _viewModel.NewSupply = new SupplyModel() { Date = DateTime.Now };
             _viewModel.TextBoxNewDateText = DateTime.Now;
             var supplies = _supplyService.GetAllSupplies();
-            var product = _supplyDetailService.GetProduct();
+            var product = _supplyDetailService.GetProducts();
             
 
             foreach (var item in supplies)

@@ -6,6 +6,7 @@ SELECT
    cl.Id,
    cl.FirstName,
    cl.LastName,
+   cl.Patronymic,
    cl.PhoneNumber,
    cl.Email,
    co.Id,

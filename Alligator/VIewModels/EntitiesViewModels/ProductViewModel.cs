@@ -1,25 +1,14 @@
 ﻿using Alligator.BusinessLayer.Models;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace Alligator.UI.VIewModels.EntitiesViewModels
+namespace Alligator.UI.ViewModels.EntitiesViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
-
-        private int _id;
-
-        public int Id
-        {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
-
+        public int Id { get; set; }
 
         private string _name;
-
         public string Name
         {
             get { return _name; }
@@ -29,16 +18,43 @@ namespace Alligator.UI.VIewModels.EntitiesViewModels
                 OnPropertyChanged(nameof(Name));
             }
         }
-        private CategoryModel _category;
+        public CategoryModel Category { get; set; }
+        public ObservableCollection<ProductTagModel> ProductTags { get; set; }
 
-        public CategoryModel Category
+        public ProductViewModel()
         {
-            get { return _category; }
-            set
+            Name = string.Empty;
+            ProductTags = new ObservableCollection<ProductTagModel>(); 
+        }
+
+        public ProductViewModel(ProductModel model)
+        {
+            Id = model.Id;
+            Name = model.Name;
+            Category = model.Category;
+            ProductTags = new ObservableCollection<ProductTagModel>(model.ProductTags);
+        }
+
+        public ProductModel ConvertToProductModel()
+        {
+            var productModel = new ProductModel()
             {
-                _category = value;
-                OnPropertyChanged(nameof(Category));
+                Id = this.Id,
+                Name = this.Name,
+                Category = this.Category,
+                ProductTags = new List<ProductTagModel>()
+            };
+
+            foreach (var productTag in ProductTags)
+            {
+                productModel.ProductTags.Add(productTag);
             }
+            return productModel;
+        }
+
+        public bool IsValid()
+        {
+            return Name.Length <= 100 && Name.Length > 0;
         }
     }
 }

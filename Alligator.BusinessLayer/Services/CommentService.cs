@@ -2,27 +2,24 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
-using AutoMapper;
-using Dapper;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Alligator.BusinessLayer
+namespace Alligator.BusinessLayer.Services
 {
-    public class CommentService
+    public class CommentService : ICommentService
     {
-        private readonly CommentRepository _commentRepository;
+        private readonly ICommentRepository _commentRepository;
 
         public CommentService()
         {
             _commentRepository = new CommentRepository();
         }
+        public CommentService(ICommentRepository fakeCommentRepository)
+        {
+            _commentRepository = fakeCommentRepository;
 
+        }
         public ActionResult<List<CommentModel>> GetAllComments(int id)
         {
             var comments = _commentRepository.GetAllCommentsByCLientId(id);
@@ -32,7 +29,7 @@ namespace Alligator.BusinessLayer
             }
             catch (Exception exception)
             {
-                return new ActionResult<List<CommentModel>>(false, new List<CommentModel>()) { ErrorMessage = exception.Message };
+                return new ActionResult<List<CommentModel>>(false, null) { ErrorMessage = exception.Message };
             }
         }
 
@@ -63,9 +60,17 @@ namespace Alligator.BusinessLayer
             }
         }
 
-        public void DeleteCommentByCommentId(int commentId)
+        public bool DeleteCommentByCommentId(int commentId)
         {
-            _commentRepository.DeleteCommentByCommentId(commentId);
+            try
+            {
+                _commentRepository.DeleteCommentByCommentId(commentId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

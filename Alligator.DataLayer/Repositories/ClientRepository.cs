@@ -1,16 +1,13 @@
 ﻿using Alligator.DataLayer.Entities;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using Dapper;
-using System.Linq;
+using System.Collections.Generic;
 using System.Data;
-using Alligator.DataLayer.Repositories;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ClientRepository : BaseRepository
+    public class ClientRepository : BaseRepository, IClientRepository 
     {
         public List<Client> GetAllClients()
         {

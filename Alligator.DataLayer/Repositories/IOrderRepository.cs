@@ -12,5 +12,6 @@ namespace Alligator.DataLayer.Repositories
         List<Order> GetAllOrders();
         Order GetOrderById(int id);
         List<Order> GetOrdersByClientId(int id);
+        void DeleteOrdersByClientId(int clientId);
     }
 }

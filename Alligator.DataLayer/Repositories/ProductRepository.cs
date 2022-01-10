@@ -2,34 +2,41 @@
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace Alligator.DataLayer.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class ProductRepository : BaseRepository, IProductRepository
     {
-        private const string _connectionString = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
-        //private const string _connectionString = "Data Source=(local);Database=AggregatorAlligator;Integrated Security=true";
-
         public Product GetProductById(int id)
         {
             string procString = "dbo.Product_SelectById";
-            using var connection = new SqlConnection(_connectionString);
+            using var connection = ProvideConnection();
 
-            connection.Open();
+            var productDictionary = new Dictionary<int, Product>();
 
             return connection
-                .Query<Product, Category, Product>(procString, (product, category) =>
+                .Query<Product, Category, ProductTag, Product>(procString, (product, category, productTag) =>
                 {
-                    product.Category = category;
-                    return product;
+                    Product productEntry;
+                    if (!productDictionary.TryGetValue(product.Id, out productEntry))
+                    {
+                        productEntry = product;
+                        productEntry.ProductTags = new List<ProductTag>();
+                        productEntry.Category = category;
+                        productDictionary.Add(product.Id, productEntry);
+                    }
+
+                    if (productTag != null)
+                        productEntry.ProductTags.Add(productTag);
+                    return productEntry;
                 },
                 new
                 {
                     Id = id
                 },
-                commandType: CommandType.StoredProcedure, splitOn: "Id")
+                commandType: CommandType.StoredProcedure,
+                splitOn: "Id")
                 .FirstOrDefault();
 
         }
@@ -37,9 +44,7 @@ namespace Alligator.DataLayer.Repositories
         public List<Product> GetAllProducts()
         {
             string procString = "dbo.Product_SelectAll";
-            using var connection = new SqlConnection(_connectionString);
-
-            connection.Open();
+            using var connection = ProvideConnection();
 
             return connection
                 .Query<Product, Category, Product>(procString, (product, category) =>
@@ -47,56 +52,88 @@ namespace Alligator.DataLayer.Repositories
                     product.Category = category;
                     return product;
                 },
-                commandType: CommandType.StoredProcedure, splitOn: "Id")
-                
+                commandType: CommandType.StoredProcedure,
+                splitOn: "Id")
+
                 .ToList();
 
-                
+
         }
 
-        public void AddProduct(Product product)
+        public int AddProduct(Product product)
         {
             string procString = "dbo.Product_Insert";
-            using var connection = new SqlConnection(_connectionString);
+            using var connection = ProvideConnection();
 
-            connection.Open();
 
-            connection.Execute(procString, new
-            {
-                Name = product.Name,
-                CategoryId = product.Category.Id
-            },
-                commandType: CommandType.StoredProcedure);
+            return connection.QueryFirstOrDefault<int>(procString,
+                new
+                {
+                    Name = product.Name,
+                    CategoryId = product.Category.Id
+                },
+            commandType: CommandType.StoredProcedure);
         }
 
-        public void EditProduct(Product product)
+        public bool AddProductTagToProduct(int productId, int productTagId)
+        {
+            string procString = "dbo.Product_ProductTag_Insert";
+            using var connection = ProvideConnection();
+
+            return connection.Execute(procString,
+                new
+                {
+                    ProductId = productId,
+                    ProductTagId = productTagId
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
+        }
+
+        public bool EditProduct(Product product)
         {
             string procString = "dbo.Product_Update";
-            using var connection = new SqlConnection(_connectionString);
+            using var connection = ProvideConnection();
 
-            connection.Open();
-
-            connection.Execute(procString, new
-            {
-                Id = product.Id,
-                Name = product.Name,
-                CategoryId = product.Category.Id
-            },
-                commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString,
+                new
+                {
+                    product.Id,
+                    product.Name,
+                    CategoryId = product.Category.Id
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
         }
 
-        public void DeleteCategory(int id)
+        public bool DeleteProduct(int id)
         {
-            string procString = "dbo.Category_Delete";
-            using var connection = new SqlConnection(_connectionString);
+            string procString = "dbo.Product_Delete";
+            using var connection = ProvideConnection();
 
-            connection.Open();
-
-            connection.Execute(procString, new
-            {
-                Id = id
-            },
-                commandType: CommandType.StoredProcedure);
+            return connection.Execute(procString,
+                new
+                {
+                    Id = id
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
         }
+
+        public bool RemoveProductTagFromProduct(int productId, int productTagId)
+        {
+            string procString = "dbo.Product_ProductTag_Delete";
+            using var connection = ProvideConnection();
+
+            return connection.Execute(procString,
+                new
+                {
+                    ProductId = productId,
+                    ProductTagId = productTagId
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
+        }
+
     }
 }
