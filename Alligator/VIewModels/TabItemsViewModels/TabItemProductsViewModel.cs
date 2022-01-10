@@ -1,5 +1,7 @@
-﻿using Alligator.BusinessLayer.Models;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.Commands.TabItemProducts;
+using Alligator.UI.ViewModels.EntitiesViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -8,26 +10,105 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
 {
     public class TabItemProductsViewModel : BaseViewModel
     {
-      
-        //private ProductViewModel _selected;
-        private Visibility _visibilityAddProduct;
-        private Visibility _visibilityProduct;
-        private Visibility _visibilityAllProducts;
+
+        private readonly ProductService _productService;
+        private readonly CategoryService _categoryService;
+        private readonly ProductTagService _productTagService;
+
+
         public ICommand OpenAddProductCard { get; set; }
         public ICommand Return { get; set; }
         public ICommand OpenProductCard { get; set; }
         public ICommand AddProduct { get; set; }
         public ICommand DeleteProduct { get; set; }
+        public ICommand LoadProducts { get; set; }
+        
+        public ICommand AddProductTagToProductToAdd { get; set; }
+        public ICommand DeleteProductTagFromProductToAdd { get; set; }
 
         public TabItemProductsViewModel()
         {
+            _productService = new ProductService();
+            _categoryService = new CategoryService();
+            _productTagService = new ProductTagService();
+
+
             Products = new ObservableCollection<ProductModel>();
+            Categories = new ObservableCollection<CategoryModel>();
+            ProductTags = new ObservableCollection<ProductTagModel>();
+
+            LoadProducts = new LoadProducts(this, _productService, _categoryService, _productTagService);
             OpenProductCard = new OpenProductCard(this);
             OpenAddProductCard = new OpenAddProductCard(this);
             Return = new Return(this);
-            AddProduct = new AddProduct(this);
-            DeleteProduct = new DeleteProduct(this);
+            AddProduct = new AddProduct(this, _productService);
+            DeleteProduct = new DeleteProduct(this, _productService);
+            AddProductTagToProductToAdd = new AddProductTagToProductToAdd(this);
+            DeleteProductTagFromProductToAdd = new DeleteProductTagFromProductToAdd(this);
+
+            VisibilityAllProducts = Visibility.Visible;
+            VisibilityAddProduct = Visibility.Collapsed;
+            VisibilityEditProduct = Visibility.Collapsed;
+
         }
+
+
+        private ProductTagModel _selectedProductTagInProductToAdd;
+        public ProductTagModel SelectedProductTagInProductToAdd
+        {
+            get { return _selectedProductTagInProductToAdd; }
+            set
+            {
+                _selectedProductTagInProductToAdd = value;
+                OnPropertyChanged(nameof(SelectedProductTagInProductToAdd));
+            }
+        }
+
+        private ProductTagModel _selectedProductTagToAdd;
+        public ProductTagModel SelectedProductTagToAdd
+        {
+            get { return _selectedProductTagToAdd; }
+            set
+            {
+                _selectedProductTagToAdd = value;
+                OnPropertyChanged(nameof(SelectedProductTagToAdd));
+            }
+        }
+
+        private ProductModel _productToEdit;
+        public ProductModel ProductToEdit
+        {
+            get { return _productToEdit; }
+            set
+            {
+                _productToEdit = value;
+                OnPropertyChanged(nameof(ProductToEdit));
+            }
+        }
+
+
+        private ProductViewModel _productToAdd;
+        public ProductViewModel ProductToAdd
+        {
+            get { return _productToAdd; }
+            set
+            {
+                _productToAdd = value;
+                OnPropertyChanged(nameof(ProductToAdd));
+            }
+        }
+
+        private CategoryModel _selectedCategoryAddProduct;
+        public CategoryModel SelectedCategoryAddProduct
+        {
+            get { return _selectedCategoryAddProduct; }
+            set
+            {
+                _selectedCategoryAddProduct = value;
+                OnPropertyChanged(nameof(SelectedCategoryAddProduct));
+            }
+        }
+
         private string _selectedProductToShow;
         public string SelectedProductToShow
         {
@@ -41,6 +122,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SelectedProductToShow));
             }
         }
+
         private ObservableCollection<ProductModel> _products;
         public ObservableCollection<ProductModel> Products
         {
@@ -54,6 +136,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(Products));
             }
         }
+       
         private ObservableCollection<CategoryModel> _categories;
         public ObservableCollection<CategoryModel> Categories
         {
@@ -64,6 +147,8 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(Categories));
             }
         }
+
+        public ObservableCollection<ProductTagModel> ProductTags { get; set; }
 
         private ProductModel _selectedProduct;
         public ProductModel SelectedProduct
@@ -99,6 +184,8 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(AddNewProductText));
             }
         }
+
+        private Visibility _visibilityAllProducts;
         public Visibility VisibilityAllProducts
         {
             get
@@ -112,6 +199,7 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             }
         }
 
+        private Visibility _visibilityAddProduct;
         public Visibility VisibilityAddProduct
         {
             get
@@ -125,16 +213,17 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             }
         }
 
-        public Visibility VisibilityProduct
+        private Visibility _visibilityEditProduct;
+        public Visibility VisibilityEditProduct
         {
             get
             {
-                return _visibilityProduct;
+                return _visibilityEditProduct;
             }
             set
             {
-                _visibilityProduct = value;
-                OnPropertyChanged(nameof(VisibilityProduct));
+                _visibilityEditProduct = value;
+                OnPropertyChanged(nameof(VisibilityEditProduct));
             }
         }
     }

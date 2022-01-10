@@ -19,7 +19,7 @@ namespace Alligator.UI.TabItems
             _viewModel = new TabItemProductsViewModel();
             DataContext = _viewModel;
             _viewModel.VisibilityAddProduct = Visibility.Collapsed;
-            _viewModel.VisibilityProduct = Visibility.Collapsed;
+            _viewModel.VisibilityEditProduct = Visibility.Collapsed;
         }      
         
 

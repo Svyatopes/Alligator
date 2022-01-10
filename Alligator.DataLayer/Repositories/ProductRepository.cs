@@ -75,6 +75,21 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
         }
 
+        public bool AddProductTagToProduct(int productId, int productTagId)
+        {
+            string procString = "dbo.Product_ProductTag_Insert";
+            using var connection = ProvideConnection();
+
+            return connection.Execute(procString,
+                new
+                {
+                    ProductId = productId,
+                    ProductTagId = productTagId
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
+        }
+
         public bool EditProduct(Product product)
         {
             string procString = "dbo.Product_Update";

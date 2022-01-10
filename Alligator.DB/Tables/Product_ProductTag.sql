@@ -14,6 +14,7 @@ GO
 
 ALTER TABLE [dbo].[Product_ProductTag]  WITH CHECK ADD  CONSTRAINT [FK_Product_ProductTag_Product] FOREIGN KEY([ProductId])
 REFERENCES [dbo].[Product] ([Id])
+ON DELETE CASCADE
 GO
 
 ALTER TABLE [dbo].[Product_ProductTag] CHECK CONSTRAINT [FK_Product_ProductTag_Product]
