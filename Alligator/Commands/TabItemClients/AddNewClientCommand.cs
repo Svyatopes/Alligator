@@ -12,11 +12,11 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    class AddNewClient : CommandBase
+    class AddNewClientCommand : CommandBase
     {
         private TabItemClientsViewModel _viewModel;
         private ClientService _clientservice;
-        public AddNewClient(TabItemClientsViewModel viewModel, ClientService clientService)
+        public AddNewClientCommand(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             _viewModel = viewModel;
             _clientservice = clientService;

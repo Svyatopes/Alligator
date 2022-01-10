@@ -38,10 +38,17 @@ namespace Alligator.BusinessLayer
             return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
         }
 
-        public List<OrderModel> GetOrdersByClientId(int id)
+        public ActionResult<List<OrderModel>> GetOrdersByClientId(int id)
         {
             var orders = _repositoryOrder.GetOrdersByClientId(id);
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
+            try
+            {
+                return new ActionResult<List<OrderModel>>(true, CustomMapper.GetInstance().Map<List<OrderModel>>(orders));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<List<OrderModel>>(false, null) { ErrorMessage = exception.Message };
+            }
         }
 
         public OrderModel GetOrderByIdWithDetailsAndReviews(int id)
@@ -66,6 +73,18 @@ namespace Alligator.BusinessLayer
         public void EditOrderModel(DateTime date, int id, string address)
         {
             _repositoryOrder.EditOrder(date, id, address);
+        }
+        public bool DeleteOrdersByClientId(int clientId)
+        {
+            try
+            {
+                _repositoryOrder.DeleteOrdersByClientId(clientId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

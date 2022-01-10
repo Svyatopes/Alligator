@@ -4,12 +4,12 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class LoadClients : CommandBase
+    public class LoadClientsCommand : CommandBase
     {
         private readonly TabItemClientsViewModel _viewModel;
         private readonly ClientService _clientService;
 
-        public LoadClients(TabItemClientsViewModel viewModel, ClientService clientService)
+        public LoadClientsCommand(TabItemClientsViewModel viewModel, ClientService clientService)
         {
             _viewModel = viewModel;
             _clientService = clientService;

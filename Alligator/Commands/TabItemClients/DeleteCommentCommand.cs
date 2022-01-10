@@ -13,11 +13,11 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
-    public class DeleteComment : CommandBase
+    public class DeleteCommentCommand : CommandBase
     {
         private TabItemClientsViewModel _viewModel;
         private CommentService _commentService;
-        public DeleteComment(TabItemClientsViewModel viewModel, CommentService commentService)
+        public DeleteCommentCommand(TabItemClientsViewModel viewModel, CommentService commentService)
         {
             _viewModel = viewModel;
             _commentService = commentService;

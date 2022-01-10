@@ -60,7 +60,7 @@ namespace Alligator.DataLayer.Repositories
 
         public void DeleteCommentByClientId(int clientId)
         {
-            string proc = "dbo.Comment_DeleteByClientId_1";
+            string proc = "dbo.Comment_DeleteByClient";
             using var connection = ProvideConnection();
             connection.Execute(proc, new
             { ClientId = clientId },

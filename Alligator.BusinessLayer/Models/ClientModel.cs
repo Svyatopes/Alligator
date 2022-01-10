@@ -14,6 +14,7 @@ namespace Alligator.BusinessLayer
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<CommentModel> Comments { get; set; }
+        public List<OrderModel> Orders { get; set; }
 
       
 

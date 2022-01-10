@@ -14,6 +14,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
     {
         private readonly ClientService _clientService;
         private readonly CommentService _commentService;
+        private readonly OrderService _orderService;
 
         private ClientModel _selectedClient;
         private string _text;
@@ -25,7 +26,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private Visibility _buttonOpenCard;
 
         private ObservableCollection<CommentModel> _comments;
-
+        private ObservableCollection<OrderModel> _orders;
         public ICommand DeleteClient { get; set; }
         public ICommand AddingClient { get; set; }
         public ICommand OpenClientCard { get; set; }
@@ -41,27 +42,26 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         {
             _commentService = new CommentService();
             _clientService = new ClientService();
+            _orderService = new OrderService();
             Clients = new ObservableCollection<ClientModel>();
             Comments = new ObservableCollection<CommentModel>();
+            Orders = new ObservableCollection<OrderModel>();
 
-
-            DeleteClient = new DeleteClient_AllClientsPage(this, _clientService, _commentService);
-            Return = new Return(this);
-            OpenClientCard = new OpenClientCard(this, _clientService, _commentService);
+            DeleteClient = new DeleteClientCommand(this, _clientService, _commentService, _orderService);
+            Return = new ReturnCommand(this);
+            OpenClientCard = new OpenClientCardCommand(this, _clientService, _commentService,_orderService);
             SaveChanges = new SaveChanges(this, _clientService, _commentService);
-            AddingClient = new AddClientPage(this, _clientService);
-            DeleteClientInClientCard = new DeleteClient_ClientCardPage(this, _clientService, _commentService);
-            AddComment = new AddComment(this, _commentService);
-            AddNewClient = new AddNewClient(this, _clientService);
-            DeleteComment = new DeleteComment(this, _commentService);
-            LoadClients = new LoadClients(this, _clientService);
+            AddingClient = new AddClientPageCommand(this, _clientService);
+            AddComment = new AddCommentCommand(this, _commentService);
+            AddNewClient = new AddNewClientCommand(this, _clientService);
+            DeleteComment = new DeleteCommentCommand(this, _commentService);
+            LoadClients = new LoadClientsCommand(this, _clientService);
 
 
             AddClient = Visibility.Collapsed;
             ClientCardVisibility = Visibility.Collapsed;
         }
         public ObservableCollection<ClientModel> Clients { get; set; }
-        
 
        
         public string Text
@@ -82,6 +82,18 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(SelectedComment));
             }
         }
+
+        public ObservableCollection<OrderModel> Orders
+        {
+            get { return _orders; }
+            set
+            {
+                _orders = value;
+                OnPropertyChanged(nameof(Orders));
+            }
+        }
+
+
         public ObservableCollection<CommentModel> Comments
         {
             get { return _comments; }   
@@ -91,6 +103,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(Comments));
             }
         }
+       
         public Visibility ButtonOpenCard
         {
             get { return _buttonOpenCard; }
@@ -151,6 +164,16 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
+        private OrderModel _order;
+        public OrderModel Order
+        {
+            get { return _order; }
+            set
+            {
+                _order = value;
+                OnPropertyChanged(nameof(Order));
+            }
+        }
 
         private ClientModel _editableClient;
         public ClientModel EditableClient
@@ -163,7 +186,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
-
+ 
         private ClientModel _newClient;
         public ClientModel NewClient
         {

@@ -9,11 +9,11 @@ using System.Windows;
 namespace Alligator.UI.Commands.TabItemClients
 {
 
-    public class Return : CommandBase
+    public class ReturnCommand : CommandBase
     {
         private TabItemClientsViewModel _viewModel;
 
-        public Return(TabItemClientsViewModel viewModel)
+        public ReturnCommand(TabItemClientsViewModel viewModel)
         {
             _viewModel = viewModel;
         }
