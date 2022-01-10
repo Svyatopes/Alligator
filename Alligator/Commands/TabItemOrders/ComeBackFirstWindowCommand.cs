@@ -27,9 +27,15 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersWindowVisibility = Visibility.Visible;
             _viewModel.AllOrders.Clear();
-            foreach (var order in _orderService.GetOrders())
+            if (_orderService.GetOrders().Success is true)
             {
+                var orders = _orderService.GetOrders().Data;
+                foreach (var order in orders)            
                 _viewModel.AllOrders.Add(order);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }
         }
     }

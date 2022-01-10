@@ -46,15 +46,22 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.SelectedOrder.Address = address;
             _viewModel.SelectedOrder.Date = _viewModel.ChangedDate;
             _viewModel.SelectedOrder.Client = _viewModel.SelectedClient;
-            _orderService.EditOrderModel(_viewModel.ChangedDate, _viewModel.SelectedOrder.Id, _viewModel.SelectedChangeClient.Id, address);
-            var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id);
-            _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel>(order.OrderReviews);
-            _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);
-            _viewModel.SelectedOrderDate = _viewModel.SelectedOrder.Date;
-            _viewModel.SelectedOrderAddress = _viewModel.SelectedOrder.Address;
-            _viewModel.SelectedOrderClient = _viewModel.SelectedOrder.Client;
-            //добавить сообщение, что всё успешно сохранено
-            //и проверку на связь с БД
+
+            if (!_orderService.EditOrderModel(_viewModel.ChangedDate, _viewModel.SelectedOrder.Id, _viewModel.SelectedChangeClient.Id, address))
+            {
+                MessageBox.Show("Ошибка при сохранении данных", "Error", MessageBoxButton.OK);
+                return;
+            }
+            else
+            {
+                var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id).Data;
+                _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel>(order.OrderReviews);
+                _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);
+                _viewModel.SelectedOrderDate = _viewModel.SelectedOrder.Date;
+                _viewModel.SelectedOrderAddress = _viewModel.SelectedOrder.Address;
+                _viewModel.SelectedOrderClient = _viewModel.SelectedOrder.Client;
+                MessageBox.Show("Данные заказа изменены");
+            }
             _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Visible;
             _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;

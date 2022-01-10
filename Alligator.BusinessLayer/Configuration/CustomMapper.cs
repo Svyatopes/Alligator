@@ -1,4 +1,5 @@
 ﻿using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer;
 using Alligator.DataLayer.Entities;
 using AutoMapper;
 
@@ -22,9 +23,7 @@ namespace Alligator.BusinessLayer.Configuration
                 cfg.CreateMap<ProductTag, ProductTagModel>();
                 cfg.CreateMap<ProductTagModel, ProductTag>();
                 cfg.CreateMap<Category, CategoryModel>();
-                cfg.CreateMap<CategoryModel, Category>();
-                cfg.CreateMap<Order, OrderShortModel>();
-                cfg.CreateMap<OrderShortModel, Order>();
+                cfg.CreateMap<CategoryModel, Category>();                
                 cfg.CreateMap<Order, OrderModel>();
                 cfg.CreateMap<OrderModel, Order>();
                 cfg.CreateMap<OrderDetail, OrderDetailModel>();

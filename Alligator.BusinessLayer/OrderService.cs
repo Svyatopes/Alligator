@@ -26,46 +26,86 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview = new OrderReviewRepository();
         }
 
-        public List<OrderShortModel> GetOrdersWithoutSensitiveData()
+        public ActionResult<List<OrderModel>> GetOrders()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);
+            try
+            {
+                return new ActionResult<List<OrderModel>>(true, CustomMapper.GetInstance().Map<List<OrderModel>>(orders));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<List<OrderModel>>(false, null) { ErrorMessage = exception.Message };
+            }
         }
 
-        public List<OrderModel> GetOrders()
-        {
-            var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
-        }
-
-        public List<OrderModel> GetOrdersByClientId(int id)
+        public ActionResult<List<OrderModel>> GetOrdersByClientId(int id)
         {
             var orders = _repositoryOrder.GetOrdersByClientId(id);
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
+            try
+            {
+                return new ActionResult<List<OrderModel>>(true, CustomMapper.GetInstance().Map<List<OrderModel>>(orders));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<List<OrderModel>>(false, null) { ErrorMessage = exception.Message };
+            }
         }
 
-        public OrderModel GetOrderByIdWithDetailsAndReviews(int id)
+        public ActionResult<OrderModel> GetOrderByIdWithDetailsAndReviews(int id)
         {
             var order = _repositoryOrder.GetOrderById(id);
             order.OrderDetails = _repositoryOrderDetail.GetOrderDetailsByOrderId(id);
             order.OrderReviews = _repositoryOrderReview.GetOrderReviewsByOrderId(id);
-            return CustomMapper.GetInstance().Map<OrderModel>(order);
+            try
+            {
+                return new ActionResult<OrderModel>(true, CustomMapper.GetInstance().Map<OrderModel>(order));
+            }
+            catch
+            (Exception exception)
+            {
+                return new ActionResult<OrderModel>(false, null) { ErrorMessage = exception.Message };
+                
+            }
         }
 
         public int AddOrderModel(DateTime date, int clientId, string address)
         {           
-           int id =_repositoryOrder.AddOrder(date, clientId, address);
-           return id;
+            try
+            {
+              int id =_repositoryOrder.AddOrder(date, clientId, address);
+              return id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
-        public void DeleteOrderModel(int id)
+        public bool DeleteOrderModel(int id)
         {
-            _repositoryOrder.DeleteOrder(id);
+            try
+            {
+                _repositoryOrder.DeleteOrder(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void EditOrderModel(DateTime date, int orderId, int clientId, string address)
+        public bool EditOrderModel(DateTime date, int orderId, int clientId, string address)
         {
-            _repositoryOrder.EditOrder(date, orderId, clientId, address);
+            try
+            {
+              _repositoryOrder.EditOrder(date, orderId, clientId, address);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

@@ -60,6 +60,11 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
 
            int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);             
+            if (orderId == -1)
+            {
+                MessageBox.Show("Ошибка при добавлении клиента в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             foreach (var orderReview in _viewModel.NewOrderReviews)
             {
                 _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
@@ -68,7 +73,15 @@ namespace Alligator.UI.Commands.TabItemOrders
             {
                 _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
             }
-            _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId));
+            if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success is true)
+            {
+                var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
+                _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }

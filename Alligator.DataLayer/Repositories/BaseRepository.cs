@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿
+using System.Data.SqlClient;
 
 namespace Alligator.DataLayer.Repositories
 {
@@ -6,7 +7,7 @@ namespace Alligator.DataLayer.Repositories
     {
         private const string _connection = "Data Source=80.78.240.16;Database=AggregatorAlligator;User Id=student;Password=qwe!23;";
 
-        protected static SqlConnection ProvideConnection() => new SqlConnection(_connection);
+        public static SqlConnection ProvideConnection() => new SqlConnection(_connection);
 
         protected enum AffectedRows
         {

@@ -32,9 +32,15 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.NewOrderReviews.Clear();
             _viewModel.NewOrderDetails.Clear();
             _viewModel.AllOrders.Clear();
-            foreach (var order in _orderService.GetOrders())
+            if (_orderService.GetOrders().Success is true)
             {
-                _viewModel.AllOrders.Add(order);
+                var orders = _orderService.GetOrders().Data;
+                foreach (var order in orders)
+                    _viewModel.AllOrders.Add(order);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }
         }
     }
