@@ -1,4 +1,4 @@
-﻿CREATE proc dbo.Product_SelectAll
+﻿CREATE proc [dbo].[Product_SelectAll]
 AS
 BEGIN
 	SELECT
@@ -8,5 +8,7 @@ BEGIN
 		c.Name
 
 		
-	from dbo.Product p left join dbo.Category c on p.CategoryId = c.Id
+	from dbo.Product p 
+	inner join dbo.Category c 
+	on p.CategoryId = c.Id
 END

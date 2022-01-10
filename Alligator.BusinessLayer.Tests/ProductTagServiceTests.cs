@@ -61,8 +61,7 @@ namespace Alligator.BusinessLayer.Tests
             //assert
             Assert.IsNotNull(actual);
             Assert.IsFalse(actual.Success);
-            Assert.IsNotNull(actual.Data);
-            Assert.IsTrue(actual.Data.Count == 0);
+            Assert.IsNull(actual.Data);
             Assert.AreEqual(errorMessage, actual.ErrorMessage);
         }
 
@@ -82,7 +81,6 @@ namespace Alligator.BusinessLayer.Tests
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.Success);
             Assert.IsNotNull(actual.Data);
-            Assert.IsInstanceOf(typeof(ProductTagModel), actual.Data);
             Assert.AreEqual(productTag, actual.Data);
         }
 
@@ -102,8 +100,7 @@ namespace Alligator.BusinessLayer.Tests
             //assert
             Assert.IsNotNull(actual);
             Assert.IsFalse(actual.Success);
-            Assert.IsNotNull(actual.Data);
-            Assert.IsInstanceOf(typeof(ProductTagModel), actual.Data);
+            Assert.IsNull(actual.Data);
             Assert.AreEqual(errorMessage, actual.ErrorMessage);
         }
 

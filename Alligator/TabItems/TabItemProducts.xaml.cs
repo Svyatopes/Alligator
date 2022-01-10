@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿
+using Alligator.UI.ViewModels.TabItemsViewModels;
+using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Alligator.UI.TabItems
 {
@@ -7,9 +11,18 @@ namespace Alligator.UI.TabItems
     /// </summary>
     public partial class TabItemProducts : TabItem
     {
+        TabItemProductsViewModel _viewModel = new TabItemProductsViewModel();
+
         public TabItemProducts()
         {
             InitializeComponent();
-        }
+            _viewModel = new TabItemProductsViewModel();
+            DataContext = _viewModel;
+            _viewModel.VisibilityAddProduct = Visibility.Collapsed;
+            _viewModel.VisibilityEditProduct = Visibility.Collapsed;
+        }      
+        
+
+      
     }
 }

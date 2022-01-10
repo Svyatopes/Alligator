@@ -1,5 +1,4 @@
 ﻿using Alligator.BusinessLayer.Models;
-using Alligator.BusinessLayer.Service;
 using NUnit.Framework;
 using Moq;
 using Alligator.DataLayer.Repositories;
@@ -23,7 +22,7 @@ namespace Alligator.BusinessLayer.Tests
         }
 
         [Test]
-        public void GetAllCategories_ShouldReturnCategoriesShortInfo()
+        public void GetAllCategories_ShouldReturnActionResultWithCategories()
         {
             //arrange            
             _categoryRepositoryMock.Setup(m => m.GetAllCategories()).Returns(new List<Category>
@@ -61,8 +60,7 @@ namespace Alligator.BusinessLayer.Tests
             //assert
             Assert.IsNotNull(actual);
             Assert.IsFalse(actual.Success);
-            Assert.IsNotNull(actual.Data);
-            Assert.IsTrue(actual.Data.Count == 0);
+            Assert.IsNull(actual.Data);
             Assert.AreEqual(errorMessage, actual.ErrorMessage);
         }
 
@@ -102,8 +100,7 @@ namespace Alligator.BusinessLayer.Tests
             //assert
             Assert.IsNotNull(actual);
             Assert.IsFalse(actual.Success);
-            Assert.IsNotNull(actual.Data);
-            Assert.IsInstanceOf(typeof(CategoryModel), actual.Data);
+            Assert.IsNull(actual.Data);
             Assert.AreEqual(errorMessage, actual.ErrorMessage);
         }
 
