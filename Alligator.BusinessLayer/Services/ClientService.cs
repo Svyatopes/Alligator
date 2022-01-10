@@ -1,21 +1,29 @@
 ﻿using Alligator.BusinessLayer.Configuration;
-using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Alligator.BusinessLayer
+namespace Alligator.BusinessLayer.Services
 {
-    public class ClientService : IClientService
+    public class ClientService : IClientService 
     {
-        private readonly ClientRepository _clientRepository;
-
-        //TODO: rename "just" to smth with info about how it uses
+        private readonly IClientRepository _clientRepository;
 
         public ClientService()
         {
             _clientRepository = new ClientRepository();
+        }
+
+        public ClientService(IClientRepository fakeClientRepository)
+        {
+            _clientRepository = fakeClientRepository;
+            
         }
 
         public ActionResult<List<ClientModel>> GetAllClients()
@@ -39,7 +47,7 @@ namespace Alligator.BusinessLayer
             {
                 return new ActionResult<ClientModel>(true, CustomMapper.GetInstance().Map<ClientModel>(client));
             }
-            catch (Exception exception)
+            catch(Exception exception)
             {
                 return new ActionResult<ClientModel>(false, null) { ErrorMessage = exception.Message };
             }
@@ -47,7 +55,7 @@ namespace Alligator.BusinessLayer
 
         public int InsertNewClient(ClientModel client)
         {
-
+            
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
@@ -62,7 +70,7 @@ namespace Alligator.BusinessLayer
 
         public bool UpdateClient(ClientModel client)
         {
-
+           
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
@@ -78,7 +86,7 @@ namespace Alligator.BusinessLayer
 
         public bool DeleteClient(ClientModel client)
         {
-
+           
             var clientMap = CustomMapper.GetInstance().Map<Client>(client);
             try
             {
@@ -92,4 +100,3 @@ namespace Alligator.BusinessLayer
         }
     }
 }
-

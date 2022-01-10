@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alligator.BusinessLayer.Models
+namespace Alligator.BusinessLayer
 {
     public class ClientModel
     {
@@ -11,6 +11,7 @@ namespace Alligator.BusinessLayer.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public List<CommentModel> Comments { get; set; }
+        public List<OrderModel> Orders { get; set; }
 
 
 

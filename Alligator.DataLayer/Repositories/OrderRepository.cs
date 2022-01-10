@@ -53,6 +53,7 @@ namespace Alligator.DataLayer.Repositories
             Distinct().ToList();
         }
 
+
         public int AddOrder(DateTime date, int clientId, string address)
         {
             using var connection = ProvideConnection();
@@ -77,6 +78,14 @@ namespace Alligator.DataLayer.Repositories
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
             new { Date = date, Id = id, Address = address },
+            commandType: CommandType.StoredProcedure);
+        }
+        public void DeleteOrdersByClientId(int clientId)
+        {
+            string proc = "dbo.Order_DeleteAllOrdersByClientId";
+            using var connection = ProvideConnection();
+            connection.Execute(proc, new
+            { ClientId = clientId },
             commandType: CommandType.StoredProcedure);
         }
 
