@@ -60,9 +60,17 @@ namespace Alligator.BusinessLayer.Services
             }
         }
 
-        public void DeleteCommentByCommentId(int commentId)
+        public bool DeleteCommentByCommentId(int commentId)
         {
-            _commentRepository.DeleteCommentByCommentId(commentId);
+            try
+            {
+                _commentRepository.DeleteCommentByCommentId(commentId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

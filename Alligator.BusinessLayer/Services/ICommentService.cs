@@ -5,7 +5,7 @@ namespace Alligator.BusinessLayer.Services
 {
     public interface ICommentService
     {
-        void DeleteCommentByCommentId(int commentId);
+        bool DeleteCommentByCommentId(int commentId);
         bool DeleteCommentsByClientId(int clientId);
         ActionResult<List<CommentModel>> GetAllComments(int id);
         int InsertComment(CommentModel comment);

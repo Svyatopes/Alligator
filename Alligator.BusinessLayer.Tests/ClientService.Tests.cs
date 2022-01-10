@@ -110,8 +110,20 @@ namespace Alligator.BusinessLayer.Tests
         public void GetClientById_ShouldReturnClient(int id)
         {
             var sut = new ClientService(_clientRepositoryMock.Object);
+            _clientRepositoryMock.Setup(m => m.GetClientById(id)).Returns(new  Client
+              
+                {
+                        Id = 2,
+                        FirstName = "TestFirstName2",
+                        LastName = "TestLastName2",
+                        Patronymic = "TestPatronymic2",
+                        PhoneNumber = "TestPhoneNumber2",
+                        Email = "TestEmail2"
+                }
+            );
             var actual = sut.GetClientById(id);
-            Assert.IsNotNull(actual);
+            _clientRepositoryMock.Verify(m => m.GetClientById(id), Times.Once());
+            
             Assert.IsTrue(actual.Success);
             Assert.IsNotNull(actual.Data);
            
@@ -159,9 +171,6 @@ namespace Alligator.BusinessLayer.Tests
             Assert.IsTrue(actual);
         }
 
-        public void GetAllComments_ShouldReturnComments()
-        {
-            
-        }
+
     }
 }

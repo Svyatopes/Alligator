@@ -23,11 +23,10 @@ namespace Alligator.BusinessLayer.Tests
         public void Setup()
         {
         }
-       
+
         public ClientModel GetClientModelToFillRepositoryMock(int key)
         {
             ClientModel client;
-            
             switch (key)
             {
                 case 1:
@@ -39,8 +38,6 @@ namespace Alligator.BusinessLayer.Tests
                         Patronymic = "TestPatronymic1",
                         PhoneNumber = "TestPhoneNumber1",
                         Email = "TestEmail1"
-                       
-                        
                     };
                     break;
                 case 2:
@@ -69,7 +66,15 @@ namespace Alligator.BusinessLayer.Tests
                     comment = new CommentModel
                     {
                         Id = 1,
-                        Client = GetClientModelToFillRepositoryMock(1),
+                        Client = new ClientModel
+                        {
+                            Id = 2,
+                            FirstName = "TestFirstName2",
+                            LastName = "TestLastName2",
+                            Patronymic = "TestPatronymic2",
+                            PhoneNumber = "TestPhoneNumber2",
+                            Email = "TestEmail2"
+                        },
                         Text = "TestText1"
                     };
                     break;
@@ -83,6 +88,7 @@ namespace Alligator.BusinessLayer.Tests
         [TestCase(1)]
         public void GetAllComments_ShouldReturnComments(int clientId)
         {
+            //arrange
             _commentRepositoryMock.Setup(m => m.GetAllCommentsByCLientId(clientId)).Returns(new List<Comment>
             {
                 new Comment()
@@ -92,7 +98,9 @@ namespace Alligator.BusinessLayer.Tests
                 }
             });
             var commentService = new CommentService(_commentRepositoryMock.Object);
+            //act
             var actual = commentService.GetAllComments(clientId);
+            //assert
             Assert.IsNotNull(actual);
             Assert.IsTrue(actual.Success);
             _commentRepositoryMock.Verify(m => m.GetAllCommentsByCLientId(clientId), Times.Once());
@@ -103,10 +111,13 @@ namespace Alligator.BusinessLayer.Tests
         [TestCase(1)]
         public void InsertComment_ShouldInsertComment(int key)
         {
+            //arrange
             var comment = GetCommentModelToFillRepositoryMock(key);
-           _commentRepositoryMock.Setup(m => m.InsertCommentById(comment.Id, comment.Text));
+            _commentRepositoryMock.Setup(m => m.InsertCommentById(comment.Id, comment.Text));
             var commentService = new CommentService(_commentRepositoryMock.Object);
+            //act
             var actual = commentService.InsertComment(comment);
+            //assert
             Assert.IsNotNull(actual);
             Assert.IsInstanceOf(typeof(int), actual);
         }
@@ -114,12 +125,26 @@ namespace Alligator.BusinessLayer.Tests
         [TestCase(1)]
         public void DeleteCommentsByClient_ShouldDeleteComments(int clientId)
         {
-
+            //arrange
             _commentRepositoryMock.Setup(m => m.DeleteCommentByClientId(clientId));
             var commentService = new CommentService(_commentRepositoryMock.Object);
+            //act
             var actual = commentService.DeleteCommentsByClientId(clientId);
+            //assert
             Assert.IsTrue(actual);
             
+        }
+        [Test]
+        public void DeleteCommentByCommentId_ShouldDeleteCurrentComment()
+        {
+            //arrange
+            var comment = new CommentModel() { Id = 1, Client = GetClientModelToFillRepositoryMock(1), Text = "newText" };
+            _commentRepositoryMock.Setup(m => m.DeleteCommentByCommentId(comment.Id));
+            var commentService = new CommentService(_commentRepositoryMock.Object);
+            //act 
+            var actual = commentService.DeleteCommentByCommentId(comment.Id);
+            //assert
+            Assert.IsTrue(actual);
         }
 
     }
