@@ -1,5 +1,4 @@
 ﻿using Alligator.BusinessLayer.Models;
-using Alligator.BusinessLayer.Service;
 using NUnit.Framework;
 using Moq;
 using Alligator.DataLayer.Repositories;

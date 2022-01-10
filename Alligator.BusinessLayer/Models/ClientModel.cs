@@ -16,13 +16,11 @@ namespace Alligator.BusinessLayer.Models
 
         public bool IsValid()
         {
-            if (FirstName.Length > 50 ||
-                LastName.Length > 50 ||
-                Patronymic.Length > 50 ||
-                PhoneNumber.Length > 50 ||
-                Email.Length > 200)
-                return false;
-            return true;
+            return FirstName.Length < 50 &&
+                LastName.Length < 50 &&
+                PhoneNumber.Length < 50 &&
+                Patronymic.Length < 50 &&
+                Email.Length < 200;
         }
 
     }

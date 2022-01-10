@@ -10,11 +10,16 @@ namespace Alligator.BusinessLayer
 {
     public class ProductService
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ProductService()
         {
             _productRepository = new ProductRepository();
+        }
+
+        public ProductService(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
         }
 
         public ActionResult<ProductModel> GetProductById(int id)
