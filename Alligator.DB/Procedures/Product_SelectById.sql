@@ -14,7 +14,7 @@ BEGIN
 	on p.CategoryId = c.Id
 	left join dbo.Product_ProductTag ppt 
 	on p.Id = ppt.ProductId
-	inner join dbo.ProductTag pt
+	left join dbo.ProductTag pt
 	on ppt.ProductTagId = pt.Id
 	where p.Id = @Id
 END

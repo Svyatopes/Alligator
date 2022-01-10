@@ -119,5 +119,21 @@ namespace Alligator.DataLayer.Repositories
                 commandType: CommandType.StoredProcedure)
                 == (int)AffectedRows.One;
         }
+
+        public bool RemoveProductTagFromProduct(int productId, int productTagId)
+        {
+            string procString = "dbo.Product_ProductTag_Delete";
+            using var connection = ProvideConnection();
+
+            return connection.Execute(procString,
+                new
+                {
+                    ProductId = productId,
+                    ProductTagId = productTagId
+                },
+                commandType: CommandType.StoredProcedure)
+                == (int)AffectedRows.One;
+        }
+
     }
 }

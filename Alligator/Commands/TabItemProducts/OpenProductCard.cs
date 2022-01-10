@@ -1,19 +1,33 @@
-﻿using Alligator.UI.ViewModels.TabItemsViewModels;
+﻿using Alligator.BusinessLayer;
+using Alligator.UI.ViewModels.TabItemsViewModels;
+using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemProducts
 {
     public class OpenProductCard : CommandBase
     {
         private readonly TabItemProductsViewModel _viewModel;
-        public OpenProductCard(TabItemProductsViewModel viewModel)
+        private readonly ProductService _productService;
+
+        public OpenProductCard(TabItemProductsViewModel viewModel, ProductService productService)
         {
             _viewModel = viewModel;
+            _productService = productService;
         }
+
         public override void Execute(object parameter)
         {
-            _viewModel.SelectedProductToShow = _viewModel.SelectedProduct.Name;
-            _viewModel.VisibilityEditProduct = System.Windows.Visibility.Visible;
-            _viewModel.VisibilityAllProducts = System.Windows.Visibility.Collapsed;
+            var productModelActionResult = _productService.GetProductById(_viewModel.SelectedProduct.Id);
+            if (!productModelActionResult.Success)
+            {
+                MessageBox.Show($"Ошибка при обращении к базе данных\r\n{productModelActionResult.ErrorMessage}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            _viewModel.ProductToEdit = new ViewModels.EntitiesViewModels.ProductViewModel(productModelActionResult.Data);
+
+            _viewModel.VisibilityEditProduct = Visibility.Visible;
+            _viewModel.VisibilityAllProducts = Visibility.Collapsed;
         }
     }
 }

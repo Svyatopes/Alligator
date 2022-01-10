@@ -2,18 +2,18 @@
 
 namespace Alligator.UI.Commands.TabItemProducts
 {
-    public class DeleteProductTagFromProductToAdd : CommandBase
+    public class DeleteProductTagFromProductToEdit : CommandBase
     {
         private readonly TabItemProductsViewModel _viewModel;
 
-        public DeleteProductTagFromProductToAdd(TabItemProductsViewModel viewModel)
+        public DeleteProductTagFromProductToEdit(TabItemProductsViewModel viewModel)
         {
             _viewModel = viewModel;
         }
 
         public override void Execute(object parameter)
         {
-            _viewModel.ProductToAdd.ProductTags.Remove(_viewModel.SelectedProductTagInProductToAdd);
+            _viewModel.ProductToEdit.ProductTags.Remove(_viewModel.SelectedProductTagToEdit);
         }
     }
 }

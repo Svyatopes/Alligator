@@ -48,8 +48,8 @@
 
             <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">Добавить продукт</Label>
             <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -64,7 +64,7 @@
                 <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Продукт</TextBlock>
                 <TextBox Text="{Binding ProductToAdd.Name}"  Grid.Column="1" Margin="5,0,0,10" Grid.Row="0"></TextBox>
                 <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Категория</TextBlock>
-                <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCategoryAddProduct}" Background="#DACDCD"  Grid.Column="1" Margin="5,0,0,10" Grid.Row="1"></ComboBox>
+                <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductToAdd.Category}" Background="#DACDCD"  Grid.Column="1" Margin="5,0,0,10" Grid.Row="1"></ComboBox>
                 <TextBlock Background="#DACDCD"  Grid.Column="0" Grid.Row="2" Margin="0,0,0,10">Добавить тэг</TextBlock>
                 <ComboBox Grid.Row="2" Grid.Column="1" Margin="5,0,0,10" ItemsSource="{Binding ProductTags}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedProductTagToAdd}" Background="#DACDCD"></ComboBox>
                 <Button Grid.Row="3" Grid.Column="1" Command="{Binding AddProductTagToProductToAdd}">Добавить тэг</Button>
@@ -80,21 +80,21 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid >
-               
+
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                
+
                 </Grid.ColumnDefinitions>
-                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Command="{Binding Return}"  >Вернуться назад</Button>
-          
-            <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Command="{Binding AddProduct}" >Сохранить изменения</Button>
+                <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Command="{Binding Return}">Вернуться назад</Button>
+
+                <Button  Grid.Column="2" Background="#DACDCD"  Height="20" Width="210" Command="{Binding AddProduct}">Сохранить изменения</Button>
             </Grid>
 
-            
+
         </Grid>
 
         <Grid  Visibility="{Binding VisibilityEditProduct}"  VerticalAlignment="Stretch" Height="Auto" Margin="5,5,5,5">
@@ -116,15 +116,29 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
-                    <RowDefinition Height="7*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Background="#DACDCD"  Grid.Column="0" Margin="0,0,0,10" Grid.Row="0">Продукт</TextBlock>
-                <TextBlock Grid.Column="1" Background="#DACDCD" Text="{Binding SelectedProductToShow, Mode=TwoWay}"   Margin="0,0,0,10" Grid.Row="0"></TextBlock>
+                <TextBox Grid.Column="1" Text="{Binding ProductToEdit.Name, Mode=TwoWay}"   Margin="0,0,0,10" Grid.Row="0"></TextBox>
                 <TextBlock Background="#DACDCD" Grid.Column="0" Margin="0,0,0,10" Grid.Row="1">Категория</TextBlock>
-
-                <DataGrid  Background="#5F5656"  Grid.Column="2" Margin="10,0,0,-250"  AutoGenerateColumns="False" CanUserAddRows="True" >
+                <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="Name" SelectedItem="{Binding ProductToEdit.Category}" Background="#DACDCD"  Grid.Column="1" Margin="5,0,0,10" Grid.Row="1"></ComboBox>
+                
+                <TextBlock Background="#DACDCD"  Grid.Column="0" Grid.Row="2" Margin="0,0,0,10">Добавить тэг</TextBlock>
+                <ComboBox Grid.Row="2" Grid.Column="1" Margin="5,0,0,10" ItemsSource="{Binding ProductTags}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedProductTagToAddInProductToEdit}" Background="#DACDCD"></ComboBox>
+                <Button Grid.Row="3" Grid.Column="1" Command="{Binding AddProductTagToProductToEdit}">Добавить тэг</Button>
+                
+                <DataGrid  Background="#5F5656" ItemsSource="{Binding ProductToEdit.ProductTags}" SelectedItem="{Binding SelectedProductTagToEdit}"  Grid.Column="2" Margin="10,0,0,-250"  AutoGenerateColumns="False" CanUserAddRows="False" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Теги" Width="*" />
+                            <DataGridTextColumn Header="Теги" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTemplateColumn Width="100">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteProductTagFromProductToEdit}">Удалить</Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid >
 
@@ -137,12 +151,12 @@
 
                 </Grid.ColumnDefinitions>
                 <Button  Grid.Column="0" Background="#DACDCD"  Height="20" Width="210" Command="{Binding Return}"  >Вернуться назад</Button>
-                <Button  Grid.Column="1" Background="#DACDCD" Height="20" Width="210" >Удалить продукт</Button>
+                <Button  Grid.Column="2" Background="#DACDCD" Height="20" Width="210" Command="{Binding SaveChanges}">Сохранить изменения</Button>
 
             </Grid>
 
 
 
-        </Grid>        
+        </Grid>
     </Grid>
 </TabItem>

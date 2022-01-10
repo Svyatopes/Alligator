@@ -24,7 +24,10 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
         public ICommand LoadProducts { get; set; }
         
         public ICommand AddProductTagToProductToAdd { get; set; }
+        public ICommand AddProductTagToProductToEdit { get; set; }
         public ICommand DeleteProductTagFromProductToAdd { get; set; }
+        public ICommand DeleteProductTagFromProductToEdit { get; set; }
+        public ICommand SaveChanges { get; set; }
 
         public TabItemProductsViewModel()
         {
@@ -38,18 +41,55 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             ProductTags = new ObservableCollection<ProductTagModel>();
 
             LoadProducts = new LoadProducts(this, _productService, _categoryService, _productTagService);
-            OpenProductCard = new OpenProductCard(this);
+            OpenProductCard = new OpenProductCard(this, _productService);
             OpenAddProductCard = new OpenAddProductCard(this);
             Return = new Return(this);
             AddProduct = new AddProduct(this, _productService);
             DeleteProduct = new DeleteProduct(this, _productService);
             AddProductTagToProductToAdd = new AddProductTagToProductToAdd(this);
+            AddProductTagToProductToEdit = new AddProductTagToProductToEdit(this);
             DeleteProductTagFromProductToAdd = new DeleteProductTagFromProductToAdd(this);
+            DeleteProductTagFromProductToEdit = new DeleteProductTagFromProductToEdit(this);
+            SaveChanges = new SaveChanges(this, _productService);
 
             VisibilityAllProducts = Visibility.Visible;
             VisibilityAddProduct = Visibility.Collapsed;
             VisibilityEditProduct = Visibility.Collapsed;
 
+        }
+
+
+        private ProductTagModel _selectedProductTagToEdit;
+        public ProductTagModel SelectedProductTagToEdit
+        {
+            get { return _selectedProductTagToEdit; }
+            set
+            {
+                _selectedProductTagToEdit = value;
+                OnPropertyChanged(nameof(SelectedProductTagToEdit));
+            }
+        }
+
+        private ProductTagModel _selectedProductTagToAddInProductToEdit;
+        public ProductTagModel SelectedProductTagToAddInProductToEdit
+        {
+            get { return _selectedProductTagToAddInProductToEdit; }
+            set
+            {
+                _selectedProductTagToAddInProductToEdit = value;
+                OnPropertyChanged(nameof(SelectedProductTagToAddInProductToEdit));
+            }
+        }
+
+        private ProductViewModel _productToEdit;
+        public ProductViewModel ProductToEdit
+        {
+            get { return _productToEdit; }
+            set
+            {
+                _productToEdit = value;
+                OnPropertyChanged(nameof(ProductToEdit));
+            }
         }
 
 
@@ -75,18 +115,6 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             }
         }
 
-        private ProductModel _productToEdit;
-        public ProductModel ProductToEdit
-        {
-            get { return _productToEdit; }
-            set
-            {
-                _productToEdit = value;
-                OnPropertyChanged(nameof(ProductToEdit));
-            }
-        }
-
-
         private ProductViewModel _productToAdd;
         public ProductViewModel ProductToAdd
         {
@@ -95,17 +123,6 @@ namespace Alligator.UI.ViewModels.TabItemsViewModels
             {
                 _productToAdd = value;
                 OnPropertyChanged(nameof(ProductToAdd));
-            }
-        }
-
-        private CategoryModel _selectedCategoryAddProduct;
-        public CategoryModel SelectedCategoryAddProduct
-        {
-            get { return _selectedCategoryAddProduct; }
-            set
-            {
-                _selectedCategoryAddProduct = value;
-                OnPropertyChanged(nameof(SelectedCategoryAddProduct));
             }
         }
 

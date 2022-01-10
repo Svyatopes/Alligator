@@ -1,4 +1,5 @@
 ﻿using Alligator.BusinessLayer.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Alligator.UI.ViewModels.EntitiesViewModels
@@ -32,6 +33,23 @@ namespace Alligator.UI.ViewModels.EntitiesViewModels
             Name = model.Name;
             Category = model.Category;
             ProductTags = new ObservableCollection<ProductTagModel>(model.ProductTags);
+        }
+
+        public ProductModel ConvertToProductModel()
+        {
+            var productModel = new ProductModel()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Category = this.Category,
+                ProductTags = new List<ProductTagModel>()
+            };
+
+            foreach (var productTag in ProductTags)
+            {
+                productModel.ProductTags.Add(productTag);
+            }
+            return productModel;
         }
 
         public bool IsValid()
