@@ -46,8 +46,9 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.SelectedOrder.Address = address;
             _viewModel.SelectedOrder.Date = _viewModel.ChangedDate;
             _viewModel.SelectedOrder.Client = _viewModel.SelectedClient;
+            OrderModel editedOrder = new OrderModel() { Id = _viewModel.SelectedOrder.Id, Address = address, Client = _viewModel.SelectedChangeClient, Date = _viewModel.ChangedDate };
 
-            if (!_orderService.EditOrderModel(_viewModel.ChangedDate, _viewModel.SelectedOrder.Id, _viewModel.SelectedChangeClient.Id, address))
+            if (!_orderService.EditOrderModel(editedOrder))
             {
                 MessageBox.Show("Ошибка при сохранении данных", "Error", MessageBoxButton.OK);
                 return;

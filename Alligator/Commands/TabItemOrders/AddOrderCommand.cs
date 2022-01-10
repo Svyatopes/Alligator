@@ -44,10 +44,8 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
             
             if (_viewModel.NewOrder.OrderDetails is null)
-            {
-                List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
-
-                _viewModel.NewOrder.OrderDetails = orderDetails;
+            {                
+                _viewModel.NewOrder.OrderDetails = new List<OrderDetailModel>();
             }
             if (_viewModel.NewOrderDetails is null)
             {
@@ -65,33 +63,33 @@ namespace Alligator.UI.Commands.TabItemOrders
                  MessageBox.Show("Ошибка при добавлении заказа в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                  return;
            }
-           else
+           
+           
+           foreach (var orderReview in _viewModel.NewOrderReviews)
            {
-                foreach (var orderReview in _viewModel.NewOrderReviews)
-                {
-                     _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
-                }
-                foreach (var orderDetail in _viewModel.NewOrderDetails)
-                {
-                     _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
-                }
-                if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success is true)
-                {
-                     var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
-                     _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
-                     MessageBox.Show("Заказ добавлен");
-                    _viewModel.NewReviewText = string.Empty;
-                    _viewModel.NewAmount = string.Empty;
-                    _viewModel.NewAddressText = string.Empty;
-                    _viewModel.NewOrderReviews.Clear();
-                    _viewModel.NewOrderDetails.Clear();
-                    _viewModel.ComeBackFirstWindow.Execute(null);
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
-                }                  
+               _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
            }
+           foreach (var orderDetail in _viewModel.NewOrderDetails)
+           {
+                _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
+           }
+           if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success)
+           {
+                var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
+                _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
+                MessageBox.Show("Заказ добавлен");
+                _viewModel.NewReviewText = string.Empty;
+                _viewModel.NewAmount = string.Empty;
+                _viewModel.NewAddressText = string.Empty;
+                _viewModel.NewOrderReviews.Clear();
+                _viewModel.NewOrderDetails.Clear();
+                _viewModel.ComeBackFirstWindow.Execute(null);
+            }
+            else
+            {
+                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
+            }
         }
     }
 }
+

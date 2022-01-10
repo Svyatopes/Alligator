@@ -13,9 +13,9 @@ namespace Alligator.BusinessLayer
     {
         private readonly IOrderDetailRepository _repositoryOrderDetail;
 
-        public OrderDetailService(IOrderDetailRepository repositoryOrderDetail)
+        public OrderDetailService(IOrderDetailRepository fakeRepositoryOrderDetail)
         {
-            _repositoryOrderDetail = repositoryOrderDetail;
+            _repositoryOrderDetail = fakeRepositoryOrderDetail;
         }
         
         public OrderDetailService()

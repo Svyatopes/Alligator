@@ -1,5 +1,6 @@
 ﻿using Alligator.BusinessLayer.Configuration;
 using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,11 @@ namespace Alligator.BusinessLayer
         private readonly IOrderDetailRepository _repositoryOrderDetail;
         private readonly IOrderReviewRepository _repositoryOrderReview;
 
-        public OrderService(IOrderRepository repositoryOrder, IOrderDetailRepository repositoryOrderDetail, IOrderReviewRepository repositoryOrderReview)
+        public OrderService(IOrderRepository fakeRepositoryOrder, IOrderDetailRepository fakeRepositoryOrderDetail, IOrderReviewRepository fakeRepositoryOrderReview)
         {
-            _repositoryOrder = repositoryOrder;
-            _repositoryOrderDetail = repositoryOrderDetail;
-            _repositoryOrderReview = repositoryOrderReview;
+            _repositoryOrder = fakeRepositoryOrder;
+            _repositoryOrderDetail = fakeRepositoryOrderDetail;
+            _repositoryOrderReview = fakeRepositoryOrderReview;
         }
 
         public OrderService()
@@ -95,11 +96,12 @@ namespace Alligator.BusinessLayer
             }
         }
 
-        public bool EditOrderModel(DateTime date, int orderId, int clientId, string address)
+        public bool EditOrderModel(OrderModel editedOrder)
         {
+            var order = CustomMapper.GetInstance().Map<Order>(editedOrder);
             try
             {
-              _repositoryOrder.EditOrder(date, orderId, clientId, address);
+              _repositoryOrder.EditOrder(order);
                 return true;
             }
             catch

@@ -27,7 +27,7 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.NewDate = DateTime.Now;
             _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAddressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
             _viewModel.Clients.Clear();
-            if (_clientService.GetAllClients().Success is true)
+            if (_clientService.GetAllClients().Success)
             {
                 var clients = _clientService.GetAllClients().Data;
                 foreach (var client in clients)

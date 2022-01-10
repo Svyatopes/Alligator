@@ -26,7 +26,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         {
 
             _viewModel.AllOrders.Clear();
-            if (_orderService.GetOrders().Success is true)
+            if (_orderService.GetOrders().Success)
             {
                 var orders = _orderService.GetOrders().Data;
                 foreach (var order in orders)

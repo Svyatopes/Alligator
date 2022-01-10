@@ -76,12 +76,12 @@ namespace Alligator.DataLayer.Repositories
             commandType: CommandType.StoredProcedure);
         }
 
-        public void EditOrder(DateTime date, int orderId, int clientId, string address)
+        public void EditOrder(Order editedOrder)
         {
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
-            new { date, Id=orderId, clientId, address },
+            new { Date=editedOrder.Date, Id= editedOrder.Id, ClientId=editedOrder.Client.Id, editedOrder.Address },
             commandType: CommandType.StoredProcedure);
         }
 

@@ -8,7 +8,7 @@ namespace Alligator.DataLayer.Repositories
     {
         int AddOrder(DateTime date, int clientId, string address);
         void DeleteOrder(int id);
-        void EditOrder(DateTime date, int orderId, int clientId, string address);
+        void EditOrder(Order order);
         List<Order> GetAllOrders();
         Order GetOrderById(int id);
         List<Order> GetOrdersByClientId(int id);
