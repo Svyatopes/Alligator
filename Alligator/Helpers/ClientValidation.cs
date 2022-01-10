@@ -1,4 +1,4 @@
-﻿using Alligator.BusinessLayer.Models;
+﻿using Alligator.BusinessLayer;
 
 namespace Alligator.UI.Helpers
 {

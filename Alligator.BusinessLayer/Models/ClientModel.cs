@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Alligator.BusinessLayer.Models;
+using System.Collections.Generic;
 
 namespace Alligator.BusinessLayer
 {
