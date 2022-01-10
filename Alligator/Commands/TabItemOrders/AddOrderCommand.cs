@@ -60,28 +60,33 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
 
            int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);             
-            if (orderId == -1)
-            {
-                MessageBox.Show("Ошибка при добавлении клиента в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            foreach (var orderReview in _viewModel.NewOrderReviews)
-            {
-                _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
-            }
-            foreach (var orderDetail in _viewModel.NewOrderDetails)
-            {
-                _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
-            }
-            if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success is true)
-            {
-                var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
-                _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
-            }
-            else
-            {
-                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
-            }
+           if (orderId == -1)
+           {
+                 MessageBox.Show("Ошибка при добавлении заказа в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                 return;
+           }
+           else
+           {
+                foreach (var orderReview in _viewModel.NewOrderReviews)
+                {
+                     _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
+                }
+                foreach (var orderDetail in _viewModel.NewOrderDetails)
+                {
+                     _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
+                }
+                if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success is true)
+                {
+                     var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
+                     _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
+                     MessageBox.Show("Заказ добавлен");
+                    _viewModel.ComeBackFirstWindow.Execute(null);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
+                }                  
+           }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
@@ -30,10 +31,14 @@ namespace Alligator.UI.Commands.TabItemOrders
 
         public override void Execute(object parameter)
         {
-            _orderReviewService.DeleteOrderReviewModelByOrderId(_viewModel.SelectedOrder.Id);
-            _orderDetailService.DeleteOrderDetailModelByOrderId(_viewModel.SelectedOrder.Id);
-            _orderService.DeleteOrderModel(_viewModel.SelectedOrder.Id);
-            _viewModel.AllOrders.Remove(_viewModel.SelectedOrder);
+            var userAnswer = MessageBox.Show("Удалить заказ?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (userAnswer == MessageBoxResult.Yes)
+            {
+                _orderReviewService.DeleteOrderReviewModelByOrderId(_viewModel.SelectedOrder.Id);
+                _orderDetailService.DeleteOrderDetailModelByOrderId(_viewModel.SelectedOrder.Id);
+                _orderService.DeleteOrderModel(_viewModel.SelectedOrder.Id);
+                _viewModel.AllOrders.Remove(_viewModel.SelectedOrder);
+            }
         }
     }
 }
