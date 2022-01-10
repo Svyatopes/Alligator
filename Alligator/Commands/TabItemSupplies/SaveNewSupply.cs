@@ -24,11 +24,6 @@ namespace Alligator.UI.Commands.TabItemSupplies
         public override void Execute(object parameter)
         {
 
-            if (_viewModel.Supplies == null)
-            {
-                _viewModel.Supplies = new ObservableCollection<SupplyModel>();                
-            }
-            
             var userAnswer = MessageBox.Show("Данные введены верно? Сохранить поставку?", "Сохранение", MessageBoxButton.YesNo, MessageBoxImage.Question);
             
             if (userAnswer == MessageBoxResult.Yes)
@@ -39,18 +34,8 @@ namespace Alligator.UI.Commands.TabItemSupplies
                 if (idSupplyInDatabase == -1)
                 {
                     MessageBox.Show("Ошибка при добавлении поставки в БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                foreach (var item in _viewModel.Supply.Details)
-                {
-                    item.SupplyId = idSupplyInDatabase;
-                    var idSupplyDetailInDatabase = _supplyDetailService.InsertSupplyDetail(item);
-                    if (idSupplyDetailInDatabase == -1)
-                    {
-                        MessageBox.Show("Ошибка при добавлении деталей поставки в БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
+                }                
 
-                }                 
-                
                 if (!_supplyService.UpdateSupply(_viewModel.Supply))
                 { 
                     MessageBox.Show("Ошибка при подключении к БД. Попробуйте позже.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

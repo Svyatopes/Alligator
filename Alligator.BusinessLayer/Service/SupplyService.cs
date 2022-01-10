@@ -2,6 +2,7 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
+using System;
 using System.Collections.Generic;
 
 
@@ -10,9 +11,12 @@ namespace Alligator.BusinessLayer.Service
     public class SupplyService : ISupplyService
     {
         private readonly ISupplyRepository _supplyRepository;
+        private readonly ISupplyDetailRepository _supplyDetailRepository;
+        
         public SupplyService()
         {
-            _supplyRepository = new SupplyRepository();
+            _supplyRepository = new SupplyRepository();           
+            _supplyDetailRepository = new SupplyDetailRepository();
 
         }
         public SupplyService(ISupplyRepository fakeSupplyRepository)
@@ -78,9 +82,32 @@ namespace Alligator.BusinessLayer.Service
         public int InsertSupply(SupplyModel supply)
         {
             var supplyModel = CustomMapper.GetInstance().Map<Supply>(supply);
+            
             try
             {
-                return _supplyRepository.AddSupply(supplyModel);
+                var idSupplyInDatabase =  _supplyRepository.AddSupply(supplyModel);
+                foreach (var item in supply.Details)
+                {
+                                        
+                    item.SupplyId = idSupplyInDatabase;
+                    SupplyDetail sd = new SupplyDetail()
+                    {
+                        Product = new Product()
+                        {
+                            Id = item.Product.Id,
+                            Name = item.Product.Name
+                        },
+                        Amount = item.Amount,
+                        SupplyId = idSupplyInDatabase
+                    };
+                    var idSupplyDetailInDatabase = _supplyDetailRepository.AddSupplyDetail(sd);
+                    if (idSupplyDetailInDatabase == -1)
+                    {
+                        throw new Exception("Ошибка при добавлении деталей поставки в БД. Попробуйте позже.");
+                    }
+                }              
+                
+            return idSupplyInDatabase;
             }
             catch
             {
