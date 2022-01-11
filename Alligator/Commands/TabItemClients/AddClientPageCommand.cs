@@ -1,7 +1,5 @@
-﻿using Alligator.BusinessLayer.Models;
-using Alligator.BusinessLayer.Services;
+﻿using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients

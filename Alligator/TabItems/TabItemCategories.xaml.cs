@@ -1,5 +1,4 @@
-﻿using Alligator.UI.ViewModels.TabItemsViewModels;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Alligator.UI.TabItems
 {

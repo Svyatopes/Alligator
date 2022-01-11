@@ -1,15 +1,13 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.Helpers;
 using Alligator.UI.ViewModels.TabItemsViewModels;
-using System.Collections.Generic;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemProducts
 {
     class AddProduct : CommandBase
     {
-        private TabItemProductsViewModel _viewModel;
+        private readonly TabItemProductsViewModel _viewModel;
         private readonly ProductService _productService;
         public AddProduct(TabItemProductsViewModel viewModel, ProductService productService)
         {
@@ -43,7 +41,7 @@ namespace Alligator.UI.Commands.TabItemProducts
             }
 
             _viewModel.Products.Add(productModelActionResult.Data);
-            
+
             _viewModel.VisibilityAddProduct = Visibility.Collapsed;
             _viewModel.VisibilityAllProducts = Visibility.Visible;
         }

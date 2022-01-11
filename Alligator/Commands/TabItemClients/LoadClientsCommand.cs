@@ -18,19 +18,19 @@ namespace Alligator.UI.Commands.TabItemClients
         public override void Execute(object parameter)
         {
             _viewModel.Clients.Clear();
-            if(_clientService.GetAllClients().Success is true)
+            if (_clientService.GetAllClients().Success is true)
             {
                 var clients = _clientService.GetAllClients().Data;
                 foreach (var client in clients)
-                _viewModel.Clients.Add(client);
+                    _viewModel.Clients.Add(client);
             }
             else
             {
                 MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }
-           
-           
-            
+
+
+
         }
 
     }

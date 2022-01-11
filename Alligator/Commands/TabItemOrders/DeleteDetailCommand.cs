@@ -1,18 +1,13 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     class DeleteDetailCommand : CommandBase
     {
 
-        private TabItemOrdersViewModel _viewModel;
-        private OrderDetailService _orderDetailService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderDetailService _orderDetailService;
 
 
         public DeleteDetailCommand(TabItemOrdersViewModel viewModel, OrderDetailService orderDetailService)

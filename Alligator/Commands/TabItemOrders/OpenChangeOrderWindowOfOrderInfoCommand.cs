@@ -1,36 +1,29 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class OpenChangeOrderWindowOfOrderInfoCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;      
-        private OrderDetailService _orderDetailService;
-        private ClientService _clientService;
-        private ProductService _productService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderDetailService _orderDetailService;
+        private readonly ClientService _clientService;
+        private readonly ProductService _productService;
 
 
-        public OpenChangeOrderWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel,  OrderDetailService orderDetailService, ClientService clientService, ProductService productService)
+        public OpenChangeOrderWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderDetailService orderDetailService, ClientService clientService, ProductService productService)
         {
-            _viewModel = viewModel;           
+            _viewModel = viewModel;
             _orderDetailService = orderDetailService;
             _clientService = clientService;
             _productService = productService;
-           
-    }
+
+        }
 
         public override void Execute(object parameter)
-        {           
+        {
             _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
             _viewModel.ChangeOrderWindowVisibility = Visibility.Visible;

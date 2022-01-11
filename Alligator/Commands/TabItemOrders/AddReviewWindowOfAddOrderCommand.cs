@@ -1,19 +1,14 @@
-﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
+﻿using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class AddReviewWindowOfAddOrderCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;       
+        private readonly TabItemOrdersViewModel _viewModel;
 
         public AddReviewWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
         {
@@ -29,7 +24,7 @@ namespace Alligator.UI.Commands.TabItemOrders
                 MessageBox.Show("Введите текст отзыва");
                 return;
             }
-            
+
             if (_viewModel.NewOrder.OrderReviews is null)
             {
                 List<OrderReviewModel> orderReviews = new List<OrderReviewModel>();
@@ -38,15 +33,15 @@ namespace Alligator.UI.Commands.TabItemOrders
             }
             if (_viewModel.NewOrderReviews is null)
             {
-               
+
                 _viewModel.NewOrderReviews = new ObservableCollection<OrderReviewModel>();
 
             }
 
-            var newOrderReview = new OrderReviewModel() { Order=_viewModel.NewOrder, Text = newReview };
+            var newOrderReview = new OrderReviewModel() { Order = _viewModel.NewOrder, Text = newReview };
             _viewModel.NewOrder.OrderReviews.Add(newOrderReview);
-            _viewModel.NewOrderReviews.Add(newOrderReview);          
+            _viewModel.NewOrderReviews.Add(newOrderReview);
             _viewModel.NewReviewText = string.Empty;
         }
-    }    
+    }
 }

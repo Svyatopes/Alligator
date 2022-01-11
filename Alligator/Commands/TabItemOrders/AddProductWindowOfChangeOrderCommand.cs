@@ -4,17 +4,14 @@ using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     class AddProductWindowOfChangeOrderCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private OrderDetailService _orderDetailService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderDetailService _orderDetailService;
         public AddProductWindowOfChangeOrderCommand(TabItemOrdersViewModel viewModel, OrderDetailService orderDetailService)
         {
             _viewModel = viewModel;
@@ -52,7 +49,7 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.OrderDetails.Add(orderDetail);
             _orderDetailService.AddOrderDetailModel(amount, _viewModel.SelectedOrder.Id, _viewModel.SelectedProduct.Id);
         }
-    } 
-    
     }
+
+}
 

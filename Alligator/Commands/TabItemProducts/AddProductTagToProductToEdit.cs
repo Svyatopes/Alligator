@@ -1,6 +1,4 @@
 ﻿using Alligator.UI.ViewModels.TabItemsViewModels;
-using System;
-using System.Linq;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemProducts

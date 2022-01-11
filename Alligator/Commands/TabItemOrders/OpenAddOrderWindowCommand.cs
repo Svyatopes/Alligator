@@ -3,19 +3,15 @@ using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class OpenAddOrderWindowCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private ClientService _clientService;
-        private ProductService _productService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly ClientService _clientService;
+        private readonly ProductService _productService;
 
         public OpenAddOrderWindowCommand(TabItemOrdersViewModel viewModel, ClientService clientService, ProductService productService)
         {
@@ -55,7 +51,7 @@ namespace Alligator.UI.Commands.TabItemOrders
             _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
             _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
-            _viewModel.AddOrderWindowVisibility = Visibility.Visible;         
+            _viewModel.AddOrderWindowVisibility = Visibility.Visible;
         }
     }
 }

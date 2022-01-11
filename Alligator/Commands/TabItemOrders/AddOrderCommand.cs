@@ -1,22 +1,15 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class AddOrderCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private OrderService _orderService;
-        private OrderReviewService _orderReviewService;
-        private OrderDetailService _orderDetailService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderService _orderService;
+        private readonly OrderReviewService _orderReviewService;
+        private readonly OrderDetailService _orderDetailService;
 
         public AddOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderReviewService orderReviewService
         , OrderDetailService orderDetailService)
@@ -53,7 +46,7 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _orderDetailService.AddOrderDetailModels(_viewModel.NewOrderDetails, orderId);
                 _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data);
                 MessageBox.Show("Заказ создан");
-                _viewModel.NewAmount = string.Empty;               
+                _viewModel.NewAmount = string.Empty;
                 _viewModel.ComeBackFirstWindow.Execute(null);
             }
         }

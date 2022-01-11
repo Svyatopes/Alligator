@@ -1,12 +1,6 @@
-﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Services;
+﻿using Alligator.BusinessLayer.Services;
 using Alligator.UI.Helpers;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
@@ -39,7 +33,7 @@ namespace Alligator.UI.Commands.TabItemClients
             {
                 _viewModel.Clients.Add(item);
             }
-           
+
             _viewModel.AllClients = Visibility.Visible;
             _viewModel.ClientCardVisibility = Visibility.Collapsed;
             _viewModel.SelectedClient = _viewModel.EditableClient;

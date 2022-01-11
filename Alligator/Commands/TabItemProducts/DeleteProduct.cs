@@ -21,7 +21,7 @@ namespace Alligator.UI.Commands.TabItemProducts
             if (userAnswer == MessageBoxResult.Yes)
             {
                 var deleted = _productService.DeleteProduct(_viewModel.SelectedProduct);
-                if(!deleted)
+                if (!deleted)
                 {
                     MessageBox.Show("Ошибка при записи в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;

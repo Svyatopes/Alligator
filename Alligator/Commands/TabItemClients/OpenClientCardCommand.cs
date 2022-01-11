@@ -2,23 +2,18 @@
 using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
     public class OpenClientCardCommand : CommandBase
     {
-        private TabItemClientsViewModel _viewModel;
-        private ClientService _clientService;
-        private CommentService _commentService;
-        private OrderService _orderService;
-        public OpenClientCardCommand(TabItemClientsViewModel viewModel,ClientService clientService, CommentService commentService, OrderService orderService)
+        private readonly TabItemClientsViewModel _viewModel;
+        private readonly ClientService _clientService;
+        private readonly CommentService _commentService;
+        private readonly OrderService _orderService;
+        public OpenClientCardCommand(TabItemClientsViewModel viewModel, ClientService clientService, CommentService commentService, OrderService orderService)
         {
             _viewModel = viewModel;
             _clientService = clientService;
@@ -28,7 +23,7 @@ namespace Alligator.UI.Commands.TabItemClients
 
         public override bool CanExecute(object parameter)
         {
-            return _viewModel.SelectedClient is not  null;
+            return _viewModel.SelectedClient is not null;
         }
 
         public override void Execute(object parameter)

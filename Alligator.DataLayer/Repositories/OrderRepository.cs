@@ -3,10 +3,7 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
@@ -52,7 +49,7 @@ namespace Alligator.DataLayer.Repositories
                 order.Client = client;
                 return order;
             },
-            new { ClientId=id },
+            new { ClientId = id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             Distinct().ToList();
@@ -64,7 +61,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Insert";
             return connection.QueryFirstOrDefault<int>(procString,
-            new { date,clientId, address },
+            new { date, clientId, address },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -73,7 +70,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Delete";
             connection.Execute(procString,
-            new {id },
+            new { id },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -82,7 +79,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
-            new { Date=editedOrder.Date, Id= editedOrder.Id, ClientId=editedOrder.Client.Id, editedOrder.Address },
+            new { Date = editedOrder.Date, Id = editedOrder.Id, ClientId = editedOrder.Client.Id, editedOrder.Address },
             commandType: CommandType.StoredProcedure);
         }
         public void DeleteOrdersByClientId(int clientId)

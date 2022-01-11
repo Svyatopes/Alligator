@@ -41,11 +41,11 @@ namespace Alligator.UI.Commands.TabItemClients
                 {
                     if (_orderService.DeleteOrdersByClientId(_viewModel.SelectedClient.Id) is false)
                     {
-                          MessageBox.Show("VIP клиент", "Невозможно удалить", MessageBoxButton.OK);
-                          return;
+                        MessageBox.Show("VIP клиент", "Невозможно удалить", MessageBoxButton.OK);
+                        return;
                     }
-                    if (_commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id) )
-                        
+                    if (_commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id))
+
                     {
                         _clientService.DeleteClient(_viewModel.SelectedClient);
                         _viewModel.Clients.Remove(_viewModel.SelectedClient);

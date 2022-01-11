@@ -1,17 +1,11 @@
-﻿using Alligator.BusinessLayer;
-using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alligator.UI.VIewModels.TabItemsViewModels;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class DeleteReviewWindowOfAddOrderCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-       
+        private readonly TabItemOrdersViewModel _viewModel;
+
         public DeleteReviewWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
         {
             _viewModel = viewModel;
@@ -25,5 +19,5 @@ namespace Alligator.UI.Commands.TabItemOrders
         {
             _viewModel.NewOrderReviews.Remove(_viewModel.SelectedNewOrderReview);
         }
-    }   
+    }
 }

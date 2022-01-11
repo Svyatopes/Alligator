@@ -1,21 +1,16 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.BusinessLayer.Models;
-using Alligator.DataLayer.Entities;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-   internal class AddReviewWindowOfOrderInfoCommand : CommandBase
+    internal class AddReviewWindowOfOrderInfoCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private OrderReviewService _orderReviewService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderReviewService _orderReviewService;
 
         public AddReviewWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderReviewService orderReviewService)
         {
@@ -32,14 +27,14 @@ namespace Alligator.UI.Commands.TabItemOrders
                 MessageBox.Show("Введите текст отзыва");
                 return;
             }
-            
+
             if (_viewModel.SelectedOrder.OrderReviews is null)
             {
                 List<OrderReviewModel> orderReviews = new List<OrderReviewModel>();
-                
-                _viewModel.SelectedOrder.OrderReviews=orderReviews;
+
+                _viewModel.SelectedOrder.OrderReviews = orderReviews;
             }
-            
+
             if (_viewModel.OrderReviews is null)
             {
                 ObservableCollection<OrderReviewModel> orderReviews = new ObservableCollection<OrderReviewModel>();
@@ -47,9 +42,9 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _viewModel.OrderReviews = orderReviews;
             }
 
-            var newOrderReview = new OrderReviewModel() {Order=_viewModel.SelectedOrder, Text=newReview };
+            var newOrderReview = new OrderReviewModel() { Order = _viewModel.SelectedOrder, Text = newReview };
             _viewModel.OrderReviews.Add(newOrderReview);
-            _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrder.Id);           
+            _orderReviewService.AddOrderReviewModel(newReview, _viewModel.SelectedOrder.Id);
             _viewModel.NewReviewText = string.Empty;
         }
     }

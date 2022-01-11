@@ -1,10 +1,5 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
@@ -12,10 +7,10 @@ namespace Alligator.UI.Commands.TabItemOrders
     public class DeleteOrderCommand : CommandBase
     {
 
-        private TabItemOrdersViewModel _viewModel;
-        private OrderService _orderService;
-        private OrderDetailService _orderDetailService;
-        private OrderReviewService _orderReviewService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderService _orderService;
+        private readonly OrderDetailService _orderDetailService;
+        private readonly OrderReviewService _orderReviewService;
 
         public DeleteOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderDetailService orderDetailService, OrderReviewService orderReviewService)
         {

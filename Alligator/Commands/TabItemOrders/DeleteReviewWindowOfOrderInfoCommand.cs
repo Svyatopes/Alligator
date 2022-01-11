@@ -1,17 +1,12 @@
 ﻿using Alligator.BusinessLayer;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class DeleteReviewWindowOfOrderInfoCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private OrderReviewService _orderReviewService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderReviewService _orderReviewService;
 
         public DeleteReviewWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderReviewService orderReviewService)
         {
