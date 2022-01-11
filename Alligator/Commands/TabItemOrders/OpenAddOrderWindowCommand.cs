@@ -15,34 +15,43 @@ namespace Alligator.UI.Commands.TabItemOrders
     {
         private TabItemOrdersViewModel _viewModel;
         private ClientService _clientService;
-        //private ProductService _productService;
+        private ProductService _productService;
 
-        public OpenAddOrderWindowCommand(TabItemOrdersViewModel viewModel, ClientService clientService)
+        public OpenAddOrderWindowCommand(TabItemOrdersViewModel viewModel, ClientService clientService, ProductService productService)
         {
             _viewModel = viewModel;
             _clientService = clientService;
+            _productService = productService;
         }
 
         public override void Execute(object parameter)
         {
             _viewModel.NewDate = DateTime.Now;
+            _viewModel.NewAmount = string.Empty;
+            _viewModel.NewAddressText = string.Empty;
+            _viewModel.NewOrderReviews.Clear();
+            _viewModel.NewOrderDetails.Clear();
             _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAddressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
             _viewModel.Clients.Clear();
-            if (_clientService.GetAllClients().Success)
+            var clientsActionResult = _clientService.GetAllClients();
+            if (clientsActionResult.Success)
             {
-                var clients = _clientService.GetAllClients().Data;
-                foreach (var client in clients)
+                foreach (var client in clientsActionResult.Data)
                     _viewModel.Clients.Add(client);
             }
             else
             {
                 MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
             }
-            //пока нет productServic'а
-            //foreach (var product in _productService.GetAllProducts())
-            //{
-            //    _viewModel.Products.Add(product);
-            //}
+            _viewModel.Products.Clear();
+            var productsActionResult = _productService.GetAllProducts();
+            if (productsActionResult.Success)
+            {
+                foreach (var product in productsActionResult.Data)
+                {
+                    _viewModel.Products.Add(product);
+                }
+            }
             _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
             _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
             _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;

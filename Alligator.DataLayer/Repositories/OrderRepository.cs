@@ -52,7 +52,7 @@ namespace Alligator.DataLayer.Repositories
                 order.Client = client;
                 return order;
             },
-            new { id },
+            new { ClientId=id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             Distinct().ToList();

@@ -48,12 +48,12 @@ namespace Alligator.BusinessLayer
             _repositoryOrderDetail.AddOrderDetail(amount, orderId, productId);
         }
 
-        public void AddOrderDetailModels(ObservableCollection<OrderDetailModel> orderDetails)
+        public void AddOrderDetailModels(ObservableCollection<OrderDetailModel> orderDetails, int orderId)
         {
             var newOrderDetails = CustomMapper.GetInstance().Map<List<OrderDetailModel>>(orderDetails);
             foreach (var orderDetail in newOrderDetails)
             {
-                _repositoryOrderDetail.AddOrderDetail(orderDetail.Amount, orderDetail.Order.Id, orderDetail.Product.Id);
+                _repositoryOrderDetail.AddOrderDetail(orderDetail.Amount, orderId, orderDetail.Product.Id);
             }
         }
 

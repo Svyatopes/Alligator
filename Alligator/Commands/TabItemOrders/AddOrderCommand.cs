@@ -28,7 +28,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         }
 
         public override void Execute(object parameter)
-        {            
+        {
             var newAddress = _viewModel.NewAddressText;
             if (string.IsNullOrEmpty(newAddress))
             {
@@ -36,53 +36,26 @@ namespace Alligator.UI.Commands.TabItemOrders
                 _viewModel.NewAddressText = string.Empty;
             }
             newAddress = _viewModel.NewAddressText.Trim();
-            
             if (_viewModel.SelectedClient is null)
             {
                 MessageBox.Show("Выберите клиента");
                 return;
             }
-            
-            if (_viewModel.NewOrder.OrderDetails is null)
-            {                
-                _viewModel.NewOrder.OrderDetails = new List<OrderDetailModel>();
-            }
-            if (_viewModel.NewOrderDetails is null)
-            {
-                _viewModel.NewOrderDetails = new ObservableCollection<OrderDetailModel>();
-            }
-            if (_viewModel.NewOrder.OrderDetails.Count==0)
+            if (_viewModel.NewOrder.OrderDetails.Count == 0)
             {
                 MessageBox.Show("Выберите продукты и их количество");
                 return;
             }
-
-           int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);             
-           if (orderId == -1)
-           {
-                 MessageBox.Show("Ошибка при добавлении заказа в базу данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                 return;
-           }                     
-               _orderReviewService.AddOrderReviewModels(_viewModel.NewOrderReviews);        
-               _orderDetailService.AddOrderDetailModels(_viewModel.NewOrderDetails);
-           
-           if (_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Success)
-           {
-                var ordersWithDetailsAndReviews = _orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data;
-                _viewModel.AllOrders.Add(ordersWithDetailsAndReviews);
-                MessageBox.Show("Заказ добавлен");
-                _viewModel.NewReviewText = string.Empty;
-                _viewModel.NewAmount = string.Empty;
-                _viewModel.NewAddressText = string.Empty;
-                _viewModel.NewOrderReviews.Clear();
-                _viewModel.NewOrderDetails.Clear();
-                _viewModel.ComeBackFirstWindow.Execute(null);
-            }
-            else
+            int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);
+            if (orderId != -1)
             {
-                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
+                _orderReviewService.AddOrderReviewModels(_viewModel.NewOrderReviews, orderId);
+                _orderDetailService.AddOrderDetailModels(_viewModel.NewOrderDetails, orderId);
+                _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data);
+                MessageBox.Show("Заказ создан");
+                _viewModel.NewAmount = string.Empty;               
+                _viewModel.ComeBackFirstWindow.Execute(null);
             }
         }
     }
 }
-

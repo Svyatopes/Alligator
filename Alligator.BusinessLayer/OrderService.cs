@@ -110,6 +110,18 @@ namespace Alligator.BusinessLayer
                 return false;
             }
         }
-              
+        public bool DeleteOrdersByClientId(int clientId)
+        {
+            try
+            {
+                _repositoryOrder.DeleteOrdersByClientId(clientId);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }

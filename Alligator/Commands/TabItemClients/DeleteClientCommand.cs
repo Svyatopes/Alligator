@@ -39,14 +39,14 @@ namespace Alligator.UI.Commands.TabItemClients
                 var userAnswer = MessageBox.Show("Вы правда хотите удалить этого клиента?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (userAnswer == MessageBoxResult.Yes)
                 {
+                    if (_orderService.DeleteOrdersByClientId(_viewModel.SelectedClient.Id) is false)
+                    {
+                          MessageBox.Show("VIP клиент", "Невозможно удалить", MessageBoxButton.OK);
+                          return;
+                    }
                     if (_commentService.DeleteCommentsByClientId(_viewModel.SelectedClient.Id) )
                         
                     {
-                        if (_orderService.DeleteOrdersByClientId(_viewModel.SelectedClient.Id) is false)
-                        {
-                            MessageBox.Show("VIP клиент", "Невозможно удалить", MessageBoxButton.OK);
-                            return;
-                        }
                         _clientService.DeleteClient(_viewModel.SelectedClient);
                         _viewModel.Clients.Remove(_viewModel.SelectedClient);
                     }

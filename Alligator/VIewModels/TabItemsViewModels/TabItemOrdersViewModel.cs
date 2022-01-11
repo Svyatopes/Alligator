@@ -29,6 +29,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private readonly OrderReviewService _orderReviewService;
         private readonly OrderDetailService _orderDetailService;
         private readonly ClientService _clientService;
+        private readonly ProductService _productService;
         private string _newReviewText;
         private string _newAdressText;
         private string _changedAddressText;
@@ -58,6 +59,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
+            _productService = new ProductService();
 
             AllOrders = new ObservableCollection<OrderModel>();
             Clients = new ObservableCollection<ClientModel>();
@@ -71,8 +73,8 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             GetOrders = new GetOrdersCommand(this, _orderService);
             DeleteOrder = new DeleteOrderCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _orderReviewService, _orderDetailService);
-            ChangeOrderWindowOfOrderInfo = new OpenChangeOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService, _clientService);
-            OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService);
+            ChangeOrderWindowOfOrderInfo = new OpenChangeOrderWindowOfOrderInfoCommand(this,  _orderDetailService, _clientService, _productService);
+            OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService, _productService);
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
             ComeBackFirstWindow = new ComeBackFirstWindowCommand(this, _orderService);
             AddReviewWindowOfAddOrder = new AddReviewWindowOfAddOrderCommand(this);

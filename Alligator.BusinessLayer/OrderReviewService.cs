@@ -42,12 +42,12 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview.AddOrderReview(text, orderId);
         }
 
-        public void AddOrderReviewModels(ObservableCollection<OrderReviewModel> orderReviews)
+        public void AddOrderReviewModels(ObservableCollection<OrderReviewModel> orderReviews, int orderId)
         {
             var newOrderReviews = CustomMapper.GetInstance().Map<List<OrderReviewModel>>(orderReviews);
             foreach (var orderReview in newOrderReviews)
             {
-                _repositoryOrderReview.AddOrderReview(orderReview.Text, orderReview.Order.Id);
+                _repositoryOrderReview.AddOrderReview(orderReview.Text, orderId);
             }
         }
 

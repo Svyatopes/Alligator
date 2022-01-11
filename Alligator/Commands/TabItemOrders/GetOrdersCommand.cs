@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
@@ -26,15 +25,9 @@ namespace Alligator.UI.Commands.TabItemOrders
         {
 
             _viewModel.AllOrders.Clear();
-            if (_orderService.GetOrders().Success)
+            foreach (var order in _orderService.GetOrders().Data)
             {
-                var orders = _orderService.GetOrders().Data;
-                foreach (var order in orders)
-                    _viewModel.AllOrders.Add(order);
-            }
-            else
-            {
-                MessageBox.Show("Ошибка", "Error", MessageBoxButton.OK);
+                _viewModel.AllOrders.Add(order);
             }
 
         }
