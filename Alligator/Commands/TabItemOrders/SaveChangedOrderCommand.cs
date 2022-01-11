@@ -1,0 +1,67 @@
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
+using Alligator.UI.VIewModels.TabItemsViewModels;
+using System.Collections.ObjectModel;
+using System.Windows;
+
+namespace Alligator.UI.Commands.TabItemOrders
+{
+    class SaveChangedOrderCommand : CommandBase
+    {
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderService _orderService;
+
+        public SaveChangedOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService)
+        {
+            _viewModel = viewModel;
+            _orderService = orderService;
+        }
+
+        public override void Execute(object parameter)
+        {
+            var address = _viewModel.ChangedAddressText;
+            if (string.IsNullOrEmpty(address))
+            {
+                MessageBox.Show("Введите адрес");
+                _viewModel.NewAddressText = string.Empty;
+            }
+            address = _viewModel.ChangedAddressText.Trim();
+
+            if (_viewModel.SelectedChangeClient is null)
+            {
+                MessageBox.Show("Выберите клиента");
+                return;
+            }
+
+            if (_viewModel.SelectedOrder.OrderDetails.Count == 0)
+            {
+                MessageBox.Show("Выберите продукты и их количество");
+                return;
+            }
+            _viewModel.SelectedOrder.Address = address;
+            _viewModel.SelectedOrder.Date = _viewModel.ChangedDate;
+            _viewModel.SelectedOrder.Client = _viewModel.SelectedClient;
+            OrderModel editedOrder = new OrderModel() { Id = _viewModel.SelectedOrder.Id, Address = address, Client = _viewModel.SelectedChangeClient, Date = _viewModel.ChangedDate };
+
+            if (!_orderService.EditOrderModel(editedOrder))
+            {
+                MessageBox.Show("Ошибка при сохранении данных", "Error", MessageBoxButton.OK);
+                return;
+            }
+            else
+            {
+                var order = _orderService.GetOrderByIdWithDetailsAndReviews(_viewModel.SelectedOrder.Id).Data;
+                _viewModel.OrderReviews = new ObservableCollection<OrderReviewModel>(order.OrderReviews);
+                _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>(order.OrderDetails);
+                _viewModel.SelectedOrderDate = _viewModel.SelectedOrder.Date;
+                _viewModel.SelectedOrderAddress = _viewModel.SelectedOrder.Address;
+                _viewModel.SelectedOrderClient = _viewModel.SelectedOrder.Client;
+                MessageBox.Show("Данные заказа изменены");
+            }
+            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.OrdersInfoWindowVisibility = Visibility.Visible;
+            _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
+        }
+    }
+}

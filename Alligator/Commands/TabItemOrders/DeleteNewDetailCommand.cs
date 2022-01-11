@@ -2,22 +2,22 @@
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class DeleteReviewWindowOfAddOrderCommand : CommandBase
+    public class DeleteNewDetailCommand : CommandBase
     {
         private readonly TabItemOrdersViewModel _viewModel;
 
-        public DeleteReviewWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
+        public DeleteNewDetailCommand(TabItemOrdersViewModel viewModel)
         {
             _viewModel = viewModel;
         }
 
         public override bool CanExecute(object parameter)
         {
-            return _viewModel.SelectedNewOrderReview is not null;
+            return _viewModel.SelectedNewOrderDetail is not null;
         }
         public override void Execute(object parameter)
         {
-            _viewModel.NewOrderReviews.Remove(_viewModel.SelectedNewOrderReview);
+            _viewModel.NewOrderDetails.Remove(_viewModel.SelectedNewOrderDetail);
         }
     }
 }

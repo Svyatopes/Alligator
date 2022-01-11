@@ -1,22 +1,15 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
     public class AddOrderCommand : CommandBase
     {
-        private TabItemOrdersViewModel _viewModel;
-        private OrderService _orderService;
-        private OrderReviewService _orderReviewService;
-        private OrderDetailService _orderDetailService;
+        private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderService _orderService;
+        private readonly OrderReviewService _orderReviewService;
+        private readonly OrderDetailService _orderDetailService;
 
         public AddOrderCommand(TabItemOrdersViewModel viewModel, OrderService orderService, OrderReviewService orderReviewService
         , OrderDetailService orderDetailService)
@@ -28,7 +21,7 @@ namespace Alligator.UI.Commands.TabItemOrders
         }
 
         public override void Execute(object parameter)
-        {            
+        {
             var newAddress = _viewModel.NewAddressText;
             if (string.IsNullOrEmpty(newAddress))
             {
@@ -40,22 +33,22 @@ namespace Alligator.UI.Commands.TabItemOrders
             {
                 MessageBox.Show("Выберите клиента");
                 return;
-            } 
-            if (_viewModel.NewOrder.OrderDetails.Count==0)
+            }
+            if (_viewModel.NewOrder.OrderDetails.Count == 0)
             {
                 MessageBox.Show("Выберите продукты и их количество");
                 return;
             }
-           int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);             
-            foreach (var orderReview in _viewModel.NewOrderReviews)
+            int orderId = _orderService.AddOrderModel(_viewModel.NewDate, _viewModel.SelectedClient.Id, newAddress);
+            if (orderId != -1)
             {
-                _orderReviewService.AddOrderReviewModel(orderReview.Text, orderId);
+                _orderReviewService.AddOrderReviewModels(_viewModel.NewOrderReviews, orderId);
+                _orderDetailService.AddOrderDetailModels(_viewModel.NewOrderDetails, orderId);
+                _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId).Data);
+                MessageBox.Show("Заказ создан");
+                _viewModel.NewAmount = string.Empty;
+                _viewModel.ComeBackFirstWindow.Execute(null);
             }
-            foreach (var orderDetail in _viewModel.NewOrderDetails)
-            {
-                _orderDetailService.AddOrderDetailModel(orderDetail.Amount, orderId, orderDetail.Product.Id);
-            }
-            _viewModel.AllOrders.Add(_orderService.GetOrderByIdWithDetailsAndReviews(orderId));
         }
     }
 }

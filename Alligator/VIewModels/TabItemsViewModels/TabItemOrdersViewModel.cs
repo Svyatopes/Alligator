@@ -21,28 +21,37 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
         private OrderReviewModel _selectedNewOrderReviewModel;
         private ProductModel _selectedProduct;
         private ClientModel _selectedClient;
+        private ClientModel _selectedChangeClient;
+        private ClientModel _selectedOrderClient;
+        private string _selectedOrderAddress;
+        private DateTime _selectedOrderDate;
         private readonly OrderService _orderService;
         private readonly OrderReviewService _orderReviewService;
         private readonly OrderDetailService _orderDetailService;
         private readonly ClientService _clientService;
+        private readonly ProductService _productService;
         private string _newReviewText;
         private string _newAdressText;
+        private string _changedAddressText;
         private DateTime _newDate;
-
-        public ICommand AddReviewWindowOfOrderInfo { get; set; }
-        public ICommand DeleteReviewWindowOfOrderInfo { get; set; }
+        private DateTime _changedDate;
+        public ICommand AddReview { get; set; }
+        public ICommand DeleteReview { get; set; }
         public ICommand GetOrders { get; set; }
         public ICommand GetOrderInfo { get; set; }
-        public ICommand DeleteOrderWindowOfAllOrders { get; set; }
-        public ICommand DeleteOrderWindowOfOrderInfo { get; set; }
+        public ICommand DeleteOrder { get; set; }
         public ICommand AddOrder { get; set; }
-        public ICommand SaveChangesWindowOfOrderInfo { get; set; }
+        public ICommand ChangeOrderWindowOfOrderInfo { get; set; }
         public ICommand OpenAddOrderWindow { get; set; }
         public ICommand OpenOrderInfoWindow { get; set; }
         public ICommand ComeBackFirstWindow { get; set; }
         public ICommand AddReviewWindowOfAddOrder { get; set; }
         public ICommand DeleteReviewWindowOfAddOrder { get; set; }
         public ICommand AddProductWindowOfAddOrder { get; set; }
+        public ICommand DeleteDetail { get; set; }
+        public ICommand DeleteNewDetail { get; set; }            
+        public ICommand AddProductWindowOfChangeOrder { get; set; }
+        public ICommand SaveChangedOrder { get; set; }
         public TabItemOrdersViewModel()
         {
 
@@ -50,6 +59,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             _orderReviewService = new OrderReviewService();
             _orderDetailService = new OrderDetailService();
             _clientService = new ClientService();
+            _productService = new ProductService();
 
             AllOrders = new ObservableCollection<OrderModel>();
             Clients = new ObservableCollection<ClientModel>();
@@ -57,23 +67,23 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             NewOrderReviews = new ObservableCollection<OrderReviewModel>();
             OrderReviews = new ObservableCollection<OrderReviewModel>();
             OrderDetails = new ObservableCollection<OrderDetailModel>();
-            NewOrderDetails = new ObservableCollection<OrderDetailModel>();
-            NewOrder = new OrderModel();
-
-            AddReviewWindowOfOrderInfo = new AddReviewWindowOfOrderInfoCommand(this, _orderReviewService);
-            DeleteReviewWindowOfOrderInfo = new DeleteReviewWindowOfOrderInfoCommand(this, _orderReviewService);
+            NewOrderDetails = new ObservableCollection<OrderDetailModel>();          
+            AddReview = new AddReviewWindowOfOrderInfoCommand(this, _orderReviewService);
+            DeleteReview = new DeleteReviewWindowOfOrderInfoCommand(this, _orderReviewService);
             GetOrders = new GetOrdersCommand(this, _orderService);
-            DeleteOrderWindowOfAllOrders = new DeleteOrderWindowOfAllOrdersCommand(this, _orderService, _orderDetailService, _orderReviewService);
-            DeleteOrderWindowOfOrderInfo = new DeleteOrderWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
+            DeleteOrder = new DeleteOrderCommand(this, _orderService, _orderDetailService, _orderReviewService);
             AddOrder = new AddOrderCommand(this, _orderService, _orderReviewService, _orderDetailService);
-            SaveChangesWindowOfOrderInfo = new SaveChangesWindowOfOrderInfoCommand(this, _orderService, _orderDetailService, _orderReviewService);
-            OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService);
+            ChangeOrderWindowOfOrderInfo = new OpenChangeOrderWindowOfOrderInfoCommand(this,  _orderDetailService, _clientService, _productService);
+            OpenAddOrderWindow = new OpenAddOrderWindowCommand(this, _clientService, _productService);
             OpenOrderInfoWindow = new OpenOrderInfoWindowCommand(this, _orderService);
-            ComeBackFirstWindow = new ComeBackFirstWindowCommand(this);
+            ComeBackFirstWindow = new ComeBackFirstWindowCommand(this, _orderService);
             AddReviewWindowOfAddOrder = new AddReviewWindowOfAddOrderCommand(this);
             DeleteReviewWindowOfAddOrder = new DeleteReviewWindowOfAddOrderCommand(this);
             AddProductWindowOfAddOrder = new AddProductWindowOfAddOrderCommand(this);
-
+            DeleteDetail = new DeleteDetailCommand(this, _orderDetailService);
+            DeleteNewDetail = new DeleteNewDetailCommand(this);
+            AddProductWindowOfChangeOrder = new AddProductWindowOfChangeOrderCommand(this, _orderDetailService);          
+            SaveChangedOrder = new SaveChangedOrderCommand(this, _orderService);
 
         }
 
@@ -110,7 +120,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(NewOrderDetails));
             }
         }
-
+       
         private ObservableCollection<OrderReviewModel> _newOrderReviews;
         public ObservableCollection<OrderReviewModel> NewOrderReviews
         {
@@ -121,7 +131,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(NewOrderReviews));
             }
         }
-
+     
         private OrderModel _newOrder;
         public OrderModel NewOrder
         {
@@ -161,7 +171,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _selectedOrder = value;
                 ((CommandBase)OpenOrderInfoWindow).RaiseCanExecuteChanged();
-                ((CommandBase)DeleteOrderWindowOfAllOrders).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteOrder).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrder));
             }
         }
@@ -171,6 +181,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedOrderDetailModel = value;
+                ((CommandBase)DeleteDetail).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrderDetail));
             }
         }
@@ -180,10 +191,11 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedOrderReviewModel = value;
-                ((CommandBase)DeleteReviewWindowOfOrderInfo).RaiseCanExecuteChanged();
+                ((CommandBase)DeleteReview).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedOrderReview));
             }
         }
+
 
         public OrderDetailModel SelectedNewOrderDetail
         {
@@ -191,6 +203,7 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             set
             {
                 _selectedNewOrderDetailModel = value;
+                ((CommandBase)DeleteNewDetail).RaiseCanExecuteChanged();
                 OnPropertyChanged(nameof(SelectedNewOrderDetail));
             }
         }
@@ -212,6 +225,36 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _selectedClient = value;
                 OnPropertyChanged(nameof(SelectedClient));
+            }
+        }
+
+        public ClientModel SelectedOrderClient
+        {
+            get { return _selectedOrderClient; }
+            set
+            {
+                _selectedOrderClient = value;
+                OnPropertyChanged(nameof(SelectedOrderClient));
+            }
+        }
+       
+        public string SelectedOrderAddress
+        {
+            get { return _selectedOrderAddress; }
+            set
+            {
+                _selectedOrderAddress = value;
+                OnPropertyChanged(nameof(SelectedOrderAddress));
+            }
+        }
+
+        public ClientModel SelectedChangeClient
+        {
+            get { return _selectedChangeClient; }
+            set
+            {
+                _selectedChangeClient = value;
+                OnPropertyChanged(nameof(SelectedChangeClient));
             }
         }
 
@@ -244,6 +287,15 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
                 OnPropertyChanged(nameof(NewAddressText));
             }
         }
+        public string ChangedAddressText
+        {
+            get { return _changedAddressText; }
+            set
+            {
+                _changedAddressText = value;
+                OnPropertyChanged(nameof(ChangedAddressText));
+            }
+        }
 
         public DateTime NewDate
         {
@@ -252,6 +304,27 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _newDate = value;
                 OnPropertyChanged(nameof(NewDate));
+            }
+        }
+
+        public DateTime SelectedOrderDate
+        {
+            get { return _selectedOrderDate; }
+            set
+            {
+                _selectedOrderDate = value;
+                OnPropertyChanged(nameof(SelectedOrderDate));
+            }
+        }
+        
+
+        public DateTime ChangedDate
+        {
+            get { return _changedDate; }
+            set
+            {
+                _changedDate = value;
+                OnPropertyChanged(nameof(ChangedDate));
             }
         }
 
@@ -308,6 +381,21 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             }
         }
 
+        private Visibility _changeOrderWindowVisibility;
+        public Visibility ChangeOrderWindowVisibility
+        {
+            get
+            {
+                return _changeOrderWindowVisibility;
+            }
+            set
+            {
+                _changeOrderWindowVisibility = value;
+
+                OnPropertyChanged(nameof(ChangeOrderWindowVisibility));
+            }
+        }
+
         private Visibility _buttonOpenOrderInfo;
         public Visibility ButtonOpenOrderInfo
         {
@@ -349,6 +437,28 @@ namespace Alligator.UI.VIewModels.TabItemsViewModels
             {
                 _buttonDeleteNewReview = value;
                 OnPropertyChanged(nameof(ButtonDeleteNewReview));
+            }
+        }
+
+        private Visibility _buttonDeleteDetail;
+        public Visibility ButtonDeleteDetail
+        {
+            get { return _buttonDeleteDetail; }
+            set
+            {
+                _buttonDeleteDetail = value;
+                OnPropertyChanged(nameof(ButtonDeleteDetail));
+            }
+        }
+
+        private Visibility _buttonDeleteNewDetail;
+        public Visibility ButtonDeleteNewDetail
+        {
+            get { return _buttonDeleteNewDetail; }
+            set
+            {
+                _buttonDeleteNewDetail = value;
+                OnPropertyChanged(nameof(ButtonDeleteNewDetail));
             }
         }
     }

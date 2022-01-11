@@ -1,8 +1,10 @@
 ﻿using Alligator.BusinessLayer.Configuration;
 using Alligator.BusinessLayer.Models;
+using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Alligator.BusinessLayer
 {
@@ -12,11 +14,11 @@ namespace Alligator.BusinessLayer
         private readonly IOrderDetailRepository _repositoryOrderDetail;
         private readonly IOrderReviewRepository _repositoryOrderReview;
 
-        public OrderService(IOrderRepository repositoryOrder, IOrderDetailRepository repositoryOrderDetail, IOrderReviewRepository repositoryOrderReview)
+        public OrderService(IOrderRepository fakeRepositoryOrder, IOrderDetailRepository fakeRepositoryOrderDetail, IOrderReviewRepository fakeRepositoryOrderReview)
         {
-            _repositoryOrder = repositoryOrder;
-            _repositoryOrderDetail = repositoryOrderDetail;
-            _repositoryOrderReview = repositoryOrderReview;
+            _repositoryOrder = fakeRepositoryOrder;
+            _repositoryOrderDetail = fakeRepositoryOrderDetail;
+            _repositoryOrderReview = fakeRepositoryOrderReview;
         }
 
         public OrderService()
@@ -26,16 +28,17 @@ namespace Alligator.BusinessLayer
             _repositoryOrderReview = new OrderReviewRepository();
         }
 
-        public List<OrderShortModel> GetOrdersWithoutSensitiveData()
+        public ActionResult<List<OrderModel>> GetOrders()
         {
             var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderShortModel>>(orders);
-        }
-
-        public List<OrderModel> GetOrders()
-        {
-            var orders = _repositoryOrder.GetAllOrders();
-            return CustomMapper.GetInstance().Map<List<OrderModel>>(orders);
+            try
+            {
+                return new ActionResult<List<OrderModel>>(true, CustomMapper.GetInstance().Map<List<OrderModel>>(orders));
+            }
+            catch (Exception exception)
+            {
+                return new ActionResult<List<OrderModel>>(false, null) { ErrorMessage = exception.Message };
+            }
         }
 
         public ActionResult<List<OrderModel>> GetOrdersByClientId(int id)
@@ -51,28 +54,61 @@ namespace Alligator.BusinessLayer
             }
         }
 
-        public OrderModel GetOrderByIdWithDetailsAndReviews(int id)
+        public ActionResult<OrderModel> GetOrderByIdWithDetailsAndReviews(int id)
         {
             var order = _repositoryOrder.GetOrderById(id);
             order.OrderDetails = _repositoryOrderDetail.GetOrderDetailsByOrderId(id);
             order.OrderReviews = _repositoryOrderReview.GetOrderReviewsByOrderId(id);
-            return CustomMapper.GetInstance().Map<OrderModel>(order);
+            try
+            {
+                return new ActionResult<OrderModel>(true, CustomMapper.GetInstance().Map<OrderModel>(order));
+            }
+            catch
+            (Exception exception)
+            {
+                return new ActionResult<OrderModel>(false, null) { ErrorMessage = exception.Message };
+                
+            }
         }
 
         public int AddOrderModel(DateTime date, int clientId, string address)
         {           
-           int id =_repositoryOrder.AddOrder(date, clientId, address);
-           return id;
+            try
+            {
+              int id =_repositoryOrder.AddOrder(date, clientId, address);
+              return id;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
-        public void DeleteOrderModel(int id)
+        public bool DeleteOrderModel(int id)
         {
-            _repositoryOrder.DeleteOrder(id);
+            try
+            {
+                _repositoryOrder.DeleteOrder(id);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void EditOrderModel(DateTime date, int id, string address)
+        public bool EditOrderModel(OrderModel editedOrder)
         {
-            _repositoryOrder.EditOrder(date, id, address);
+            var order = CustomMapper.GetInstance().Map<Order>(editedOrder);
+            try
+            {
+              _repositoryOrder.EditOrder(order);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
         public bool DeleteOrdersByClientId(int clientId)
         {
@@ -86,5 +122,6 @@ namespace Alligator.BusinessLayer
                 return false;
             }
         }
+
     }
 }

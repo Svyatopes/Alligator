@@ -1,4 +1,5 @@
-﻿using Alligator.BusinessLayer.Models;
+﻿using Alligator.BusinessLayer;
+using Alligator.BusinessLayer.Models;
 using Alligator.UI.VIewModels.TabItemsViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,14 @@ using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class AddProductWindowOfAddOrderCommand : CommandBase
+    class AddProductWindowOfChangeOrderCommand : CommandBase
     {
         private readonly TabItemOrdersViewModel _viewModel;
-        public AddProductWindowOfAddOrderCommand(TabItemOrdersViewModel viewModel)
+        private readonly OrderDetailService _orderDetailService;
+        public AddProductWindowOfChangeOrderCommand(TabItemOrdersViewModel viewModel, OrderDetailService orderDetailService)
         {
             _viewModel = viewModel;
+            _orderDetailService = orderDetailService;
         }
 
         public override void Execute(object parameter)
@@ -30,21 +33,23 @@ namespace Alligator.UI.Commands.TabItemOrders
                 MessageBox.Show("Выберите продукт");
                 return;
             }
-            if (_viewModel.NewOrder.OrderDetails is null)
+            if (_viewModel.SelectedOrder.OrderDetails is null)
             {
                 List<OrderDetailModel> orderDetails = new List<OrderDetailModel>();
 
-                _viewModel.NewOrder.OrderDetails = orderDetails;
+                _viewModel.SelectedOrder.OrderDetails = orderDetails;
             }
-            if (_viewModel.NewOrderDetails is null)
+            if (_viewModel.OrderDetails is null)
             {
-                _viewModel.NewOrderDetails = new ObservableCollection<OrderDetailModel>();
+                _viewModel.OrderDetails = new ObservableCollection<OrderDetailModel>();
             }
 
-            var newOrderDetail = new OrderDetailModel() { Product = _viewModel.SelectedProduct, Amount = amount, Order = _viewModel.NewOrder };
-            _viewModel.NewOrder.OrderDetails.Add(newOrderDetail);
-            _viewModel.NewOrderDetails.Add(newOrderDetail);
+            var orderDetail = new OrderDetailModel() { Product = _viewModel.SelectedProduct, Amount = amount, Order = _viewModel.SelectedOrder };
+            _viewModel.SelectedOrder.OrderDetails.Add(orderDetail);
+            _viewModel.OrderDetails.Add(orderDetail);
+            _orderDetailService.AddOrderDetailModel(amount, _viewModel.SelectedOrder.Id, _viewModel.SelectedProduct.Id);
         }
     }
+
 }
 

@@ -1,33 +1,35 @@
 ﻿using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
 using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemOrders
 {
-    public class OpenAddOrderWindowCommand : CommandBase
+    public class OpenChangeOrderWindowOfOrderInfoCommand : CommandBase
     {
         private readonly TabItemOrdersViewModel _viewModel;
+        private readonly OrderDetailService _orderDetailService;
         private readonly ClientService _clientService;
         private readonly ProductService _productService;
 
-        public OpenAddOrderWindowCommand(TabItemOrdersViewModel viewModel, ClientService clientService, ProductService productService)
+
+        public OpenChangeOrderWindowOfOrderInfoCommand(TabItemOrdersViewModel viewModel, OrderDetailService orderDetailService, ClientService clientService, ProductService productService)
         {
             _viewModel = viewModel;
+            _orderDetailService = orderDetailService;
             _clientService = clientService;
             _productService = productService;
+
         }
 
         public override void Execute(object parameter)
         {
-            _viewModel.NewDate = DateTime.Now;
-            _viewModel.NewAmount = string.Empty;
-            _viewModel.NewAddressText = string.Empty;
-            _viewModel.NewOrderReviews.Clear();
-            _viewModel.NewOrderDetails.Clear();
-            _viewModel.NewOrder = new OrderModel() { Address = _viewModel.NewAddressText, Client = _viewModel.SelectedClient, Date = _viewModel.NewDate };
+            _viewModel.AddOrderWindowVisibility = Visibility.Collapsed;
+            _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
+            _viewModel.ChangeOrderWindowVisibility = Visibility.Visible;
+            _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
+            _viewModel.ChangedDate = _viewModel.SelectedOrder.Date;
+            _viewModel.ChangedAddressText = _viewModel.SelectedOrder.Address;
             _viewModel.Clients.Clear();
             var clientsActionResult = _clientService.GetAllClients();
             if (clientsActionResult.Success)
@@ -48,10 +50,8 @@ namespace Alligator.UI.Commands.TabItemOrders
                     _viewModel.Products.Add(product);
                 }
             }
-            _viewModel.OrdersWindowVisibility = Visibility.Collapsed;
-            _viewModel.OrdersInfoWindowVisibility = Visibility.Collapsed;
-            _viewModel.ChangeOrderWindowVisibility = Visibility.Collapsed;
-            _viewModel.AddOrderWindowVisibility = Visibility.Visible;
+            _viewModel.SelectedChangeClient = _viewModel.SelectedOrder.Client;
+            _viewModel.SelectedOrder.OrderDetails = _orderDetailService.GetOrderDetailsByOrderId(_viewModel.SelectedOrder.Id);
         }
     }
 }

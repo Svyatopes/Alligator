@@ -18,11 +18,10 @@ namespace Alligator.DataLayer.Repositories
             return connection.Query<OrderReview, Order, Client, OrderReview>
             ("dbo.OrderReview_SelectById", (orderreview, order, client) =>
             {
-                orderreview.Order = order;
-                //orderreview.Client = client;
+                orderreview.Order = order;               
                 return orderreview;
             },
-            new { Id = id },
+            new {  id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             FirstOrDefault();
@@ -36,10 +35,9 @@ namespace Alligator.DataLayer.Repositories
             ("dbo.OrderReview_SelectByOrderId", (orderreview, order, client) =>
             {
                 orderreview.Order = order;
-                //orderreview.Client = client;
                 return orderreview;
             },
-            new { OrderId = id },
+            new { OrderId=id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             Distinct().ToList();
@@ -59,7 +57,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.OrderReview_Delete";
             connection.Execute(procString,
-            new { Id = id },
+            new { id },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -67,7 +65,7 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderReview_DeleteByOrderId";
-            connection.Execute(procString, new { OrderId = orderId },
+            connection.Execute(procString, new { orderId },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -75,7 +73,7 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             string procString = "dbo.OrderReview_Update";
-            connection.Execute(procString, new { Id = id, Text = text },
+            connection.Execute(procString, new { id, text },
             commandType: CommandType.StoredProcedure);
         }
 

@@ -3,10 +3,7 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Alligator.DataLayer.Repositories
 {
@@ -17,7 +14,12 @@ namespace Alligator.DataLayer.Repositories
         {
             using var connection = ProvideConnection();
             var orderDictionary = new Dictionary<int, Order>();
-            return connection.Query<Order>("dbo.Order_SelectAll",
+            return connection.Query<Order, Client, Order>("dbo.Order_SelectAll", (order, client) =>
+            {
+                order.Client = client;
+
+                return order;
+            },
             commandType: CommandType.StoredProcedure)
             .ToList();
         }
@@ -31,7 +33,7 @@ namespace Alligator.DataLayer.Repositories
 
                 return order;
             },
-            new { Id = id },
+            new { id },
             commandType: CommandType.StoredProcedure,
             splitOn: "Id").
             FirstOrDefault();
@@ -59,7 +61,7 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Insert";
             return connection.QueryFirstOrDefault<int>(procString,
-            new { Date = date, ClientId = clientId, Address = address },
+            new { date, clientId, address },
             commandType: CommandType.StoredProcedure);
         }
 
@@ -68,16 +70,16 @@ namespace Alligator.DataLayer.Repositories
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Delete";
             connection.Execute(procString,
-            new {id },
+            new { id },
             commandType: CommandType.StoredProcedure);
         }
 
-        public void EditOrder(DateTime date, int id, string address)
+        public void EditOrder(Order editedOrder)
         {
             using var connection = ProvideConnection();
             string procString = "dbo.Order_Update";
             connection.Execute(procString,
-            new { Date = date, Id = id, Address = address },
+            new { Date = editedOrder.Date, Id = editedOrder.Id, ClientId = editedOrder.Client.Id, editedOrder.Address },
             commandType: CommandType.StoredProcedure);
         }
         public void DeleteOrdersByClientId(int clientId)

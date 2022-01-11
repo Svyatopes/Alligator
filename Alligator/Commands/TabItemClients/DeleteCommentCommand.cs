@@ -1,22 +1,13 @@
-﻿
-using Alligator.BusinessLayer;
-using Alligator.BusinessLayer.Models;
-using Alligator.BusinessLayer.Services;
+﻿using Alligator.BusinessLayer.Services;
 using Alligator.UI.VIewModels.TabItemsViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Alligator.UI.Commands.TabItemClients
 {
     public class DeleteCommentCommand : CommandBase
     {
-        private TabItemClientsViewModel _viewModel;
-        private CommentService _commentService;
+        private readonly TabItemClientsViewModel _viewModel;
+        private readonly CommentService _commentService;
 
         public DeleteCommentCommand(TabItemClientsViewModel viewModel, CommentService commentService)
         {

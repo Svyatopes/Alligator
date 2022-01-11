@@ -4,6 +4,7 @@ using Alligator.DataLayer.Entities;
 using Alligator.DataLayer.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace Alligator.BusinessLayer
     {
         private readonly IOrderReviewRepository _repositoryOrderReview;
 
-        public OrderReviewService(IOrderReviewRepository repositoryOrderReview)
+        public OrderReviewService(IOrderReviewRepository fakeRepositoryOrderReview)
         {
-            _repositoryOrderReview = repositoryOrderReview;
+            _repositoryOrderReview = fakeRepositoryOrderReview;
         }
 
         public OrderReviewService()
@@ -39,6 +40,15 @@ namespace Alligator.BusinessLayer
         public void AddOrderReviewModel(string text, int orderId)
         {
             _repositoryOrderReview.AddOrderReview(text, orderId);
+        }
+
+        public void AddOrderReviewModels(ObservableCollection<OrderReviewModel> orderReviews, int orderId)
+        {
+            var newOrderReviews = CustomMapper.GetInstance().Map<List<OrderReviewModel>>(orderReviews);
+            foreach (var orderReview in newOrderReviews)
+            {
+                _repositoryOrderReview.AddOrderReview(orderReview.Text, orderId);
+            }
         }
 
         public void EditOrderReviewModel(int id, string text)
